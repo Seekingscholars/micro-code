@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: micro-code
+  profiles:
+    active: pg
+  freemarker:
+    checkTemplateLocation: false

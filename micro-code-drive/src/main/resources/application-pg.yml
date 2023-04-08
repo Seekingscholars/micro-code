@@ -1,0 +1,25 @@
+server:
+  port: 4100
+  servlet:
+    context-path: /micro
+spring:
+  datasource:
+    master:
+      pool-name: MasterDataSource
+      jdbc-url: jdbc:postgresql://192.168.0.194:5432/sooth
+      username: postgres
+      password: 123456
+      driver-class-name: org.postgresql.Driver
+      minimum-idle: 3
+      auto-commit: true
+      connection-test-query: select 1
+      maximum-pool-size: 50
+      idle-timeout: 10000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+
+
+dream:
+  toSQL: com.moxa.dream.antlr.sql.ToPGSQL
+  listeners:
+    - com.moxa.dream.drive.listener.DebugListener
