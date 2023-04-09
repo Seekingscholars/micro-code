@@ -39,6 +39,12 @@ const getSectionStyle = computed(() => {
 });
 
 const transitionMain = defineComponent({
+  props: {
+    route: {
+      type: undefined,
+      required: true
+    }
+  },
   render() {
     return h(
       Transition,
@@ -63,12 +69,6 @@ const transitionMain = defineComponent({
         default: () => [this.$slots.default()]
       }
     );
-  },
-  props: {
-    route: {
-      type: undefined,
-      required: true
-    }
   }
 });
 </script>

@@ -4,17 +4,16 @@
 <script setup name="AppPreview">
 import { ref } from "vue";
 import FormRender from "@/components/render/index.vue";
-import { useAppStoreHook } from "@/store/modules/app";
-const flushed = ref(false);
 const formJson = ref({});
-console.log('aaaaaaaaa')
-formJson.value=useAppStoreHook().getFormJson
-console.log('aaaaaaaaa')
-console.log(formJson.value)
-// const router = useRouter();
-// const query = router.currentRoute.value.query;
-// formJson.value = JSON.parse(query.formJson);
-flushed.value = true;
+const flushed = ref(false);
+const storage = window.localStorage;
+const key = "preview";
+const formValue = storage.getItem(key);
+if (formValue) {
+  formJson.value = JSON.parse(formValue);
+  storage.removeItem(key);
+  flushed.value = true;
+}
 </script>
 
 <style scoped></style>

@@ -56,7 +56,6 @@
 <script setup type="ts">
 import {ref,nextTick} from 'vue';
 import { useRouter } from "vue-router";
-import { useAppStoreHook } from "@/store/modules/app";
 const props=defineProps({designer:Object})
 const  nodeTreeData=ref([]);
 const router = useRouter();
@@ -137,10 +136,12 @@ function previewForm() {
       widgetList: props.designer.widgetList,
       formConfig: props.designer.formConfig
     }
+  const key= 'preview'
+ const storage= window.localStorage
+  storage.setItem(key,JSON.stringify(formJson))
   const to = router.resolve({
     name: "app-preview"
   });
-  useAppStoreHook().setFormJson(formJson)
   window.open(to.href, "_blank");
 }
 function findWidgetById(widgetId) {

@@ -18,8 +18,7 @@ export const useAppStore = defineStore({
     layout:
       storageLocal().getItem<StorageConfigs>("responsive-layout")?.layout ??
       getConfig().Layout,
-    device: deviceDetection() ? "mobile" : "desktop",
-    formJson: Object
+    device: deviceDetection() ? "mobile" : "desktop"
   }),
   getters: {
     getSidebarStatus() {
@@ -27,9 +26,6 @@ export const useAppStore = defineStore({
     },
     getDevice() {
       return this.device;
-    },
-    getFormJson() {
-      return this.formJson;
     }
   },
   actions: {
@@ -60,9 +56,6 @@ export const useAppStore = defineStore({
     },
     setLayout(layout) {
       this.layout = layout;
-    },
-    setFormJson(formJson) {
-      this.formJson = formJson
     }
   }
 });
