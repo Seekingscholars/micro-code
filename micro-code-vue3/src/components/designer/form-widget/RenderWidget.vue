@@ -1,5 +1,6 @@
 <script lang="tsx">
 import Draggable from "@/components/draggable";
+import ContainerComponents from "./container-widget";
 import FieldComponents from "./field-widget";
 import ColWrapper from "./wrapper/ColWrapper.vue";
 import StaticWrapper from "./wrapper/StaticWrapper.vue";
@@ -50,7 +51,7 @@ export default {
         const slots = {
           item: ({ element, index }) => {
             return (
-              <div class="form-widget-item">
+              <div>
                 {this.renderColSpanWrapper(element, index)}
               </div>
             );
@@ -132,7 +133,10 @@ export default {
     },
     renderComponent(subWidget, index) {
       const widgetName = this.getWidgetName(subWidget);
-      const Component = this.$options.components[widgetName];
+      let Component = this.$options.components[widgetName];
+      if(!Component){
+        Component=ContainerComponents[widgetName];
+      }
       return (
         <Component
           field={subWidget}

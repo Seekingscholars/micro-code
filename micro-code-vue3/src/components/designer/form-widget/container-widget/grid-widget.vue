@@ -11,7 +11,7 @@
 import RenderWidget from "../RenderWidget.vue";
 
 export default {
-  name: "GridWidget",
+  name: "grid-widget",
   componentName: "GridWidget",
   components: {
     RenderWidget
@@ -22,3 +22,10 @@ export default {
   }
 };
 </script>
+<style>
+.grid-container {
+  padding: 10px;
+  outline: 1px dashed #336699;
+  min-height: 80px;
+}
+</style>

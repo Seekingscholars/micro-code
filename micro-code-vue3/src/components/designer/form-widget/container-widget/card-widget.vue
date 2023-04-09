@@ -8,7 +8,7 @@
 import RenderWidget from "../RenderWidget.vue";
 
 export default {
-  name: "CardWidget",
+  name: "card-widget",
   componentName: "ContainerWidget",
   components: {
     RenderWidget
