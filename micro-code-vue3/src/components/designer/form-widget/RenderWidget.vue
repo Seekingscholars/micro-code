@@ -1,5 +1,5 @@
 <script lang="tsx">
-import Draggable from "vuedraggable";
+import Draggable from "@/components/draggable";
 import FieldComponents from "./field-widget";
 import ColWrapper from "./wrapper/ColWrapper.vue";
 import StaticWrapper from "./wrapper/StaticWrapper.vue";
@@ -60,10 +60,20 @@ export default {
       );
     },
     renderDraggable() {
+      let widgetClass;
+      if (this.designer === this.widget) {
+        widgetClass = "form-widget-list";
+      } else {
+        widgetClass = "form-widget-item";
+      }
       if (this.designer.design) {
         const slots = {
           item: ({ element, index }) => {
-            return <div>{this.renderColSpanWrapper(element, index)}</div>;
+            return (
+              <div class={widgetClass}>
+                {this.renderColSpanWrapper(element, index)}
+              </div>
+            );
           }
         };
         return (
@@ -84,7 +94,7 @@ export default {
         );
       } else {
         return (
-          <div>
+          <div class={widgetClass}>
             {this.widget.widgetList.map((subWidget, index) => {
               return this.renderColSpanWrapper(subWidget, index);
             })}
@@ -94,7 +104,7 @@ export default {
     },
 
     renderColSpanWrapper(subWidget, index) {
-      return(
+      return (
         <ColWrapper key={subWidget.id} field={subWidget}>
           {this.renderStaticWrapper(subWidget, index)}
         </ColWrapper>

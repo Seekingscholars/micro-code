@@ -9,7 +9,6 @@
               label-position="left"
               label-width="120px"
               size="mini"
-              @submit.native.prevent
             >
               <el-collapse
                 v-model="widgetActiveCollapseNames"

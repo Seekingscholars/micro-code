@@ -32,7 +32,7 @@
 
 <script>
 import widgetJson from "./widget.json";
-import Draggable from "vuedraggable";
+import Draggable from "@/components/draggable";
 import { deepClone, generateId } from "@/utils/util";
 
 export default {

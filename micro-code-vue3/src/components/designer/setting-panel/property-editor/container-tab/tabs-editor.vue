@@ -1,5 +1,9 @@
 <template>
-  <ElTableDraggable ref="ElTableDraggable" :list="optionModel.tabs" handle=".drag-handler">
+  <ElTableDraggable
+    ref="ElTableDraggable"
+    :list="optionModel.tabs"
+    handle=".drag-handler"
+  >
     <el-table :data="optionModel.tabs" border row-key="value">
       <el-table-column label="排序" width="50px">
         <i class="drag-handler el-icon-sort" style="cursor: move"></i>
@@ -10,14 +14,18 @@
       <!--        </template>-->
       <!--      </el-table-column>-->
       <el-table-column label="标签" prop="label">
-        <template slot-scope="scope">
-          <el-input v-model="scope.row.label"></el-input>
+        <template #default="scope">
+          <el-input v-model="scope.row.label" />
         </template>
       </el-table-column>
       <el-table-column label="操作" width="60px">
-        <template slot-scope="scope">
+        <template #default="scope">
           <div class="operate">
-            <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除" @click="deleteTabPane(scope.row)"
+            <i
+              class="el-icon-delete"
+              style="color: red; cursor: pointer"
+              title="删除"
+              @click="deleteTabPane(scope.row)"
             ></i>
           </div>
         </template>
@@ -27,15 +35,13 @@
   </ElTableDraggable>
 </template>
 <script>
-import Draggable from 'vuedraggable'
-import { deepClone } from '@/utils/util'
-import ElTableDraggable from '../../ElTableDraggable/index.vue'
+import { deepClone } from "@/utils/util";
+import ElTableDraggable from "../../ElTableDraggable/index.vue";
 
 export default {
-  name: 'tabs-editor',
-  componentName: 'PropertyEditor',
+  name: "TabsEditor",
+  componentName: "PropertyEditor",
   components: {
-    Draggable,
     ElTableDraggable
   },
   props: {
@@ -43,30 +49,29 @@ export default {
   },
   methods: {
     addTabPane() {
-      const newTab = deepClone(this.optionModel.tabs[0])
-      newTab.value = 'tab' + (this.optionModel.tabs.length + 1)
-      newTab.label = '标签' + (this.optionModel.tabs.length + 1)
-      this.optionModel.tabs.push(newTab)
+      const newTab = deepClone(this.optionModel.tabs[0]);
+      newTab.value = "tab" + (this.optionModel.tabs.length + 1);
+      newTab.label = "标签" + (this.optionModel.tabs.length + 1);
+      this.optionModel.tabs.push(newTab);
     },
     deleteTabPane(row) {
       if (this.optionModel.tabs.length === 1) {
-        this.$message.info('仅剩一个选项卡页不可删除')
-        return
+        this.$message.info("仅剩一个选项卡页不可删除");
+        return;
       }
-      this.$modal.confirm('是否确认删除？').then(() => {
+      this.$modal.confirm("是否确认删除？").then(() => {
         for (let i = 0; i < this.optionModel.tabs.length; i++) {
           if (this.optionModel.tabs[i].value === row.value) {
-            this.optionModel.tabs.splice(i, 1)
+            this.optionModel.tabs.splice(i, 1);
             this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init()
-            })
-            break
+              this.$refs.ElTableDraggable.init();
+            });
+            break;
           }
         }
-      })
+      });
     }
   }
-}
+};
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
