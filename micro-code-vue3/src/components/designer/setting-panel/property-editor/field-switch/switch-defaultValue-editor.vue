@@ -1,0 +1,26 @@
+<template>
+  <el-form-item :label="默认值">
+    <el-switch v-model="optionModel.defaultValue" active-text="true"
+               inactive-text="false" @change="emitDefaultValueChange"
+    ></el-switch>
+  </el-form-item>
+</template>
+
+<script>
+
+import propertyMixin from '../propertyMixin'
+
+export default {
+  name: 'switch-defaultValue-editor',
+  mixins: [propertyMixin],
+  props: {
+    designer: Object,
+    selectedWidget: Object,
+    optionModel: Object
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

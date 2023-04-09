@@ -1,0 +1,50 @@
+[
+  {
+    "type": "options",
+    "name": "普通属性"
+  },
+  {
+    "type": "form-item",
+    "name": "表单项"
+  },
+  {
+    "type": "option-item",
+    "name": "选项数据"
+  },
+  {
+    "type": "table-column",
+    "name": "操作列"
+  },
+  {
+    "type": "table-toolbar",
+    "name": "操作栏"
+  },
+  {
+    "type": "pagination",
+    "name": "分页设置"
+  },
+  {
+    "type": "chart-title",
+    "name": "标题"
+  },
+  {
+    "type": "chart-legend",
+    "name": "图例"
+  },
+  {
+    "type": "chart-label",
+    "name": "标签"
+  },
+  {
+    "type": "chart-xAxis",
+    "name": "X坐标轴"
+  },
+  {
+    "type": "chart-yAxis",
+    "name": "Y坐标轴"
+  },
+  {
+    "type": "events",
+    "name": "事件属性"
+  }
+]

@@ -14,7 +14,7 @@ export default {
     {
       path: "/app",
       name: "我的应用",
-      component: () => import("@/views/welcome/index.vue"),
+      component: () => import("@/views/design/index.vue"),
       meta: {
         title: "我的应用"
       }

@@ -1,76 +1,24 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    browser: true,
+    node: true,
+    es6: true,
   },
-  globals: {
-    // Ref sugar (take 2)
-    $: "readonly",
-    $$: "readonly",
-    $ref: "readonly",
-    $shallowRef: "readonly",
-    $computed: "readonly",
-
-    // index.d.ts
-    // global.d.ts
-    Fn: "readonly",
-    PromiseFn: "readonly",
-    RefType: "readonly",
-    LabelValueOptions: "readonly",
-    EmitType: "readonly",
-    TargetContext: "readonly",
-    ComponentElRef: "readonly",
-    ComponentRef: "readonly",
-    ElRef: "readonly",
-    global: "readonly",
-    ForDataType: "readonly",
-    ComponentRoutes: "readonly",
-
-    // script setup
-    defineProps: "readonly",
-    defineEmits: "readonly",
-    defineExpose: "readonly",
-    withDefaults: "readonly"
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    jsxPragma: 'React',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/typescript/recommended",
-    "@vue/prettier",
-    "@vue/eslint-config-typescript"
-  ],
-  parser: "vue-eslint-parser",
-  parserOptions: {
-    parser: "@typescript-eslint/parser",
-    ecmaVersion: 2020,
-    sourceType: "module",
-    jsxPragma: "React",
-    ecmaFeatures: {
-      jsx: true
-    }
-  },
-  overrides: [
-    {
-      files: ["*.ts", "*.vue"],
-      rules: {
-        "no-undef": "off"
-      }
-    },
-    {
-      files: ["*.vue"],
-      parser: "vue-eslint-parser",
-      parserOptions: {
-        parser: "@typescript-eslint/parser",
-        extraFileExtensions: [".vue"],
-        ecmaVersion: "latest",
-        ecmaFeatures: {
-          jsx: true
-        }
-      },
-      rules: {
-        "no-undef": "off"
-      }
-    }
+    'plugin:vue/vue3-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   rules: {
     'vue/script-setup-uses-vars': 'error',
@@ -124,5 +72,5 @@ module.exports = {
       },
     ],
     'vue/multi-word-component-names': 'off',
-  }
+  },
 };
