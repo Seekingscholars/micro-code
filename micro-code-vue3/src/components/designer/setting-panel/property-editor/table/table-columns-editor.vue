@@ -42,7 +42,7 @@
     </ElTableDraggable>
     <el-dialog
       v-if="showItemDialogFlag"
-      v-dialog-drag
+      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"

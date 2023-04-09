@@ -141,8 +141,4 @@ const transitionMain = defineComponent({
   min-height: 100vh;
   position: relative;
 }
-
-.main-content {
-  margin: 24px;
-}
 </style>

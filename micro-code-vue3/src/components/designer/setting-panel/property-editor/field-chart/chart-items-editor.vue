@@ -29,7 +29,7 @@
       </el-table>
       <el-button type="text" @click="addNewItem">添加一项+</el-button>
     </ElTableDraggable>
-    <el-dialog v-if="showItemDialogFlag" v-dialog-drag
+    <el-dialog v-if="showItemDialogFlag" :draggable="true"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="false"
                :visible.sync="showItemDialogFlag"
                append-to-body class="small-padding-dialog" title="样式编辑"

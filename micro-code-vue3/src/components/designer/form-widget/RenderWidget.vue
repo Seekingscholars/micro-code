@@ -60,17 +60,11 @@ export default {
       );
     },
     renderDraggable() {
-      let widgetClass;
-      if (this.designer === this.widget) {
-        widgetClass = "form-widget-list";
-      } else {
-        widgetClass = "form-widget-item";
-      }
       if (this.designer.design) {
         const slots = {
           item: ({ element, index }) => {
             return (
-              <div class={widgetClass}>
+              <div class="form-widget-item">
                 {this.renderColSpanWrapper(element, index)}
               </div>
             );
@@ -94,7 +88,7 @@ export default {
         );
       } else {
         return (
-          <div class={widgetClass}>
+          <div>
             {this.widget.widgetList.map((subWidget, index) => {
               return this.renderColSpanWrapper(subWidget, index);
             })}

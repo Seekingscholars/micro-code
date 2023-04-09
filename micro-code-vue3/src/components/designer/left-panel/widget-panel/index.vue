@@ -18,11 +18,7 @@
       >
         <template #item="{ element: ctn }">
           <li :key="ctn.type + index" :title="ctn.name" class="widget-item">
-            <span
-              ><svg-icon :icon-class="ctn.icon" class-name="color-svg-icon" />{{
-                ctn.name
-              }}</span
-            >
+            <span>{{ ctn.name }}</span>
           </li>
         </template>
       </draggable>

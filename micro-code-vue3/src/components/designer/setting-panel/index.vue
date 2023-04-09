@@ -16,12 +16,12 @@
               >
                 <el-collapse-item
                   v-for="item in collapseList"
-                  v-if="designer.selectedWidget[item.type]"
                   :key="item.type"
                   :name="item.type"
                   :title="item.name"
                 >
                   <template
+                    v-if="designer.selectedWidget[item.type]"
                     v-for="propName in Object.keys(
                       designer.selectedWidget[item.type]
                     )"
@@ -42,7 +42,7 @@
       </el-tab-pane>
 
       <el-tab-pane v-if="!!designer" label="表单设置" name="2">
-        <el-scrollbar :style="{ height: scrollerHeight }">
+        <el-scrollbar>
           <form-setting
             :designer="designer"
             :form-config="designer.formConfig"
@@ -53,7 +53,7 @@
 
     <el-dialog
       v-if="showWidgetEventDialogFlag"
-      v-dialog-drag
+      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
@@ -72,8 +72,8 @@
       />
       <el-alert :closable="false" title="}" type="info" />
       <div slot="footer" class="dialog-footer">
-        <el-button @click="showWidgetEventDialogFlag = false"> 取消 </el-button>
-        <el-button type="primary" @click="saveEventHandler"> 确定 </el-button>
+        <el-button @click="showWidgetEventDialogFlag = false"> 取消</el-button>
+        <el-button type="primary" @click="saveEventHandler"> 确定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -83,7 +83,6 @@
 import CodeEditor from "@/components/code-editor/index.vue";
 import PropertyEditors from "./property-editor";
 import FormSetting from "./form-setting.vue";
-import { addWindowResizeHandler } from "@/utils/util";
 import collapseJson from "./collapse.json";
 
 export default {
@@ -99,7 +98,6 @@ export default {
   },
   data() {
     return {
-      scrollerHeight: 0,
       activeTab: "2",
       widgetActiveCollapseNames: [],
       collapseList: [],
@@ -144,14 +142,6 @@ export default {
     } else {
       this.activeTab = "1";
     }
-
-    this.scrollerHeight = window.innerHeight - 56 - 48 + "px";
-    addWindowResizeHandler(() => {
-      this.$nextTick(() => {
-        this.scrollerHeight = window.innerHeight - 56 - 48 + "px";
-        //console.log(this.scrollerHeight)
-      });
-    });
   },
   methods: {
     getPropEditor(propName) {
@@ -196,55 +186,6 @@ export default {
 
 <style lang="scss" scoped>
 .panel-container {
-  padding: 0 10px;
-}
-
-.setting-collapse {
-  ::v-deep .el-collapse-item__content {
-    padding-bottom: 6px;
-  }
-
-  ::v-deep .el-collapse-item__header {
-    font-style: italic;
-    font-weight: bold;
-  }
-}
-
-.setting-form {
-  ::v-deep .el-form-item__label {
-    font-size: 13px;
-    //text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  ::v-deep .el-form-item--mini.el-form-item {
-    margin-bottom: 6px;
-  }
-}
-
-/* 隐藏Chrome浏览器中el-input数字输入框右侧的上下调整小箭头 */
-::v-deep .hide-spin-button input::-webkit-outer-spin-button,
-::v-deep .hide-spin-button input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
-}
-
-/* 隐藏Firefox浏览器中el-input数字输入框右侧的上下调整小箭头 */
-::v-deep .hide-spin-button input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-::v-deep .custom-divider.el-divider--horizontal {
-  margin: 10px 0;
-}
-
-::v-deep .custom-divider-margin-top.el-divider--horizontal {
-  margin: 20px 0;
-}
-
-.small-padding-dialog {
-  ::v-deep .el-dialog__body {
-    padding: 6px 15px 12px 15px;
-  }
+  padding: 0 10px 10px 10px;
 }
 </style>

@@ -61,8 +61,4 @@ onMounted(() => {
     box-sizing: border-box;
   }
 }
-
-.main-content {
-  margin: 2px 0 0 !important;
-}
 </style>

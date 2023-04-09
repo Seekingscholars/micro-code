@@ -3,7 +3,7 @@
     <el-button icon="el-icon-edit" plain round type="info" @click="showWidgetEventDialogFlag=true">
       编辑数据
     </el-button>
-    <el-dialog v-if="showWidgetEventDialogFlag" v-dialog-drag
+    <el-dialog v-if="showWidgetEventDialogFlag" :draggable="true"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
                :title="label" :visible.sync="showWidgetEventDialogFlag" append-to-body
     >

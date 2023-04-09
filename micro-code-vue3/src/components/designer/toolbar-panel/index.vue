@@ -1,19 +1,32 @@
 <template>
   <div class="toolbar-container">
     <div class="left-toolbar">
-      <el-button icon="el-icon-office-building" style="margin-left: 20px" title="组件层次结构树" @click="showNodeTreeDrawer"
-      ></el-button>
+      <el-button
+        icon="el-icon-office-building"
+        style="margin-left: 20px"
+        title="组件层次结构树"
+        @click="showNodeTreeDrawer"
+      />
     </div>
 
-    <el-drawer :destroy-on-close="true" :modal="false" :size="280"
-               :visible.sync="showNodeTreeDrawerFlag" class="node-tree-drawer"
-               direction="ltr" title="组件层次结构树"
+    <el-drawer
+      :destroy-on-close="true"
+      :modal="false"
+      :size="280"
+      v-model:visible="showNodeTreeDrawerFlag"
+      class="node-tree-drawer"
+      direction="ltr"
+      title="组件层次结构树"
     >
-      <el-tree ref="nodeTree" :data="nodeTreeData" :expand-on-click-node="false"
-               class="node-tree"
-               default-expand-all
-               icon-class="el-icon-arrow-right"
-               node-key="id" @node-click="onNodeTreeClick"
+      <el-tree
+        ref="nodeTree"
+        :data="nodeTreeData"
+        :expand-on-click-node="false"
+        class="node-tree"
+        default-expand-all
+        icon-class="el-icon-arrow-right"
+        node-key="id"
+        @node-click="onNodeTreeClick"
       >
         <div slot-scope="{ node, data }" class="nodeTree">
           <div>{{ node.label }}</div>
@@ -21,8 +34,8 @@
             <el-button
               icon="el-icon-delete"
               type="text"
-              @click="()=>removeWidgetById(data.id)"
-            ></el-button>
+              @click="() => removeWidgetById(data.id)"
+            />
           </div>
         </div>
       </el-tree>
@@ -37,29 +50,32 @@
       </div>
     </div>
 
-    <el-dialog v-if="showPreviewDialogFlag" :append-to-body="true" :destroy-on-close="true"
-               :visible.sync="showPreviewDialogFlag" fullscreen title="预览"
+    <el-dialog
+      v-if="showPreviewDialogFlag"
+      :append-to-body="true"
+      :destroy-on-close="true"
+      v-model:visible="showPreviewDialogFlag"
+      fullscreen
+      title="预览"
     >
-      <VFormRender ref="preForm" :form-json="formJson"
-      >
-      </VFormRender>
+      <VFormRender ref="preForm" :form-json="formJson" />
     </el-dialog>
   </div>
 </template>
 
 <script>
-import VFormRender from '@/components/render/index.vue'
-import { addWindowResizeHandler, deepClone } from '@/utils/util'
+import VFormRender from "@/components/render/index.vue";
+import { addWindowResizeHandler, deepClone } from "@/utils/util";
 
 export default {
-  name: 'ToolbarPanel',
+  name: "ToolbarPanel",
   components: {
     VFormRender
   },
+  inject: ["getDesignerConfig"],
   props: {
     designer: Object
   },
-  inject: ['getDesignerConfig'],
   data() {
     return {
       designerConfig: this.getDesignerConfig(),
@@ -68,129 +84,137 @@ export default {
       showPreviewDialogFlag: false,
       showNodeTreeDrawerFlag: false,
       nodeTreeData: []
-    }
+    };
   },
   computed: {
     formJson() {
       return {
         widgetList: deepClone(this.designer.widgetList),
         formConfig: deepClone(this.designer.formConfig)
-      }
+      };
     }
   },
   watch: {
-    'designer.widgetList': {
+    "designer.widgetList": {
       deep: true,
-      handler(val) {
-      }
+      handler(val) {}
     }
-
   },
   mounted() {
-    let maxTBWidth = this.designerConfig.toolbarMaxWidth || 420
-    let minTBWidth = this.designerConfig.toolbarMinWidth || 300
-    let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80
-    this.toolbarWidth = newTBWidth >= maxTBWidth ? maxTBWidth : (newTBWidth <= minTBWidth ? minTBWidth : newTBWidth)
+    let maxTBWidth = this.designerConfig.toolbarMaxWidth || 420;
+    let minTBWidth = this.designerConfig.toolbarMinWidth || 300;
+    let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80;
+    this.toolbarWidth =
+      newTBWidth >= maxTBWidth
+        ? maxTBWidth
+        : newTBWidth <= minTBWidth
+        ? minTBWidth
+        : newTBWidth;
     addWindowResizeHandler(() => {
       this.$nextTick(() => {
-        let newTBWidth2 = window.innerWidth - 260 - 300 - 320 - 80
-        this.toolbarWidth = newTBWidth2 >= maxTBWidth ? maxTBWidth : (newTBWidth2 <= minTBWidth ? minTBWidth : newTBWidth2)
-      })
-    })
+        let newTBWidth2 = window.innerWidth - 260 - 300 - 320 - 80;
+        this.toolbarWidth =
+          newTBWidth2 >= maxTBWidth
+            ? maxTBWidth
+            : newTBWidth2 <= minTBWidth
+            ? minTBWidth
+            : newTBWidth2;
+      });
+    });
   },
   methods: {
     getLabel(widget) {
       if (!widget) {
-        return
+        return;
       }
-      let label
-      if (widget['form-item']) {
-        label = widget['form-item'].label
+      let label;
+      if (widget["form-item"]) {
+        label = widget["form-item"].label;
         if (label) {
-          return label
+          return label;
         }
       }
       if (widget.options) {
-        label = widget.options.label
+        label = widget.options.label;
         if (label) {
-          return label
+          return label;
         }
       }
-      label = widget.name
-      return label
+      label = widget.name;
+      return label;
     },
     buildTreeNodeOfWidget(widget, treeNode) {
       let curNode = {
         id: widget.id,
         label: this.getLabel(widget)
-      }
-      treeNode.push(curNode)
+      };
+      treeNode.push(curNode);
       if (widget.category === undefined) {
-        return
+        return;
       }
       if (widget.tabs) {
-        curNode.children = []
+        curNode.children = [];
         widget.tabs.map(tab => {
           let tabNode = {
             id: tab.id,
             label: this.getLabel(widget),
             children: []
-          }
-          curNode.children.push(tabNode)
+          };
+          curNode.children.push(tabNode);
           tab.widgetList.map(wChild => {
-            this.buildTreeNodeOfWidget(wChild, tabNode.children)
-          })
-        })
+            this.buildTreeNodeOfWidget(wChild, tabNode.children);
+          });
+        });
       }
       if (widget.widgetList) {
-        curNode.children = []
+        curNode.children = [];
         widget.widgetList.map(wChild => {
-          this.buildTreeNodeOfWidget(wChild, curNode.children)
-        })
+          this.buildTreeNodeOfWidget(wChild, curNode.children);
+        });
       }
     },
 
     refreshNodeTree() {
-      this.nodeTreeData.length = 0
+      this.nodeTreeData.length = 0;
       this.designer.widgetList.forEach(wItem => {
-        this.buildTreeNodeOfWidget(wItem, this.nodeTreeData)
-      })
+        this.buildTreeNodeOfWidget(wItem, this.nodeTreeData);
+      });
     },
 
     showNodeTreeDrawer() {
-      this.refreshNodeTree()
-      this.showNodeTreeDrawerFlag = true
+      this.refreshNodeTree();
+      this.showNodeTreeDrawerFlag = true;
       this.$nextTick(() => {
-        if (!!this.designer.selectedId) {  //同步当前选中组件到节点树！！！
-          this.$refs.nodeTree.setCurrentKey(this.designer.selectedId)
+        if (!!this.designer.selectedId) {
+          //同步当前选中组件到节点树！！！
+          this.$refs.nodeTree.setCurrentKey(this.designer.selectedId);
         }
-      })
+      });
     },
 
     clearFormWidget() {
-      this.designer.clearDesigner()
+      this.designer.clearDesigner();
     },
 
     previewForm() {
-      this.showPreviewDialogFlag = true
+      this.showPreviewDialogFlag = true;
     },
     findWidgetById(widgetId) {
-      return this.designer.findWidgetById(widgetId)
+      return this.designer.findWidgetById(widgetId);
     },
 
     onNodeTreeClick(nodeData, node, nodeEl) {
-      const selectedId = nodeData.id
-      const foundW = this.findWidgetById(selectedId)
+      const selectedId = nodeData.id;
+      const foundW = this.findWidgetById(selectedId);
       if (!!foundW) {
-        this.designer.setSelected(foundW)
+        this.designer.setSelected(foundW);
       }
     },
     removeWidgetById(widgetId) {
-      this.designer.removeWidgetById(widgetId)
+      this.designer.removeWidgetById(widgetId);
     }
-
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -253,7 +277,7 @@ div.toolbar-container {
   }
 
   ::v-deep .ace-container {
-    border: 1px solid #DCDFE6;
+    border: 1px solid #dcdfe6;
   }
 }
 
