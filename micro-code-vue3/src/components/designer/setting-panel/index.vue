@@ -1,14 +1,14 @@
 <template>
   <div class="panel-container">
-    <el-tabs :active-name="activeTab" style="height: 100%; overflow: hidden">
+    <el-tabs v-model="activeTab">
       <el-tab-pane label="组件设置" name="1">
-        <el-scrollbar :style="{ height: scrollerHeight }">
+        <el-scrollbar height="calc(100vh - 112px)">
           <template v-if="!!designer.selectedWidget">
             <el-form
               class="setting-form"
               label-position="left"
               label-width="120px"
-              size="mini"
+              size="small"
             >
               <el-collapse
                 v-model="widgetActiveCollapseNames"
@@ -42,7 +42,7 @@
       </el-tab-pane>
 
       <el-tab-pane v-if="!!designer" label="表单设置" name="2">
-        <el-scrollbar>
+        <el-scrollbar height="calc(100vh - 112px)">
           <form-setting
             :designer="designer"
             :form-config="designer.formConfig"
@@ -186,6 +186,9 @@ export default {
 
 <style lang="scss" scoped>
 .panel-container {
-  padding: 0 10px 10px 10px;
+  padding: 0px 10px 0 10px;
+}
+.setting-form {
+  padding-right: 10px;
 }
 </style>

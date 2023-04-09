@@ -53,7 +53,7 @@ export default {
           labelWidth={this.designer.formConfig.labelWidth + "px"}
           labelPosition={this.designer.formConfig.labelPosition}
           disabled={this.designer.formConfig.disabled}
-          class="full-height-width"
+          class="form-height"
         >
           {children}
         </el-form>

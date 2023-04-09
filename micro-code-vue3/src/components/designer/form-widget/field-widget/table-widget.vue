@@ -18,13 +18,13 @@
             v-for="(item, index) in showToolbar"
             :key="index"
             :icon="item.icon"
-            size="mini"
+            size="small"
             type="text"
             @click="callClick(item.click, scope.row)"
             >{{ item.label }}
           </el-button>
-          <el-dropdown v-if="showMore" size="mini">
-            <el-button icon="el-icon-d-arrow-right" size="mini" type="text"
+          <el-dropdown v-if="showMore" size="small">
+            <el-button icon="el-icon-d-arrow-right" size="small" type="text"
               >更多</el-button
             >
             <el-dropdown-menu slot="dropdown">

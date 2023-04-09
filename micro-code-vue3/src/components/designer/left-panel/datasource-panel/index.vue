@@ -61,7 +61,7 @@ export default {
         <div>
           <el-dropdown
             onCommand={command => this.handleCommand(command, data)}
-            size="mini"
+            size="small"
             placement="bottom"
           >
             <i

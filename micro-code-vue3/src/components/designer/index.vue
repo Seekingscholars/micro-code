@@ -1,5 +1,5 @@
 <template>
-  <el-container class="designer full-height">
+  <el-container class="designer">
     <el-aside class="left-panel">
       <left-panel :designer="designer" />
     </el-aside>
@@ -12,7 +12,7 @@
         </toolbar-panel>
       </el-header>
       <el-main class="form-widget-main">
-        <el-scrollbar :style="{ height: scrollerHeight }">
+        <el-scrollbar height="calc(100vh - 112px)">
           <v-form-widget
             v-if="flushed"
             ref="formRef"
@@ -76,7 +76,6 @@ export default {
   },
   data() {
     return {
-      activeName: "form",
       vsCodeFlag: false,
       caseName: "",
       flushed: true,
@@ -185,13 +184,7 @@ export default {
   background: #fff;
 }
 
-.el-container.full-height {
-  height: 100%;
-  overflow-y: hidden;
-}
-
 .el-container.center-layout-container {
-  min-width: 680px;
   border-left: 1px dotted #cccccc;
   border-right: 1px dotted #cccccc;
 }

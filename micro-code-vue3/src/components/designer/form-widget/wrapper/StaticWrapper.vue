@@ -13,11 +13,11 @@
         v-show="designer.selectedId === widget.id"
         class="widget-action"
       >
-        <span class="widget-action-copy" title="复制">
-          <i class="el-icon-copy-document" @click.stop="cloneWidget"></i>
+        <span class="widget-action-copy widget-action-item" title="复制">
+          <copyIcon @click.stop="cloneWidget"/>
         </span>
-        <span class="widget-action-delete" title="删除">
-          <i class="el-icon-delete" @click.stop="removeWidget"></i>
+        <span class="widget-action-delete widget-action-item" title="删除">
+          <removeIcon @click.stop="removeWidget"/>
         </span>
       </div>
     </div>
@@ -26,8 +26,11 @@
 </template>
 
 <script>
+import copyIcon from "@/assets/svg/copy.svg?component";
+import removeIcon from "@/assets/svg/remove.svg?component";
 export default {
   name: "StaticWrapper",
+  components:{copyIcon,removeIcon},
   props: {
     widget: Object,
     designer: Object,
@@ -79,18 +82,14 @@ export default {
 
   .widget-action {
     position: absolute;
-    //bottom: -24px;
     bottom: 0;
     right: -2px;
     display: flex;
-    justify-content: space-around;
-    width: 60px;
-
-    & > .widget-action-copy,
-    & > .widget-action-delete {
+    justify-content: flex-end;
+    & > .widget-action-item{
+      margin-right: 10px;
       text-align: center;
       border-radius: 50%;
-      font-size: 12px;
       padding: 5px;
       border: 1px solid;
       cursor: pointer;
@@ -99,27 +98,38 @@ export default {
 
     & > .widget-action-copy {
       right: 56px;
-      border-color: #409eff;
-      color: #409eff;
+      border-color: #1296db;
+      color: #1296db;
       background: #fff;
 
       &:hover {
-        background: #409eff;
-        color: #fff;
+        //background: #409eff;
+        fill: #fff;
       }
     }
 
     & > .widget-action-delete {
       right: 24px;
-      border-color: #f56c6c;
-      color: #f56c6c;
+      border-color: #d81e06;
+      color: #d81e06;
       background: #fff;
 
       &:hover {
-        background: #f56c6c;
-        color: #fff;
+        //background: #d81e06;
+        fill: #fff;
       }
     }
   }
 }
+
+.static-content-item {
+  min-height: 20px;
+  align-items: center; /* 垂直居中 */
+  padding: 10px;
+}
+
+.static-content-item.selected {
+  background-color: #eaecfd;
+}
+
 </style>

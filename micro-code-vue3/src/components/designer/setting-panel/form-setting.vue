@@ -5,7 +5,7 @@
       class="setting-form"
       label-position="left"
       label-width="120px"
-      size="mini"
+      size="small"
       @submit.native.prevent
     >
       <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
@@ -192,9 +192,7 @@ export default {
       formSizes: [
         { label: "default", value: "" },
         { label: "large", value: "large" },
-        { label: "medium", value: "medium" },
-        { label: "small", value: "small" },
-        { label: "mini", value: "mini" }
+        { label: "small", value: "small" }
       ],
       showEditFunctionDialogFlag: false,
       showEditDataDialogFlag: false,
@@ -248,43 +246,6 @@ export default {
 
 <style lang="scss" scoped>
 .setting-form {
-  ::v-deep .el-form-item__label {
-    font-size: 13px;
-    //text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  ::v-deep .el-form-item--mini.el-form-item {
-    margin-bottom: 6px;
-  }
-
-  .radio-group-custom {
-    ::v-deep .el-radio-button__inner {
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-  }
-
-  .custom-divider.el-divider--horizontal {
-    margin: 10px 0;
-  }
-}
-
-.setting-collapse {
-  ::v-deep .el-collapse-item__content {
-    padding-bottom: 6px;
-  }
-
-  ::v-deep .el-collapse-item__header {
-    font-style: italic;
-    font-weight: bold;
-  }
-}
-
-.small-padding-dialog {
-  ::v-deep .el-dialog__body {
-    padding: 6px 15px 12px 15px;
-  }
+  padding-right: 10px;
 }
 </style>

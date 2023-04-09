@@ -44,8 +44,8 @@
     <div class="right-toolbar">
       <div class="right-toolbar-con">
         <slot name="prefixToolbar"></slot>
-        <el-button size="mini" @click="clearFormWidget">清空</el-button>
-        <el-button size="mini" @click="previewForm">预览</el-button>
+        <el-button size="small" @click="clearFormWidget">清空</el-button>
+        <el-button size="small" @click="previewForm">预览</el-button>
         <slot name="suffixToolbar"></slot>
       </div>
     </div>

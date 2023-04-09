@@ -27,8 +27,6 @@ export default {
 .form-widget-container {
   padding: 10px;
   contain: paint;
-  height: calc(100vh - 92px);
-
   .no-widget-hint {
     position: absolute;
     left: 0;
@@ -43,8 +41,9 @@ export default {
     font-size: 24px;
     color: #e59d9d;
   }
-  .full-height-width {
-    height: 100%;
+
+  .form-height {
+    min-height: 60vh;
   }
 }
 

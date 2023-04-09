@@ -1,27 +1,26 @@
 <template>
-  <el-form-item>
-    <span slot="label">字段校验
-      <el-tooltip content="支持输入正则表达式" effect="light">
-        <i class="el-icon-info"></i></el-tooltip>
-    </span>
-    <el-select v-model="optionModel.validation" allow-create clearable default-first-option filterable
-               style="width: 100%"
+  <el-form-item label="字段校验">
+    <el-select
+      v-model="optionModel.validation"
+      allow-create
+      clearable
+      default-first-option
+      filterable
+      style="width: 100%"
     >
-      <el-option v-for="(fv, fvIdx) in fieldValidators"
-                 :key="fvIdx"
-                 :label="fv.label"
-                 :value="fv.value"
-      >
-      </el-option>
+      <el-option
+        v-for="(fv, fvIdx) in fieldValidators"
+        :key="fvIdx"
+        :label="fv.label"
+        :value="fv.value"
+      />
     </el-select>
   </el-form-item>
 </template>
 
 <script>
-
-
 export default {
-  name: 'validation-editor',
+  name: "ValidationEditor",
 
   props: {
     designer: Object,
@@ -31,21 +30,18 @@ export default {
   data() {
     return {
       fieldValidators: [
-        { value: 'number', label: '数字' },
-        { value: 'letter', label: '字母' },
-        { value: 'letterAndNumber', label: '数字字母' },
-        { value: 'mobilePhone', label: '手机号码' },
-        { value: 'email', label: '邮箱' },
-        { value: 'url', label: '网址' },
-        { value: 'noChinese', label: '非中文字符' },
-        { value: 'chinese', label: '仅中文字符' }
+        { value: "number", label: "数字" },
+        { value: "letter", label: "字母" },
+        { value: "letterAndNumber", label: "数字字母" },
+        { value: "mobilePhone", label: "手机号码" },
+        { value: "email", label: "邮箱" },
+        { value: "url", label: "网址" },
+        { value: "noChinese", label: "非中文字符" },
+        { value: "chinese", label: "仅中文字符" }
       ]
-    }
+    };
   }
-
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
