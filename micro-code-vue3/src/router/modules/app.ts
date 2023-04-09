@@ -1,10 +1,10 @@
 const Layout = () => import("@/layout/index.vue");
 
 export default {
-  path: "/",
+  path: "/app",
   name: "App",
   component: Layout,
-  redirect: "/app",
+  redirect: "/app/design",
   meta: {
     icon: "homeFilled",
     title: "我的应用",
@@ -12,11 +12,19 @@ export default {
   },
   children: [
     {
-      path: "/app",
-      name: "我的应用",
-      component: () => import("@/views/design/index.vue"),
+      path: "/app/design",
+      name: "app-design",
+      component: () => import("@/views/app/design/index.vue"),
       meta: {
-        title: "我的应用"
+        title: "表单设计"
+      }
+    },
+    {
+      path: "/app/preview",
+      name: "app-preview",
+      component: () => import("@/views/app/preview/index.vue"),
+      meta: {
+        title: "表单预览"
       }
     }
   ]

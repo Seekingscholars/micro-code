@@ -19,6 +19,7 @@ export type appType = {
   };
   layout: string;
   device: string;
+  formJson: Object,
 };
 
 export type multiType = {

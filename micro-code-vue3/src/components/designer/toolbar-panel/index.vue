@@ -9,37 +9,37 @@
       />
     </div>
 
-    <el-drawer
-      :destroy-on-close="true"
-      :modal="false"
-      :size="280"
-      v-model:visible="showNodeTreeDrawerFlag"
-      class="node-tree-drawer"
-      direction="ltr"
-      title="组件层次结构树"
-    >
-      <el-tree
-        ref="nodeTree"
-        :data="nodeTreeData"
-        :expand-on-click-node="false"
-        class="node-tree"
-        default-expand-all
-        icon-class="el-icon-arrow-right"
-        node-key="id"
-        @node-click="onNodeTreeClick"
-      >
-        <div slot-scope="{ node, data }" class="nodeTree">
-          <div>{{ node.label }}</div>
-          <div class="trash">
-            <el-button
-              icon="el-icon-delete"
-              type="text"
-              @click="() => removeWidgetById(data.id)"
-            />
-          </div>
-        </div>
-      </el-tree>
-    </el-drawer>
+<!--    <el-drawer-->
+<!--      :destroy-on-close="true"-->
+<!--      :modal="false"-->
+<!--      :size="280"-->
+<!--      v-model:visible="showNodeTreeDrawerFlag"-->
+<!--      class="node-tree-drawer"-->
+<!--      direction="ltr"-->
+<!--      title="组件层次结构树"-->
+<!--    >-->
+<!--      <el-tree-->
+<!--        ref="nodeTree"-->
+<!--        :data="nodeTreeData"-->
+<!--        :expand-on-click-node="false"-->
+<!--        class="node-tree"-->
+<!--        default-expand-all-->
+<!--        icon-class="el-icon-arrow-right"-->
+<!--        node-key="id"-->
+<!--        @node-click="onNodeTreeClick"-->
+<!--      >-->
+<!--        <div slot-scope="{ node, data }" class="nodeTree">-->
+<!--          <div>{{ node.label }}</div>-->
+<!--          <div class="trash">-->
+<!--            <el-button-->
+<!--              icon="el-icon-delete"-->
+<!--              type="text"-->
+<!--              @click="() => removeWidgetById(data.id)"-->
+<!--            />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </el-tree>-->
+<!--    </el-drawer>-->
 
     <div class="right-toolbar">
       <div class="right-toolbar-con">
@@ -50,171 +50,113 @@
       </div>
     </div>
 
-    <el-dialog
-      v-if="showPreviewDialogFlag"
-      :append-to-body="true"
-      :destroy-on-close="true"
-      v-model:visible="showPreviewDialogFlag"
-      fullscreen
-      title="预览"
-    >
-      <VFormRender ref="preForm" :form-json="formJson" />
-    </el-dialog>
   </div>
 </template>
 
-<script>
-import VFormRender from "@/components/render/index.vue";
-import { addWindowResizeHandler, deepClone } from "@/utils/util";
-
-export default {
-  name: "ToolbarPanel",
-  components: {
-    VFormRender
-  },
-  inject: ["getDesignerConfig"],
-  props: {
-    designer: Object
-  },
-  data() {
-    return {
-      designerConfig: this.getDesignerConfig(),
-
-      toolbarWidth: 420,
-      showPreviewDialogFlag: false,
-      showNodeTreeDrawerFlag: false,
-      nodeTreeData: []
-    };
-  },
-  computed: {
-    formJson() {
-      return {
-        widgetList: deepClone(this.designer.widgetList),
-        formConfig: deepClone(this.designer.formConfig)
-      };
-    }
-  },
-  watch: {
-    "designer.widgetList": {
-      deep: true,
-      handler(val) {}
-    }
-  },
-  mounted() {
-    let maxTBWidth = this.designerConfig.toolbarMaxWidth || 420;
-    let minTBWidth = this.designerConfig.toolbarMinWidth || 300;
-    let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80;
-    this.toolbarWidth =
-      newTBWidth >= maxTBWidth
-        ? maxTBWidth
-        : newTBWidth <= minTBWidth
-        ? minTBWidth
-        : newTBWidth;
-    addWindowResizeHandler(() => {
-      this.$nextTick(() => {
-        let newTBWidth2 = window.innerWidth - 260 - 300 - 320 - 80;
-        this.toolbarWidth =
-          newTBWidth2 >= maxTBWidth
-            ? maxTBWidth
-            : newTBWidth2 <= minTBWidth
-            ? minTBWidth
-            : newTBWidth2;
-      });
-    });
-  },
-  methods: {
-    getLabel(widget) {
-      if (!widget) {
-        return;
-      }
-      let label;
-      if (widget["form-item"]) {
-        label = widget["form-item"].label;
-        if (label) {
-          return label;
-        }
-      }
-      if (widget.options) {
-        label = widget.options.label;
-        if (label) {
-          return label;
-        }
-      }
-      label = widget.name;
+<script setup type="ts">
+import {ref,nextTick} from 'vue';
+import { useRouter } from "vue-router";
+import { useAppStoreHook } from "@/store/modules/app";
+const props=defineProps({designer:Object})
+const  nodeTreeData=ref([]);
+const router = useRouter();
+function getLabel(widget) {
+  if (!widget) {
+    return;
+  }
+  let label;
+  if (widget["form-item"]) {
+    label = widget["form-item"].label;
+    if (label) {
       return label;
-    },
-    buildTreeNodeOfWidget(widget, treeNode) {
-      let curNode = {
-        id: widget.id,
-        label: this.getLabel(widget)
-      };
-      treeNode.push(curNode);
-      if (widget.category === undefined) {
-        return;
-      }
-      if (widget.tabs) {
-        curNode.children = [];
-        widget.tabs.map(tab => {
-          let tabNode = {
-            id: tab.id,
-            label: this.getLabel(widget),
-            children: []
-          };
-          curNode.children.push(tabNode);
-          tab.widgetList.map(wChild => {
-            this.buildTreeNodeOfWidget(wChild, tabNode.children);
-          });
-        });
-      }
-      if (widget.widgetList) {
-        curNode.children = [];
-        widget.widgetList.map(wChild => {
-          this.buildTreeNodeOfWidget(wChild, curNode.children);
-        });
-      }
-    },
-
-    refreshNodeTree() {
-      this.nodeTreeData.length = 0;
-      this.designer.widgetList.forEach(wItem => {
-        this.buildTreeNodeOfWidget(wItem, this.nodeTreeData);
-      });
-    },
-
-    showNodeTreeDrawer() {
-      this.refreshNodeTree();
-      this.showNodeTreeDrawerFlag = true;
-      this.$nextTick(() => {
-        if (!!this.designer.selectedId) {
-          //同步当前选中组件到节点树！！！
-          this.$refs.nodeTree.setCurrentKey(this.designer.selectedId);
-        }
-      });
-    },
-
-    clearFormWidget() {
-      this.designer.clearDesigner();
-    },
-
-    previewForm() {
-      this.showPreviewDialogFlag = true;
-    },
-    findWidgetById(widgetId) {
-      return this.designer.findWidgetById(widgetId);
-    },
-
-    onNodeTreeClick(nodeData, node, nodeEl) {
-      const selectedId = nodeData.id;
-      const foundW = this.findWidgetById(selectedId);
-      if (!!foundW) {
-        this.designer.setSelected(foundW);
-      }
-    },
-    removeWidgetById(widgetId) {
-      this.designer.removeWidgetById(widgetId);
     }
   }
-};
+  if (widget.options) {
+    label = widget.options.label;
+    if (label) {
+      return label;
+    }
+  }
+  label = widget.name;
+  return label;
+}
+function buildTreeNodeOfWidget(widget, treeNode) {
+  let curNode = {
+    id: widget.id,
+    label: getLabel(widget)
+  };
+  treeNode.push(curNode);
+  if (widget.category === undefined) {
+    return;
+  }
+  if (widget.tabs) {
+    curNode.children = [];
+    widget.tabs.map(tab => {
+      let tabNode = {
+        id: tab.id,
+        label: getLabel(widget),
+        children: []
+      };
+      curNode.children.push(tabNode);
+      tab.widgetList.map(wChild => {
+        buildTreeNodeOfWidget(wChild, tabNode.children);
+      });
+    });
+  }
+  if (widget.widgetList) {
+    curNode.children = [];
+    widget.widgetList.map(wChild => {
+      buildTreeNodeOfWidget(wChild, curNode.children);
+    });
+  }
+}
+
+function refreshNodeTree() {
+  nodeTreeData.value.length = 0;
+  props.designer.widgetList.forEach(wItem => {
+    buildTreeNodeOfWidget(wItem, nodeTreeData.value);
+  });
+}
+
+function showNodeTreeDrawer() {
+  refreshNodeTree();
+  nextTick(() => {
+    if (!!props.designer.selectedId) {
+      //同步当前选中组件到节点树！！！
+      // this.$refs.nodeTree.setCurrentKey(props.designer.selectedId);
+    }
+  });
+}
+
+function clearFormWidget() {
+  props.designer.clearDesigner();
+}
+
+function previewForm() {
+  const formJson={
+      widgetList: props.designer.widgetList,
+      formConfig: props.designer.formConfig
+    }
+  const to = router.resolve({
+    name: "app-preview"
+  });
+  useAppStoreHook().setFormJson(formJson)
+  window.open(to.href, "_blank");
+}
+function findWidgetById(widgetId) {
+  return props.designer.findWidgetById(widgetId);
+}
+
+function onNodeTreeClick(nodeData) {
+  const selectedId = nodeData.id;
+  const foundW = findWidgetById(selectedId);
+  if (!!foundW) {
+    props.designer.setSelected(foundW);
+  }
+}
+function removeWidgetById(widgetId) {
+  props.designer.removeWidgetById(widgetId);
+}
 </script>
 
 <style lang="scss" scoped>
