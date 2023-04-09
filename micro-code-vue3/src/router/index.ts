@@ -1,4 +1,3 @@
-// import "@/utils/sso";
 import { getConfig } from "@/config";
 import NProgress from "@/utils/progress";
 import { sessionKey, type DataInfo } from "@/utils/auth";
@@ -96,7 +95,6 @@ export function resetRouter() {
 const whiteList = ["/login"];
 
 router.beforeEach((to: toRouteType, _from, next) => {
-  debugger
   if (to.meta?.keepAlive) {
     const newMatched = to.matched;
     handleAliveRoute(newMatched, "add");

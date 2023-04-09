@@ -1,17 +1,18 @@
 <template>
-  <el-row :class="[designer.design?'grid-container':'']"
-          v-bind="field.options"
+  <el-row
+    :class="[designer.design ? 'grid-container' : '']"
+    v-bind="field.options"
   >
-    <RenderWidget :designer="designer" :widget="field"></RenderWidget>
+    <RenderWidget :designer="designer" :widget="field" />
   </el-row>
 </template>
 
 <script>
-import RenderWidget from '../RenderWidget.vue'
+import RenderWidget from "../RenderWidget.vue";
 
 export default {
-  name: 'grid-widget',
-  componentName: 'GridWidget',
+  name: "GridWidget",
+  componentName: "GridWidget",
   components: {
     RenderWidget
   },
@@ -19,9 +20,5 @@ export default {
     field: Object,
     designer: Object
   }
-}
+};
 </script>
-
-<style lang="scss" scoped>
-
-</style>

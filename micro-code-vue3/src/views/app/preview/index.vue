@@ -1,5 +1,7 @@
 <template>
+  <div>
   <FormRender v-if="flushed" :formJson="formJson" />
+  </div>
 </template>
 <script setup name="AppPreview">
 import { ref } from "vue";

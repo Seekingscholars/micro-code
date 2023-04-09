@@ -45,20 +45,6 @@ export default {
     checkMove(evt) {
       return true;
     },
-    renderForm() {
-      const children = this.renderDraggable();
-      return (
-        <el-form
-          size={this.designer.formConfig.size}
-          labelWidth={this.designer.formConfig.labelWidth + "px"}
-          labelPosition={this.designer.formConfig.labelPosition}
-          disabled={this.designer.formConfig.disabled}
-          class="form-height"
-        >
-          {children}
-        </el-form>
-      );
-    },
     renderDraggable() {
       if (this.designer.design) {
         const slots = {
@@ -161,7 +147,7 @@ export default {
   },
 
   render(h, context) {
-    return this.renderForm();
+    return this.renderDraggable();
   }
 };
 </script>

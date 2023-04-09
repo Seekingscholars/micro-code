@@ -14,27 +14,27 @@
                 v-model="widgetActiveCollapseNames"
                 class="setting-collapse"
               >
-                <el-collapse-item
-                  v-for="item in collapseList"
-                  :key="item.type"
-                  :name="item.type"
-                  :title="item.name"
-                >
-                  <template
+                <template v-for="item in collapseList" :key="item.type">
+                  <el-collapse-item
                     v-if="designer.selectedWidget[item.type]"
-                    v-for="propName in Object.keys(
-                      designer.selectedWidget[item.type]
-                    )"
+                    :name="item.type"
+                    :title="item.name"
                   >
-                    <component
-                      :is="getPropEditor(propName)"
-                      v-if="getPropEditor(propName) != null"
-                      :designer="designer"
-                      :option-model="designer.selectedWidget[item.type]"
-                      :selected-widget="designer.selectedWidget"
-                    />
-                  </template>
-                </el-collapse-item>
+                    <template
+                      v-for="propName in Object.keys(
+                        designer.selectedWidget[item.type]
+                      )"
+                    >
+                      <component
+                        :is="getPropEditor(propName)"
+                        v-if="getPropEditor(propName) != null"
+                        :designer="designer"
+                        :option-model="designer.selectedWidget[item.type]"
+                        :selected-widget="designer.selectedWidget"
+                      />
+                    </template>
+                  </el-collapse-item>
+                </template>
               </el-collapse>
             </el-form>
           </template>

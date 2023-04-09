@@ -1,15 +1,15 @@
 <template>
   <el-card :shadow="field.options.shadow">
-    <RenderWidget :designer="designer" :widget="field"></RenderWidget>
+    <RenderWidget :designer="designer" :widget="field" />
   </el-card>
 </template>
 
 <script>
-import RenderWidget from '../RenderWidget.vue'
+import RenderWidget from "../RenderWidget.vue";
 
 export default {
-  name: 'card-widget',
-  componentName: 'ContainerWidget',
+  name: "CardWidget",
+  componentName: "ContainerWidget",
   components: {
     RenderWidget
   },
@@ -17,8 +17,7 @@ export default {
     field: Object,
     designer: Object
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

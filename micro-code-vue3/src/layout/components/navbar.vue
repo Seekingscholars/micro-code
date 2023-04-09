@@ -3,7 +3,6 @@ import Search from "./search/index.vue";
 import Notice from "./notice/index.vue";
 import mixNav from "./sidebar/mixNav.vue";
 import { useNav } from "@/layout/hooks/useNav";
-import Breadcrumb from "./sidebar/breadCrumb.vue";
 import topCollapse from "./sidebar/topCollapse.vue";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 import Setting from "@iconify-icons/ri/settings-3-line";
@@ -29,11 +28,6 @@ const {
       class="hamburger-container"
       :is-active="pureApp.sidebar.opened"
       @toggleClick="toggleSideBar"
-    />
-
-    <Breadcrumb
-      v-if="layout !== 'mix' && device !== 'mobile'"
-      class="breadcrumb-container"
     />
 
     <mixNav v-if="layout === 'mix'" />
@@ -115,11 +109,6 @@ const {
         border-radius: 50%;
       }
     }
-  }
-
-  .breadcrumb-container {
-    float: left;
-    margin-left: 16px;
   }
 }
 
