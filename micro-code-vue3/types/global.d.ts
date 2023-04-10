@@ -6,7 +6,6 @@ import type {
 } from "vue";
 import type { ECharts } from "echarts";
 import type { IconifyIcon } from "@iconify/vue";
-import type { TableColumns } from "@pureadmin/table";
 import { type RouteComponent, type RouteLocationNormalized } from "vue-router";
 
 /**
@@ -65,11 +64,6 @@ declare global {
     VITE_CDN: boolean;
     VITE_COMPRESSION: ViteCompression;
   }
-
-  /**
-   *  继承 `@pureadmin/table` 的 `TableColumns` ，方便全局直接调用
-   */
-  interface TableColumnList extends Array<TableColumns> {}
 
   /**
    * 对应 `public/serverConfig.json` 文件的类型声明

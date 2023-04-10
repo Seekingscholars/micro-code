@@ -1,40 +1,23 @@
 <script setup lang="ts">
-import Search from "./search/index.vue";
 import Notice from "./notice/index.vue";
-import mixNav from "./sidebar/mixNav.vue";
+import Logo from "./logo.vue";
 import { useNav } from "@/layout/hooks/useNav";
-import topCollapse from "./sidebar/topCollapse.vue";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
-import Setting from "@iconify-icons/ri/settings-3-line";
 
-const {
-  layout,
-  device,
-  logout,
-  onPanel,
-  pureApp,
-  username,
-  avatarsStyle,
-  toggleSideBar
-} = useNav();
+const { logout, username, avatarsStyle } = useNav();
 </script>
 
 <template>
   <div
     class="navbar bg-[#fff] shadow-sm shadow-[rgba(0, 21, 41, 0.08)] dark:shadow-[#0d0d0d]"
   >
-    <topCollapse
-      v-if="device === 'mobile'"
-      class="hamburger-container"
-      :is-active="pureApp.sidebar.opened"
-      @toggleClick="toggleSideBar"
-    />
+    <div class="vertical-header-left">
+      <Logo />
+    </div>
+    <div class="vertical-header-center">
+    </div>
 
-    <mixNav v-if="layout === 'mix'" />
-
-    <div v-if="layout === 'vertical'" class="vertical-header-right">
-      <!-- 菜单搜索 -->
-      <Search />
+    <div class="vertical-header-right">
       <!-- 通知 -->
       <Notice id="header-notice" />
       <!-- 退出登录 -->
@@ -58,13 +41,6 @@ const {
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span
-        class="set-icon navbar-bg-hover"
-        title="打开项目配置"
-        @click="onPanel"
-      >
-        <IconifyIconOffline :icon="Setting" />
-      </span>
     </div>
   </div>
 </template>
@@ -74,14 +50,8 @@ const {
   width: 100%;
   height: 48px;
   overflow: hidden;
-
-  .hamburger-container {
-    line-height: 48px;
-    height: 100%;
-    float: left;
-    cursor: pointer;
-  }
-
+  display: flex;
+  justify-content: space-between;
   .vertical-header-right {
     display: flex;
     min-width: 280px;

@@ -48,6 +48,7 @@ module.exports = {
         varsIgnorePattern: '^_',
       },
     ],
+    camelcase: "off",
     'space-before-function-paren': 'off',
 
     'vue/attributes-order': 'off',

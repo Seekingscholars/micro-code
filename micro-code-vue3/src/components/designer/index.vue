@@ -4,12 +4,15 @@
       <left-panel :designer="designer" />
     </el-aside>
     <el-container class="center-layout-container">
-      <el-header class="toolbar-header">
-        <toolbar-panel ref="toolbarRef" :designer="designer">
-          <template v-for="(idx, slotName) in $slots" #[slotName]>
-            <slot :name="slotName"></slot>
-          </template>
-        </toolbar-panel>
+      <el-header class="toolbar-header" v-if="$slots.length > 0">
+        <template v-for="(index, slotName) in $slots">
+          <slot :name="slotName"></slot>
+        </template>
+<!--        <toolbar-panel ref="toolbarRef" :designer="designer">-->
+<!--          <template v-for="(idx, slotName) in $slots" #[slotName]>-->
+<!--            <slot :name="slotName"></slot>-->
+<!--          </template>-->
+<!--        </toolbar-panel>-->
       </el-header>
       <el-main class="form-widget-main">
         <el-scrollbar height="calc(100vh - 112px)">
@@ -185,13 +188,11 @@ export default {
 }
 
 .el-container.center-layout-container {
-  border-left: 1px dotted #cccccc;
-  border-right: 1px dotted #cccccc;
+  border: 1px dotted #cccccc;
 }
 
 .el-header.toolbar-header {
   font-size: 14px;
-  border-bottom: 1px dotted #cccccc;
   height: 42px !important;
 }
 

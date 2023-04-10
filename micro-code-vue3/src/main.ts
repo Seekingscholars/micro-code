@@ -6,7 +6,7 @@ import { getServerConfig } from "./config";
 import { createApp, Directive } from "vue";
 import { MotionPlugin } from "@vueuse/motion";
 import { injectResponsiveStorage } from "@/utils/responsive";
-
+import locale from "element-plus/lib/locale/lang/zh-cn";
 // 引入重置样式
 import "./style/reset.scss";
 // 导入公共样式
@@ -40,11 +40,11 @@ app.component("FontIcon", FontIcon);
 import { Auth } from "@/components/ReAuth";
 app.component("Auth", Auth);
 
-getServerConfig(app).then(async config => {
+getServerConfig(app).then(async () => {
   app.use(router);
   await router.isReady();
-  injectResponsiveStorage(app, config);
+  injectResponsiveStorage(app);
   setupStore(app);
-  app.use(MotionPlugin).use(ElementPlus);
+  app.use(MotionPlugin).use(ElementPlus, { locale });
   app.mount("#app");
 });

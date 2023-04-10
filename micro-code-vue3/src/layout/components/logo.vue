@@ -7,7 +7,6 @@ const props = defineProps({
 
 const { title } = useNav();
 </script>
-
 <template>
   <div class="sidebar-logo-container" :class="{ collapses: props.collapse }">
     <transition name="sidebarLogoFade">
@@ -38,18 +37,14 @@ const { title } = useNav();
 <style lang="scss" scoped>
 .sidebar-logo-container {
   position: relative;
-  width: 100%;
+  width: 300px;
   height: 48px;
   text-align: center;
   overflow: hidden;
 
   .sidebar-logo-link {
-    height: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-top: 5px;
-
+    padding-left: 10px;
+    display: flex;
     .sidebar-title {
       display: block;
       width: 160px;

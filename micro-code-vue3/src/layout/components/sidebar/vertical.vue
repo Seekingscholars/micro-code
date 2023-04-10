@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Logo from "./logo.vue";
 import { useRoute } from "vue-router";
 import { emitter } from "@/utils/mitt";
 import SidebarItem from "./sidebarItem.vue";
@@ -16,15 +15,13 @@ const showLogo = ref(
     true
 );
 
-const { routers, device, pureApp, isCollapse, menuSelect, toggleSideBar } =
+const { routers, pureApp, isCollapse, menuSelect, toggleSideBar } =
   useNav();
 
 const subMenuData = ref([]);
 
 const menuData = computed(() => {
-  return pureApp.layout === "mix" && device.value !== "mobile"
-    ? subMenuData.value
-    : usePermissionStoreHook().wholeMenus;
+  return usePermissionStoreHook().wholeMenus;
 });
 
 function getSubMenuData(path: string) {
@@ -64,11 +61,7 @@ watch(
     v-loading="menuData.length === 0"
     :class="['sidebar-container', showLogo ? 'has-logo' : '']"
   >
-    <Logo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar
-      wrap-class="scrollbar-wrapper"
-      :class="[device === 'mobile' ? 'mobile' : 'pc']"
-    >
+    <el-scrollbar wrap-class="scrollbar-wrapper" class="pc">
       <el-menu
         router
         unique-opened
@@ -89,7 +82,6 @@ watch(
       </el-menu>
     </el-scrollbar>
     <leftCollapse
-      v-if="device !== 'mobile'"
       :is-active="pureApp.sidebar.opened"
       @toggleClick="toggleSideBar"
     />

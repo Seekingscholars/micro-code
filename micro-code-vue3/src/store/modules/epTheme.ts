@@ -9,9 +9,7 @@ export const useEpThemeStore = defineStore({
     epThemeColor:
       storageLocal().getItem<StorageConfigs>("responsive-layout")
         ?.epThemeColor ?? getConfig().EpThemeColor,
-    epTheme:
-      storageLocal().getItem<StorageConfigs>("responsive-layout")?.theme ??
-      getConfig().Theme
+    epTheme: getConfig().Theme
   }),
   getters: {
     getEpThemeColor() {

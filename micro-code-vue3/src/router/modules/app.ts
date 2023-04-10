@@ -24,7 +24,8 @@ export default {
       name: "app-preview",
       component: () => import("@/views/app/preview/index.vue"),
       meta: {
-        title: "表单预览"
+        title: "表单预览",
+        hidden: true
       }
     }
   ]
