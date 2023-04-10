@@ -7,7 +7,7 @@ import StaticWrapper from "./wrapper/StaticWrapper.vue";
 import FormItemWrapper from "./wrapper/FormItemWrapper.vue";
 
 export default {
-  name: "RenderWidget",
+  name: "render-widget",
   componentName: "RenderWidget",
   components: {
     Draggable,
@@ -49,13 +49,7 @@ export default {
     renderDraggable() {
       if (this.designer.design) {
         const slots = {
-          item: ({ element, index }) => {
-            return (
-              <div>
-                {this.renderColSpanWrapper(element, index)}
-              </div>
-            );
-          }
+          item: ({ element, index }) => this.renderColSpanWrapper(element, index)
         };
         return (
           <draggable
@@ -74,12 +68,8 @@ export default {
           ></draggable>
         );
       } else {
-        return (
-          <div>
-            {this.widget.widgetList.map((subWidget, index) => {
-              return this.renderColSpanWrapper(subWidget, index);
-            })}
-          </div>
+        return this.widget.widgetList.map((subWidget, index) =>
+          this.renderColSpanWrapper(subWidget, index)
         );
       }
     },
@@ -134,8 +124,8 @@ export default {
     renderComponent(subWidget, index) {
       const widgetName = this.getWidgetName(subWidget);
       let Component = this.$options.components[widgetName];
-      if(!Component){
-        Component=ContainerComponents[widgetName];
+      if (!Component) {
+        Component = ContainerComponents[widgetName];
       }
       return (
         <Component

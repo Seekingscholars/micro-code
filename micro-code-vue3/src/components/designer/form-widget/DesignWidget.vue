@@ -16,7 +16,7 @@ import "./container-widget/index";
 import RenderWidget from "./RenderWidget.vue";
 
 export default {
-  name: "DesignWidget",
+  name: "design-widget",
   components: {
     RenderWidget
   },
