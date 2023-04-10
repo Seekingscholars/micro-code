@@ -12,7 +12,6 @@
 
 <script>
 // import request from '@/utils/request'
-import "./container-widget/index";
 import RenderWidget from "./RenderWidget.vue";
 
 export default {

@@ -1,22 +1,14 @@
 <template>
-  <el-config-provider :locale="currentLocale">
-    <router-view />
-  </el-config-provider>
+  <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ElConfigProvider } from "element-plus";
-import zhCn from "element-plus/lib/locale/lang/zh-cn";
+import Comps from "@/components/designer/form-widget/field-widget";
 export default defineComponent({
-  name: "app",
+  name: "App",
   components: {
-    [ElConfigProvider.name]: ElConfigProvider
-  },
-  computed: {
-    currentLocale() {
-      return zhCn;
-    }
+    ...Comps
   }
 });
 </script>

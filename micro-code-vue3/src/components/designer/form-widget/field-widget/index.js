@@ -1,4 +1,4 @@
-let comps = {};
+const comps = {};
 
 const modules = import.meta.glob("./*.vue", {
   eager: true
