@@ -9,7 +9,7 @@ import {
 import { router } from "./index";
 import { isProxy, toRaw } from "vue";
 import { useTimeoutFn } from "@vueuse/core";
-import { RouteConfigs } from "@/layout/types";
+import { RouteConfigs } from "@/layout/default/types";
 import {
   isString,
   cloneDeep,

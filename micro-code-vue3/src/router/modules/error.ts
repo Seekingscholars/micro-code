@@ -1,6 +1,8 @@
+const Layout = () => import("@/layout/default/index.vue");
 export default {
   path: "/error",
   redirect: "/error/403",
+  component: Layout,
   meta: {
     icon: "informationLine",
     title: "异常页面",

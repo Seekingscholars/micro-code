@@ -1,39 +1,33 @@
 <template>
-  <el-container class="designer">
-    <el-aside class="left-panel">
-      <left-panel :designer="designer" />
-    </el-aside>
-    <el-container class="center-layout-container">
-      <el-header class="toolbar-header" v-if="$slots.length > 0">
-        <template v-for="(index, slotName) in $slots">
-          <slot :name="slotName"></slot>
-        </template>
-<!--        <toolbar-panel ref="toolbarRef" :designer="designer">-->
-<!--          <template v-for="(idx, slotName) in $slots" #[slotName]>-->
-<!--            <slot :name="slotName"></slot>-->
-<!--          </template>-->
-<!--        </toolbar-panel>-->
-      </el-header>
-      <el-main class="form-widget-main">
-        <el-scrollbar height="calc(100vh - 112px)">
-          <v-form-widget
-            v-if="flushed"
-            ref="formRef"
-            :designer="designer"
-            :form-config="designer.formConfig"
-          />
-        </el-scrollbar>
-      </el-main>
+  <div class="design-container">
+    <div class="design-header">
+      <slot name="header"> </slot>
+    </div>
+    <el-container>
+      <el-aside class="left-panel">
+        <left-panel :designer="designer" />
+      </el-aside>
+      <el-container class="center-layout-container">
+        <el-main class="form-widget-main">
+          <el-scrollbar height="calc(100vh - 112px)">
+            <v-form-widget
+              v-if="flushed"
+              ref="formRef"
+              :designer="designer"
+              :form-config="designer.formConfig"
+            />
+          </el-scrollbar>
+        </el-main>
+      </el-container>
+      <el-aside class="setting-panel">
+        <setting-panel :designer="designer" />
+      </el-aside>
     </el-container>
-    <el-aside class="setting-panel">
-      <setting-panel :designer="designer" />
-    </el-aside>
-  </el-container>
+  </div>
 </template>
 
 <script>
 import LeftPanel from "./left-panel/index.vue";
-import ToolbarPanel from "./toolbar-panel/index.vue";
 import SettingPanel from "./setting-panel/index.vue";
 import VFormWidget from "./form-widget/index.vue";
 import { createDesigner } from "./designer";
@@ -46,12 +40,11 @@ import {
 } from "@/utils/util";
 
 export default {
-  name: "VFormDesigner",
-  componentName: "VFormDesigner",
+  name: "FormDesigner",
+  componentName: "FormDesigner",
 
   components: {
     LeftPanel,
-    ToolbarPanel,
     SettingPanel,
     VFormWidget
   },
@@ -126,8 +119,8 @@ export default {
 
     getFormJson() {
       return {
-        widgetList: deepClone(this.designer.widgetList),
-        formConfig: deepClone(this.designer.formConfig)
+        widgetList: this.designer.widgetList,
+        formConfig: this.designer.formConfig
       };
     },
 
@@ -183,12 +176,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-container.designer {
-  background: #fff;
+.design-header {
+  width: 100%;
+  height: 48px !important;
+  overflow: hidden;
+  border-bottom: 1px dotted #cccccc;
 }
-
 .el-container.center-layout-container {
-  border: 1px dotted #cccccc;
+  border-left: 1px dotted #cccccc;
+  border-right: 1px dotted #cccccc;
 }
 
 .el-header.toolbar-header {

@@ -1,13 +1,10 @@
-const Layout = () => import("@/layout/index.vue");
-
 export default {
   path: "/app",
-  name: "App",
-  component: Layout,
+  name: "app",
   redirect: "/app/design",
   meta: {
     icon: "homeFilled",
-    title: "我的应用",
+    title: "表单设计",
     rank: 1
   },
   children: [
@@ -16,6 +13,7 @@ export default {
       name: "app-design",
       component: () => import("@/views/app/design/index.vue"),
       meta: {
+        icon: "homeFilled",
         title: "表单设计"
       }
     },
@@ -24,8 +22,8 @@ export default {
       name: "app-preview",
       component: () => import("@/views/app/preview/index.vue"),
       meta: {
-        title: "表单预览",
-        hidden: true
+        icon: "homeFilled",
+        title: "表单设计"
       }
     }
   ]

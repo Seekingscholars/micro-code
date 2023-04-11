@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useNav } from "@/layout/hooks/useNav";
+import { useNav } from "@/layout/default/hooks/useNav";
 import MenuFold from "@iconify-icons/ri/menu-fold-fill";
 
 interface Props {

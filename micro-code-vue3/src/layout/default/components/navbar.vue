@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Notice from "./notice/index.vue";
 import Logo from "./logo.vue";
-import { useNav } from "@/layout/hooks/useNav";
+import { useNav } from "@/layout/default/hooks/useNav";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 
 const { logout, username, avatarsStyle } = useNav();

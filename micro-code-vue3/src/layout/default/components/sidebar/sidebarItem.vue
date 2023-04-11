@@ -2,7 +2,7 @@
 import path from "path";
 import { getConfig } from "@/config";
 import { childrenType } from "../../types";
-import { useNav } from "@/layout/hooks/useNav";
+import { useNav } from "@/layout/default/hooks/useNav";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
 

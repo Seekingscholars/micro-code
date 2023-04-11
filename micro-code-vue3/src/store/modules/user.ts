@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { store } from "@/store";
 import { userType } from "./types";
-import { routerArrays } from "@/layout/types";
+import { routerArrays } from "@/layout/default/types";
 import { router, resetRouter } from "@/router";
 import { storageSession } from "@pureadmin/utils";
 import { getLogin, refreshTokenApi } from "@/api/user";
