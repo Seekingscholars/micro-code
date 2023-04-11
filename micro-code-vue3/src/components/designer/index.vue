@@ -3,26 +3,18 @@
     <div class="design-header">
       <slot name="header"> </slot>
     </div>
-    <el-container>
-      <el-aside class="left-panel">
-        <left-panel :designer="designer" />
-      </el-aside>
-      <el-container class="center-layout-container">
-        <el-main class="form-widget-main">
-          <el-scrollbar height="calc(100vh - 112px)">
-            <v-form-widget
-              v-if="flushed"
-              ref="formRef"
-              :designer="designer"
-              :form-config="designer.formConfig"
-            />
-          </el-scrollbar>
-        </el-main>
-      </el-container>
-      <el-aside class="setting-panel">
-        <setting-panel :designer="designer" />
-      </el-aside>
-    </el-container>
+    <div class="design-body">
+      <left-panel class="design-body-left" :designer="designer" />
+      <el-scrollbar class="design-body-center" height="calc(100vh - 112px)">
+        <v-form-widget
+          v-if="flushed"
+          ref="formRef"
+          :designer="designer"
+          :form-config="designer.formConfig"
+        />
+      </el-scrollbar>
+      <setting-panel class="design-body-right" :designer="designer" />
+    </div>
   </div>
 </template>
 
@@ -33,7 +25,6 @@ import VFormWidget from "./form-widget/index.vue";
 import { createDesigner } from "./designer";
 import {
   addWindowResizeHandler,
-  deepClone,
   getAllContainerWidgets,
   getAllFieldWidgets,
   getQueryParam
@@ -176,31 +167,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.design-container{
+  height: 100%;
+}
 .design-header {
   width: 100%;
   height: 48px !important;
   overflow: hidden;
   border-bottom: 1px dotted #cccccc;
 }
-.el-container.center-layout-container {
+.design-body {
+  display: flex;
+  height: calc(100% - 48px);
+}
+.design-body-center {
+  flex: 1;
   border-left: 1px dotted #cccccc;
   border-right: 1px dotted #cccccc;
-}
-
-.el-header.toolbar-header {
-  font-size: 14px;
-  height: 42px !important;
-}
-
-.el-aside.left-panel {
-  width: 280px !important;
-}
-
-.el-aside.setting-panel {
-  width: 400px !important;
-}
-
-.el-main.form-widget-main {
-  padding: 0;
 }
 </style>

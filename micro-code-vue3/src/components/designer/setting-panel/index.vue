@@ -188,6 +188,7 @@ export default {
 <style lang="scss" scoped>
 .panel-container {
   padding: 0px 10px 0 10px;
+  width: 400px;
 }
 .setting-form {
   padding-right: 10px;
