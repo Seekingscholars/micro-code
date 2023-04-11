@@ -23,7 +23,7 @@ export default {
       component: () => import("@/views/app/preview/index.vue"),
       meta: {
         icon: "homeFilled",
-        title: "表单设计"
+        title: "表单预览"
       }
     }
   ]
