@@ -52,14 +52,13 @@
     </el-tabs>
 
     <el-dialog
-      v-if="showWidgetEventDialogFlag"
+      v-model="showWidgetEventDialogFlag"
       :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
       :show-close="true"
       title="组件事件处理"
-      v-model:visible="showWidgetEventDialogFlag"
       append-to-body
       class="small-padding-dialog"
     >
@@ -71,10 +70,12 @@
         :readonly="false"
       />
       <el-alert :closable="false" title="}" type="info" />
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
+      <div class="dialog-footer">
         <el-button @click="showWidgetEventDialogFlag = false"> 取消</el-button>
         <el-button type="primary" @click="saveEventHandler"> 确定</el-button>
       </div>
+      </template>
     </el-dialog>
   </div>
 </template>

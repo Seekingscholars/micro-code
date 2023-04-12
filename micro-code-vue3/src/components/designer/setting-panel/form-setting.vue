@@ -91,14 +91,12 @@
     </el-form>
 
     <el-dialog
-      v-if="showFormEventDialogFlag"
+      v-model="showFormEventDialogFlag"
       :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
       :show-close="true"
-      v-model:visible="showFormEventDialogFlag"
-      append-to-body
       class="small-padding-dialog"
       title="表单事件处理"
     >
@@ -114,22 +112,23 @@
         :readonly="false"
       />
       <el-alert :closable="false" title="}" type="info" />
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
+      <div class="dialog-footer">
         <el-button @click="showFormEventDialogFlag = false"> 取消 </el-button>
         <el-button type="primary" @click="saveFormEventHandler">
           确定
         </el-button>
       </div>
+      </template>
     </el-dialog>
 
     <el-dialog
-      v-if="showEditFunctionDialogFlag"
+      v-model="showEditFunctionDialogFlag"
       :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
       :show-close="true"
-      v-model:visible="showEditFunctionDialogFlag"
       append-to-body
       class="small-padding-dialog"
       title="全局函数"
@@ -140,21 +139,22 @@
         :mode="'javascript'"
         :readonly="false"
       />
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
+      <div class="dialog-footer">
         <el-button @click="showEditFunctionDialogFlag = false">
           取消
         </el-button>
         <el-button type="primary" @click="saveGlobalFunction"> 确定 </el-button>
       </div>
+      </template>
     </el-dialog>
     <el-dialog
-      v-if="showEditDataDialogFlag"
+      v-model="showEditDataDialogFlag"
       :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
       :show-close="true"
-      v-model:visible="showEditDataDialogFlag"
       append-to-body
       class="small-padding-dialog"
       title="全局数据"
@@ -167,10 +167,12 @@
         :readonly="false"
       />
       <el-alert :closable="false" title="}" type="info" />
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
+      <div  class="dialog-footer">
         <el-button @click="showEditDataDialogFlag = false"> 取消 </el-button>
         <el-button type="primary" @click="saveGlobalData"> 确定 </el-button>
       </div>
+      </template>
     </el-dialog>
   </div>
 </template>

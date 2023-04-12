@@ -1,22 +1,23 @@
 <template>
   <div @click.stop="selectWidget(field)">
     <el-dialog
+      v-model="field.options.visible"
       :before-close="handleClose"
       :fullscreen="field.options.fullscreen"
       :modal="field.options.modal"
       :showClose="field.options.showClose"
       :title="field.options.label"
-      :visible.sync="field.options.visible"
       :width="width"
-      destroy-on-close
       @closed="onClosed"
       @opened="onOpened"
     >
       <RenderWidget :designer="designer" :widget="field"></RenderWidget>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+      <span class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
+      </template>
     </el-dialog>
   </div>
 </template>

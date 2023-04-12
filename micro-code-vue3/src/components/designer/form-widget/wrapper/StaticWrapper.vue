@@ -1,7 +1,6 @@
 <template>
   <div class="widget-wrapper drag-handler">
     <div
-      v-if="designer.design"
       v-show="!widget.options.hidden"
       :class="[selected ? 'selected' : '']"
       class="static-content-item"
@@ -21,7 +20,6 @@
         </span>
       </div>
     </div>
-    <slot v-else></slot>
   </div>
 </template>
 

@@ -1,9 +1,14 @@
 <template>
   <div>
-    <el-table :data="optionModel.columns" border row-key="id" v-sort>
+    <el-table
+      :data="optionModel.columns"
+      border
+      row-key="id"
+      v-sort="dragOption()"
+    >
       <el-table-column label="排序" width="50px">
         <div class="drag-handler" style="cursor: move">
-        <el-icon><Sort /></el-icon>
+          <el-icon><Sort /></el-icon>
         </div>
       </el-table-column>
       <el-table-column label="属性" prop="prop">
@@ -35,7 +40,7 @@
         </template>
       </el-table-column>
     </el-table>
-      <el-button link @click="addNewColumn">添加一项+</el-button>
+    <el-button link @click="addNewColumn">添加一项+</el-button>
     <el-dialog
       v-if="showItemDialogFlag"
       :draggable="true"
@@ -108,7 +113,7 @@
 <script>
 import { Sort } from "@element-plus/icons-vue";
 import { generateId } from "@/utils/util";
-
+import { option } from "./dragOption";
 export default {
   name: "table-columns-editor",
   components: { Sort },
@@ -147,6 +152,9 @@ export default {
     };
   },
   methods: {
+    dragOption() {
+      return option(this.optionModel.columns);
+    },
     handleEdit(row) {
       this.row = row;
       this.modelForm = Object.assign(this.modelForm, row);

@@ -25,7 +25,7 @@ const router = useRouter();
 function previewForm() {
   const formJson = FormDesignerRef.value.getFormJson();
   const key = "preview";
-  const storage = window.localStorage;
+  const storage = window.sessionStorage;
   storage.setItem(key, JSON.stringify(formJson));
   const to = router.resolve({
     name: "app-preview"

@@ -552,7 +552,7 @@
         "icon": "",
         "options": {
           "name": "",
-          "label": "",
+          "label": "button",
           "size": "",
           "disabled": false,
           "hidden": false,
@@ -612,20 +612,7 @@
           "data": ""
         },
         "table-column": {
-          "columns": [
-            {
-            "label": "1",
-            "value": "1"
-          },
-            {
-              "label": "11",
-              "value": "11"
-            },
-            {
-              "label": "12",
-              "value": "12"
-            }
-          ]
+          "columns": []
         },
         "table-toolbar": {
           "disabled": false,
