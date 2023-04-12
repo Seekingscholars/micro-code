@@ -11,7 +11,7 @@ import removeConsole from "vite-plugin-remove-console";
 import themePreprocessorPlugin from "@pureadmin/theme";
 import DefineOptions from "unplugin-vue-define-options/vite";
 import { genScssMultipleScopeVars } from "../src/layout/default/theme";
-
+import {resolve} from "path";
 export function getPluginsList(
   command: string,
   VITE_CDN: boolean,

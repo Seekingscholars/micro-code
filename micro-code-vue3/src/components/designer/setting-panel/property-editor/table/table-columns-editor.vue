@@ -1,45 +1,41 @@
 <template>
   <div>
-    <ElTableDraggable
-      ref="ElTableDraggable"
-      :list="optionModel.columns"
-      handle=".drag-handler"
-    >
-      <el-table :data="optionModel.columns" border row-key="id">
-        <el-table-column label="排序" width="50px">
-          <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-        </el-table-column>
-        <el-table-column label="属性" prop="prop">
-          <template #default="scope">
-            <el-input v-model="scope.row.prop" />
-          </template>
-        </el-table-column>
-        <el-table-column label="标签" prop="label">
-          <template #default="scope">
-            <el-input v-model="scope.row.label" />
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" width="60px">
-          <template #default="scope">
-            <div class="operate">
-              <i
-                class="el-icon-edit"
-                style="cursor: pointer"
-                title="编辑"
-                @click="handleEdit(scope.row)"
-              ></i>
-              <i
-                class="el-icon-delete"
-                style="color: red; cursor: pointer"
-                title="删除"
-                @click="handleDelete(scope.row)"
-              ></i>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-button type="text" @click="addNewColumn">添加一项+</el-button>
-    </ElTableDraggable>
+    <el-table :data="optionModel.columns" border row-key="id" v-sort>
+      <el-table-column label="排序" width="50px">
+        <div class="drag-handler" style="cursor: move">
+        <el-icon><Sort /></el-icon>
+        </div>
+      </el-table-column>
+      <el-table-column label="属性" prop="prop">
+        <template #default="scope">
+          <el-input v-model="scope.row.prop" />
+        </template>
+      </el-table-column>
+      <el-table-column label="标签" prop="label">
+        <template #default="scope">
+          <el-input v-model="scope.row.label" />
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="60px">
+        <template #default="scope">
+          <div class="operate">
+            <i
+              class="el-icon-edit"
+              style="cursor: pointer"
+              title="编辑"
+              @click="handleEdit(scope.row)"
+            ></i>
+            <i
+              class="el-icon-delete"
+              style="color: red; cursor: pointer"
+              title="删除"
+              @click="handleDelete(scope.row)"
+            ></i>
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
+      <el-button link @click="addNewColumn">添加一项+</el-button>
     <el-dialog
       v-if="showItemDialogFlag"
       :draggable="true"
@@ -110,12 +106,12 @@
 </template>
 
 <script>
+import { Sort } from "@element-plus/icons-vue";
 import { generateId } from "@/utils/util";
-import ElTableDraggable from "../../ElTableDraggable/index.vue";
 
 export default {
-  name: "TableColumnsEditor",
-  components: { ElTableDraggable },
+  name: "table-columns-editor",
+  components: { Sort },
   props: {
     designer: Object,
     selectedWidget: Object,
@@ -162,9 +158,7 @@ export default {
         for (let i = 0; i < this.optionModel.columns.length; i++) {
           if (this.optionModel.columns[i].id === row.id) {
             this.optionModel.columns.splice(i, 1);
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init();
-            });
+
             break;
           }
         }
@@ -177,9 +171,6 @@ export default {
         label: "",
         showOverflowTooltip: true,
         width: ""
-      });
-      this.$nextTick(() => {
-        this.$refs.ElTableDraggable.init();
       });
     },
     saveItem() {

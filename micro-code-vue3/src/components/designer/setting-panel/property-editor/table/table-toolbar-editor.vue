@@ -1,17 +1,17 @@
 <template>
   <div>
-    <ElTableDraggable ref="ElTableDraggable" :list="optionModel.toolbar" handle=".drag-handler">
+
       <el-table :data="optionModel.toolbar" border row-key="id">
         <el-table-column label="排序" width="50px">
           <i class="drag-handler el-icon-sort" style="cursor: move"></i>
         </el-table-column>
         <el-table-column label="标签" prop="label">
-          <template slot-scope="scope">
+          <template #default="scope">
             <el-input v-model="scope.row.label"></el-input>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="60px">
-          <template slot-scope="scope">
+          <template #default="scope">
             <div class="operate">
               <i class="el-icon-edit" style="cursor: pointer" title="编辑" @click="handleEdit(scope.row)"></i>
               <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"
@@ -21,8 +21,8 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-button type="text" @click="addNewColumn">添加一项+</el-button>
-    </ElTableDraggable>
+      <el-button link @click="addNewColumn">添加一项+</el-button>
+
     <el-dialog v-if="showItemDialogFlag" :draggable="true"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="false"
                :visible.sync="showItemDialogFlag"
@@ -55,7 +55,7 @@
 
 <script>
 import { generateId } from '@/utils/util'
-import ElTableDraggable from '../../ElTableDraggable/index.vue'
+
 import CodeEditor from '@/components/code-editor/index.vue'
 
 export default {
@@ -65,7 +65,7 @@ export default {
     selectedWidget: Object,
     optionModel: Object
   },
-  components: { ElTableDraggable, CodeEditor },
+  components: { CodeEditor },
   data() {
     return {
       showItemDialogFlag: false,
@@ -95,9 +95,7 @@ export default {
         for (let i = 0; i < this.optionModel.toolbar.length; i++) {
           if (this.optionModel.toolbar[i].id === row.id) {
             this.optionModel.toolbar.splice(i, 1)
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init()
-            })
+
             break
           }
         }
@@ -105,9 +103,7 @@ export default {
     },
     addNewColumn() {
       this.optionModel.toolbar.push({ id: 'button' + generateId(), label: '', title: '', icon: '', click: '' })
-      this.$nextTick(() => {
-        this.$refs.ElTableDraggable.init()
-      })
+
     }
 
   }

@@ -6,6 +6,9 @@
       :name="item.type"
       :title="item.name"
     >
+      <template #title>
+        <div class="title">{{ item.name }}</div>
+      </template>
       <draggable
         item-key="type"
         :clone="cloneWidget"
@@ -27,9 +30,9 @@
 </template>
 
 <script>
-import widgetJson from "./widget.json";
 import Draggable from "@/components/draggable";
 import { deepClone, generateId } from "@/utils/util";
+import widgetJson from "./widget.json";
 
 export default {
   name: "WidgetPanel",
@@ -59,7 +62,6 @@ export default {
       let tempId = generateId();
       newWidget.id = newWidget.type.replace(/-/g, "") + tempId;
       newWidget.options.name = newWidget.id;
-      // newWidget.options.label = newWidget.options.label || newWidget.type.toLowerCase()
       return newWidget;
     },
 
@@ -70,98 +72,27 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.no-bottom-margin ::v-deep .el-tabs__header {
-  margin-bottom: 0;
+<style scoped>
+.title {
+  margin-left: 8px;
+  font-weight: bold;
 }
 
-.indent-left-margin {
-  ::v-deep .el-tabs__nav {
-    margin-left: 20px;
-  }
+.widget-item {
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  width: 115px;
+  float: left;
+  margin: 2px 6px 6px 0;
+  cursor: move;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background: #f1f2f3;
 }
 
-.el-collapse-item ::v-deep ul > li {
-  list-style: none;
-}
-
-.widget-collapse {
-  border-top-width: 0;
-
-  ::v-deep .el-collapse-item__header {
-    margin-left: 8px;
-    font-style: italic;
-    font-weight: bold;
-  }
-
-  ::v-deep .el-collapse-item__content {
-    padding-bottom: 6px;
-
-    ul {
-      padding-left: 10px; /* 重置IE11默认样式 */
-      margin: 0; /* 重置IE11默认样式 */
-      margin-block-start: 0;
-      margin-block-end: 0.25em;
-      padding-inline-start: 10px;
-
-      &:after {
-        content: "";
-        display: block;
-        clear: both;
-      }
-
-      .widget-item {
-        display: inline-block;
-        height: 28px;
-        line-height: 28px;
-        width: 115px;
-        float: left;
-        margin: 2px 6px 6px 0;
-        cursor: move;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        background: #f1f2f3;
-      }
-
-      .widget-item:hover {
-        background: #ebeef5;
-        outline: 1px solid #409eff;
-      }
-    }
-  }
-}
-
-.el-card.ft-card {
-  border: 1px solid #8896b3;
-}
-
-.ft-card {
-  margin-bottom: 10px;
-
-  .bottom {
-    margin-top: 10px;
-    line-height: 12px;
-  }
-
-  .ft-title {
-    font-size: 13px;
-    font-weight: bold;
-  }
-
-  .right-button {
-    padding: 0;
-    float: right;
-  }
-
-  .clear-fix:before,
-  .clear-fix:after {
-    display: table;
-    content: "";
-  }
-
-  .clear-fix:after {
-    clear: both;
-  }
+.widget-item:hover {
+  background: #eaecfd;
 }
 </style>

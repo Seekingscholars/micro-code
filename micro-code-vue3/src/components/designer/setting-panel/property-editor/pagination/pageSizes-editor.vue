@@ -19,7 +19,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-button type="text" @click="addPageSize">添加一项+</el-button>
+    <el-button link @click="addPageSize">添加一项+</el-button>
   </div>
 </template>
 <script>

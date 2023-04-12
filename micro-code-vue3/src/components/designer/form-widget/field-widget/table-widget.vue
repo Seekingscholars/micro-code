@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="dataList" v-bind="field.options">
+    <el-table v-bind="field.options" :data="dataList">
       <el-table-column
         v-for="(item, index) in field['table-column'].columns"
         :key="index"
@@ -19,12 +19,12 @@
             :key="index"
             :icon="item.icon"
             size="small"
-            type="text"
+            link
             @click="callClick(item.click, scope.row)"
             >{{ item.label }}
           </el-button>
           <el-dropdown v-if="showMore" size="small">
-            <el-button icon="el-icon-d-arrow-right" size="small" type="text"
+            <el-button icon="el-icon-d-arrow-right" size="small" link
               >更多</el-button
             >
             <el-dropdown-menu slot="dropdown">
@@ -55,7 +55,7 @@
 import fieldMixin from "./fieldMixin";
 
 export default {
-  name: "TableWidget",
+  name: "table-widget",
   componentName: "FieldWidget",
   mixins: [fieldMixin],
   props: {

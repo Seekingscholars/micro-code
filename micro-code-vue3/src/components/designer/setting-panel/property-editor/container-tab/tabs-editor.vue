@@ -1,15 +1,10 @@
 <template>
-  <ElTableDraggable
-    ref="ElTableDraggable"
-    :list="optionModel.tabs"
-    handle=".drag-handler"
-  >
     <el-table :data="optionModel.tabs" border row-key="value">
       <el-table-column label="排序" width="50px">
         <i class="drag-handler el-icon-sort" style="cursor: move"></i>
       </el-table-column>
       <!--      <el-table-column label="属性" prop="value">-->
-      <!--        <template slot-scope="scope">-->
+      <!--        <template #default="scope">-->
       <!--          <el-input v-model="scope.row.value"></el-input>-->
       <!--        </template>-->
       <!--      </el-table-column>-->
@@ -31,19 +26,16 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-button type="text" @click="addTabPane">添加一项+</el-button>
-  </ElTableDraggable>
+    <el-button link @click="addTabPane">添加一项+</el-button>
 </template>
 <script>
 import { deepClone } from "@/utils/util";
-import ElTableDraggable from "../../ElTableDraggable/index.vue";
+
 
 export default {
-  name: "TabsEditor",
+  name: "tabs-editor",
   componentName: "PropertyEditor",
-  components: {
-    ElTableDraggable
-  },
+
   props: {
     optionModel: Object
   },
@@ -63,9 +55,6 @@ export default {
         for (let i = 0; i < this.optionModel.tabs.length; i++) {
           if (this.optionModel.tabs[i].value === row.value) {
             this.optionModel.tabs.splice(i, 1);
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init();
-            });
             break;
           }
         }
