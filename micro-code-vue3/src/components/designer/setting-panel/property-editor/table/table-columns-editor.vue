@@ -4,7 +4,7 @@
       :data="optionModel.columns"
       border
       row-key="id"
-      v-sort="dragOption()"
+      v-sort="dragOption"
     >
       <el-table-column label="排序" width="50px">
         <div class="drag-handler" style="cursor: move">
@@ -24,32 +24,20 @@
       <el-table-column label="操作" width="60px">
         <template #default="scope">
           <div class="operate">
-            <i
-              class="el-icon-edit"
-              style="cursor: pointer"
-              title="编辑"
-              @click="handleEdit(scope.row)"
-            ></i>
-            <i
-              class="el-icon-delete"
-              style="color: red; cursor: pointer"
-              title="删除"
-              @click="handleDelete(scope.row)"
-            ></i>
+            <el-icon title="编辑" style="cursor: pointer" @click="handleEdit(scope.row)"><Edit /></el-icon>
+            <el-icon title="删除" style="color: red; cursor: pointer" @click="handleDelete(scope.row)"><Delete /></el-icon>
           </div>
         </template>
       </el-table-column>
     </el-table>
     <el-button link @click="addNewColumn">添加一项+</el-button>
     <el-dialog
-      v-if="showItemDialogFlag"
+      v-model="showItemDialogFlag"
       :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
       :show-close="false"
-      v-model:visible="showItemDialogFlag"
-      append-to-body
       class="small-padding-dialog"
       title="列编辑"
     >
@@ -66,7 +54,7 @@
           <el-input v-model="modelForm.label" />
         </el-form-item>
         <el-form-item label="宽度" prop="width">
-          <el-input-number v-model="modelForm.width" />
+          <el-input type="number" v-model="modelForm.width" />
         </el-form-item>
         <el-form-item label="列类型" prop="type">
           <el-select v-model="modelForm.type" clearable style="width: 100%">
@@ -102,25 +90,32 @@
           <el-switch v-model="modelForm.showOverflowTooltip" />
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
+      <div class="dialog-footer">
         <el-button @click="showItemDialogFlag = false"> 取消 </el-button>
         <el-button type="primary" @click="saveItem"> 确定 </el-button>
       </div>
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { Sort } from "@element-plus/icons-vue";
+import { Sort,Edit,Delete } from "@element-plus/icons-vue";
 import { generateId } from "@/utils/util";
 import { option } from "./dragOption";
 export default {
   name: "table-columns-editor",
-  components: { Sort },
+  components: { Sort, Edit, Delete },
   props: {
     designer: Object,
     selectedWidget: Object,
     optionModel: Object
+  },
+  computed: {
+    dragOption() {
+      return option(this.optionModel.columns);
+    }
   },
   data() {
     return {
@@ -152,9 +147,6 @@ export default {
     };
   },
   methods: {
-    dragOption() {
-      return option(this.optionModel.columns);
-    },
     handleEdit(row) {
       this.row = row;
       this.modelForm = Object.assign(this.modelForm, row);
@@ -162,15 +154,12 @@ export default {
     },
     /** 删除操作 */
     handleDelete(row) {
-      this.$modal.confirm("是否确认删除？").then(() => {
         for (let i = 0; i < this.optionModel.columns.length; i++) {
           if (this.optionModel.columns[i].id === row.id) {
             this.optionModel.columns.splice(i, 1);
-
             break;
           }
         }
-      });
     },
     addNewColumn() {
       this.optionModel.columns.push({
@@ -192,6 +181,6 @@ export default {
 <style scoped>
 .operate {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 </style>

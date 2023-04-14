@@ -28,9 +28,7 @@
                       <component
                         :is="getPropEditor(propName)"
                         v-if="getPropEditor(propName) != null"
-                        :designer="designer"
                         :option-model="designer.selectedWidget[item.type]"
-                        :selected-widget="designer.selectedWidget"
                       />
                     </template>
                   </el-collapse-item>
@@ -81,7 +79,6 @@
 </template>
 
 <script>
-import { emitter } from "@/utils/mitt";
 import CodeEditor from "@/components/code-editor/index.vue";
 import PropertyEditors from "./property-editor";
 import FormSetting from "./form-setting.vue";
@@ -130,9 +127,7 @@ export default {
     }
   },
   created() {
-    emitter.on("editEventHandler", function (eventName, eventParams) {
-      this.editEventHandler(eventName, eventParams);
-    });
+
   },
   mounted() {
     this.collapseList = collapseJson;

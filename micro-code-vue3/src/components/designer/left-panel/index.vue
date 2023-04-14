@@ -1,10 +1,17 @@
 <template>
   <el-tabs
-    v-model="firstTab"
+    v-model="activeTab"
     tab-position="left"
     @tab-click="handleTabClick"
-    :class="firstTab ? 'showTab' : 'hideTab'"
+    :class="activeTab ? 'showTab' : 'hideTab'"
   >
+    <el-tab-pane label="大纲树" name="tree">
+      <template #label>
+        <el-tooltip effect="dark" content="大纲树" placement="right">
+          <el-icon :size="20"><DataBoard /></el-icon>
+        </el-tooltip>
+      </template>
+    </el-tab-pane>
     <el-tab-pane label="组件库" name="componentLib">
       <template #label>
         <el-tooltip effect="dark" content="组件库" placement="right">
@@ -42,13 +49,14 @@
 import WidgetPanel from "./widget-panel/index.vue";
 import VariablePanel from "./variable-panel/index.vue";
 import DatasourcePanel from "./datasource-panel/index.vue";
-import { OfficeBuilding, MostlyCloudy, Coin } from "@element-plus/icons-vue";
+import { DataBoard, OfficeBuilding, MostlyCloudy, Coin } from "@element-plus/icons-vue";
 export default {
   name: "LeftPanel",
   components: {
     WidgetPanel,
     VariablePanel,
     DatasourcePanel,
+    DataBoard,
     OfficeBuilding,
     MostlyCloudy,
     Coin
@@ -58,14 +66,14 @@ export default {
   },
   data() {
     return {
-      firstTab: "componentLib"
+      activeTab: ""
     };
   },
   methods: {
     handleTabClick(tab) {
-      if (this.firstTab === tab.props.name) {
-        this.firstTab = "";
-      } else if ("globalVariable" === tab.name) {
+      if (this.activeTab === tab.props.name) {
+        this.activeTab = "";
+      } else if ("globalVariable" === tab.props.name) {
         this.$refs.VariablePanelRef.refresh();
       }
     }

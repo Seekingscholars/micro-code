@@ -12,22 +12,19 @@
         "options": {
           "name": "",
           "gutter": 10,
-          "type": "",
           "justify": "start",
           "align": "",
-          "hidden": false,
           "span": 24
         }
       },
       {
-        "type": "tab",
+        "type": "tabs",
         "name": "标签页",
         "category": "container",
         "icon": "",
         "displayType": "border-card",
         "options": {
           "name": "",
-          "hidden": false,
           "type": "border-card",
           "tabPosition": "top",
           "active": "",
@@ -51,7 +48,6 @@
         "widgetList": [],
         "options": {
           "name": "",
-          "hidden": false,
           "shadow": "never"
         }
       },
@@ -66,7 +62,6 @@
           "show-close": true,
           "withHeader": true,
           "wrapperClosable": true,
-          "hidden": false,
           "visible": true,
           "size": "30%"
         }
@@ -144,7 +139,6 @@
           "size": "",
           "readonly": false,
           "disabled": false,
-          "hidden": false,
           "clearable": true,
           "showPassword": false,
           "span": 24,
@@ -155,7 +149,6 @@
         "form-item": {
           "label": "输入框",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -181,7 +174,6 @@
           "placeholder": "",
           "size": "",
           "disabled": false,
-          "hidden": false,
           "span": 24,
           "min": -100000000000,
           "max": 100000000000,
@@ -192,7 +184,6 @@
         "form-item": {
           "label": "计数器",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -216,7 +207,6 @@
           "buttonStyle": false,
           "border": false,
           "disabled": false,
-          "hidden": false,
           "span": 24
         },
         "option-item": {
@@ -239,7 +229,6 @@
         "form-item": {
           "label": "单选框",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -261,7 +250,6 @@
           "buttonStyle": false,
           "border": false,
           "disabled": false,
-          "hidden": false,
           "span": 24
         },
         "option-item": {
@@ -284,7 +272,6 @@
         "form-item": {
           "label": "多选框",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -307,7 +294,6 @@
           "span": 24,
           "size": "",
           "disabled": false,
-          "hidden": false,
           "clearable": true,
           "filterable": false,
           "allowCreate": false,
@@ -336,7 +322,6 @@
         "form-item": {
           "label": "选择框",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -360,14 +345,12 @@
           "size": "",
           "readonly": false,
           "disabled": false,
-          "hidden": false,
           "clearable": true,
           "span": 24
         },
         "form-item": {
           "label": "日期",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -383,7 +366,6 @@
           "group": "",
           "defaultValue": null,
           "disabled": false,
-          "hidden": false,
           "span": 24,
           "switchWidth": 40,
           "activeText": "",
@@ -396,7 +378,6 @@
         "form-item": {
           "label": "开关",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -412,7 +393,6 @@
           "group": "",
           "defaultValue": null,
           "disabled": false,
-          "hidden": false,
           "span": 24,
           "max": 5,
           "lowThreshold": 2,
@@ -426,7 +406,6 @@
         "form-item": {
           "label": "评分",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -443,14 +422,12 @@
           "defaultValue": null,
           "size": "",
           "disabled": false,
-          "hidden": false,
           "change": "",
           "onValidate": ""
         },
         "form-item": {
           "label": "颜色选择器",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -467,7 +444,6 @@
           "showStops": true,
           "size": "",
           "disabled": false,
-          "hidden": false,
           "min": 0,
           "max": 100,
           "step": 10,
@@ -479,7 +455,6 @@
         "form-item": {
           "label": "滑块",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -497,7 +472,6 @@
           "placeholder": "",
           "size": "",
           "disabled": false,
-          "hidden": false,
           "clearable": true,
           "filterable": false,
           "multiple": false,
@@ -533,7 +507,6 @@
         "form-item": {
           "label": "级联选择器",
           "disabled": false,
-          "hidden": false,
           "width": null,
           "required": false,
           "validation": "",
@@ -555,7 +528,6 @@
           "label": "button",
           "size": "",
           "disabled": false,
-          "hidden": false,
           "type": "",
           "plain": false,
           "round": false,
@@ -576,7 +548,6 @@
           "label": "",
           "direction": "horizontal",
           "contentPosition": "center",
-          "hidden": false,
           "onMounted": ""
         }
       },
@@ -607,7 +578,6 @@
           "size": "",
           "showHeader": true,
           "highlightCurrentRow": false,
-          "hidden": false,
           "span": 24,
           "data": ""
         },
@@ -718,7 +688,6 @@
           "name": "",
           "label": "",
           "disabled": false,
-          "hidden": false,
           "customRule": "",
           "customRuleHint": "",
           "uploadURL": "",
@@ -748,7 +717,6 @@
           "name": "",
           "label": "",
           "disabled": false,
-          "hidden": false,
           "customRule": "",
           "customRuleHint": "",
           "uploadURL": "",
@@ -780,7 +748,6 @@
           "label": "",
           "placeholder": "",
           "disabled": false,
-          "hidden": false,
           "customRule": "",
           "customRuleHint": "",
           "minLength": null,
@@ -795,7 +762,6 @@
         "icon": "html-text",
         "options": {
           "name": "",
-          "hidden": false,
           "htmlContent": "<b>html text</b>",
           "onMounted": ""
         }
@@ -806,7 +772,6 @@
         "icon": "static-text",
         "options": {
           "name": "",
-          "hidden": false,
           "textContent": "static text",
           "fontSize": "13px",
           "onMounted": ""
@@ -834,7 +799,6 @@
           ]
         },
         "chart-title": {
-          "hidden": false,
           "title": "",
           "color": "#333333",
           "fontSize": 18,
@@ -842,23 +806,19 @@
           "top": "top"
         },
         "chart-legend": {
-          "hidden": false,
           "icon": "rect",
           "orient": "horizontal",
           "left": "center",
           "top": "top"
         },
         "chart-label": {
-          "hidden": false,
           "position": "top"
         },
         "chart-xAxis": {
-          "hidden": false,
           "rotate": 0,
           "color": "#333333"
         },
         "chart-yAxis": {
-          "hidden": false,
           "rotate": 0,
           "color": "#333333"
         }
@@ -875,7 +835,6 @@
           "data": "[\n        { value: 1048, name: 'Search Engine' },\n        { value: 735, name: 'Direct' },\n        { value: 580, name: 'Email' },\n        { value: 484, name: 'Union Ads' },\n        { value: 300, name: 'Video Ads' }\n      ]"
         },
         "chart-title": {
-          "hidden": false,
           "title": "",
           "color": "#333333",
           "fontSize": 18,
@@ -883,7 +842,6 @@
           "top": "top"
         },
         "chart-legend": {
-          "hidden": false,
           "icon": "rect",
           "orient": "horizontal",
           "left": "center",

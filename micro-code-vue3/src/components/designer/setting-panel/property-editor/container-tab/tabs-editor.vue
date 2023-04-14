@@ -1,41 +1,37 @@
 <template>
-    <el-table :data="optionModel.tabs" border row-key="value">
-      <el-table-column label="排序" width="50px">
-        <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-      </el-table-column>
-      <!--      <el-table-column label="属性" prop="value">-->
-      <!--        <template #default="scope">-->
-      <!--          <el-input v-model="scope.row.value"></el-input>-->
-      <!--        </template>-->
-      <!--      </el-table-column>-->
-      <el-table-column label="标签" prop="label">
-        <template #default="scope">
-          <el-input v-model="scope.row.label" />
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="60px">
-        <template #default="scope">
-          <div class="operate">
-            <i
-              class="el-icon-delete"
-              style="color: red; cursor: pointer"
-              title="删除"
-              @click="deleteTabPane(scope.row)"
-            ></i>
-          </div>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-button link @click="addTabPane">添加一项+</el-button>
+  <el-table :data="optionModel.tabs" border row-key="value">
+    <el-table-column label="排序" width="50px">
+      <div class="drag-handler" style="cursor: move">
+        <el-icon><Sort /></el-icon>
+      </div>
+    </el-table-column>
+    <el-table-column label="标签" prop="label">
+      <template #default="scope">
+        <el-input v-model="scope.row.label" />
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" width="60px">
+      <template #default="scope">
+        <div class="operate">
+          <i
+            class="el-icon-delete"
+            style="color: red; cursor: pointer"
+            title="删除"
+            @click="deleteTabPane(scope.row)"
+          ></i>
+        </div>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-button link @click="addTabPane">添加一项+</el-button>
 </template>
 <script>
+import { Sort } from "@element-plus/icons-vue";
 import { deepClone } from "@/utils/util";
-
-
 export default {
   name: "tabs-editor",
   componentName: "PropertyEditor",
-
+  components:{ Sort },
   props: {
     optionModel: Object
   },
