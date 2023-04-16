@@ -1,5 +1,5 @@
 <template>
-  <div ref="chart" :style="style"></div>
+  <div ref="chart" :style="style" />
 </template>
 
 <script>
@@ -10,9 +10,6 @@ export default {
   name: 'chart-widget',
   componentName: 'FieldWidget',
   mixins: [fieldMixin],
-  mounted() {
-    this.$nextTick(() => this.draw())
-  },
   computed: {
     style() {
       return {
@@ -28,12 +25,15 @@ export default {
       deep: true
     }
   },
+  mounted() {
+    this.$nextTick(() => this.draw())
+  },
   methods: {
     dataList() {
       const data = this.field.options.data
       let dataList
-      if (!!data) {
-        let customFn = new Function(this.wrapWith('return ' + data))
+      if (data) {
+        const customFn = new Function(this.wrapWith('return ' + data))
         dataList = customFn.call(this)
       }
       return dataList || []

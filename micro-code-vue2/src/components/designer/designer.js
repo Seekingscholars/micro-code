@@ -14,15 +14,15 @@ export function createDesigner(vueInstance) {
       functionCode: '',
       onCreated: '',
       onMounted: '',
-      apis:[]
+      apis: []
     },
     design: true,
     selectedId: null,
     selectedWidget: null,
     selectedPanel: null,
-    selectedWidgetName: null,  //选中组件名称（唯一）
+    selectedWidgetName: null, // 选中组件名称（唯一）
     vueInstance: vueInstance,
-    formWidget: null,  //表单设计容器
+    formWidget: null, // 表单设计容器
     initDesigner() {
       this.widgetList = []
       this.formConfig = deepClone(defaultFormConfig)
@@ -31,7 +31,7 @@ export function createDesigner(vueInstance) {
       this.widgetList = []
       this.selectedId = null
       this.selectedWidgetName = null
-      this.selectedWidget = {}  //this.selectedWidget = null
+      this.selectedWidget = {} // this.selectedWidget = null
       overwriteObj(this.formConfig, defaultFormConfig) //
     },
 
@@ -43,8 +43,8 @@ export function createDesigner(vueInstance) {
         modifiedFlag = true
       }
       if (!!formJson && !!formJson.formConfig) {
-        //this.formConfig = importObj.formConfig
-        overwriteObj(this.formConfig, formJson.formConfig)  /* 用=赋值，会导致inject依赖注入的formConfig属性变成非响应式 */
+        // this.formConfig = importObj.formConfig
+        overwriteObj(this.formConfig, formJson.formConfig) /* 用=赋值，会导致inject依赖注入的formConfig属性变成非响应式 */
         modifiedFlag = true
       }
 
@@ -57,7 +57,7 @@ export function createDesigner(vueInstance) {
         return
       }
       this.selectedWidget = selected
-      if (!!selected.id) {
+      if (selected.id) {
         this.selectedId = selected.id
         this.selectedWidgetName = selected.options.name
       }
@@ -65,7 +65,7 @@ export function createDesigner(vueInstance) {
     clearSelected() {
       this.selectedId = null
       this.selectedWidgetName = null
-      this.selectedWidget = {}  //this.selectedWidget = null
+      this.selectedWidget = {} // this.selectedWidget = null
     },
 
     cloneWidget(widget) {
@@ -96,7 +96,7 @@ export function createDesigner(vueInstance) {
         return parentWidget
       }
       if (parentWidget.widgetList) {
-        for (let widget of parentWidget.widgetList) {
+        for (const widget of parentWidget.widgetList) {
           const targetWidget = this.findWidget(handler, widget)
           if (targetWidget) {
             return targetWidget

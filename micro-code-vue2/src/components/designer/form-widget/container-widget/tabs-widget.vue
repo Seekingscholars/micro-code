@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="activeTab" v-bind="field.options">
-    <el-tab-pane v-for="(tab, index) in field.options.tabs" :key="index" :label="tab.label"
+    <el-tab-pane v-for="(tab, index) in field.widgetList" :key="index" :label="tab.name"
                  :name="tab.value"
     >
       <RenderWidget :designer="designer" :widget="tab"></RenderWidget>
@@ -11,7 +11,7 @@
 import RenderWidget from '../RenderWidget'
 
 export default {
-  name: 'tab-widget',
+  name: 'tabs-widget',
   componentName: 'ContainerWidget',
   components: {
     RenderWidget
@@ -29,7 +29,7 @@ export default {
     if (!!this.field.options.active) {
       this.activeTab = this.field.options.active
     } else {
-      this.activeTab = this.field.options.tabs[0].value
+      this.activeTab = this.field.widgetList[0].value
     }
   }
 }

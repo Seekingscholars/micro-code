@@ -283,7 +283,7 @@ export const CONFIG = {
           /** @todo 缓存是否强制expanded */
           toContext.toggleRowExpansion(fromDomInfo.data, true)
 
-          //移除手动生成的位移
+          // 移除手动生成的位移
           document.querySelectorAll(`.${CUSTOMER_INDENT_CSS}`).forEach((el) => {
             dom.remove(el)
           })
@@ -323,7 +323,7 @@ export const CONFIG = {
      */
     OPTION(context, elTableInstance, animation) {
       let isDragging = false // 正在拖拽
-      let columnIsMoving = false // 列正在移动
+      const columnIsMoving = false // 列正在移动
       // 自动对齐
       function autoAlignmentTableByThList(thList) {
         if (!isDragging) {
@@ -440,10 +440,10 @@ export const CONFIG = {
 
           const { to, from, pullMode } = evt
           const toContext = context.get(to)
-          let toList = toContext[PROP]
+          const toList = toContext[PROP]
           const fromContext = context.get(from)
-          let fromList = fromContext[PROP]
-          let { newIndex, oldIndex } = evt
+          const fromList = fromContext[PROP]
+          const { newIndex, oldIndex } = evt
 
           // 交换dom位置
           exchange(oldIndex, fromList, newIndex, toList, pullMode)

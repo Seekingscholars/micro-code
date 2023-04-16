@@ -87,7 +87,7 @@ export function getDomPosition(el, ignoreTranslate = true) {
   const position = el.getBoundingClientRect().toJSON()
   const transform = el.style.transform
   if (transform && ignoreTranslate) {
-    const { groups = { x: 0, y: 0 } } = translateRegexp.exec(transform) || {}
+    const { groups = { x: 0, y: 0 }} = translateRegexp.exec(transform) || {}
     position.x = position.x - +groups.x
     position.y = position.y - +groups.y
   }
@@ -283,18 +283,18 @@ export function getColByTh(th) {
  * @param {Element[]|Element} thList
  */
 export const alignmentTableByThList = throttle(function alignmentTableByThList(
-    thList
-  ) {
-    const list = Array.isArray(thList) ? thList : [thList]
-    list.forEach((th) => {
-      const tdList = getTdListByTh(th)
-      tdList.forEach((td) => {
-        const { x } = getDomPosition(th)
-        translateTo(td, { x })
-      })
+  thList
+) {
+  const list = Array.isArray(thList) ? thList : [thList]
+  list.forEach((th) => {
+    const tdList = getTdListByTh(th)
+    tdList.forEach((td) => {
+      const { x } = getDomPosition(th)
+      translateTo(td, { x })
     })
-  },
-  1000 / 120)
+  })
+},
+1000 / 120)
 
 /**
  * 切换row的打开还是关闭

@@ -3,7 +3,7 @@
     <div class="header">
       <div>所有数据源</div>
       <div class="setting">
-        <i class="el-icon-circle-plus-outline" title="新建" @click="handleDataSource"></i>
+        <i class="el-icon-circle-plus-outline" title="新建" @click="handleDataSource" />
       </div>
     </div>
     <el-tree
@@ -11,9 +11,8 @@
       :render-content="renderContent"
       node-key="id"
       @node-click="onNodeClick"
-    >
-    </el-tree>
-    <RestApi :datasource="datasource" :visible.sync="restApiOpen" @change="getList"></RestApi>
+    />
+    <RestApi :datasource="datasource" :visible.sync="restApiOpen" @change="getList" />
   </div>
 </template>
 
@@ -22,11 +21,11 @@ import RestApi from './component/RestApi'
 // import { getRestApi, listRestApi } from './component/RestApi/restApi'
 
 export default {
-  name: 'datasource-panel',
+  name: 'DatasourcePanel',
+  components: { RestApi },
   props: {
     designer: Object
   },
-  components: { RestApi },
   data() {
     return {
       selectId: null,
@@ -47,16 +46,16 @@ export default {
     },
     renderContent(h, { node, data, store }) {
       return (
-        <div class="datasource">
+        <div class='datasource'>
           <div>
-            <span class="name">{data.name}</span>
+            <span class='name'>{data.name}</span>
           </div>
           <div>
-            <el-dropdown onCommand={command => this.handleCommand(command, data)} size="mini" placement="bottom">
+            <el-dropdown onCommand={command => this.handleCommand(command, data)} size='mini' placement='bottom'>
               <i class={{ 'hide': this.isHide(node, data), 'el-icon-more': true }}></i>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="edit" icon="el-icon-edit">编辑</el-dropdown-item>
-                <el-dropdown-item command="delete" icon="el-icon-delete">删除</el-dropdown-item>
+              <el-dropdown-menu slot='dropdown'>
+                <el-dropdown-item command='edit' icon='el-icon-edit'>编辑</el-dropdown-item>
+                <el-dropdown-item command='delete' icon='el-icon-delete'>删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -91,7 +90,6 @@ export default {
         case 'delete':
           this.handleDelete(data)
           break
-
       }
     }
   }

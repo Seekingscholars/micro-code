@@ -85,6 +85,7 @@ export default {
             this.$router.push('/')
             this.loading = false
           }).catch(() => {
+            this.handleChangeCode()
             this.loading = false
           })
         } else {

@@ -6,7 +6,6 @@
       {
         "type": "grid",
         "name": "栅格",
-        "category": "container",
         "icon": "grid",
         "widgetList": [],
         "options": {
@@ -20,33 +19,31 @@
         }
       },
       {
-        "type": "tab",
+        "type": "tabs",
         "name": "标签页",
-        "category": "container",
         "icon": "",
         "displayType": "border-card",
+        "widgetList": [
+          {
+            "value": "tab1",
+            "name": "标签1",
+            "type": "tab",
+            "icon": "tab-pane",
+            "widgetList": []
+          }
+        ],
         "options": {
           "name": "",
           "hidden": false,
           "type": "border-card",
           "tabPosition": "top",
           "active": "",
-          "tabs": [
-            {
-              "value": "tab1",
-              "label": "标签1",
-              "type": "tab-pane",
-              "category": "container",
-              "icon": "tab-pane",
-              "widgetList": []
-            }
-          ]
+          "tabs": ""
         }
       },
       {
         "type": "card",
         "name": "卡片",
-        "category": "container",
         "icon": "card",
         "widgetList": [],
         "options": {
@@ -58,7 +55,6 @@
       {
         "type": "drawer",
         "name": "抽屉",
-        "category": "container",
         "icon": "",
         "widgetList": [],
         "options": {
@@ -74,7 +70,6 @@
       {
         "type": "dialog",
         "name": "对话框",
-        "category": "container",
         "icon": "",
         "widgetList": [],
         "options": {
@@ -90,35 +85,25 @@
       {
         "type": "collapse",
         "name": "折叠面板",
-        "category": "container",
         "icon": "",
+        "widgetList": [
+          {
+            "value": "tab1",
+            "name": "标签1",
+            "type": "collapse-item",
+            "icon": "collapse-item",
+            "widgetList": []
+          }
+        ],
         "options": {
           "name": "",
           "active": [],
-          "tabs": [
-            {
-              "value": "tab1",
-              "label": "标签1",
-              "type": "collapse-item",
-              "category": "container",
-              "icon": "collapse-item",
-              "widgetList": []
-            },
-            {
-              "value": "tab2",
-              "label": "标签2",
-              "type": "collapse-item",
-              "category": "container",
-              "icon": "collapse-item",
-              "widgetList": []
-            }
-          ]
+          "tabs": ""
         }
       },
       {
         "type": "carousel",
         "name": "走马灯",
-        "category": "container",
         "icon": "",
         "options": {
           "name": "",

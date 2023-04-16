@@ -1,7 +1,7 @@
 <template>
   <el-collapse v-model="activeTab">
-    <el-collapse-item v-for="(item, index) in field.options.tabs" :key="index" :name="item.value"
-                      :title="item.label"
+    <el-collapse-item v-for="(item, index) in field.widgetList" :key="index" :name="item.value"
+                      :title="item.name"
     >
       <RenderWidget :designer="designer" :widget="item"></RenderWidget>
     </el-collapse-item>
@@ -30,7 +30,7 @@ export default {
     if (!!active && Array.isArray(active) && active.length > 0) {
       this.activeTab = active
     } else {
-      this.activeTab = this.field.options.tabs.map(tab => tab.value)
+      this.activeTab = this.field.widgetList.map(tab => tab.value)
     }
   }
 }

@@ -1,8 +1,10 @@
 <template>
-  <el-input-number v-model="dataModel[field.options.name]" class="full-width-input" v-bind="field.options"
-                   v-on="getListeners(field)"
-  >
-  </el-input-number>
+  <el-input-number
+    v-model="dataModel[field.options.name]"
+    class="full-width-input"
+    v-bind="field.options"
+    v-on="getListeners(field)"
+  />
 </template>
 
 <script>

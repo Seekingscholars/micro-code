@@ -4,7 +4,7 @@
       <div class="flex">
         <div class="label">{{ data.label }}</div>
         <div :class="{value:true,content:!data.type}">{{ data.value }}</div>
-        <div class="count" v-if="data.children">{{ data.children.length }}项</div>
+        <div v-if="data.children" class="count">{{ data.children.length }}项</div>
       </div>
     </div>
   </el-tree>
@@ -12,12 +12,12 @@
 
 <script>
 export default {
-  name: 'Variable-panel',
+  name: 'VariablePanel',
   inject: ['$model'],
   data() {
     return {
       dataList: [],
-      defaultExpandedKeys:[0],
+      defaultExpandedKeys: [0],
       index: null
     }
   },
@@ -47,13 +47,13 @@ export default {
         return { value: value }
       }
     },
-    handleNodeExpand(data){
+    handleNodeExpand(data) {
       this.defaultExpandedKeys.push(data.id)
     },
-    handleNodeCollapse(data){
-      for(let i=this.defaultExpandedKeys.length-1;i>=0;i--){
-        if(this.defaultExpandedKeys[i]===data.id){
-          this.defaultExpandedKeys.splice(i,1)
+    handleNodeCollapse(data) {
+      for (let i = this.defaultExpandedKeys.length - 1; i >= 0; i--) {
+        if (this.defaultExpandedKeys[i] === data.id) {
+          this.defaultExpandedKeys.splice(i, 1)
           break
         }
       }

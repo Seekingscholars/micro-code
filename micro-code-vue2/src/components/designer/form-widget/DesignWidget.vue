@@ -1,10 +1,11 @@
 <template>
   <el-form
     :size="designer.formConfig.size"
-    :labelWidth="designer.formConfig.labelWidth + 'px'"
-    :labelPosition="designer.formConfig.labelPosition"
-    :disabled="designer.formConfig.disabled">
-    <RenderWidget :designer="designer" :widget="designer"></RenderWidget>
+    :label-width="designer.formConfig.labelWidth + 'px'"
+    :label-position="designer.formConfig.labelPosition"
+    :disabled="designer.formConfig.disabled"
+  >
+    <RenderWidget :designer="designer" :widget="designer" />
   </el-form>
 </template>
 
@@ -14,7 +15,7 @@ import './container-widget/index'
 import RenderWidget from './RenderWidget'
 
 export default {
-  name: 'DesignWidget',
+  name: 'design-widget',
   inject: ['$model'],
   components: {
     RenderWidget
@@ -64,14 +65,14 @@ export default {
     },
     handleOnCreated() {
       if (!!this.designer.formConfig && !!this.designer.formConfig.onCreated) {
-        let customFunc = new Function(this.wrapWith(this.designer.formConfig.onCreated))
+        const customFunc = new Function(this.wrapWith(this.designer.formConfig.onCreated))
         customFunc.call(this)
       }
     },
 
     handleOnMounted() {
       if (!!this.designer.formConfig && !!this.designer.formConfig.onMounted) {
-        let customFunc = new Function(this.wrapWith(this.designer.formConfig.onMounted))
+        const customFunc = new Function(this.wrapWith(this.designer.formConfig.onMounted))
         customFunc.call(this)
       }
     },
@@ -116,7 +117,7 @@ export default {
     initDataSource() {
       const apis = this.designer.formConfig.apis
       if (apis) {
-        for (let api of apis) {
+        for (const api of apis) {
           this.$model[api.name] = this.requestApi(api)
         }
       }
