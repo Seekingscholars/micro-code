@@ -1,5 +1,5 @@
 server:
-  port: 3100
+  port: 4100
   servlet:
     context-path: /micro
 management:

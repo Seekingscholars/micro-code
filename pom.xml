@@ -24,7 +24,6 @@
         <shiro.version>1.10.0</shiro.version>
         <java-jwt.version>4.2.1</java-jwt.version>
         <hutool.version>5.3.8</hutool.version>
-        <xxl-job.version>2.3.1</xxl-job.version>
     </properties>
 
     <modules>
