@@ -23,5 +23,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.grid-container {
+  padding: 10px;
+  outline: 1px dashed #336699;
+}
 </style>

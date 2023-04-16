@@ -82,7 +82,7 @@ export default {
     },
     renderStaticWrapper(subWidget, index) {
       const children = this.renderFormItemWrapper(subWidget, index)
-      if (this.designer.design && subWidget.type != 'dialog' && subWidget.type != 'drawer') {
+      if (this.designer.design) {
         return <StaticWrapper key={subWidget.id} designer={this.designer} parent-widget={this.widget} widget={subWidget}
           parent-list={this.widget.widgetList} index-of-parent-list={index}
         >

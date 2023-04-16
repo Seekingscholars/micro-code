@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-dialog-drag :show-close="false" :title="title" append-to-body v-bind="$attrs" @open="onOpen">
+  <el-dialog :show-close="false" :title="title" append-to-body v-bind="$attrs" @open="onOpen">
     <el-tabs v-model="activeTab" class="no-box-shadow no-padding" type="border-card">
       <el-tab-pane label="请求配置" name="info">
         <el-form ref="form" :model="modelForm" :rules="rules" label-position="right" label-width="80px">

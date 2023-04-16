@@ -1,10 +1,21 @@
 <template>
-  <div @click.stop="selectWidget(field)">
+  <div>
+    <div
+      v-if="designer.design"
+      style="outline: 1px dashed #cb2f2f;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  font-weight: bold;
+  color: #cb2f2f;"
+    >
+      {{ field.options.label }}
+    </div>
     <el-dialog
       :before-close="handleClose"
       :fullscreen="field.options.fullscreen"
       :modal="field.options.modal"
-      :showClose="field.options.showClose"
+      :show-close="field.options.showClose"
       :title="field.options.label"
       :visible.sync="field.options.visible"
       :width="width"
@@ -12,11 +23,11 @@
       @closed="onClosed"
       @opened="onOpened"
     >
-      <RenderWidget :designer="designer" :widget="field"></RenderWidget>
+      <RenderWidget :designer="designer" :widget="field" />
       <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -69,5 +80,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

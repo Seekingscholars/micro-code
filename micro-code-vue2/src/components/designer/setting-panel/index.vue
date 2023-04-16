@@ -32,7 +32,7 @@
       </el-tab-pane>
     </el-tabs>
 
-    <el-dialog v-if="showWidgetEventDialogFlag" v-dialog-drag
+    <el-dialog v-if="showWidgetEventDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
                title="组件事件处理"
                :visible.sync="showWidgetEventDialogFlag" append-to-body class="small-padding-dialog"

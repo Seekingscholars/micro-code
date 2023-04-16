@@ -49,7 +49,7 @@
       </el-collapse>
     </el-form>
 
-    <el-dialog v-if="showFormEventDialogFlag" v-dialog-drag
+    <el-dialog v-if="showFormEventDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
                :visible.sync="showFormEventDialogFlag"
                append-to-body class="small-padding-dialog" title="表单事件处理"
@@ -67,7 +67,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog v-if="showEditFunctionDialogFlag" v-dialog-drag
+    <el-dialog v-if="showEditFunctionDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
                :visible.sync="showEditFunctionDialogFlag"
                append-to-body class="small-padding-dialog" title="全局函数"
@@ -82,7 +82,7 @@
         </el-button>
       </div>
     </el-dialog>
-    <el-dialog v-if="showEditDataDialogFlag" v-dialog-drag
+    <el-dialog v-if="showEditDataDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
                :visible.sync="showEditDataDialogFlag"
                append-to-body class="small-padding-dialog" title="全局数据"

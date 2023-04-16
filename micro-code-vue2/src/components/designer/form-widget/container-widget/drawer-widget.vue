@@ -1,13 +1,26 @@
 <template>
-  <el-drawer
-    :modal="false"
-    :visible.sync="drawer"
-    :wrapperClosable="false"
-    title="我是标题"
-    v-bind="field.options"
-  >
-    <RenderWidget :designer="designer" :widget="field"></RenderWidget>
-  </el-drawer>
+  <div>
+    <div
+      v-if="designer.design"
+      style="outline: 1px dashed #cb2f2f;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  font-weight: bold;
+  color: #cb2f2f;"
+    >
+      {{ field.options.label }}
+    </div>
+    <el-drawer
+      :modal="false"
+      :visible.sync="drawer"
+      :wrapper-closable="false"
+      title="我是标题"
+      v-bind="field.options"
+    >
+      <RenderWidget :designer="designer" :widget="field" />
+    </el-drawer>
+  </div>
 </template>
 <script>
 import RenderWidget from '../RenderWidget'
@@ -45,5 +58,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

@@ -94,13 +94,6 @@ input[type="password"]::-ms-reveal {  /* 隐藏IE/Edge原生的密码查看按�
   scrollbar-width: thin;     //thin模式下滚动条两端的三角按钮会消失
 }
 
-
-
-//栅格布局
-.grid-container {
-  padding: 10px;
-  outline: 1px dashed #336699;
-}
 //拖拽
 .drag-handler {
   cursor: move;
