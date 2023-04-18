@@ -3,9 +3,9 @@ package com.moxa.micro.core.service.impl;
 
 import com.moxa.micro.core.entity.LoginUser;
 import com.moxa.micro.core.exception.MicroException;
-import com.moxa.micro.user.view.SysUser;
 import com.moxa.micro.core.service.SysApiService;
 import com.moxa.micro.user.service.ISysUserService;
+import com.moxa.micro.user.view.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

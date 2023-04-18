@@ -1,7 +1,7 @@
 <template>
   <el-tree :data="designer.widgetList" :props="defaultProps" draggable node-key="id" :expand-on-click-node="false" :allow-drop="allowDrop" default-expand-all @node-click="handleNodeClick">
     <div slot-scope="{ node, data }">
-      <div class="node-label">{{ getLabel(data) }}</div>
+      <div>{{ getLabel(data) }}</div>
     </div>
   </el-tree>
 </template>

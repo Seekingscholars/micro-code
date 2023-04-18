@@ -2,74 +2,68 @@
   <el-drawer
     v-bind="$attrs"
     title="应用分组"
-    size="calc(100% - 50px)"
-    direction="btt"
+    size="500px"
+    direction="ltr"
+    destroy-on-close
+    :with-header="false"
+    :wrapperClosable="false"
     @close="close"
   >
-    <el-container>
-      <el-main>
-        <div class="dashboard-drawer">
-          <div class="dashboard-drawer-group">
-            <div class="dashboard-body">
-              <div class="dashboard-sub-title">默认分组</div>
-              <div class="dashboard-sub-wrapper">
-                <div class="dashboard-sub-body">
-                  <div v-for="item in appList" :key="item.id" class="dashboard-sub-body-item">
-                    <div class="dashboard-sub-body-item-app" />
-                    <div class="dashboard-sub-body-item-title">智能分析</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </el-main>
-      <el-aside>
+    <div class="title">
+      <span>应用分组设置</span>
+    </div>
+    <el-scrollbar class="scrollbar">
+      <div class="scrollbar-div">
         <el-table
           v-sort="dragOption"
           :data="categoryList"
-          row-key="id"
+          row-key="key"
           :show-header="false"
+          @cell-click="handleCellClick"
         >
-          <el-table-column label="排序" width="50px">
-            <div class="drag-handler" style="cursor: move">
-              <i class="el-icon-sort" />
-            </div>
-          </el-table-column>
-          <el-table-column label="名称" prop="categoryName">
+          <el-table-column label="分组名称" prop="categoryName">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.categoryName" />
+              <div class="column">
+                <el-input v-show="selectKey===scope.row.key" :ref="'input'+scope.row.key" v-model="scope.row.categoryName" />
+                <span v-show="selectKey!=scope.row.key">{{ scope.row.categoryName }}</span>
+              </div>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="60px">
             <template slot-scope="scope">
-              <div class="operate">
-                <i class="el-icon-delete" title="删除" style="color: red; cursor: pointer" />
+              <div class="toolbar">
+                <div class="drag-handler toolbar-button" style="cursor: move">
+                  <i class="el-icon-sort" title="排序" />
+                </div>
+                <div class="toolbar-button">
+                  <i class="el-icon-delete" title="删除" style="color: red; cursor: pointer" />
+                </div>
               </div>
             </template>
           </el-table-column>
         </el-table>
-        <el-button type="text" icon="el-icon-plus">添加</el-button>
-      </el-aside>
-    </el-container>
+      </div>
+      <div class="scrollbar-bar">
+        <el-button type="text" icon="el-icon-plus" @click="createCategory">添加</el-button>
+      </div>
+    </el-scrollbar>
+    <div class="footer">
+      <el-button @click="close">取 消</el-button>
+      <el-button type="primary" @click="submit">确 定</el-button>
+    </div>
   </el-drawer>
 </template>
 
 <script>
 import { option } from '@/utils/dragOption'
+import categoryApi from './api/category.api'
 export default {
   name: 'CreateCategoryDrawer',
   data() {
     return {
-      appList: [
-        {
-          id: 1
-        },
-        {
-          id: 2
-        }
-      ],
-      categoryList: [{ id: 1, categoryName: '默认分组' }]
+      categoryList: [],
+      index: 1,
+      selectKey: null
     }
   },
   computed: {
@@ -77,51 +71,73 @@ export default {
       return option(this.categoryList)
     }
   },
+  created() {
+    this.listCategory()
+  },
   methods: {
+    async listCategory() {
+      this.categoryList = await categoryApi.list() || []
+    },
+    createCategory() {
+      this.categoryList.push({ key: this.index, id: '', categoryName: '' })
+      this.checkKey(this.index)
+      this.index++
+    },
+    handleCellClick(row) {
+      this.checkKey(row.key)
+    },
+    checkKey(key) {
+      this.selectKey = key
+      this.$nextTick(() => {
+        const refs = this.$refs['input' + key]
+        if (refs) {
+          refs.focus()
+        }
+      })
+    },
     close() {
       this.$emit('update:visible', false)
+    },
+    submit() {
+
     }
   }
 }
 </script>
 
 <style scoped>
-.dashboard-sub-wrapper{
+.title{
   padding: 10px;
-  border: 1px dashed #0db3a6;
-}
-
-.dashboard-sub-title{
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-.dashboard-sub-body{
-  display: flex;
-  flex-wrap: wrap;
-}
-.dashboard-sub-body-item{
-  cursor: pointer;
-  width: 200px;
-  padding-top: 30px;
-  position: relative;
-}
-.dashboard-sub-body-item:hover{
-  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2);
-}
-.dashboard-sub-body-item-app{
-  position: relative;
-  margin: 0 auto;
-  height: 48px;
-  width: 48px;
-  background-color: #d5a60a;
-  background-image: url("../../assets/images/icon-cover-1.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  border-radius: 12px;
-}
-.dashboard-sub-body-item-title{
-  margin: 15px auto;
+  font-size: 16px;
   text-align: center;
+  font-weight: bold;
+}
+.scrollbar{
+  height: calc(100vh - 100px);
+}
+.scrollbar-div{
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.column{
+  height: 65px;
+  line-height: 65px;
+}
+.scrollbar-bar{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+.toolbar{
+  display: flex;
+}
+.toolbar-button{
+  margin-right: 20px;
+}
+.footer{
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
 }
 </style>

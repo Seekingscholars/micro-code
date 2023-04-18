@@ -11,11 +11,11 @@ import com.moxa.dream.system.config.Configuration;
 import com.moxa.micro.core.constant.CommonConstant;
 import com.moxa.micro.core.entity.LoginUser;
 import com.moxa.micro.core.entity.Result;
-import com.moxa.micro.login.model.SysLoginModel;
 import com.moxa.micro.core.service.SysApiService;
 import com.moxa.micro.core.util.ClientUtil;
 import com.moxa.micro.core.util.JwtUtil;
 import com.moxa.micro.core.util.RandImageUtil;
+import com.moxa.micro.login.model.SysLoginModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,11 +104,11 @@ public class LoginController {
         }
         LoginUser loginUser = ClientUtil.getLoginUser();
         if (loginUser == null || !loginUser.getUsername().equals(username)) {
-            return Result.ok(null,"退出登录失败");
+            return Result.ok(null, "退出登录失败");
         }
         redisTemplate.delete(CommonConstant.PREFIX_USER_TOKEN + token);
         SecurityUtils.getSubject().logout();
-        return Result.ok(null,"退出登录成功");
+        return Result.ok(null, "退出登录成功");
     }
 
     /**

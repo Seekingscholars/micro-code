@@ -5,10 +5,14 @@
         <Logo />
         <div class="header-right">
           <el-button
-            type="primary"
             icon="el-icon-search"
             @click="previewForm"
           >预览</el-button>
+          <el-button
+            type="primary"
+            icon="el-icon-plus"
+            @click="previewForm"
+          >保存</el-button>
         </div>
       </div>
     </template>
@@ -40,6 +44,7 @@ export default {
   justify-content: space-between;
 }
 .header-right {
+  display: flex;
   height: 100%;
   line-height: 48px;
   margin-right: 20px;

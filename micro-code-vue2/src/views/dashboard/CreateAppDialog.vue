@@ -28,12 +28,15 @@
         <div class="dashboard-dialog-template">模板4</div>
       </div>
     </div>
+    <CreateEmptyAppDialog :visible.sync="showAppDialogFlag" ></CreateEmptyAppDialog>
   </el-dialog>
 </template>
 
 <script>
+import CreateEmptyAppDialog from './CreateEmptyAppDialog'
 export default {
   name: 'CreateAppDialog',
+  components:{CreateEmptyAppDialog},
   data() {
     return {
       showAppDialogFlag: false
@@ -44,7 +47,7 @@ export default {
       this.$emit('update:visible', false)
     },
     createEmptyApp() {
-
+      this.showAppDialogFlag=true
     }
   }
 }

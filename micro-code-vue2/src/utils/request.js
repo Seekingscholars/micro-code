@@ -1,86 +1,70 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Notification, Message } from 'element-ui'
+import { getToken } from '@/utils/auth'
 import store from '@/store'
-
-// create an axios instance
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+// 对应国际化资源文件后缀
+axios.defaults.headers['Content-Language'] = 'zh_CN'
+// 创建axios实例
 const service = axios.create({
+  // axios中请求配置有baseURL选项，表示请求URL公共部分
   baseURL: process.env.VUE_APP_API,
-  timeout: 5000 // request timeout
+  // 超时
+  timeout: 10000,
+  validateStatus: (status) => {
+    return status>=200
+  }
 })
 
-// request interceptor
-service.interceptors.request.use(
-  config => {
-    // do something before request is sent
+// request拦截器
+service.interceptors.request.use(config => {
+  config.headers['X-Access-Token'] = getToken()
+  // get请求映射params参数
+  return config
+}, error => {
+  Promise.reject(error)
+})
 
-    if (store.getters.token) {
-      config.headers['X-Access-Token'] = store.getters.token
-    }
-    return config
-  },
-  error => {
-    // do something with request error
-    console.log(error) // for debug
-    return Promise.reject(error)
+// 响应拦截器
+service.interceptors.response.use(res => {
+
+    // 未设置状态码则默认成功状态
+  const code = res.data.code||res.status
+
+  // 获取错误信息
+  const msg = res.data.message
+  // 二进制数据则直接返回
+  if (res.request.responseType === 'blob' || res.request.responseType === 'arraybuffer') {
+    return res.data
   }
-)
-
-// response interceptor
-service.interceptors.response.use(
-  /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-  */
-
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
-   */
-  response => {
-    const res = response.data
-    if (res.code !== 200) {
-      if (res.message) {
-        Message({
-          message: res.message,
-          type: 'error',
-          duration: 5 * 1000
-        })
-      }
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 401) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(res.message || 'Error'))
-    } else {
-      if (res.message) {
-        Message({
-          message: res.message,
-          type: 'success',
-          duration: 5 * 1000
-        })
-      }
-      return res.result
-    }
-  },
-  error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
-    return Promise.reject(error)
+  if (msg) {
+    Message({ message: msg, type: code === 200 ? 'success' : 'error' })
   }
+  switch (code){
+    case 200:
+      return res.data.result
+    case 401:
+      store.dispatch('user/logout')
+      break
+    case 404:
+      Message({ message: res.data.path+'不存在', type: 'error' })
+      break
+  }
+  return Promise.reject('error')
+},
+error => {
+  console.log('err' + error)
+  let { message } = error
+  if (message === 'Network Error') {
+    message = '后端接口连接异常'
+  } else if (message.includes('timeout')) {
+    message = '系统接口请求超时'
+  } else if (message.includes('Request failed with status code')) {
+    message = '系统接口' + message.substr(message.length - 3) + '异常'
+  }
+  Message({ message: message, type: 'error', duration: 5 * 1000 })
+  return Promise.reject(error)
+}
 )
 
 export default service

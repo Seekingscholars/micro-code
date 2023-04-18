@@ -39,32 +39,29 @@
         </div>
       </div>
     </el-card>
-    <CreateAppDialog :visible.sync="showAppDialogFlag" />
-    <CreateCategoryDrawer :visible.sync="showAppDrawerFlag" />
+    <CreateAppDialog v-if="showAppDialogFlag" :visible.sync="showAppDialogFlag" />
+    <CreateCategoryDrawer v-if="showAppDrawerFlag" :visible.sync="showAppDrawerFlag" />
   </div>
 </template>
 <script>
 import CreateAppDialog from './CreateAppDialog'
 import CreateCategoryDrawer from './CreateCategoryDrawer'
+import appApi from './api/app.api'
 export default {
   name: 'Dashboard',
   components: { CreateAppDialog, CreateCategoryDrawer },
   data() {
     return {
       name: '',
-      appList: [
-        {
-          id: 1
-        },
-        {
-          id: 2
-        }
-      ],
+      appList: [],
       selectAppId: null,
       showAppDialogFlag: false,
       showAppDrawerFlag: false
 
     }
+  },
+  created() {
+    this.listApp()
   },
   mounted() {
     document.addEventListener('click', this.handleDocumentClick, false)
@@ -73,6 +70,9 @@ export default {
     document.removeEventListener('click', this.handleDocumentClick, false)
   },
   methods: {
+    async listApp(){
+      this.appList=await appApi.listApp()||[];
+    },
     gotoApp() {
       const to = this.$router.resolve({ name: 'app' })
       window.open(to.href, '_self')

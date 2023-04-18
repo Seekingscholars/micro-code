@@ -3,7 +3,6 @@ package com.moxa.micro.core.controller;
 import cn.hutool.core.util.StrUtil;
 import com.moxa.dream.system.config.Page;
 import com.moxa.dream.template.service.IService;
-
 import com.moxa.micro.core.entity.PageModel;
 import com.moxa.micro.core.entity.Result;
 import com.moxa.micro.core.exception.MicroException;

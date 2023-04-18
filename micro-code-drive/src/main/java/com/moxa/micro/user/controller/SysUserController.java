@@ -1,15 +1,13 @@
 package com.moxa.micro.user.controller;
 
 
-
+import com.moxa.micro.core.controller.BaseController;
 import com.moxa.micro.core.entity.Result;
-import com.moxa.micro.user.model.BasicInfoModel;
 import com.moxa.micro.user.model.PasswordModel;
 import com.moxa.micro.user.model.SysUserModel;
+import com.moxa.micro.user.service.ISysUserService;
 import com.moxa.micro.user.view.SysUser;
 import com.moxa.micro.user.view.SysUserEditView;
-import com.moxa.micro.core.controller.BaseController;
-import com.moxa.micro.user.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
