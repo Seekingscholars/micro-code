@@ -18,10 +18,10 @@ export default {
   data() {
     return {
       dataList: [
-        { label: 'top', value: 'top' },
-        { label: 'right', value: 'right' },
-        { label: 'bottom', value: 'bottom' },
-        { label: 'left', value: 'left' }
+        {label: 'top', value: 'top'},
+        {label: 'right', value: 'right'},
+        {label: 'bottom', value: 'bottom'},
+        {label: 'left', value: 'left'}
       ]
     }
   }

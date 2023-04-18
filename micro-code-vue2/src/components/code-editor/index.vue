@@ -1,7 +1,7 @@
 <template>
   <div class="ace-container">
     <!-- 官方文档中使用id，这里禁止使用，在后期打包后容易出现问题，使用 ref 或者 DOM 就行 -->
-    <div ref="ace" class="ace-editor" />
+    <div ref="ace" class="ace-editor"/>
   </div>
 </template>
 
@@ -11,7 +11,6 @@ import ace from 'ace-builds'
      特别提示：禁用此行后，需要调用ace.config.set('basePath', 'path...')指定动态js加载URL！！
    */
 // import 'ace-builds/webpack-resolver'
-
 // import 'ace-builds/src-min-noconflict/theme-monokai' // 默认设置的主题
 import 'ace-builds/src-min-noconflict/theme-sqlserver' // 新设主题
 import 'ace-builds/src-min-noconflict/mode-javascript' // 默认设置的语言模式
@@ -91,13 +90,13 @@ export default {
   methods: {
     addAutoCompletion(ace) {
       const acData = [
-        { meta: 'VForm API', caption: 'getWidgetRef', value: 'getWidgetRef()', score: 1 },
-        { meta: 'VForm API', caption: 'getFormRef', value: 'getFormRef()', score: 1 }
+        {meta: 'VForm API', caption: 'getWidgetRef', value: 'getWidgetRef()', score: 1},
+        {meta: 'VForm API', caption: 'getFormRef', value: 'getFormRef()', score: 1}
         // TODO: 待补充！！
       ]
       const langTools = ace.require('ace/ext/language_tools')
       langTools.addCompleter({
-        getCompletions: function(editor, session, pos, prefix, callback) {
+        getCompletions: function (editor, session, pos, prefix, callback) {
           if (prefix.length === 0) {
             return callback(null, [])
           } else {
@@ -124,7 +123,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .ace-editor {
-    min-height: 300px;
-  }
+.ace-editor {
+  min-height: 300px;
+}
 </style>

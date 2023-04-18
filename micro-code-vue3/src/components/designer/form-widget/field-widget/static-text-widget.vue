@@ -6,6 +6,7 @@
 
 <script>
 import fieldMixin from './fieldMixin'
+
 export default {
   name: 'static-text-widget',
   componentName: 'FieldWidget',

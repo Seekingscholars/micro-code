@@ -15,12 +15,12 @@ export default {
   data() {
     return {
       iconList: [
-        { label: '矩形', value: 'rect' },
-        { label: '圆角', value: 'roundRect' },
-        { label: '圆', value: 'circle' },
-        { label: '三角形', value: 'triangle' },
-        { label: '菱形', value: 'diamond' },
-        { label: '无', value: 'none' }
+        {label: '矩形', value: 'rect'},
+        {label: '圆角', value: 'roundRect'},
+        {label: '圆', value: 'circle'},
+        {label: '三角形', value: 'triangle'},
+        {label: '菱形', value: 'diamond'},
+        {label: '无', value: 'none'}
       ]
     }
   }

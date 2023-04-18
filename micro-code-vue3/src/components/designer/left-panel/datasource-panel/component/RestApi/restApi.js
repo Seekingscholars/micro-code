@@ -44,11 +44,11 @@ export function delRestApi(id) {
 }
 
 export const REQUEST_METHOD = [
-  { label: "GET", value: "GET" },
-  { label: "POST", value: "POST" },
+  {label: "GET", value: "GET"},
+  {label: "POST", value: "POST"},
   {
     label: "PUT",
     value: "PUT"
   },
-  { label: "DELETE", value: "DELETE" }
+  {label: "DELETE", value: "DELETE"}
 ];

@@ -1,12 +1,12 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import type { RequestOptions, Result, UploadFileParams } from './axios.d';
-import type { CreateAxiosOptions } from './axiosTransform';
+import type {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import axios from 'axios';
+import type {RequestOptions, Result, UploadFileParams} from './axios.d';
+import type {CreateAxiosOptions} from './axiosTransform';
 import qs from 'qs';
-import { AxiosCanceler } from './axiosCancel';
-import { isFunction } from '@/utils/is';
-import { cloneDeep } from 'lodash-es';
-import { RequestEnum,ContentTypeEnum } from '@/enums/httpEnum';
+import {AxiosCanceler} from './axiosCancel';
+import {isFunction} from '@/utils/is';
+import {cloneDeep} from 'lodash-es';
+import {ContentTypeEnum, RequestEnum} from '@/enums/httpEnum';
 
 export * from './axiosTransform';
 
@@ -21,18 +21,6 @@ export class VAxios {
     this.options = options;
     this.axiosInstance = axios.create(options);
     this.setupInterceptors();
-  }
-
-  /**
-   * @description:  Create axios instance
-   */
-  private createAxios(config: CreateAxiosOptions): void {
-    this.axiosInstance = axios.create(config);
-  }
-
-  private getTransform() {
-    const { transform } = this.options;
-    return transform;
   }
 
   getAxios(): AxiosInstance {
@@ -57,63 +45,6 @@ export class VAxios {
       return;
     }
     Object.assign(this.axiosInstance.defaults.headers, headers);
-  }
-
-  /**
-   * @description: Interceptor configuration 拦截器配置
-   */
-  private setupInterceptors() {
-    const transform = this.getTransform();
-    if (!transform) {
-      return;
-    }
-    const {
-      requestInterceptors,
-      requestInterceptorsCatch,
-      responseInterceptors,
-      responseInterceptorsCatch,
-    } = transform;
-
-    const axiosCanceler = new AxiosCanceler();
-
-    // Request interceptor configuration processing
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-      // If cancel repeat request is turned on, then cancel repeat request is prohibited
-      // @ts-ignore
-      const { ignoreCancelToken } = config.requestOptions;
-      const ignoreCancel =
-        ignoreCancelToken !== undefined
-          ? ignoreCancelToken
-          : this.options.requestOptions?.ignoreCancelToken;
-
-      !ignoreCancel && axiosCanceler.addPending(config);
-      if (requestInterceptors && isFunction(requestInterceptors)) {
-        config = requestInterceptors(config, this.options);
-      }
-      return config;
-    }, undefined);
-
-    // Request interceptor error capture
-    requestInterceptorsCatch &&
-      isFunction(requestInterceptorsCatch) &&
-      this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
-
-    // Response result interceptor processing
-    this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
-      res && axiosCanceler.removePending(res.config);
-      if (responseInterceptors && isFunction(responseInterceptors)) {
-        res = responseInterceptors(res);
-      }
-      return res;
-    }, undefined);
-
-    // Response result interceptor error capture
-    responseInterceptorsCatch &&
-      isFunction(responseInterceptorsCatch) &&
-      this.axiosInstance.interceptors.response.use(undefined, (error) => {
-        // @ts-ignore
-        return responseInterceptorsCatch(this.axiosInstance, error);
-      });
   }
 
   /**
@@ -170,35 +101,35 @@ export class VAxios {
 
     return {
       ...config,
-      data: qs.stringify(config.data, { arrayFormat: 'brackets' }),
+      data: qs.stringify(config.data, {arrayFormat: 'brackets'}),
     };
   }
 
   get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'GET' }, options);
+    return this.request({...config, method: 'GET'}, options);
   }
 
   post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'POST' }, options);
+    return this.request({...config, method: 'POST'}, options);
   }
 
   put<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'PUT' }, options);
+    return this.request({...config, method: 'PUT'}, options);
   }
 
   delete<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'DELETE' }, options);
+    return this.request({...config, method: 'DELETE'}, options);
   }
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     let conf: CreateAxiosOptions = cloneDeep(config);
     const transform = this.getTransform();
 
-    const { requestOptions } = this.options;
+    const {requestOptions} = this.options;
 
     const opt: RequestOptions = Object.assign({}, requestOptions, options);
 
-    const { beforeRequestHook, requestCatchHook, transformResponseHook } = transform || {};
+    const {beforeRequestHook, requestCatchHook, transformResponseHook} = transform || {};
     if (beforeRequestHook && isFunction(beforeRequestHook)) {
       conf = beforeRequestHook(conf, opt);
     }
@@ -231,6 +162,75 @@ export class VAxios {
           }
           reject(e);
         });
+    });
+  }
+
+  /**
+   * @description:  Create axios instance
+   */
+  private createAxios(config: CreateAxiosOptions): void {
+    this.axiosInstance = axios.create(config);
+  }
+
+  private getTransform() {
+    const {transform} = this.options;
+    return transform;
+  }
+
+  /**
+   * @description: Interceptor configuration 拦截器配置
+   */
+  private setupInterceptors() {
+    const transform = this.getTransform();
+    if (!transform) {
+      return;
+    }
+    const {
+      requestInterceptors,
+      requestInterceptorsCatch,
+      responseInterceptors,
+      responseInterceptorsCatch,
+    } = transform;
+
+    const axiosCanceler = new AxiosCanceler();
+
+    // Request interceptor configuration processing
+    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+      // If cancel repeat request is turned on, then cancel repeat request is prohibited
+      // @ts-ignore
+      const {ignoreCancelToken} = config.requestOptions;
+      const ignoreCancel =
+        ignoreCancelToken !== undefined
+          ? ignoreCancelToken
+          : this.options.requestOptions?.ignoreCancelToken;
+
+      !ignoreCancel && axiosCanceler.addPending(config);
+      if (requestInterceptors && isFunction(requestInterceptors)) {
+        config = requestInterceptors(config, this.options);
+      }
+      return config;
+    }, undefined);
+
+    // Request interceptor error capture
+    requestInterceptorsCatch &&
+    isFunction(requestInterceptorsCatch) &&
+    this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
+
+    // Response result interceptor processing
+    this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
+      res && axiosCanceler.removePending(res.config);
+      if (responseInterceptors && isFunction(responseInterceptors)) {
+        res = responseInterceptors(res);
+      }
+      return res;
+    }, undefined);
+
+    // Response result interceptor error capture
+    responseInterceptorsCatch &&
+    isFunction(responseInterceptorsCatch) &&
+    this.axiosInstance.interceptors.response.use(undefined, (error) => {
+      // @ts-ignore
+      return responseInterceptorsCatch(this.axiosInstance, error);
     });
   }
 }

@@ -1,3 +1,3 @@
-import { ElMessage ,ElMessageBox } from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 
-export { ElMessage as createMessage, ElMessageBox as createMessageBox };
+export {ElMessage as createMessage, ElMessageBox as createMessageBox};

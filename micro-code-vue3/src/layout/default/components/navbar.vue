@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import Notice from "./notice/index.vue";
 import Logo from "./logo.vue";
-import { useNav } from "@/layout/default/hooks/useNav";
+import {useNav} from "@/layout/default/hooks/useNav";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 
-const { logout, username, avatarsStyle } = useNav();
+const {logout, username, avatarsStyle} = useNav();
 </script>
 
 <template>
@@ -12,20 +12,20 @@ const { logout, username, avatarsStyle } = useNav();
     class="navbar bg-[#fff] shadow-sm shadow-[rgba(0, 21, 41, 0.08)] dark:shadow-[#0d0d0d]"
   >
     <div class="vertical-header-left">
-      <Logo />
+      <Logo/>
     </div>
     <div class="vertical-header-center">
     </div>
 
     <div class="vertical-header-right">
       <!-- 通知 -->
-      <Notice id="header-notice" />
+      <Notice id="header-notice"/>
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover select-none">
           <img
-            src="https://avatars.githubusercontent.com/u/44761321?v=4"
             :style="avatarsStyle"
+            src="https://avatars.githubusercontent.com/u/44761321?v=4"
           />
           <p v-if="username" class="dark:text-white">{{ username }}</p>
         </span>
@@ -52,6 +52,7 @@ const { logout, username, avatarsStyle } = useNav();
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+
   .vertical-header-right {
     display: flex;
     min-width: 280px;

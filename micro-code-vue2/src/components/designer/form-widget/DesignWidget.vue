@@ -1,11 +1,11 @@
 <template>
   <el-form
-    :size="designer.formConfig.size"
-    :label-width="designer.formConfig.labelWidth + 'px'"
-    :label-position="designer.formConfig.labelPosition"
     :disabled="designer.formConfig.disabled"
+    :label-position="designer.formConfig.labelPosition"
+    :label-width="designer.formConfig.labelWidth + 'px'"
+    :size="designer.formConfig.size"
   >
-    <RenderWidget :designer="designer" :widget="designer" />
+    <RenderWidget :designer="designer" :widget="designer"/>
   </el-form>
 </template>
 
@@ -103,7 +103,7 @@ export default {
         if (api.failFunction) {
           failFunction = new Function('err', this.wrapWith(api.failFunction))
         }
-        request(param, { headers: api.header }).then(res => {
+        request(param, {headers: api.header}).then(res => {
           if (successFunction) {
             successFunction.call(this, res)
           }

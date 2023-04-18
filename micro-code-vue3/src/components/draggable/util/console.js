@@ -4,6 +4,7 @@ function getConsole() {
   }
   return global.console;
 }
+
 const console = getConsole();
 
-export { console };
+export {console};

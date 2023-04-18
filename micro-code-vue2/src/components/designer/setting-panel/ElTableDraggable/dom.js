@@ -2,8 +2,8 @@
 import throttle from 'lodash/throttle'
 import Sortable from 'sortablejs'
 
-const { utils } = Sortable
-const { css } = utils
+const {utils} = Sortable
+const {css} = utils
 
 /** @type {Set<Element>} */
 const animatedSet = new Set()
@@ -87,7 +87,7 @@ export function getDomPosition(el, ignoreTranslate = true) {
   const position = el.getBoundingClientRect().toJSON()
   const transform = el.style.transform
   if (transform && ignoreTranslate) {
-    const { groups = { x: 0, y: 0 }} = translateRegexp.exec(transform) || {}
+    const {groups = {x: 0, y: 0}} = translateRegexp.exec(transform) || {}
     position.x = position.x - +groups.x
     position.y = position.y - +groups.y
   }
@@ -133,7 +133,7 @@ export function clearAnimate(targetList = []) {
 export function getTransform(el, target) {
   const currentPostion = getDomPosition(el)
   const originPosition = getDomPosition(el, true)
-  const { x, y } = target
+  const {x, y} = target
   const toPosition = {
     x: x !== undefined ? x : currentPostion.x,
     y: y !== undefined ? y : currentPostion.y
@@ -230,11 +230,11 @@ export function exchange(prevNode, nextNode, animate = 0) {
       to: prevNode
     }
   ]
-  exchangeList.forEach(({ from, to }) => {
+  exchangeList.forEach(({from, to}) => {
     const targetPosition = getDomPosition(to, false)
 
     // 宽度需要修正
-    const { width } = getDomPosition(from, false)
+    const {width} = getDomPosition(from, false)
     const targetWidth = targetPosition.width
     if (width !== targetWidth) {
       const offset = width - targetWidth
@@ -283,18 +283,18 @@ export function getColByTh(th) {
  * @param {Element[]|Element} thList
  */
 export const alignmentTableByThList = throttle(function alignmentTableByThList(
-  thList
-) {
-  const list = Array.isArray(thList) ? thList : [thList]
-  list.forEach((th) => {
-    const tdList = getTdListByTh(th)
-    tdList.forEach((td) => {
-      const { x } = getDomPosition(th)
-      translateTo(td, { x })
+    thList
+  ) {
+    const list = Array.isArray(thList) ? thList : [thList]
+    list.forEach((th) => {
+      const tdList = getTdListByTh(th)
+      tdList.forEach((td) => {
+        const {x} = getDomPosition(th)
+        translateTo(td, {x})
+      })
     })
-  })
-},
-1000 / 120)
+  },
+  1000 / 120)
 
 /**
  * 切换row的打开还是关闭
@@ -334,7 +334,7 @@ export function toggleExpansion(domInfo, expanded = true) {
  * @param {number} indent
  */
 export function changeDomInfoLevel(domInfo, level = 0, indent = 16) {
-  const { el } = domInfo
+  const {el} = domInfo
   domInfo.level = level
   changeRowLevel(el, level)
   const cell = el.querySelector('td:nth-child(1) .cell')

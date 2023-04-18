@@ -1,12 +1,13 @@
 <template>
-    <el-progress v-bind="field.options"></el-progress>
+  <el-progress v-bind="field.options"></el-progress>
 </template>
 <script>
 import fieldMixin from './fieldMixin'
+
 export default {
   name: 'progress-widget',
   componentName: 'FieldWidget',
-  mixins:[fieldMixin]
+  mixins: [fieldMixin]
 }
 </script>
 <style lang="scss" scoped>

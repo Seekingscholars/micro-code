@@ -1,17 +1,17 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import path from "path";
-import { getConfig } from "@/config";
-import { childrenType } from "../../types";
-import { useNav } from "@/layout/default/hooks/useNav";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
+import {getConfig} from "@/config";
+import {childrenType} from "../../types";
+import {useNav} from "@/layout/default/hooks/useNav";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
+import {computed, CSSProperties, nextTick, PropType, ref, toRaw} from "vue";
 
 import ArrowUp from "@iconify-icons/ep/arrow-up";
 import EpArrowDown from "@iconify-icons/ep/arrow-down";
 import ArrowLeft from "@iconify-icons/ep/arrow-left";
 import ArrowRight from "@iconify-icons/ep/arrow-right";
 
-const { layout, isCollapse, tooltipEffect } = useNav();
+const {layout, isCollapse, tooltipEffect} = useNav();
 
 const props = defineProps({
   item: {
@@ -105,11 +105,11 @@ function hoverMenu(key) {
     // 如果文本内容的整体宽度大于其可视宽度，则文本溢出
     menuTextRef.value?.scrollWidth > menuTextRef.value?.clientWidth
       ? Object.assign(key, {
-          showTooltip: true
-        })
+        showTooltip: true
+      })
       : Object.assign(key, {
-          showTooltip: false
-        });
+        showTooltip: false
+      });
     hoverMenuMap.set(key, true);
   });
 }
@@ -132,7 +132,7 @@ function hasOneShowingChild(
   }
 
   if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: "", noShowingChildren: true };
+    onlyOneChild.value = {...parent, path: "", noShowingChildren: true};
     return true;
   }
   return false;
@@ -157,11 +157,11 @@ function resolvePath(routePath) {
     "
   >
     <el-menu-item
-      :index="resolvePath(onlyOneChild.path)"
       :class="{ 'submenu-title-noDropdown': !isNest }"
+      :index="resolvePath(onlyOneChild.path)"
       :style="getNoDropdownStyle"
     >
-      <div class="sub-menu-icon" v-if="toRaw(props.item.meta.icon)">
+      <div v-if="toRaw(props.item.meta.icon)" class="sub-menu-icon">
         <component
           :is="
             useRenderIcon(
@@ -200,10 +200,10 @@ function resolvePath(routePath) {
           </span>
           <el-tooltip
             v-else
-            placement="top"
+            :disabled="!onlyOneChild.showTooltip"
             :effect="tooltipEffect"
             :offset="-10"
-            :disabled="!onlyOneChild.showTooltip"
+            placement="top"
           >
             <template #content>
               {{ onlyOneChild.meta.title }}
@@ -218,11 +218,11 @@ function resolvePath(routePath) {
           </el-tooltip>
           <FontIcon
             v-if="onlyOneChild.meta.extraIcon"
-            width="30px"
-            height="30px"
-            :style="getExtraIconStyle"
             :icon="onlyOneChild.meta.extraIcon.name"
+            :style="getExtraIconStyle"
             :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
+            height="30px"
+            width="30px"
           />
         </div>
       </template>
@@ -232,8 +232,8 @@ function resolvePath(routePath) {
   <el-sub-menu
     v-else
     ref="subMenu"
-    v-bind="expandCloseIcon"
     :index="resolvePath(props.item.path)"
+    v-bind="expandCloseIcon"
   >
     <template #title>
       <div v-if="toRaw(props.item.meta.icon)" class="sub-menu-icon">
@@ -246,10 +246,10 @@ function resolvePath(routePath) {
       </span>
       <el-tooltip
         v-else
-        placement="top"
+        :disabled="!props.item.showTooltip"
         :effect="tooltipEffect"
         :offset="-10"
-        :disabled="!props.item.showTooltip"
+        placement="top"
       >
         <template #content>
           {{ props.item.meta.title }}
@@ -266,19 +266,19 @@ function resolvePath(routePath) {
       </el-tooltip>
       <FontIcon
         v-if="props.item.meta.extraIcon"
-        width="30px"
-        height="30px"
-        style="position: absolute; right: 10px"
         :icon="props.item.meta.extraIcon.name"
         :svg="props.item.meta.extraIcon.svg ? true : false"
+        height="30px"
+        style="position: absolute; right: 10px"
+        width="30px"
       />
     </template>
     <sidebar-item
       v-for="child in props.item.children"
       :key="child.path"
+      :base-path="resolvePath(child.path)"
       :is-nest="true"
       :item="child"
-      :base-path="resolvePath(child.path)"
       class="nest-menu"
     />
   </el-sub-menu>

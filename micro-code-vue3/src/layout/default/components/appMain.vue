@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { h, computed, Transition, defineComponent } from "vue";
+<script lang="ts" setup>
+import {computed, defineComponent, h, Transition} from "vue";
 
 const transitions = computed(() => {
   return route => {
@@ -23,8 +23,8 @@ const transitionMain = defineComponent({
           this.route.meta.transition.enterTransition
             ? "pure-classes-transition"
             : (transitions.value(this.route) &&
-                this.route.meta.transition.name) ||
-              "fade-transform",
+              this.route.meta.transition.name) ||
+            "fade-transform",
         enterActiveClass:
           transitions.value(this.route) &&
           `animate__animated ${this.route.meta.transition.enterTransition}`,

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <FormRender v-if="flushed" :form-json="formJson" />
+    <FormRender v-if="flushed" :form-json="formJson"/>
   </div>
 </template>
 <script>
 import FormRender from '@/components/render/index.vue'
 
 export default {
-  components: { FormRender },
+  components: {FormRender},
   data() {
     return {
       formJson: {},

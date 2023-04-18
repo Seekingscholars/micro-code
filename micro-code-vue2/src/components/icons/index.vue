@@ -1,18 +1,26 @@
 <template>
   <div class="icons-container">
-        <div class="grid">
-          <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateIconCode(item),$event)">
-            <el-tooltip placement="top">
-              <div slot="content">
-                {{ generateIconCode(item) }}
-              </div>
-              <div class="icon-item">
-                <svg-icon :icon-class="item" class-name="disabled" />
-                <span>{{ item }}</span>
-              </div>
-            </el-tooltip>
-          </div>
-        </div>
+    <div class="color-list">
+      <div v-for="item in colors" :key="item" :style="{backgroundColor:item}" class="color-item"
+           @click="()=>handleColorClick(item)">
+        <svg-icon v-show="selectColor===item" class-name="colorIcon" icon-class="check"/>
+      </div>
+    </div>
+    <div class="grid">
+      <div v-for="item of pageSvgIcons" :key="item" :class="{'icon-item':true,'icon-item-selected':selectIcon===item}"
+           @click="()=>handleItemClick(item)">
+        <svg-icon :icon-class="item" class-name="disabled"/>
+      </div>
+    </div>
+    <div class="footer">
+      <el-pagination
+        :current-page.sync="currentPage"
+        :page-size="pageSize"
+        :total="total"
+        layout="prev, pager, next"
+        small
+      />
+    </div>
   </div>
 </template>
 
@@ -23,15 +31,29 @@ export default {
   name: 'Icons',
   data() {
     return {
-      svgIcons
+      svgIcons,
+      colors: ['#7CFC00', '#FF8C00', '#BDB76B', '#FF6347',
+        '#6495ED', '#8A2BE2', '#008B8B', '#778899'],
+      currentPage: 1,
+      pageSize: 56,
+      selectIcon: null,
+      selectColor: null
+    }
+  },
+  computed: {
+    total() {
+      return svgIcons.length
+    },
+    pageSvgIcons() {
+      return svgIcons.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize)
     }
   },
   methods: {
-    generateIconCode(symbol) {
-      return `<svg-icon icon-class="${symbol}" />`
+    handleColorClick(item) {
+      this.selectColor = item
     },
-    handleClipboard(text, event) {
-
+    handleItemClick(item) {
+      this.selectIcon = item
     }
   }
 }
@@ -39,34 +61,52 @@ export default {
 
 <style lang="scss" scoped>
 .icons-container {
-  margin: 10px 20px 0;
-  overflow: hidden;
+  padding: 10px;
+  width: 340px;
+}
 
-  .grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
+.color-list {
+  width: 100%;
+  display: flex;
+}
 
-  .icon-item {
-    margin: 20px;
-    height: 85px;
-    text-align: center;
-    width: 100px;
-    float: left;
-    font-size: 30px;
-    color: #24292e;
-    cursor: pointer;
-  }
+.color-item {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
 
-  span {
-    display: block;
-    font-size: 16px;
-    margin-top: 10px;
-  }
+.colorIcon {
+  color: #ffffff;
+}
 
-  .disabled {
-    pointer-events: none;
-  }
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon-item {
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  color: #24292e;
+  cursor: pointer;
+  border: 1px solid #f1f2f3;
+  text-align: center;
+}
+
+.icon-item-selected {
+  border: 1px solid #0db3a6;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

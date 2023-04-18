@@ -12,4 +12,4 @@ function insertNodeAt(fatherNode, node, position) {
   fatherNode.insertBefore(node, refNode);
 }
 
-export { insertNodeAt, removeNode };
+export {insertNodeAt, removeNode};

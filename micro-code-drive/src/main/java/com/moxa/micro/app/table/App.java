@@ -15,7 +15,7 @@ public class App extends BaseEntity {
     @Column(value = "id", jdbcType = Types.BIGINT)
     private Long id;
     @Column(value = "app_name", jdbcType = Types.VARCHAR)
-    private String apName;
+    private String appName;
     @Column(value = "image_name", jdbcType = Types.VARCHAR)
     private String imageName;
     @Column(value = "color", jdbcType = Types.VARCHAR)

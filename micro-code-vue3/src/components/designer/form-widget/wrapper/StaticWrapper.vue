@@ -26,9 +26,10 @@
 <script>
 import copyIcon from "@/assets/svg/copy.svg?component";
 import removeIcon from "@/assets/svg/remove.svg?component";
+
 export default {
   name: "StaticWrapper",
-  components:{copyIcon,removeIcon},
+  components: {copyIcon, removeIcon},
   props: {
     widget: Object,
     designer: Object,
@@ -84,7 +85,8 @@ export default {
     right: -2px;
     display: flex;
     justify-content: flex-end;
-    & > .widget-action-item{
+
+    & > .widget-action-item {
       margin-right: 10px;
       text-align: center;
       border-radius: 50%;

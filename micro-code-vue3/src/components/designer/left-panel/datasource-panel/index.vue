@@ -17,8 +17,8 @@
       @node-click="onNodeClick"
     />
     <RestApi
-      :datasource="datasource"
       v-model:visible="restApiOpen"
+      :datasource="datasource"
       @change="getList"
     />
   </div>
@@ -26,11 +26,11 @@
 
 <script lang="tsx">
 import RestApi from "./component/RestApi/index.vue";
-import { getRestApi, listRestApi } from "./component/RestApi/restApi";
+import {getRestApi, listRestApi} from "./component/RestApi/restApi";
 
 export default {
   name: "DatasourcePanel",
-  components: { RestApi },
+  components: {RestApi},
   props: {
     designer: Object
   },
@@ -52,7 +52,7 @@ export default {
         this.designer.formConfig.apis = res;
       });
     },
-    renderContent(h, { node, data, store }) {
+    renderContent(h, {node, data, store}) {
       return
       <div class="datasource">
         <div>
@@ -65,7 +65,7 @@ export default {
             placement="bottom"
           >
             <i
-              class={{ hide: this.isHide(node, data), "el-icon-more": true }}
+              class={{hide: this.isHide(node, data), "el-icon-more": true}}
             ></i>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="edit" icon="el-icon-edit">
@@ -95,8 +95,9 @@ export default {
       });
     },
     handleDelete(data) {
-      this.$confirm("确定删除该数据源吗？", "提示", { type: "warning" }).then(
-        () => {}
+      this.$confirm("确定删除该数据源吗？", "提示", {type: "warning"}).then(
+        () => {
+        }
       );
     },
     handleCommand(command, data) {

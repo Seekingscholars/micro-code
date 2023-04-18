@@ -1,11 +1,11 @@
-import { MockMethod } from "vite-plugin-mock";
+import {MockMethod} from "vite-plugin-mock";
 
 // 模拟刷新token接口
 export default [
   {
     url: "/refreshToken",
     method: "post",
-    response: ({ body }) => {
+    response: ({body}) => {
       if (body.refreshToken) {
         return {
           success: true,

@@ -1,30 +1,30 @@
 <template>
   <div>
 
-      <el-table :data="optionModel.toolbar" border row-key="id">
-        <el-table-column label="排序" width="50px">
-          <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-        </el-table-column>
-        <el-table-column label="标签" prop="label">
-          <template #default="scope">
-            <el-input v-model="scope.row.label"></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" width="60px">
-          <template #default="scope">
-            <div class="operate">
-              <i class="el-icon-edit" style="cursor: pointer" title="编辑" @click="handleEdit(scope.row)"></i>
-              <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"
-                 @click="handleDelete(scope.row)"
-              ></i>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-button link @click="addNewColumn">添加一项+</el-button>
+    <el-table :data="optionModel.toolbar" border row-key="id">
+      <el-table-column label="排序" width="50px">
+        <i class="drag-handler el-icon-sort" style="cursor: move"></i>
+      </el-table-column>
+      <el-table-column label="标签" prop="label">
+        <template #default="scope">
+          <el-input v-model="scope.row.label"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="60px">
+        <template #default="scope">
+          <div class="operate">
+            <i class="el-icon-edit" style="cursor: pointer" title="编辑" @click="handleEdit(scope.row)"></i>
+            <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"
+               @click="handleDelete(scope.row)"
+            ></i>
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-button link @click="addNewColumn">添加一项+</el-button>
 
-    <el-dialog v-if="showItemDialogFlag" :draggable="true"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="false"
+    <el-dialog v-if="showItemDialogFlag" :close-on-click-modal="false"
+               :close-on-press-escape="false" :destroy-on-close="true" :draggable="true" :show-close="false"
                :visible.sync="showItemDialogFlag"
                append-to-body class="small-padding-dialog" title="按钮编辑"
     >
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { generateId } from '@/utils/util'
+import {generateId} from '@/utils/util'
 
 import CodeEditor from '@/components/code-editor/index.vue'
 
@@ -65,7 +65,7 @@ export default {
     selectedWidget: Object,
     optionModel: Object
   },
-  components: { CodeEditor },
+  components: {CodeEditor},
   data() {
     return {
       showItemDialogFlag: false,
@@ -102,7 +102,7 @@ export default {
       })
     },
     addNewColumn() {
-      this.optionModel.toolbar.push({ id: 'button' + generateId(), label: '', title: '', icon: '', click: '' })
+      this.optionModel.toolbar.push({id: 'button' + generateId(), label: '', title: '', icon: '', click: ''})
 
     }
 

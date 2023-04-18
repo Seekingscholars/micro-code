@@ -1,26 +1,21 @@
-import { getConfig } from "@/config";
+import {getConfig} from "@/config";
 import NProgress from "@/utils/progress";
-import { sessionKey, type DataInfo } from "@/utils/auth";
-import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
-import { usePermissionStoreHook } from "@/store/modules/permission";
-import {
-  Router,
-  createRouter,
-  RouteRecordRaw,
-  RouteComponent
-} from "vue-router";
+import {type DataInfo, sessionKey} from "@/utils/auth";
+import {useMultiTagsStoreHook} from "@/store/modules/multiTags";
+import {usePermissionStoreHook} from "@/store/modules/permission";
+import {createRouter, RouteComponent, Router, RouteRecordRaw} from "vue-router";
 import {
   ascending,
-  initRouter,
-  isOneOfArray,
-  getHistoryMode,
   findRouteByPath,
-  handleAliveRoute,
+  formatFlatteningRoutes,
   formatTwoStageRoutes,
-  formatFlatteningRoutes
+  getHistoryMode,
+  handleAliveRoute,
+  initRouter,
+  isOneOfArray
 } from "./utils";
-import { buildHierarchyTree } from "@/utils/tree";
-import { isUrl, openLink, storageSession } from "@pureadmin/utils";
+import {buildHierarchyTree} from "@/utils/tree";
+import {isUrl, openLink, storageSession} from "@pureadmin/utils";
 
 import remainingRouter from "./modules/remaining";
 
@@ -67,7 +62,7 @@ export const router: Router = createRouter({
         if (from.meta.saveSrollTop) {
           const top: number =
             document.documentElement.scrollTop || document.body.scrollTop;
-          resolve({ left: 0, top });
+          resolve({left: 0, top});
         }
       }
     });
@@ -77,7 +72,7 @@ export const router: Router = createRouter({
 /** 重置路由 */
 export function resetRouter() {
   router.getRoutes().forEach(route => {
-    const { name, meta } = route;
+    const {name, meta} = route;
     if (name && router.hasRoute(name) && meta?.backstage) {
       router.removeRoute(name);
       router.options.routes = formatTwoStageRoutes(
@@ -111,14 +106,16 @@ router.beforeEach((to: toRouteType, _from, next) => {
       else document.title = item.meta.title as string;
     });
   }
+
   /** 如果已经登录并存在登录信息后不能跳转到路由白名单，而是继续保持在当前页面 */
   function toCorrectRoute() {
     whiteList.includes(to.fullPath) ? next(_from.fullPath) : next();
   }
+
   if (userInfo) {
     // 无权限跳转403页面
     if (to.meta?.roles && !isOneOfArray(to.meta?.roles, userInfo?.roles)) {
-      next({ path: "/error/403" });
+      next({path: "/error/403"});
     }
     if (_from?.name) {
       // name为超链接
@@ -136,7 +133,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
       )
         initRouter().then((router: Router) => {
           if (!useMultiTagsStoreHook().getMultiTagsCache) {
-            const { path } = to;
+            const {path} = to;
             const route = findRouteByPath(
               path,
               router.options.routes[0].children
@@ -159,7 +156,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
       if (whiteList.indexOf(to.path) !== -1) {
         next();
       } else {
-        next({ path: "/login" });
+        next({path: "/login"});
       }
     } else {
       next();

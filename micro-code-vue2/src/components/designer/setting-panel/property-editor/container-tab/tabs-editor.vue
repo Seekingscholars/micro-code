@@ -2,7 +2,7 @@
   <ElTableDraggable ref="ElTableDraggable" :list="designer.selectedWidget.widgetList" handle=".drag-handler">
     <el-table :data="designer.selectedWidget.widgetList" border row-key="value">
       <el-table-column label="排序" width="50px">
-        <i class="drag-handler el-icon-sort" style="cursor: move" />
+        <i class="drag-handler el-icon-sort" style="cursor: move"/>
       </el-table-column>
       <!--      <el-table-column label="属性" prop="value">-->
       <!--        <template slot-scope="scope">-->
@@ -11,7 +11,7 @@
       <!--      </el-table-column>-->
       <el-table-column label="标签" prop="name">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.name" />
+          <el-input v-model="scope.row.name"/>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="60px">
@@ -31,7 +31,7 @@
   </ElTableDraggable>
 </template>
 <script>
-import { deepClone } from '@/utils/util'
+import {deepClone} from '@/utils/util'
 import ElTableDraggable from '../../ElTableDraggable'
 
 export default {

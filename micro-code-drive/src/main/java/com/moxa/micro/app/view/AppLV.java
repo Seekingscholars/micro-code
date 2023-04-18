@@ -1,7 +1,7 @@
 package com.moxa.micro.app.view;
 
 import com.moxa.dream.system.annotation.View;
-import com.moxa.micro.core.config.App;
+import com.moxa.micro.app.table.App;
 import lombok.Data;
 
 @Data

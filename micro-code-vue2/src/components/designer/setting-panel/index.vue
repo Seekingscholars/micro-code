@@ -34,8 +34,8 @@
 
     <el-dialog v-if="showWidgetEventDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
-               title="组件事件处理"
-               :visible.sync="showWidgetEventDialogFlag" append-to-body class="small-padding-dialog"
+               :visible.sync="showWidgetEventDialogFlag"
+               append-to-body class="small-padding-dialog" title="组件事件处理"
     >
       <el-alert :closable="false" :title="eventHeader" type="info"></el-alert>
       <code-editor ref="ecEditor" v-model="eventHandlerCode" :mode="'javascript'" :readonly="false"></code-editor>
@@ -57,7 +57,7 @@
 import CodeEditor from '@/components/code-editor/index'
 import PropertyEditors from './property-editor'
 import FormSetting from './form-setting'
-import { addWindowResizeHandler } from '@/utils/util'
+import {addWindowResizeHandler} from '@/utils/util'
 import collapseJson from './collapse.json'
 
 export default {
@@ -167,6 +167,7 @@ export default {
   padding: 0px 10px 0 10px;
   width: 400px;
 }
+
 .setting-form {
   padding-right: 10px;
 }

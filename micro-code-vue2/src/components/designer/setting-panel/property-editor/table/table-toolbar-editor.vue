@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { generateId } from '@/utils/util'
+import {generateId} from '@/utils/util'
 import ElTableDraggable from '../../ElTableDraggable'
 import CodeEditor from '@/components/code-editor/index'
 
@@ -65,7 +65,7 @@ export default {
     selectedWidget: Object,
     optionModel: Object
   },
-  components: { ElTableDraggable, CodeEditor },
+  components: {ElTableDraggable, CodeEditor},
   data() {
     return {
       showItemDialogFlag: false,
@@ -104,7 +104,7 @@ export default {
       })
     },
     addNewColumn() {
-      this.optionModel.toolbar.push({ id: 'button' + generateId(), label: '', title: '', icon: '', click: '' })
+      this.optionModel.toolbar.push({id: 'button' + generateId(), label: '', title: '', icon: '', click: ''})
       this.$nextTick(() => {
         this.$refs.ElTableDraggable.init()
       })

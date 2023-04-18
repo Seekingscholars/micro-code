@@ -1,17 +1,17 @@
-import { cdn } from "./cdn";
+import {cdn} from "./cdn";
 import vue from "@vitejs/plugin-vue";
-import { viteBuildInfo } from "./info";
+import {viteBuildInfo} from "./info";
 import svgLoader from "vite-svg-loader";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { viteMockServe } from "vite-plugin-mock";
-import { configCompressPlugin } from "./compress";
+import {viteMockServe} from "vite-plugin-mock";
+import {configCompressPlugin} from "./compress";
 // import ElementPlus from "unplugin-element-plus/vite";
-import { visualizer } from "rollup-plugin-visualizer";
+import {visualizer} from "rollup-plugin-visualizer";
 import removeConsole from "vite-plugin-remove-console";
 import themePreprocessorPlugin from "@pureadmin/theme";
 import DefineOptions from "unplugin-vue-define-options/vite";
-import { genScssMultipleScopeVars } from "../src/layout/default/theme";
-import {resolve} from "path";
+import {genScssMultipleScopeVars} from "../src/layout/default/theme";
+
 export function getPluginsList(
   command: string,
   VITE_CDN: boolean,
@@ -27,7 +27,7 @@ export function getPluginsList(
     configCompressPlugin(VITE_COMPRESSION),
     DefineOptions(),
     // 线上环境删除console
-    removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
+    removeConsole({external: ["src/assets/iconfont/iconfont.js"]}),
     viteBuildInfo(),
     // 自定义主题
     themePreprocessorPlugin({
@@ -52,7 +52,7 @@ export function getPluginsList(
     }),
     // 打包分析
     lifecycle === "report"
-      ? visualizer({ open: true, brotliSize: true, filename: "report.html" })
+      ? visualizer({open: true, brotliSize: true, filename: "report.html"})
       : null
   ];
 }

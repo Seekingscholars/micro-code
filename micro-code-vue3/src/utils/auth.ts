@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
-import { storageSession } from "@pureadmin/utils";
-import { useUserStoreHook } from "@/store/modules/user";
+import {storageSession} from "@pureadmin/utils";
+import {useUserStoreHook} from "@/store/modules/user";
 
 export interface DataInfo<T> {
   /** token */
@@ -34,14 +34,14 @@ export function getToken(): DataInfo<number> {
  */
 export function setToken(data: DataInfo<Date>) {
   let expires = 0;
-  const { accessToken, refreshToken } = data;
+  const {accessToken, refreshToken} = data;
   expires = new Date(data.expires).getTime(); // 如果后端直接设置时间戳，将此处代码改为expires = data.expires，然后把上面的DataInfo<Date>改成DataInfo<number>即可
-  const cookieString = JSON.stringify({ accessToken, expires });
+  const cookieString = JSON.stringify({accessToken, expires});
 
   expires > 0
     ? Cookies.set(TokenKey, cookieString, {
-        expires: (expires - Date.now()) / 86400000
-      })
+      expires: (expires - Date.now()) / 86400000
+    })
     : Cookies.set(TokenKey, cookieString);
 
   function setSessionKey(username: string, roles: Array<string>) {
@@ -56,7 +56,7 @@ export function setToken(data: DataInfo<Date>) {
   }
 
   if (data.username && data.roles) {
-    const { username, roles } = data;
+    const {username, roles} = data;
     setSessionKey(username, roles);
   } else {
     const username =

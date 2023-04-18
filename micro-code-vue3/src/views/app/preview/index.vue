@@ -1,11 +1,12 @@
 <template>
   <div>
-  <FormRender v-if="flushed" :formJson="formJson" />
+    <FormRender v-if="flushed" :formJson="formJson"/>
   </div>
 </template>
-<script setup name="AppPreview">
-import { ref } from "vue";
+<script name="AppPreview" setup>
+import {ref} from "vue";
 import FormRender from "@/components/render/index.vue";
+
 const formJson = ref({});
 const flushed = ref(false);
 const storage = window.sessionStorage;

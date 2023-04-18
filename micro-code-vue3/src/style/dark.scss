@@ -44,6 +44,7 @@ html.dark {
     .el-divider__text {
       --el-bg-color: var(--el-bg-color);
     }
+
     .el-divider--horizontal {
       border-top: none;
     }
@@ -53,14 +54,17 @@ html.dark {
   .el-table__cell {
     background: var(--el-bg-color);
   }
+
   .el-card {
     --el-card-bg-color: var(--el-bg-color);
     // border: none !important;
   }
+
   .el-backtop {
     --el-backtop-bg-color: var(--el-color-primary-light-9);
     --el-backtop-hover-bg-color: var(--el-color-primary);
   }
+
   .el-dropdown-menu__item:not(.is-disabled):hover {
     background: transparent;
   }
@@ -83,7 +87,7 @@ html.dark {
     background-image: initial !important;
     background-color: rgb(36, 37, 37) !important;
     box-shadow: rgb(13 13 13 / 12%) 0px 3px 6px -4px,
-      rgb(13 13 13 / 8%) 0px 6px 16px 0px, rgb(13 13 13 / 5%) 0px 9px 28px 8px !important;
+    rgb(13 13 13 / 8%) 0px 6px 16px 0px, rgb(13 13 13 / 5%) 0px 9px 28px 8px !important;
 
     & .el-message__content {
       color: $color-white !important;

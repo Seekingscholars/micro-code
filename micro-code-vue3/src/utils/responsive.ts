@@ -1,5 +1,5 @@
 // 响应式storage
-import { App } from "vue";
+import {App} from "vue";
 import Storage from "responsive-storage";
 
 const nameSpace = "responsive-";
@@ -24,5 +24,5 @@ export const injectResponsiveStorage = (app: App) => {
     }
   });
 
-  app.use(Storage, { nameSpace, memory: configObj });
+  app.use(Storage, {nameSpace, memory: configObj});
 };

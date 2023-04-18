@@ -1,6 +1,8 @@
-import { isObject, isString } from '@/utils/is';
-import { cloneDeep } from 'lodash-es';
+import {isObject, isString} from '@/utils/is';
+import {cloneDeep} from 'lodash-es';
+
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+
 export function joinTimestamp<T extends boolean>(
   join: boolean,
   restful: T,
@@ -14,7 +16,7 @@ export function joinTimestamp(join: boolean, restful = false): string | object {
   if (restful) {
     return `?_t=${now}`;
   }
-  return { _t: now };
+  return {_t: now};
 }
 
 /**

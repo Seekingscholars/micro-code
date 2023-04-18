@@ -15,19 +15,19 @@ export default {
   data() {
     return {
       positionList: [
-        { label: '顶部', value: 'top' },
-        { label: '左边', value: 'left' },
-        { label: '右边', value: 'right' },
-        { label: '底部', value: 'bottom' },
-        { label: '内侧', value: 'inside' },
-        { label: '左内侧', value: 'insideLeft' },
-        { label: '右内侧', value: 'insideRight' },
-        { label: '内底部', value: 'insideBottom' },
-        { label: '内顶部', value: 'insideTop' },
-        { label: '左上角内侧', value: 'insideTopLeft' },
-        { label: '左下角内侧', value: 'insideBottomLeft' },
-        { label: '右上角内侧', value: 'insideTopRight' },
-        { label: '右下角内侧', value: 'insideBottomRight' }
+        {label: '顶部', value: 'top'},
+        {label: '左边', value: 'left'},
+        {label: '右边', value: 'right'},
+        {label: '底部', value: 'bottom'},
+        {label: '内侧', value: 'inside'},
+        {label: '左内侧', value: 'insideLeft'},
+        {label: '右内侧', value: 'insideRight'},
+        {label: '内底部', value: 'insideBottom'},
+        {label: '内顶部', value: 'insideTop'},
+        {label: '左上角内侧', value: 'insideTopLeft'},
+        {label: '左下角内侧', value: 'insideBottomLeft'},
+        {label: '右上角内侧', value: 'insideTopRight'},
+        {label: '右下角内侧', value: 'insideBottomRight'}
       ]
     }
   }

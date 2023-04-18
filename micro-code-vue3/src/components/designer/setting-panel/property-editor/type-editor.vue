@@ -1,8 +1,8 @@
 <template>
   <el-form-item label="显示类型">
     <el-select v-model="optionModel.type">
-      <el-option label="text" value="text" />
-      <el-option label="password" value="password" />
+      <el-option label="text" value="text"/>
+      <el-option label="password" value="password"/>
     </el-select>
   </el-form-item>
 </template>

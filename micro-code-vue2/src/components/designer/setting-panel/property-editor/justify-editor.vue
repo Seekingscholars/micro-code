@@ -20,11 +20,11 @@ export default {
   data() {
     return {
       dataList: [
-        { label: 'start', value: 'start' },
-        { label: 'end', value: 'end' },
-        { label: 'center', value: 'center' },
-        { label: 'space-around', value: 'space-around' },
-        { label: 'space-between', value: 'space-between' }
+        {label: 'start', value: 'start'},
+        {label: 'end', value: 'end'},
+        {label: 'center', value: 'center'},
+        {label: 'space-around', value: 'space-around'},
+        {label: 'space-between', value: 'space-between'}
       ]
     }
   }

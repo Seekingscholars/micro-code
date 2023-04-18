@@ -46,7 +46,7 @@ export default {
     renderDraggable() {
       if (this.designer.design) {
         const slots = {
-          item: ({ element, index }) =>
+          item: ({element, index}) =>
             this.renderColSpanWrapper(element, index)
         };
         return (
@@ -57,7 +57,7 @@ export default {
             ghostClass="ghost"
             animation="300"
             tag="transition-group"
-            component-data={{ name: "fade" }}
+            component-data={{name: "fade"}}
             handle=".drag-handler"
             onAdd={this.onDragAdd}
             disabled={this.disabled}

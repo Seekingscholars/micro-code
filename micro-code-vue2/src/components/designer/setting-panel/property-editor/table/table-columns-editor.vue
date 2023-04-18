@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { generateId } from '@/utils/util'
+import {generateId} from '@/utils/util'
 import ElTableDraggable from '../../ElTableDraggable'
 
 export default {
@@ -86,7 +86,7 @@ export default {
     selectedWidget: Object,
     optionModel: Object
   },
-  components: { ElTableDraggable },
+  components: {ElTableDraggable},
   data() {
     return {
       showItemDialogFlag: false,
@@ -101,18 +101,18 @@ export default {
         showOverflowTooltip: null
       },
       rowTypeList: [
-        { label: '选择', value: 'selection' },
-        { label: '下标', value: 'index' },
-        { label: '展开', value: 'expand' }
+        {label: '选择', value: 'selection'},
+        {label: '下标', value: 'index'},
+        {label: '展开', value: 'expand'}
       ],
       fixedList: [
-        { label: '左侧', value: 'left' },
-        { label: '右侧', value: 'right' }
+        {label: '左侧', value: 'left'},
+        {label: '右侧', value: 'right'}
       ],
       alignList: [
-        { label: '居左', value: 'left' },
-        { label: '居中', value: 'center' },
-        { label: '居右', value: 'right' }
+        {label: '居左', value: 'left'},
+        {label: '居中', value: 'center'},
+        {label: '居右', value: 'right'}
       ]
     }
   },

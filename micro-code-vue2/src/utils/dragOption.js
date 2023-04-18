@@ -1,4 +1,4 @@
-export const option = function(
+export const option = function (
   list,
   handle = '.drag-handler',
   selector = 'tbody'

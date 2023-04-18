@@ -1,4 +1,4 @@
-import type { IconifyIcon } from "@iconify/vue";
+import type {IconifyIcon} from "@iconify/vue";
 
 export const routerArrays: Array<RouteConfigs> = [
   {

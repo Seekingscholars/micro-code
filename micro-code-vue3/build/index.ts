@@ -27,4 +27,4 @@ const warpperEnv = (envConf: Recordable): ViteEnv => {
   return ret;
 };
 
-export { warpperEnv };
+export {warpperEnv};

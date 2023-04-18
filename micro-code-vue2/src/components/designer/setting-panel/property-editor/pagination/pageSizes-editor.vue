@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     addPageSize() {
-      this.optionModel.pageSizes.push({ pageSize: null })
+      this.optionModel.pageSizes.push({pageSize: null})
     },
     deletePageSize(row) {
       if (this.optionModel.pageSizes.length === 1) {

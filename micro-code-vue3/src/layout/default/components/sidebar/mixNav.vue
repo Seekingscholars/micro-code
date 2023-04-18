@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import Notice from "../notice/index.vue";
-import { useNav } from "@/layout/default/hooks/useNav";
-import { ref, toRaw, watch, onMounted, nextTick } from "vue";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { getParentPaths, findRouteByPath } from "@/router/utils";
-import { usePermissionStoreHook } from "@/store/modules/permission";
+import {useNav} from "@/layout/default/hooks/useNav";
+import {nextTick, onMounted, ref, toRaw, watch} from "vue";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
+import {findRouteByPath, getParentPaths} from "@/router/utils";
+import {usePermissionStoreHook} from "@/store/modules/permission";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 import Setting from "@iconify-icons/ri/settings-3-line";
 
@@ -52,15 +52,15 @@ watch(
 <template>
   <div
     v-if="device !== 'mobile'"
-    class="horizontal-header"
     v-loading="usePermissionStoreHook().wholeMenus.length === 0"
+    class="horizontal-header"
   >
     <el-menu
-      router
       ref="menuRef"
-      mode="horizontal"
-      class="horizontal-header-menu"
       :default-active="defaultActive"
+      class="horizontal-header-menu"
+      mode="horizontal"
+      router
       @select="indexPath => menuSelect(indexPath, routers)"
     >
       <el-menu-item
@@ -80,24 +80,24 @@ watch(
           <span class="select-none">{{ route.meta.title }}</span>
           <FontIcon
             v-if="route.meta.extraIcon"
-            width="30px"
-            height="30px"
-            style="position: absolute; right: 10px"
             :icon="route.meta.extraIcon.name"
             :svg="route.meta.extraIcon.svg ? true : false"
+            height="30px"
+            style="position: absolute; right: 10px"
+            width="30px"
           />
         </template>
       </el-menu-item>
     </el-menu>
     <div class="horizontal-header-right">
       <!-- 通知 -->
-      <Notice id="header-notice" />
+      <Notice id="header-notice"/>
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover select-none">
           <img
-            src="https://avatars.githubusercontent.com/u/44761321?v=4"
             :style="avatarsStyle"
+            src="https://avatars.githubusercontent.com/u/44761321?v=4"
           />
           <p v-if="username" class="dark:text-white">{{ username }}</p>
         </span>
@@ -118,7 +118,7 @@ watch(
         title="打开项目配置"
         @click="onPanel"
       >
-        <IconifyIconOffline :icon="Setting" />
+        <IconifyIconOffline :icon="Setting"/>
       </span>
     </div>
   </div>

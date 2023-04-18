@@ -49,8 +49,8 @@ export default {
       const children = this.renderTransitionGroup()
       if (this.designer.design) {
         return <draggable list={this.widget.widgetList} group='dragGroup' ghostClass='ghost' animation='300'
-          handle='.drag-handler' onAdd={this.onDragAdd} disabled={this.disabled}
-          move={this.checkMove}
+                          handle='.drag-handler' onAdd={this.onDragAdd} disabled={this.disabled}
+                          move={this.checkMove}
         >
           {children}
         </draggable>
@@ -84,7 +84,7 @@ export default {
       const children = this.renderFormItemWrapper(subWidget, index)
       if (this.designer.design) {
         return <StaticWrapper key={subWidget.id} designer={this.designer} parent-widget={this.widget} widget={subWidget}
-          parent-list={this.widget.widgetList} index-of-parent-list={index}
+                              parent-list={this.widget.widgetList} index-of-parent-list={index}
         >
           {children}
         </StaticWrapper>
@@ -98,7 +98,7 @@ export default {
         return children
       } else {
         return <FormItemWrapper key={subWidget.id} designer={this.designer} field={subWidget}
-          parent-widget={this.widget}
+                                parent-widget={this.widget}
         >{children}</FormItemWrapper>
       }
     },
@@ -106,8 +106,8 @@ export default {
       const widgetName = this.getWidgetName(subWidget)
       const Component = this.$options.components[widgetName]
       return <Component field={subWidget} designer={this.designer} key={subWidget.id}
-        parent-list={this.widget.widgetList}
-        index-of-parent-list={index} parent-widget={this.widget}
+                        parent-list={this.widget.widgetList}
+                        index-of-parent-list={index} parent-widget={this.widget}
       ></Component>
     }
   },

@@ -1,5 +1,6 @@
 export default {
-  created() {},
+  created() {
+  },
   methods: {
     editEventHandler(eventName, eventParams) {
       this.dispatch("SettingPanel", "editEventHandler", [

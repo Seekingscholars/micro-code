@@ -18,9 +18,9 @@ export default {
   data() {
     return {
       dataList: [
-        { label: 'always', value: 'always' },
-        { label: 'hover', value: 'hover' },
-        { label: 'never', value: 'never' }
+        {label: 'always', value: 'always'},
+        {label: 'hover', value: 'hover'},
+        {label: 'never', value: 'never'}
       ]
     }
   }

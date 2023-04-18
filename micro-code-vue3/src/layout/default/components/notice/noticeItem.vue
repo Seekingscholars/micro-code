@@ -1,12 +1,13 @@
-<script setup lang="ts">
-import { ListItem } from "./data";
-import { ref, PropType, nextTick } from "vue";
-import { useNav } from "@/layout/default/hooks/useNav";
+<script lang="ts" setup>
+import {ListItem} from "./data";
+import {nextTick, PropType, ref} from "vue";
+import {useNav} from "@/layout/default/hooks/useNav";
 
 const props = defineProps({
   noticeItem: {
     type: Object as PropType<ListItem>,
-    default: () => {}
+    default: () => {
+    }
   }
 });
 
@@ -14,7 +15,7 @@ const titleRef = ref(null);
 const titleTooltip = ref(false);
 const descriptionRef = ref(null);
 const descriptionTooltip = ref(false);
-const { tooltipEffect } = useNav();
+const {tooltipEffect} = useNav();
 
 function hoverTitle() {
   nextTick(() => {
@@ -58,11 +59,11 @@ function hoverDescription(event, description) {
     <div class="notice-container-text">
       <div class="notice-text-title text-[#000000d9] dark:text-white">
         <el-tooltip
-          popper-class="notice-title-popper"
-          :effect="tooltipEffect"
-          :disabled="!titleTooltip"
           :content="props.noticeItem.title"
+          :disabled="!titleTooltip"
+          :effect="tooltipEffect"
           placement="top-start"
+          popper-class="notice-title-popper"
         >
           <div
             ref="titleRef"
@@ -75,19 +76,19 @@ function hoverDescription(event, description) {
         <el-tag
           v-if="props.noticeItem?.extra"
           :type="props.noticeItem?.status"
-          size="small"
           class="notice-title-extra"
+          size="small"
         >
           {{ props.noticeItem?.extra }}
         </el-tag>
       </div>
 
       <el-tooltip
-        popper-class="notice-title-popper"
-        :effect="tooltipEffect"
-        :disabled="!descriptionTooltip"
         :content="props.noticeItem.description"
+        :disabled="!descriptionTooltip"
+        :effect="tooltipEffect"
         placement="top-start"
+        popper-class="notice-title-popper"
       >
         <div
           ref="descriptionRef"
@@ -109,7 +110,7 @@ function hoverDescription(event, description) {
   max-width: 238px;
 }
 </style>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .notice-container {
   display: flex;
   align-items: flex-start;

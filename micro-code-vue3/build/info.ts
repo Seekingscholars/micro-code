@@ -1,8 +1,9 @@
-import type { Plugin } from "vite";
-import dayjs, { Dayjs } from "dayjs";
+import type {Plugin} from "vite";
+import dayjs, {Dayjs} from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { green, bold } from "picocolors";
-import { getPackageSize } from "@pureadmin/utils";
+import {bold, green} from "picocolors";
+import {getPackageSize} from "@pureadmin/utils";
+
 dayjs.extend(duration);
 
 export function viteBuildInfo(): Plugin {

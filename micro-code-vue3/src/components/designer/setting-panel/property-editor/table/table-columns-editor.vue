@@ -1,31 +1,37 @@
 <template>
   <div>
     <el-table
+      v-sort="dragOption"
       :data="optionModel.columns"
       border
       row-key="id"
-      v-sort="dragOption"
     >
       <el-table-column label="排序" width="50px">
         <div class="drag-handler" style="cursor: move">
-          <el-icon><Sort /></el-icon>
+          <el-icon>
+            <Sort/>
+          </el-icon>
         </div>
       </el-table-column>
       <el-table-column label="属性" prop="prop">
         <template #default="scope">
-          <el-input v-model="scope.row.prop" />
+          <el-input v-model="scope.row.prop"/>
         </template>
       </el-table-column>
       <el-table-column label="标签" prop="label">
         <template #default="scope">
-          <el-input v-model="scope.row.label" />
+          <el-input v-model="scope.row.label"/>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="60px">
         <template #default="scope">
           <div class="operate">
-            <el-icon title="编辑" style="cursor: pointer" @click="handleEdit(scope.row)"><Edit /></el-icon>
-            <el-icon title="删除" style="color: red; cursor: pointer" @click="handleDelete(scope.row)"><Delete /></el-icon>
+            <el-icon style="cursor: pointer" title="编辑" @click="handleEdit(scope.row)">
+              <Edit/>
+            </el-icon>
+            <el-icon style="color: red; cursor: pointer" title="删除" @click="handleDelete(scope.row)">
+              <Delete/>
+            </el-icon>
           </div>
         </template>
       </el-table-column>
@@ -33,10 +39,10 @@
     <el-button link @click="addNewColumn">添加一项+</el-button>
     <el-dialog
       v-model="showItemDialogFlag"
-      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
+      :draggable="true"
       :show-close="false"
       class="small-padding-dialog"
       title="列编辑"
@@ -48,13 +54,13 @@
         label-width="80px"
       >
         <el-form-item label="属性" prop="prop">
-          <el-input v-model="modelForm.prop" />
+          <el-input v-model="modelForm.prop"/>
         </el-form-item>
         <el-form-item label="标签" prop="label">
-          <el-input v-model="modelForm.label" />
+          <el-input v-model="modelForm.label"/>
         </el-form-item>
         <el-form-item label="宽度" prop="width">
-          <el-input type="number" v-model="modelForm.width" />
+          <el-input v-model="modelForm.width" type="number"/>
         </el-form-item>
         <el-form-item label="列类型" prop="type">
           <el-select v-model="modelForm.type" clearable style="width: 100%">
@@ -87,26 +93,27 @@
           </el-select>
         </el-form-item>
         <el-form-item label="过长提示" prop="showOverflowTooltip">
-          <el-switch v-model="modelForm.showOverflowTooltip" />
+          <el-switch v-model="modelForm.showOverflowTooltip"/>
         </el-form-item>
       </el-form>
       <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="showItemDialogFlag = false"> 取消 </el-button>
-        <el-button type="primary" @click="saveItem"> 确定 </el-button>
-      </div>
+        <div class="dialog-footer">
+          <el-button @click="showItemDialogFlag = false"> 取消</el-button>
+          <el-button type="primary" @click="saveItem"> 确定</el-button>
+        </div>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { Sort,Edit,Delete } from "@element-plus/icons-vue";
-import { generateId } from "@/utils/util";
-import { option } from "./dragOption";
+import {Delete, Edit, Sort} from "@element-plus/icons-vue";
+import {generateId} from "@/utils/util";
+import {option} from "./dragOption";
+
 export default {
   name: "table-columns-editor",
-  components: { Sort, Edit, Delete },
+  components: {Sort, Edit, Delete},
   props: {
     designer: Object,
     selectedWidget: Object,
@@ -131,18 +138,18 @@ export default {
         showOverflowTooltip: null
       },
       rowTypeList: [
-        { label: "选择", value: "selection" },
-        { label: "下标", value: "index" },
-        { label: "展开", value: "expand" }
+        {label: "选择", value: "selection"},
+        {label: "下标", value: "index"},
+        {label: "展开", value: "expand"}
       ],
       fixedList: [
-        { label: "左侧", value: "left" },
-        { label: "右侧", value: "right" }
+        {label: "左侧", value: "left"},
+        {label: "右侧", value: "right"}
       ],
       alignList: [
-        { label: "居左", value: "left" },
-        { label: "居中", value: "center" },
-        { label: "居右", value: "right" }
+        {label: "居左", value: "left"},
+        {label: "居中", value: "center"},
+        {label: "居右", value: "right"}
       ]
     };
   },
@@ -154,12 +161,12 @@ export default {
     },
     /** 删除操作 */
     handleDelete(row) {
-        for (let i = 0; i < this.optionModel.columns.length; i++) {
-          if (this.optionModel.columns[i].id === row.id) {
-            this.optionModel.columns.splice(i, 1);
-            break;
-          }
+      for (let i = 0; i < this.optionModel.columns.length; i++) {
+        if (this.optionModel.columns[i].id === row.id) {
+          this.optionModel.columns.splice(i, 1);
+          break;
         }
+      }
     },
     addNewColumn() {
       this.optionModel.columns.push({

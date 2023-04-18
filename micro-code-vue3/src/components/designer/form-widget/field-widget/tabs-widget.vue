@@ -6,7 +6,7 @@
       :label="tab.label"
       :name="tab.value"
     >
-      <RenderWidget :designer="designer" :widget="tab" />
+      <RenderWidget :designer="designer" :widget="tab"/>
     </el-tab-pane>
   </el-tabs>
 </template>

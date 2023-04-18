@@ -1,19 +1,18 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import "animate.css";
 // 引入 src/components/ReIcon/src/offlineIcon.ts 文件中所有使用addIcon添加过的本地图标
 import "@/components/ReIcon/src/offlineIcon";
-import { setType } from "./types";
-import { useAppStoreHook } from "@/store/modules/app";
-import { useSettingStoreHook } from "@/store/modules/settings";
-import { useGlobal } from "@pureadmin/utils";
-import { h, reactive, computed, onMounted, defineComponent } from "vue";
+import {setType} from "./types";
+import {useAppStoreHook} from "@/store/modules/app";
+import {useSettingStoreHook} from "@/store/modules/settings";
+import {useGlobal} from "@pureadmin/utils";
+import {computed, defineComponent, h, onMounted, reactive} from "vue";
 
 import navbar from "./components/navbar.vue";
-import appMain from "./components/appMain.vue";
 import Vertical from "./components/sidebar/vertical.vue";
 
 const pureSetting = useSettingStoreHook();
-const { $storage } = useGlobal<GlobalPropertiesApi>();
+const {$storage} = useGlobal<GlobalPropertiesApi>();
 
 const set: setType = reactive({
   sidebar: computed(() => {
@@ -62,7 +61,7 @@ const layoutHeader = defineComponent({
     return h(
       "div",
       {
-        class: { "fixed-header": set.fixedHeader }
+        class: {"fixed-header": set.fixedHeader}
       },
       {
         default: () => [h(navbar)]
@@ -73,16 +72,16 @@ const layoutHeader = defineComponent({
 </script>
 
 <template>
-  <div :class="['app-wrapper', set.classes]" v-resize>
-    <layout-header />
+  <div v-resize :class="['app-wrapper', set.classes]">
+    <layout-header/>
     <div
       :class="[
         'main-container',
         pureSetting.hiddenSideBar ? 'main-hidden' : ''
       ]"
     >
-      <Vertical v-show="!pureSetting.hiddenSideBar" />
-      <app-main :fixed-header="set.fixedHeader" />
+      <Vertical v-show="!pureSetting.hiddenSideBar"/>
+      <app-main :fixed-header="set.fixedHeader"/>
     </div>
   </div>
 </template>

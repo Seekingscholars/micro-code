@@ -9,9 +9,9 @@
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
-          prefix-icon="el-icon-user"
-          placeholder="用户名"
           name="username"
+          placeholder="用户名"
+          prefix-icon="el-icon-user"
           type="text"
         />
       </el-form-item>
@@ -19,33 +19,40 @@
       <el-form-item prop="password">
         <el-input
           v-model="loginForm.password"
-          prefix-icon="el-icon-lock"
           :type="passwordType"
-          placeholder="密码"
           name="password"
+          placeholder="密码"
+          prefix-icon="el-icon-lock"
         />
       </el-form-item>
       <el-form-item prop="captcha">
         <el-input
           v-model="loginForm.captcha"
-          prefix-icon="el-icon-key"
-          placeholder="验证码"
           name="captcha"
+          placeholder="验证码"
+          prefix-icon="el-icon-key"
           style="width: 70%"
         />
         <div class="login-code">
           <img v-if="codeForm.imgUrl" :src="codeForm.imgUrl" class="login-code-img" @click="handleChangeCode">
-          <img v-else src="../../assets/images/checkcode.png" class="login-code-img" @click="handleChangeCode">
+          <img v-else class="login-code-img" src="../../assets/images/checkcode.png" @click="handleChangeCode">
         </div>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button
+        :loading="loading"
+        style="width:100%;margin-bottom:30px;"
+        type="primary"
+        @click.native.prevent="handleLogin"
+      >登录
+      </el-button>
     </el-form>
   </div>
 </template>
 
 <script>
 import { getCodeInfo } from '@/api/user'
+
 export default {
   name: 'Login',
   data() {
@@ -98,8 +105,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$bg:#fff;
-$light_gray:#999;
+$bg: #fff;
+$light_gray: #999;
 
 .login-container {
   min-height: 100%;
@@ -154,6 +161,7 @@ $light_gray:#999;
   width: 30%;
   height: 38px;
   float: right;
+
   img {
     cursor: pointer;
     vertical-align: middle;

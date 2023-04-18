@@ -1,4 +1,4 @@
-import { getLevelFromClassName } from './dom'
+import {getLevelFromClassName} from './dom'
 
 /**
  * 判断当前表格是否已经树状展开了
@@ -16,7 +16,7 @@ export function checkIsTreeTable(tableInstance) {
  */
 export function getOnMove(tableInstance) {
   const {
-    $props: { onMove }
+    $props: {onMove}
   } = tableInstance.$parent
   return onMove || (() => true)
 }
@@ -45,7 +45,7 @@ export function fixDomInfoByDirection(domInfo, originDomInfo) {
   // if (!willInsertAfter) {
   //   return domInfo;
   // }
-  const { childrenList } = domInfo
+  const {childrenList} = domInfo
   const visibleChildrenList = childrenList.filter((item) => isVisible(item.el))
   // 某个行的根节点上
   if (visibleChildrenList.length > 0) {
@@ -53,8 +53,8 @@ export function fixDomInfoByDirection(domInfo, originDomInfo) {
   }
   // 子节点上
   else if (domInfo.level > 0) {
-    const { index } = domInfo
-    const { childrenList } = domInfo.parent
+    const {index} = domInfo
+    const {childrenList} = domInfo.parent
 
     // 如果是跨数据层面拖拽，同样需要+1
     const offset = childrenList.includes(originDomInfo) ? 0 : 1
@@ -74,7 +74,7 @@ export function fixDomInfoByDirection(domInfo, originDomInfo) {
  * @returns {import('./options').DomInfo | null}
  */
 export function getSameLevelParentDomInfo(domInfo, targetLevel = 0) {
-  const { level, parent } = domInfo
+  const {level, parent} = domInfo
 
   if (level === targetLevel) {
     return domInfo
@@ -103,8 +103,8 @@ export function createOrUpdateDomMapping(
   observer = null
 ) {
   // table的配置
-  const { data, treeProps } = tableInstance
-  const { children = null } = treeProps || {}
+  const {data, treeProps} = tableInstance
+  const {children = null} = treeProps || {}
   mapping.clear()
   observer && observer.stop() // 停止监听变化，构建完成后继续监听
   const wrapperEl = tableInstance.$el.querySelector(wrapper)
@@ -126,7 +126,7 @@ export function createOrUpdateDomMapping(
   const trList = wrapperEl.querySelectorAll('tr')
   trList.forEach((tr, index) => {
     try {
-      const { className, style } = tr
+      const {className, style} = tr
       const isShow = style.display === 'none' ? false : true
 
       /** @type {DomInfo} */

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { useRoute } from "vue-router";
-import { ref, unref, onMounted, nextTick } from "vue";
+import {useRoute} from "vue-router";
+import {nextTick, onMounted, ref, unref} from "vue";
 
 defineOptions({
   name: "FrameView"
@@ -43,8 +43,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="frame" v-loading="loading" element-loading-text="加载中...">
-    <iframe :src="frameSrc" class="frame-iframe" ref="frameRef" />
+  <div v-loading="loading" class="frame" element-loading-text="加载中...">
+    <iframe ref="frameRef" :src="frameSrc" class="frame-iframe"/>
   </div>
 </template>
 

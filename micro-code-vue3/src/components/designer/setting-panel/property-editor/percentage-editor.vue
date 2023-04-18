@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="百分比">
-    <el-input type="number" v-model="optionModel.percentage" :min="0" :max="100"></el-input>
+    <el-input v-model="optionModel.percentage" :max="100" :min="0" type="number"></el-input>
   </el-form-item>
 </template>
 <script>

@@ -2,12 +2,14 @@
   <el-table :data="optionModel.tabs" border row-key="value">
     <el-table-column label="排序" width="50px">
       <div class="drag-handler" style="cursor: move">
-        <el-icon><Sort /></el-icon>
+        <el-icon>
+          <Sort/>
+        </el-icon>
       </div>
     </el-table-column>
     <el-table-column label="标签" prop="label">
       <template #default="scope">
-        <el-input v-model="scope.row.label" />
+        <el-input v-model="scope.row.label"/>
       </template>
     </el-table-column>
     <el-table-column label="操作" width="60px">
@@ -26,12 +28,13 @@
   <el-button link @click="addTabPane">添加一项+</el-button>
 </template>
 <script>
-import { Sort } from "@element-plus/icons-vue";
-import { deepClone } from "@/utils/util";
+import {Sort} from "@element-plus/icons-vue";
+import {deepClone} from "@/utils/util";
+
 export default {
   name: "tabs-editor",
   componentName: "PropertyEditor",
-  components:{ Sort },
+  components: {Sort},
   props: {
     optionModel: Object
   },

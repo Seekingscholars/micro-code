@@ -9,37 +9,37 @@
       />
     </div>
 
-<!--    <el-drawer-->
-<!--      :destroy-on-close="true"-->
-<!--      :modal="false"-->
-<!--      :size="280"-->
-<!--      v-model:visible="showNodeTreeDrawerFlag"-->
-<!--      class="node-tree-drawer"-->
-<!--      direction="ltr"-->
-<!--      title="组件层次结构树"-->
-<!--    >-->
-<!--      <el-tree-->
-<!--        ref="nodeTree"-->
-<!--        :data="nodeTreeData"-->
-<!--        :expand-on-click-node="false"-->
-<!--        class="node-tree"-->
-<!--        default-expand-all-->
-<!--        icon-class="el-icon-arrow-right"-->
-<!--        node-key="id"-->
-<!--        @node-click="onNodeTreeClick"-->
-<!--      >-->
-<!--        <div slot-scope="{ node, data }" class="nodeTree">-->
-<!--          <div>{{ node.label }}</div>-->
-<!--          <div class="trash">-->
-<!--            <el-button-->
-<!--              icon="el-icon-delete"-->
-<!--              type="text"-->
-<!--              @click="() => removeWidgetById(data.id)"-->
-<!--            />-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </el-tree>-->
-<!--    </el-drawer>-->
+    <!--    <el-drawer-->
+    <!--      :destroy-on-close="true"-->
+    <!--      :modal="false"-->
+    <!--      :size="280"-->
+    <!--      v-model:visible="showNodeTreeDrawerFlag"-->
+    <!--      class="node-tree-drawer"-->
+    <!--      direction="ltr"-->
+    <!--      title="组件层次结构树"-->
+    <!--    >-->
+    <!--      <el-tree-->
+    <!--        ref="nodeTree"-->
+    <!--        :data="nodeTreeData"-->
+    <!--        :expand-on-click-node="false"-->
+    <!--        class="node-tree"-->
+    <!--        default-expand-all-->
+    <!--        icon-class="el-icon-arrow-right"-->
+    <!--        node-key="id"-->
+    <!--        @node-click="onNodeTreeClick"-->
+    <!--      >-->
+    <!--        <div slot-scope="{ node, data }" class="nodeTree">-->
+    <!--          <div>{{ node.label }}</div>-->
+    <!--          <div class="trash">-->
+    <!--            <el-button-->
+    <!--              icon="el-icon-delete"-->
+    <!--              type="text"-->
+    <!--              @click="() => removeWidgetById(data.id)"-->
+    <!--            />-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </el-tree>-->
+    <!--    </el-drawer>-->
 
     <div class="right-toolbar">
       <div class="right-toolbar-con">
@@ -54,11 +54,13 @@
 </template>
 
 <script setup type="ts">
-import {ref,nextTick} from 'vue';
-import { useRouter } from "vue-router";
-const props=defineProps({designer:Object})
-const  nodeTreeData=ref([]);
+import {nextTick, ref} from 'vue';
+import {useRouter} from "vue-router";
+
+const props = defineProps({designer: Object})
+const nodeTreeData = ref([]);
 const router = useRouter();
+
 function getLabel(widget) {
   if (!widget) {
     return;
@@ -79,6 +81,7 @@ function getLabel(widget) {
   label = widget.name;
   return label;
 }
+
 function buildTreeNodeOfWidget(widget, treeNode) {
   let curNode = {
     id: widget.id,
@@ -132,18 +135,19 @@ function clearFormWidget() {
 }
 
 function previewForm() {
-  const formJson={
-      widgetList: props.designer.widgetList,
-      formConfig: props.designer.formConfig
-    }
-  const key= 'preview'
- const storage= window.localStorage
-  storage.setItem(key,JSON.stringify(formJson))
+  const formJson = {
+    widgetList: props.designer.widgetList,
+    formConfig: props.designer.formConfig
+  }
+  const key = 'preview'
+  const storage = window.localStorage
+  storage.setItem(key, JSON.stringify(formJson))
   const to = router.resolve({
     name: "app-preview"
   });
   window.open(to.href, "_blank");
 }
+
 function findWidgetById(widgetId) {
   return props.designer.findWidgetById(widgetId);
 }
@@ -155,6 +159,7 @@ function onNodeTreeClick(nodeData) {
     props.designer.setSelected(foundW);
   }
 }
+
 function removeWidgetById(widgetId) {
   props.designer.removeWidgetById(widgetId);
 }

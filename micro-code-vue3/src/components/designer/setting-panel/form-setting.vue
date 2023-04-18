@@ -39,7 +39,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="表单禁用">
-            <el-switch v-model="designer.formConfig.disabled" />
+            <el-switch v-model="designer.formConfig.disabled"/>
           </el-form-item>
           <el-form-item label="全局数据">
             <el-button
@@ -48,7 +48,8 @@
               round
               type="info"
               @click="editGlobalData"
-              >编写代码</el-button
+            >编写代码
+            </el-button
             >
           </el-form-item>
           <el-form-item label="全局函数">
@@ -58,7 +59,8 @@
               round
               type="info"
               @click="editGlobalFunction"
-              >编写代码</el-button
+            >编写代码
+            </el-button
             >
           </el-form-item>
         </el-collapse-item>
@@ -92,10 +94,10 @@
 
     <el-dialog
       v-model="showFormEventDialogFlag"
-      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
+      :draggable="true"
       :show-close="true"
       class="small-padding-dialog"
       title="表单事件处理"
@@ -111,23 +113,23 @@
         :mode="'javascript'"
         :readonly="false"
       />
-      <el-alert :closable="false" title="}" type="info" />
+      <el-alert :closable="false" title="}" type="info"/>
       <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="showFormEventDialogFlag = false"> 取消 </el-button>
-        <el-button type="primary" @click="saveFormEventHandler">
-          确定
-        </el-button>
-      </div>
+        <div class="dialog-footer">
+          <el-button @click="showFormEventDialogFlag = false"> 取消</el-button>
+          <el-button type="primary" @click="saveFormEventHandler">
+            确定
+          </el-button>
+        </div>
       </template>
     </el-dialog>
 
     <el-dialog
       v-model="showEditFunctionDialogFlag"
-      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
+      :draggable="true"
       :show-close="true"
       append-to-body
       class="small-padding-dialog"
@@ -140,38 +142,38 @@
         :readonly="false"
       />
       <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="showEditFunctionDialogFlag = false">
-          取消
-        </el-button>
-        <el-button type="primary" @click="saveGlobalFunction"> 确定 </el-button>
-      </div>
+        <div class="dialog-footer">
+          <el-button @click="showEditFunctionDialogFlag = false">
+            取消
+          </el-button>
+          <el-button type="primary" @click="saveGlobalFunction"> 确定</el-button>
+        </div>
       </template>
     </el-dialog>
     <el-dialog
       v-model="showEditDataDialogFlag"
-      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
+      :draggable="true"
       :show-close="true"
       append-to-body
       class="small-padding-dialog"
       title="全局数据"
     >
-      <el-alert :closable="false" title="{" type="info" />
+      <el-alert :closable="false" title="{" type="info"/>
       <code-editor
         ref="gfEditor"
         v-model="dataCode"
         :mode="'javascript'"
         :readonly="false"
       />
-      <el-alert :closable="false" title="}" type="info" />
+      <el-alert :closable="false" title="}" type="info"/>
       <template #footer>
-      <div  class="dialog-footer">
-        <el-button @click="showEditDataDialogFlag = false"> 取消 </el-button>
-        <el-button type="primary" @click="saveGlobalData"> 确定 </el-button>
-      </div>
+        <div class="dialog-footer">
+          <el-button @click="showEditDataDialogFlag = false"> 取消</el-button>
+          <el-button type="primary" @click="saveGlobalData"> 确定</el-button>
+        </div>
       </template>
     </el-dialog>
   </div>
@@ -192,9 +194,9 @@ export default {
     return {
       formActiveCollapseNames: ["1", "2"],
       formSizes: [
-        { label: "default", value: "" },
-        { label: "large", value: "large" },
-        { label: "small", value: "small" }
+        {label: "default", value: ""},
+        {label: "large", value: "large"},
+        {label: "small", value: "small"}
       ],
       showEditFunctionDialogFlag: false,
       showEditDataDialogFlag: false,

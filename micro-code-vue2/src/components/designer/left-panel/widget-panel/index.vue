@@ -24,7 +24,7 @@
 <script>
 import widgetJson from './widget.json'
 import Draggable from 'vuedraggable'
-import { deepClone, generateId } from '@/utils/util'
+import {deepClone, generateId} from '@/utils/util'
 
 export default {
   name: 'WidgetPanel',
@@ -89,6 +89,7 @@ export default {
 .widget-item:hover {
   background: #eaecfd;
 }
+
 ::v-deep ul {
   padding-left: 10px; /* 重置IE11默认样式 */
   margin: 0; /* 重置IE11默认样式 */

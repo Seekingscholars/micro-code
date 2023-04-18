@@ -1,9 +1,4 @@
-import {
-  deepClone,
-  generateId,
-  getDefaultFormConfig,
-  overwriteObj
-} from "@/utils/util";
+import {deepClone, generateId, getDefaultFormConfig, overwriteObj} from "@/utils/util";
 
 export function createDesigner(vueInstance) {
   let defaultFormConfig = getDefaultFormConfig();

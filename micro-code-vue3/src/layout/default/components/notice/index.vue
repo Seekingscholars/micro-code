@@ -1,6 +1,6 @@
-<script setup lang="ts">
-import { ref } from "vue";
-import { noticesData } from "./data";
+<script lang="ts" setup>
+import {ref} from "vue";
+import {noticesData} from "./data";
 import NoticeList from "./noticeList.vue";
 import Bell from "@iconify-icons/ep/bell";
 
@@ -12,17 +12,17 @@ notices.value.map(v => (noticesNum.value += v.list.length));
 </script>
 
 <template>
-  <el-dropdown trigger="click" placement="bottom-end">
+  <el-dropdown placement="bottom-end" trigger="click">
     <span class="dropdown-badge navbar-bg-hover select-none">
-      <el-badge :value="noticesNum" :max="99">
+      <el-badge :max="99" :value="noticesNum">
         <span class="header-notice-icon">
-          <IconifyIconOffline :icon="Bell" />
+          <IconifyIconOffline :icon="Bell"/>
         </span>
       </el-badge>
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-tabs :stretch="true" v-model="activeKey" class="dropdown-tabs">
+        <el-tabs v-model="activeKey" :stretch="true" class="dropdown-tabs">
           <template v-for="item in notices" :key="item.key">
             <el-tab-pane
               :label="`${item.name}(${item.list.length})`"
@@ -30,7 +30,7 @@ notices.value.map(v => (noticesNum.value += v.list.length));
             >
               <el-scrollbar max-height="330px">
                 <div class="noticeList-container">
-                  <NoticeList :list="item.list" />
+                  <NoticeList :list="item.list"/>
                 </div>
               </el-scrollbar>
             </el-tab-pane>

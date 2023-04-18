@@ -1,14 +1,14 @@
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
-import { getConfig } from "@/config";
-import { emitter } from "@/utils/mitt";
-import { routeMetaType } from "../types";
-import { useGlobal } from "@pureadmin/utils";
-import { useRouter, useRoute } from "vue-router";
-import { router, remainingPaths } from "@/router";
-import { useAppStoreHook } from "@/store/modules/app";
-import { useUserStoreHook } from "@/store/modules/user";
-import { usePermissionStoreHook } from "@/store/modules/permission";
+import {computed} from "vue";
+import {storeToRefs} from "pinia";
+import {getConfig} from "@/config";
+import {emitter} from "@/utils/mitt";
+import {routeMetaType} from "../types";
+import {useGlobal} from "@pureadmin/utils";
+import {useRoute, useRouter} from "vue-router";
+import {remainingPaths, router} from "@/router";
+import {useAppStoreHook} from "@/store/modules/app";
+import {useUserStoreHook} from "@/store/modules/user";
+import {usePermissionStoreHook} from "@/store/modules/permission";
 
 const errorInfo = "当前路由配置不正确，请检查配置";
 
@@ -16,7 +16,7 @@ export function useNav() {
   const route = useRoute();
   const pureApp = useAppStoreHook();
   const routers = useRouter().options.routes;
-  const { wholeMenus } = storeToRefs(usePermissionStoreHook());
+  const {wholeMenus} = storeToRefs(usePermissionStoreHook());
   /** 平台`layout`中所有`el-tooltip`的`effect`配置，默认`light` */
   const tooltipEffect = getConfig()?.TooltipEffect ?? "light";
 
@@ -26,7 +26,7 @@ export function useNav() {
   });
 
   const avatarsStyle = computed(() => {
-    return username.value ? { marginRight: "10px" } : "";
+    return username.value ? {marginRight: "10px"} : "";
   });
 
   const isCollapse = computed(() => {
@@ -37,7 +37,7 @@ export function useNav() {
     return pureApp.getDevice;
   });
 
-  const { $storage, $config } = useGlobal<GlobalPropertiesApi>();
+  const {$storage, $config} = useGlobal<GlobalPropertiesApi>();
   const layout = computed(() => {
     return $storage?.layout?.layout;
   });
@@ -93,6 +93,7 @@ export function useNav() {
     if (parentPathIndex > 0) {
       parentPath = indexPath.slice(0, parentPathIndex);
     }
+
     /** 找到当前路由的信息 */
     function findCurrentRoute(indexPath: string, routes) {
       if (!routes) return console.error(errorInfo);
@@ -112,6 +113,7 @@ export function useNav() {
         }
       });
     }
+
     findCurrentRoute(indexPath, routers);
   }
 

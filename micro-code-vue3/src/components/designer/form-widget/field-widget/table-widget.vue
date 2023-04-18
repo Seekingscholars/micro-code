@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table v-bind="field.options" :data="dataList">
+    <el-table :data="dataList" v-bind="field.options">
       <el-table-column
         v-for="(item, index) in field['table-column'].columns"
         :key="index"
@@ -18,20 +18,21 @@
             v-for="(item, index) in showToolbar"
             :key="index"
             :icon="item.icon"
-            size="small"
             link
+            size="small"
             @click="callClick(item.click, scope.row)"
-            >{{ item.label }}
+          >{{ item.label }}
           </el-button>
           <el-dropdown v-if="showMore" size="small">
-            <el-button icon="el-icon-d-arrow-right" size="small" link
-              >更多</el-button
+            <el-button icon="el-icon-d-arrow-right" link size="small"
+            >更多
+            </el-button
             >
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
                 v-for="(item, index) in showMoreToolbar"
                 :key="index"
-                >{{ item.label }}
+              >{{ item.label }}
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>

@@ -15,8 +15,8 @@ export default {
   data() {
     return {
       orientList: [
-        { label: '横向', value: 'horizontal' },
-        { label: '纵向', value: 'vertical' }
+        {label: '横向', value: 'horizontal'},
+        {label: '纵向', value: 'vertical'}
       ]
     }
   }

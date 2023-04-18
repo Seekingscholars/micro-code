@@ -58,13 +58,13 @@
 </template>
 
 <script>
-import { addRestApi, REQUEST_METHOD, updateRestApi } from './restApi'
+import {addRestApi, REQUEST_METHOD, updateRestApi} from './restApi'
 import CodeEditor from '@/components/code-editor/index'
 
 export default {
   name: 'RestApi',
-  components: { CodeEditor },
-  props: { datasource: Object },
+  components: {CodeEditor},
+  props: {datasource: Object},
   computed: {
     title() {
       return '创建REST API'
@@ -78,13 +78,13 @@ export default {
       modelForm: {},
       rules: {
         name: [
-          { required: true, message: '函数名称不能为空', trigger: 'blur' }
+          {required: true, message: '函数名称不能为空', trigger: 'blur'}
         ],
         url: [
-          { required: true, message: '请求地址不能为空', trigger: 'blur' }
+          {required: true, message: '请求地址不能为空', trigger: 'blur'}
         ],
         method: [
-          { required: true, message: '请求类型不能为空', trigger: 'change' }
+          {required: true, message: '请求类型不能为空', trigger: 'change'}
         ]
       }
     }

@@ -37,7 +37,7 @@ export default {
   props: {
     optionModel: Object
   },
-  components: { ElTableDraggable },
+  components: {ElTableDraggable},
   data() {
     return {
       modelForm: {

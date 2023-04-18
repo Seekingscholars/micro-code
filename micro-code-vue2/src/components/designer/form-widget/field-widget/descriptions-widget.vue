@@ -11,6 +11,7 @@
 </template>
 <script>
 import fieldMixin from './fieldMixin'
+
 export default {
   name: 'descriptions-widget',
   componentName: 'FieldWidget',

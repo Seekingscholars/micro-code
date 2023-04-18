@@ -1,61 +1,63 @@
 import request from '@/utils/request'
 
 export class BaseApi {
-   requestUrl = '';
-   constructor(requestUrl) {
-     this.requestUrl = requestUrl
-   }
+  requestUrl = '';
+
+  constructor(requestUrl) {
+    this.requestUrl = requestUrl
+  }
+
   /**
    * @param params
    */
   get = (params) => {
-    return request({ url: this.requestUrl + '/get', method: 'get', params })
+    return request({url: this.requestUrl + '/get', method: 'get', params})
   };
   /**
    * @param params
    */
   getOne = (params) => {
-    return request({ url: this.requestUrl + '/getOne', method: 'get', params })
+    return request({url: this.requestUrl + '/getOne', method: 'get', params})
   };
   /**
    * @param params
    */
   page = (params) => {
-    return request({ url: this.requestUrl + '/page', method: 'get', params })
+    return request({url: this.requestUrl + '/page', method: 'get', params})
   };
   /**
    *
    * @param params
    */
   list = (params) => {
-    return request({ url: this.requestUrl + '/list', method: 'get', params })
+    return request({url: this.requestUrl + '/list', method: 'get', params})
   };
   /**
    * @param params
    */
-  save = (params) => {
-    return request({ url: this.requestUrl + '/save', method: 'post', params })
+  save = (data) => {
+    return request({url: this.requestUrl + '/save', method: 'post', data})
   };
   /**
    * @param params
    */
-  postEdit = (params) => {
-    return request({ url: this.requestUrl + '/edit', method: 'post', params })
+  postEdit = (data) => {
+    return request({url: this.requestUrl + '/edit', method: 'post', data})
   };
   /**
    * @param params
    */
-  putEdit = (params) => {
-    return request({ url: this.requestUrl + '/edit', method: 'put', params })
+  putEdit = (data) => {
+    return request({url: this.requestUrl + '/edit', method: 'put', data})
   };
   /**
    * @param params
    */
-  saveOrEdit = (params, isUpdate) => {
+  saveOrEdit = (data, isUpdate) => {
     if (isUpdate) {
-      return this.postEdit(params)
+      return this.postEdit(data)
     } else {
-      return this.save(params)
+      return this.save(data)
     }
   };
   /**
@@ -63,7 +65,7 @@ export class BaseApi {
    */
   remove = (params) => {
     return request(
-      { url: this.requestUrl + '/remove', method: 'delete', params }
+      {url: this.requestUrl + '/remove', method: 'delete', params}
     )
   };
 
@@ -77,7 +79,7 @@ export class BaseApi {
       type: 'warning'
     }).then(() => {
       return request(
-        { url: this.requestUrl + '/removeBatch', method: 'get', params: params }
+        {url: this.requestUrl + '/removeBatch', method: 'get', params: params}
       )
     })
   };

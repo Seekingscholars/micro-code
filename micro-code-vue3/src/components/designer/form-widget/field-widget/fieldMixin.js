@@ -30,7 +30,7 @@ export default {
       let dataModel = this.$model[group]
       if (!dataModel) {
         dataModel = {}
-        this.$model[group]=dataModel
+        this.$model[group] = dataModel
       }
       this.dataModel = dataModel
     } else {
@@ -64,7 +64,7 @@ export default {
       return eventMap
     },
     refreshDefaultValue(value) {
-      this.dataModel[this.field.options.name]=value
+      this.dataModel[this.field.options.name] = value
     },
     $(name) {
       return this.designer.findWidgetByName(name)

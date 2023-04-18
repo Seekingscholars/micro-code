@@ -23,7 +23,7 @@
       @closed="onClosed"
       @opened="onOpened"
     >
-      <RenderWidget :designer="designer" :widget="field" />
+      <RenderWidget :designer="designer" :widget="field"/>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>

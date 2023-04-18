@@ -2,10 +2,11 @@
   <FormDesigner ref="FormDesignerRef">
     <template #header>
       <div class="header">
-        <Logo />
+        <Logo/>
         <div class="header-right">
           <el-button :icon="Search" color="#626aef" @click="previewForm"
-            >预览</el-button
+          >预览
+          </el-button
           >
         </div>
       </div>
@@ -13,12 +14,13 @@
   </FormDesigner>
 </template>
 
-<script setup name="AppDesign">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { Search } from "@element-plus/icons-vue";
+<script name="AppDesign" setup>
+import {ref} from "vue";
+import {useRouter} from "vue-router";
+import {Search} from "@element-plus/icons-vue";
 import Logo from "@/layout/default/components/logo.vue";
 import FormDesigner from "@/components/designer/index.vue";
+
 const FormDesignerRef = ref(null);
 const router = useRouter();
 
@@ -38,6 +40,7 @@ function previewForm() {
   display: flex;
   justify-content: space-between;
 }
+
 .header-right {
   height: 100%;
   line-height: 48px;

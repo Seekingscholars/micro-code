@@ -31,10 +31,10 @@ export default {
   data() {
     return {
       uploadPictureTypes: [
-        { value: 'jpg', label: 'jpg' },
-        { value: 'jpeg', label: 'jpeg' },
-        { value: 'png', label: 'png' },
-        { value: 'gif', label: 'gif' }
+        {value: 'jpg', label: 'jpg'},
+        {value: 'jpeg', label: 'jpeg'},
+        {value: 'png', label: 'png'},
+        {value: 'gif', label: 'gif'}
       ]
     }
   }

@@ -47,7 +47,7 @@ module.exports = {
         ignore: ["after-comment", "first-nested"]
       }
     ],
-    "unit-no-unknown": [true, { ignoreUnits: ["rpx"] }],
+    "unit-no-unknown": [true, {ignoreUnits: ["rpx"]}],
     "order/order": [
       [
         "dollar-variables",
@@ -64,7 +64,7 @@ module.exports = {
         },
         "rules"
       ],
-      { severity: "warning" }
+      {severity: "warning"}
     ]
   },
   ignoreFiles: ["**/*.js", "**/*.jsx", "**/*.tsx", "**/*.ts", "**/*.json"],

@@ -3,7 +3,7 @@
     <div class="header">
       <div>所有数据源</div>
       <div class="setting">
-        <i class="el-icon-circle-plus-outline" title="新建" @click="handleDataSource" />
+        <i class="el-icon-circle-plus-outline" title="新建" @click="handleDataSource"/>
       </div>
     </div>
     <el-tree
@@ -12,7 +12,7 @@
       node-key="id"
       @node-click="onNodeClick"
     />
-    <RestApi :datasource="datasource" :visible.sync="restApiOpen" @change="getList" />
+    <RestApi :datasource="datasource" :visible.sync="restApiOpen" @change="getList"/>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ import RestApi from './component/RestApi'
 
 export default {
   name: 'DatasourcePanel',
-  components: { RestApi },
+  components: {RestApi},
   props: {
     designer: Object
   },
@@ -44,7 +44,7 @@ export default {
       //   this.designer.formConfig.apis=res
       // })
     },
-    renderContent(h, { node, data, store }) {
+    renderContent(h, {node, data, store}) {
       return (
         <div class='datasource'>
           <div>
@@ -52,7 +52,7 @@ export default {
           </div>
           <div>
             <el-dropdown onCommand={command => this.handleCommand(command, data)} size='mini' placement='bottom'>
-              <i class={{ 'hide': this.isHide(node, data), 'el-icon-more': true }}></i>
+              <i class={{'hide': this.isHide(node, data), 'el-icon-more': true}}></i>
               <el-dropdown-menu slot='dropdown'>
                 <el-dropdown-item command='edit' icon='el-icon-edit'>编辑</el-dropdown-item>
                 <el-dropdown-item command='delete' icon='el-icon-delete'>删除</el-dropdown-item>
@@ -77,7 +77,7 @@ export default {
       })
     },
     handleDelete(data) {
-      this.$confirm('确定删除该数据源吗？', '提示', { type: 'warning' }).then(
+      this.$confirm('确定删除该数据源吗？', '提示', {type: 'warning'}).then(
         () => {
         }
       )

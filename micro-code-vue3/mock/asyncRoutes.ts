@@ -1,5 +1,5 @@
 // 模拟后端动态生成路由
-import { MockMethod } from "vite-plugin-mock";
+import {MockMethod} from "vite-plugin-mock";
 
 export default [
   {

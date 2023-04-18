@@ -18,8 +18,8 @@ export default {
   data() {
     return {
       dataList: [
-        { label: 'border-card', value: 'border-card' },
-        { label: 'card', value: 'card' }
+        {label: 'border-card', value: 'border-card'},
+        {label: 'card', value: 'card'}
       ]
     }
   }

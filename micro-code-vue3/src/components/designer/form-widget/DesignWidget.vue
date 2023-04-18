@@ -1,12 +1,12 @@
 <template>
   <el-form
-    :size="designer.formConfig.size"
-    :labelWidth="designer.formConfig.labelWidth + 'px'"
-    :labelPosition="designer.formConfig.labelPosition"
     :disabled="designer.formConfig.disabled"
+    :labelPosition="designer.formConfig.labelPosition"
+    :labelWidth="designer.formConfig.labelWidth + 'px'"
+    :size="designer.formConfig.size"
     class="form-height"
   >
-    <RenderWidget :designer="designer" :widget="designer" />
+    <RenderWidget :designer="designer" :widget="designer"/>
   </el-form>
 </template>
 

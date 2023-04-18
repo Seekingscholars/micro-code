@@ -3,8 +3,8 @@
 /**
  * 根据不同类型使用不同的option
  */
-import dom, { CUSTOMER_INDENT_CSS, EMPTY_FIX_CSS } from './dom'
-import { fixDomInfoByDirection, getOnMove, MappingOberver } from './utils'
+import dom, {CUSTOMER_INDENT_CSS, EMPTY_FIX_CSS} from './dom'
+import {fixDomInfoByDirection, getOnMove, MappingOberver} from './utils'
 
 export const DOM_MAPPING_NAME = '_mapping'
 
@@ -124,13 +124,13 @@ export const CONFIG = {
           /**
            * expanded/树表格的处理, 关闭展开行
            */
-          const { item } = evt
+          const {item} = evt
           const domInfo = mappingOberver.mapping.get(item)
           // 收起拖动的行的已展开行
           dom.toggleExpansion(domInfo, false)
         },
         onMove(evt, originEvt) {
-          const { related, dragged, to, from, willInsertAfter } = evt
+          const {related, dragged, to, from, willInsertAfter} = evt
           const fromContext = context.get(from)
           const toContext = context.get(to)
           /** @type {DomInfo} */
@@ -200,14 +200,14 @@ export const CONFIG = {
           })
 
           const {
-            states: { indent }
+            states: {indent}
           } = fromContext.store
           dom.changeDomInfoLevel(draggedDomInfo, targrtDomInfo.level, indent)
         },
         onEnd(evt) {
           dom.cleanUp()
 
-          const { to, from, pullMode, newIndex, item, oldIndex } = evt
+          const {to, from, pullMode, newIndex, item, oldIndex} = evt
           const fromContext = context.get(from)
           const toContext = context.get(to)
 
@@ -263,7 +263,7 @@ export const CONFIG = {
           )
 
           // 通知更新
-          updateElTableInstance(from, to, context, function(tableContext) {
+          updateElTableInstance(from, to, context, function (tableContext) {
             const draggableContext = tableContext.$parent // 包裹组件
             const data = tableContext[PROP]
             draggableContext.$emit('input', data)
@@ -362,7 +362,7 @@ export const CONFIG = {
            * 在页面上创建一个当前table的wrapper，然后隐藏它，只显示那一列的部分作为拖拽对象
            * 在下一个事件循环删除dom即可
            */
-          const { offsetLeft, offsetWidth, offsetHeight } = dragEl
+          const {offsetLeft, offsetWidth, offsetHeight} = dragEl
           const tableEl = elTableInstance.$el
 
           const wrapper = document.createElement('div') // 可视区域
@@ -385,8 +385,8 @@ export const CONFIG = {
           })
         },
         onMove(evt, originEvent) {
-          const { related, dragged, relatedRect, draggedRect } = evt
-          let { willInsertAfter } = evt
+          const {related, dragged, relatedRect, draggedRect} = evt
+          let {willInsertAfter} = evt
 
           // 根据用户选择
           const onMove = getOnMove(elTableInstance)
@@ -432,18 +432,18 @@ export const CONFIG = {
           const PROP = 'columns'
           dom.cleanUp()
           // 清除所有临时交换产生的设定和变量
-          colDomInfoList.forEach(({ el, originWidth }) => {
+          colDomInfoList.forEach(({el, originWidth}) => {
             el.setAttribute('width', originWidth)
           })
 
           isDragging = false
 
-          const { to, from, pullMode } = evt
+          const {to, from, pullMode} = evt
           const toContext = context.get(to)
           const toList = toContext[PROP]
           const fromContext = context.get(from)
           const fromList = fromContext[PROP]
-          const { newIndex, oldIndex } = evt
+          const {newIndex, oldIndex} = evt
 
           // 交换dom位置
           exchange(oldIndex, fromList, newIndex, toList, pullMode)
@@ -456,11 +456,11 @@ export const CONFIG = {
           }
 
           // 通知对应的实例
-          updateElTableInstance(from, to, context, function(tableContext) {
+          updateElTableInstance(from, to, context, function (tableContext) {
             const draggableContext = tableContext.$parent
             const columns = draggableContext.value
               ? draggableContext.value
-              : tableContext[PROP].map(({ property }) => ({ property }))
+              : tableContext[PROP].map(({property}) => ({property}))
             draggableContext.$emit('input', columns)
           })
         }

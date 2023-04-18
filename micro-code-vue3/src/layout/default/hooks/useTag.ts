@@ -1,20 +1,10 @@
-import {
-  ref,
-  unref,
-  watch,
-  computed,
-  reactive,
-  onMounted,
-  CSSProperties,
-  getCurrentInstance
-} from "vue";
-import { tagsViewsType } from "../types";
-import { useEventListener } from "@vueuse/core";
-import { useRoute, useRouter } from "vue-router";
-import { isEqual, isBoolean } from "@pureadmin/utils";
-import { useSettingStoreHook } from "@/store/modules/settings";
-import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
-import { storageLocal, toggleClass, hasClass } from "@pureadmin/utils";
+import {computed, CSSProperties, getCurrentInstance, onMounted, reactive, ref, unref, watch} from "vue";
+import {tagsViewsType} from "../types";
+import {useEventListener} from "@vueuse/core";
+import {useRoute, useRouter} from "vue-router";
+import {hasClass, isBoolean, isEqual, storageLocal, toggleClass} from "@pureadmin/utils";
+import {useSettingStoreHook} from "@/store/modules/settings";
+import {useMultiTagsStoreHook} from "@/store/modules/multiTags";
 
 import Fullscreen from "@iconify-icons/ri/fullscreen-fill";
 import CloseAllTags from "@iconify-icons/ri/subtract-line";
@@ -41,7 +31,7 @@ export function useTags() {
   /** 显示模式，默认灵动模式 */
   const showModel = ref(
     storageLocal().getItem<StorageConfigs>("responsive-configure")?.showModel ||
-      "smart"
+    "smart"
   );
   /** 是否隐藏标签页，默认显示 */
   const showTags =
@@ -149,7 +139,7 @@ export function useTags() {
   });
 
   const getContextMenuStyle = computed((): CSSProperties => {
-    return { left: buttonLeft.value + "px", top: buttonTop.value + "px" };
+    return {left: buttonLeft.value + "px", top: buttonTop.value + "px"};
   });
 
   const closeMenu = () => {
@@ -188,8 +178,8 @@ export function useTags() {
 
   function onContentFullScreen() {
     pureSetting.hiddenSideBar
-      ? pureSetting.changeSetting({ key: "hiddenSideBar", value: false })
-      : pureSetting.changeSetting({ key: "hiddenSideBar", value: true });
+      ? pureSetting.changeSetting({key: "hiddenSideBar", value: false})
+      : pureSetting.changeSetting({key: "hiddenSideBar", value: true});
   }
 
   onMounted(() => {

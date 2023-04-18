@@ -1,7 +1,7 @@
-import { store } from "@/store";
-import { defineStore } from "pinia";
-import { getConfig } from "@/config";
-import { storageLocal } from "@pureadmin/utils";
+import {store} from "@/store";
+import {defineStore} from "pinia";
+import {getConfig} from "@/config";
+import {storageLocal} from "@pureadmin/utils";
 
 export const useEpThemeStore = defineStore({
   id: "pure-epTheme",

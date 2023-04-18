@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="颜色">
-    <el-input type="color" v-model="optionModel.color"></el-input>
+    <el-input v-model="optionModel.color" type="color"></el-input>
   </el-form-item>
 </template>
 <script>

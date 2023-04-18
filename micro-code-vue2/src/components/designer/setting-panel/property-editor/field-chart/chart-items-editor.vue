@@ -36,10 +36,10 @@
     >
       <el-form ref="form" :model="modelForm" label-position="left" label-width="80px">
         <el-form-item label="属性" prop="value">
-          <el-input type="text" v-model="modelForm.value"></el-input>
+          <el-input v-model="modelForm.value" type="text"></el-input>
         </el-form-item>
         <el-form-item label="标签" prop="label">
-          <el-input type="text" v-model="modelForm.label"></el-input>
+          <el-input v-model="modelForm.label" type="text"></el-input>
         </el-form-item>
         <el-form-item label="类型" prop="type">
           <el-select v-model="modelForm.type" style="width: 100%">
@@ -47,7 +47,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="颜色" prop="color">
-        <el-input type="color" v-model="modelForm.color"></el-input>
+          <el-input v-model="modelForm.color" type="color"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -64,28 +64,28 @@
 
 <script>
 import ElTableDraggable from '../../ElTableDraggable'
-import { generateId } from '@/utils/util'
+import {generateId} from '@/utils/util'
 
 export default {
   name: 'chart-items-editor',
   props: {
     optionModel: Object
   },
-  components: { ElTableDraggable },
+  components: {ElTableDraggable},
   data() {
     return {
-      showItemDialogFlag:false,
+      showItemDialogFlag: false,
       modelForm: {
-        value:'',
-        label:'',
-        type:'',
-        color:''
+        value: '',
+        label: '',
+        type: '',
+        color: ''
       },
       typeList: [
-        { value: 'bar', label: '柱状图' },
-        { value: 'line', label: '折线图' },
-        { value: 'pie', label: '饼图' },
-        { value: 'scatter', label: '散点图' }
+        {value: 'bar', label: '柱状图'},
+        {value: 'line', label: '折线图'},
+        {value: 'pie', label: '饼图'},
+        {value: 'scatter', label: '散点图'}
       ]
     }
   },
@@ -111,7 +111,7 @@ export default {
     },
     addNewItem() {
       this.optionModel.items.push({
-        id:'item'+generateId(),
+        id: 'item' + generateId(),
         value: '',
         label: '',
         disabled: false

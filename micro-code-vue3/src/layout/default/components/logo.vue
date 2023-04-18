@@ -1,14 +1,14 @@
-<script setup lang="ts">
-import { useNav } from "@/layout/default/hooks/useNav";
+<script lang="ts" setup>
+import {useNav} from "@/layout/default/hooks/useNav";
 
 const props = defineProps({
   collapse: Boolean
 });
 
-const { title } = useNav();
+const {title} = useNav();
 </script>
 <template>
-  <div class="sidebar-logo-container" :class="{ collapses: props.collapse }">
+  <div :class="{ collapses: props.collapse }" class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
       <router-link
         v-if="props.collapse"
@@ -17,7 +17,7 @@ const { title } = useNav();
         class="sidebar-logo-link"
         to="/"
       >
-        <FontIcon icon="team-iconlogo" svg style="width: 35px; height: 35px" />
+        <FontIcon icon="team-iconlogo" style="width: 35px; height: 35px" svg/>
         <span class="sidebar-title">{{ title }}</span>
       </router-link>
       <router-link
@@ -27,7 +27,7 @@ const { title } = useNav();
         class="sidebar-logo-link"
         to="/"
       >
-        <FontIcon icon="team-iconlogo" svg style="width: 35px; height: 35px" />
+        <FontIcon icon="team-iconlogo" style="width: 35px; height: 35px" svg/>
         <span class="sidebar-title">{{ title }}</span>
       </router-link>
     </transition>
@@ -45,6 +45,7 @@ const { title } = useNav();
   .sidebar-logo-link {
     padding-left: 10px;
     display: flex;
+
     .sidebar-title {
       display: block;
       width: 160px;

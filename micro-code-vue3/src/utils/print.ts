@@ -150,7 +150,7 @@ Print.prototype = {
     iframe.onload = function (): void {
       // Before popping, callback
       if (_this.conf.printBeforeFn) {
-        _this.conf.printBeforeFn({ doc });
+        _this.conf.printBeforeFn({doc});
       }
       _this.toPrint(w);
       setTimeout(function () {

@@ -1,6 +1,6 @@
 <template>
   <div class="form-widget-container">
-    <DesignWidget :designer="designer" />
+    <DesignWidget :designer="designer"/>
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
   .form-height {
     min-height: 60vh;
   }
+
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.5s;

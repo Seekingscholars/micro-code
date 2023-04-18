@@ -1,14 +1,10 @@
 import Sortable from "sortablejs";
-import { insertNodeAt, removeNode } from "./util/htmlHelper";
-import { console } from "./util/console";
-import {
-  getComponentAttributes,
-  createSortableOption,
-  getValidSortableEntries
-} from "./core/componentBuilderHelper";
-import { computeComponentStructure } from "./core/renderHelper";
-import { events } from "./core/sortableEvents";
-import { h, defineComponent, nextTick } from "vue";
+import {insertNodeAt, removeNode} from "./util/htmlHelper";
+import {console} from "./util/console";
+import {createSortableOption, getComponentAttributes, getValidSortableEntries} from "./core/componentBuilderHelper";
+import {computeComponentStructure} from "./core/renderHelper";
+import {events} from "./core/sortableEvents";
+import {defineComponent, h, nextTick} from "vue";
 
 function emit(evtName, evtData) {
   nextTick(() => this.$emit(evtName.toLowerCase(), evtData));
@@ -92,7 +88,7 @@ const draggableComponent = defineComponent({
   render() {
     try {
       this.error = false;
-      const { $slots, $attrs, tag, componentData, realList, getKey } = this;
+      const {$slots, $attrs, tag, componentData, realList, getKey} = this;
       const componentStructure = computeComponentStructure({
         $slots,
         tag,
@@ -100,11 +96,11 @@ const draggableComponent = defineComponent({
         getKey
       });
       this.componentStructure = componentStructure;
-      const attributes = getComponentAttributes({ $attrs, componentData });
+      const attributes = getComponentAttributes({$attrs, componentData});
       return componentStructure.render(h, attributes);
     } catch (err) {
       this.error = true;
-      return h("pre", { style: { color: "red" } }, err.stack);
+      return h("pre", {style: {color: "red"}}, err.stack);
     }
   },
 
@@ -121,7 +117,7 @@ const draggableComponent = defineComponent({
       return;
     }
 
-    const { $attrs, $el, componentStructure } = this;
+    const {$attrs, $el, componentStructure} = this;
     componentStructure.updated();
 
     const sortableOptions = createSortableOption({
@@ -148,12 +144,12 @@ const draggableComponent = defineComponent({
 
   computed: {
     realList() {
-      const { list } = this;
+      const {list} = this;
       return list ? list : this.modelValue;
     },
 
     getKey() {
-      const { itemKey } = this;
+      const {itemKey} = this;
       if (typeof itemKey === "function") {
         return itemKey;
       }
@@ -164,7 +160,7 @@ const draggableComponent = defineComponent({
   watch: {
     $attrs: {
       handler(newOptionValue) {
-        const { _sortable } = this;
+        const {_sortable} = this;
         if (!_sortable) return;
         getValidSortableEntries(newOptionValue).forEach(([key, value]) => {
           _sortable.option(key, value);
@@ -210,16 +206,16 @@ const draggableComponent = defineComponent({
       this.alterList(updatePosition);
     },
 
-    getRelatedContextFromMoveEvent({ to, related }) {
+    getRelatedContextFromMoveEvent({to, related}) {
       const component = this.getUnderlyingPotencialDraggableComponent(to);
       if (!component) {
-        return { component };
+        return {component};
       }
       const list = component.realList;
-      const context = { list, component };
+      const context = {list, component};
       if (to !== related && list) {
         const destination = component.getUnderlyingVm(related) || {};
-        return { ...destination, ...context };
+        return {...destination, ...context};
       }
       return context;
     },
@@ -246,8 +242,8 @@ const draggableComponent = defineComponent({
       const newIndex = this.getVmIndexFromDomIndex(evt.newIndex);
       // @ts-ignore
       this.spliceList(newIndex, 0, element);
-      const added = { element, newIndex };
-      this.emitChanges({ added });
+      const added = {element, newIndex};
+      this.emitChanges({added});
     },
 
     onDragRemove(evt) {
@@ -256,11 +252,11 @@ const draggableComponent = defineComponent({
         removeNode(evt.clone);
         return;
       }
-      const { index: oldIndex, element } = this.context;
+      const {index: oldIndex, element} = this.context;
       // @ts-ignore
       this.spliceList(oldIndex, 1);
-      const removed = { element, oldIndex };
-      this.emitChanges({ removed });
+      const removed = {element, oldIndex};
+      this.emitChanges({removed});
     },
 
     onDragUpdate(evt) {
@@ -269,8 +265,8 @@ const draggableComponent = defineComponent({
       const oldIndex = this.context.index;
       const newIndex = this.getVmIndexFromDomIndex(evt.newIndex);
       this.updatePosition(oldIndex, newIndex);
-      const moved = { element: this.context.element, oldIndex, newIndex };
-      this.emitChanges({ moved });
+      const moved = {element: this.context.element, oldIndex, newIndex};
+      this.emitChanges({moved});
     },
 
     computeFutureIndex(relatedContext, evt) {
@@ -291,7 +287,7 @@ const draggableComponent = defineComponent({
     },
 
     onDragMove(evt, originalEvent) {
-      const { move, realList } = this;
+      const {move, realList} = this;
       if (!move || !realList) {
         return true;
       }

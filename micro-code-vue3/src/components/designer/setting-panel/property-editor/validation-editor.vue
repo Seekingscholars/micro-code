@@ -30,14 +30,14 @@ export default {
   data() {
     return {
       fieldValidators: [
-        { value: "number", label: "数字" },
-        { value: "letter", label: "字母" },
-        { value: "letterAndNumber", label: "数字字母" },
-        { value: "mobilePhone", label: "手机号码" },
-        { value: "email", label: "邮箱" },
-        { value: "url", label: "网址" },
-        { value: "noChinese", label: "非中文字符" },
-        { value: "chinese", label: "仅中文字符" }
+        {value: "number", label: "数字"},
+        {value: "letter", label: "字母"},
+        {value: "letterAndNumber", label: "数字字母"},
+        {value: "mobilePhone", label: "手机号码"},
+        {value: "email", label: "邮箱"},
+        {value: "url", label: "网址"},
+        {value: "noChinese", label: "非中文字符"},
+        {value: "chinese", label: "仅中文字符"}
       ]
     };
   }

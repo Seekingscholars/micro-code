@@ -4,6 +4,7 @@
 </template>
 <script>
 import fieldMixin from './fieldMixin'
+
 export default {
   name: 'input-widget',
   componentName: 'FieldWidget',

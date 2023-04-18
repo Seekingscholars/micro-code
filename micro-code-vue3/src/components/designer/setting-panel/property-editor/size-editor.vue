@@ -22,9 +22,9 @@ export default {
   data() {
     return {
       widgetSizes: [
-        { label: "default", value: "" },
-        { label: "large", value: "large" },
-        { label: "small", value: "small" }
+        {label: "default", value: ""},
+        {label: "large", value: "large"},
+        {label: "small", value: "small"}
       ]
     };
   }

@@ -1,6 +1,6 @@
 <template>
   <el-card :shadow="field.options.shadow">
-    <RenderWidget :designer="designer" :widget="field" />
+    <RenderWidget :designer="designer" :widget="field"/>
   </el-card>
 </template>
 

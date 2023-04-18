@@ -13,11 +13,11 @@ export function isEmptyStr(str) {
   return (str === undefined) || (!str && (str !== 0) && (str !== '0')) || (!/[^\s]/.test(str))
 }
 
-export const generateId = function() {
+export const generateId = function () {
   return new Date().getTime() % (1000 * 60 * 60 * 8) + index++
 }
 
-export const deepClone = function(data, apply = function(data, label) {
+export const deepClone = function (data, apply = function (data, label) {
   return data[label]
 }) {
   if (!data || typeof data !== 'object') {
@@ -30,12 +30,12 @@ export const deepClone = function(data, apply = function(data, label) {
   const dataKeys = Object.keys(data)
   dataKeys.forEach(label => {
     const value = apply(data, label)
-    newData[label] = deepClone(value,apply)
+    newData[label] = deepClone(value, apply)
   })
   return newData
 }
 
-export const overwriteObj = function(obj1, obj2) {  /* 浅拷贝对象属性，obj2覆盖obj1 */
+export const overwriteObj = function (obj1, obj2) {  /* 浅拷贝对象属性，obj2覆盖obj1 */
   // for (let prop in obj2) {
   //   if (obj2.hasOwnProperty(prop)) {
   //     obj1[prop] = obj2[prop]
@@ -47,19 +47,19 @@ export const overwriteObj = function(obj1, obj2) {  /* 浅拷贝对象属性，o
   })
 }
 
-export const addWindowResizeHandler = function(handler) {
+export const addWindowResizeHandler = function (handler) {
   let oldHandler = window.onresize
   if (typeof window.onresize != 'function') {
     window.onresize = handler
   } else {
-    window.onresize = function() {
+    window.onresize = function () {
       oldHandler()
       handler()
     }
   }
 }
 
-const createStyleSheet = function() {
+const createStyleSheet = function () {
   let head = document.head || document.getElementsByTagName('head')[0]
   let style = document.createElement('style')
   style.type = 'text/css'
@@ -67,7 +67,7 @@ const createStyleSheet = function() {
   return style.sheet
 }
 
-export const insertCustomCssToHead = function(cssCode, formId = '') {
+export const insertCustomCssToHead = function (cssCode, formId = '') {
   let head = document.getElementsByTagName('head')[0]
   let oldStyle = document.getElementById('vform-custom-css')
   if (!!oldStyle) {
@@ -91,7 +91,7 @@ export const insertCustomCssToHead = function(cssCode, formId = '') {
   head.appendChild(newStyle)
 }
 
-export const insertGlobalFunctionsToHtml = function(functionsCode, formId = '') {
+export const insertGlobalFunctionsToHtml = function (functionsCode, formId = '') {
   let bodyEle = document.getElementsByTagName('body')[0]
   let oldScriptEle = document.getElementById('v_form_global_functions')
   !!oldScriptEle && bodyEle.removeChild(oldScriptEle)  //先清除后插入！！
@@ -107,7 +107,7 @@ export const insertGlobalFunctionsToHtml = function(functionsCode, formId = '') 
   bodyEle.appendChild(newScriptEle)
 }
 
-export const optionExists = function(optionsObj, optionName) {
+export const optionExists = function (optionsObj, optionName) {
   if (!optionsObj) {
     return false
   }
@@ -115,7 +115,7 @@ export const optionExists = function(optionsObj, optionName) {
   return Object.keys(optionsObj).indexOf(optionName) > -1
 }
 
-export const loadRemoteScript = function(srcPath, callback) {  /*加载远程js，加载成功后执行回调函数*/
+export const loadRemoteScript = function (srcPath, callback) {  /*加载远程js，加载成功后执行回调函数*/
   let sid = encodeURIComponent(srcPath)
   let oldScriptEle = document.getElementById(sid)
 
@@ -125,7 +125,7 @@ export const loadRemoteScript = function(srcPath, callback) {  /*加载远程js�
     s.id = sid
     document.body.appendChild(s)
 
-    s.onload = s.onreadystatechange = function(_, isAbort) { /* 借鉴自ace.js */
+    s.onload = s.onreadystatechange = function (_, isAbort) { /* 借鉴自ace.js */
       if (isAbort || !s.readyState || s.readyState === 'loaded' || s.readyState === 'complete') {
         s = s.onload = s.onreadystatechange = null
         if (!isAbort) {

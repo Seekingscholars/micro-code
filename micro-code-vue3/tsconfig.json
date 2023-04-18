@@ -17,11 +17,18 @@
     "baseUrl": ".",
     "allowJs": false,
     "resolveJsonModule": true,
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "incremental": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@build/*": ["build/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@build/*": [
+        "build/*"
+      ]
     },
     "types": [
       "node",
@@ -29,7 +36,10 @@
       "element-plus/global",
       "unplugin-vue-define-options/macros-global"
     ],
-    "typeRoots": ["./node_modules/@types/", "./types"]
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ]
   },
   "include": [
     "mock/*.ts",
@@ -39,5 +49,9 @@
     "types/*.d.ts",
     "vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ]
 }

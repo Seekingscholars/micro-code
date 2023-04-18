@@ -35,6 +35,7 @@ export default {
     min-height: 80px;
     padding: 10px;
   }
+
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.5s;

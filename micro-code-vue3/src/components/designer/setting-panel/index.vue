@@ -51,28 +51,28 @@
 
     <el-dialog
       v-model="showWidgetEventDialogFlag"
-      :draggable="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :destroy-on-close="true"
+      :draggable="true"
       :show-close="true"
-      title="组件事件处理"
       append-to-body
       class="small-padding-dialog"
+      title="组件事件处理"
     >
-      <el-alert :closable="false" :title="eventHeader" type="info" />
+      <el-alert :closable="false" :title="eventHeader" type="info"/>
       <code-editor
         ref="ecEditor"
         v-model="eventHandlerCode"
         :mode="'javascript'"
         :readonly="false"
       />
-      <el-alert :closable="false" title="}" type="info" />
+      <el-alert :closable="false" title="}" type="info"/>
       <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="showWidgetEventDialogFlag = false"> 取消</el-button>
-        <el-button type="primary" @click="saveEventHandler"> 确定</el-button>
-      </div>
+        <div class="dialog-footer">
+          <el-button @click="showWidgetEventDialogFlag = false"> 取消</el-button>
+          <el-button type="primary" @click="saveEventHandler"> 确定</el-button>
+        </div>
       </template>
     </el-dialog>
   </div>
@@ -186,6 +186,7 @@ export default {
   padding: 0px 10px 0 10px;
   width: 400px;
 }
+
 .setting-form {
   padding-right: 10px;
 }

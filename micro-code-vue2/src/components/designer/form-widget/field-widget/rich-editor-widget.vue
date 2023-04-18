@@ -9,10 +9,10 @@
 
 <script>
 
-import { VueEditor } from 'vue2-editor'
+import {VueEditor} from 'vue2-editor'
 import emitter from '@/utils/emitter'
 
-import { deepClone } from '@/utils/util'
+import {deepClone} from '@/utils/util'
 import fieldMixin from './fieldMixin'
 
 export default {

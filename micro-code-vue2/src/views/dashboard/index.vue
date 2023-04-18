@@ -3,53 +3,65 @@
     <el-card class="dashboard-card">
       <div class="dashboard-header">
         <div class="dashboard-title"><span>我的应用</span>
-          <el-tooltip content="应用分组设置" placement="right" effect="dark">
+          <el-tooltip content="应用分组设置" effect="dark" placement="right">
             <i class="dashboard-title-setting el-icon-setting" style="cursor: pointer" @click="createCategoryApp" />
           </el-tooltip>
         </div>
         <div class="dashboard-action">
           <div class="dashboard-action-item">
-            <el-input v-model="name" type="text" placeholder="请输入名称进行搜索" prefix-icon="el-icon-search" />
+            <el-input v-model="name" placeholder="请输入名称进行搜索" prefix-icon="el-icon-search" type="text" />
           </div>
           <div class="dashboard-action-item">
-            <el-button type="primary" icon="el-icon-plus" @click="createApp">新建应用</el-button>
+            <el-button icon="el-icon-plus" type="primary" @click="createApp">新建应用</el-button>
           </div>
         </div>
       </div>
-      <div class="dashboard-body">
-        <div class="dashboard-sub-title">默认分组</div>
+      <div v-for="item in appList" :key="item.category.id" class="dashboard-body">
+        <div class="dashboard-sub-title">{{ item.category.categoryName }}</div>
         <div class="dashboard-sub-body">
-          <div v-for="item in appList" :key="item.id" :class="{'dashboard-sub-body-item':true,'dashboard-sub-body-item-selected':selectAppId===item.id}" @click="gotoApp">
-            <div class="dashboard-action-item-setting" @click.stop="selectAppId=item.id">
+          <div
+            v-for="app in item.appList"
+            :key="app.id"
+            :class="{'dashboard-sub-body-item':true,'dashboard-sub-body-item-selected':selectAppId===app.id}"
+            @click="gotoApp"
+          >
+            <div class="dashboard-action-item-setting" @click.stop="selectAppId=app.id">
               <el-popover
+                :value="selectAppId===app.id"
                 placement="bottom"
                 trigger="click"
-                :value="selectAppId===item.id"
               >
                 <div class="dashboard-action-item-setting-menu">
-                  <div class="dashboard-action-item-setting-menu-item"><i class="el-icon-edit" /><span class="dashboard-action-item-setting-menu-item-title">编辑</span></div>
-                  <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c"><i class="el-icon-delete" /><span class="dashboard-action-item-setting-menu-item-title">删除</span></div>
+                  <div class="dashboard-action-item-setting-menu-item"><i class="el-icon-edit" /><span
+                    class="dashboard-action-item-setting-menu-item-title"
+                  >编辑</span></div>
+                  <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c"><i
+                    class="el-icon-delete"
+                  /><span class="dashboard-action-item-setting-menu-item-title">删除</span></div>
                 </div>
                 <div slot="reference"><i class="el-icon-setting" /></div>
               </el-popover>
             </div>
             <div class="dashboard-sub-body-item-app" />
-            <div class="dashboard-sub-body-item-title">智能分析</div>
+            <div class="dashboard-sub-body-item-title">{{ app.appName }}</div>
           </div>
         </div>
       </div>
     </el-card>
-    <CreateAppDialog v-if="showAppDialogFlag" :visible.sync="showAppDialogFlag" />
+    <Icons />
+    <CreateEmptyAppDialog v-if="showAppDialogFlag" :visible.sync="showAppDialogFlag" />
     <CreateCategoryDrawer v-if="showAppDrawerFlag" :visible.sync="showAppDrawerFlag" />
   </div>
 </template>
 <script>
-import CreateAppDialog from './CreateAppDialog'
+import CreateEmptyAppDialog from './CreateEmptyAppDialog'
 import CreateCategoryDrawer from './CreateCategoryDrawer'
-import appApi from './api/app.api'
+import categoryApi from './api/category.api'
+import Icons from '@/components/icons/index.vue'
+
 export default {
   name: 'Dashboard',
-  components: { CreateAppDialog, CreateCategoryDrawer },
+  components: { CreateEmptyAppDialog, CreateCategoryDrawer, Icons },
   data() {
     return {
       name: '',
@@ -70,8 +82,8 @@ export default {
     document.removeEventListener('click', this.handleDocumentClick, false)
   },
   methods: {
-    async listApp(){
-      this.appList=await appApi.listApp()||[];
+    async listApp() {
+      this.appList = await categoryApi.listApp() || []
     },
     gotoApp() {
       const to = this.$router.resolve({ name: 'app' })
@@ -91,69 +103,86 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$setting-color:#0db3a6;
-.dashboard-container{
+$setting-color: #0db3a6;
+.dashboard-container {
   padding: 10px;
 }
-.dashboard-card{
+
+.dashboard-card {
   margin: 10px;
 }
-.dashboard-header{
+
+.dashboard-header {
   display: flex;
   justify-content: space-between;
   height: 40px;
 }
-.dashboard-title{
+
+.dashboard-title {
   font-weight: bold;
   font-size: 18px;
 }
-.dashboard-title-setting{
+
+.dashboard-title-setting {
   margin-left: 5px;
 }
-.dashboard-title-setting:hover{
+
+.dashboard-title-setting:hover {
   color: $setting-color;
 }
-.dashboard-action{
+
+.dashboard-action {
   display: flex;
   justify-content: flex-end;
 }
-.dashboard-action-item{
+
+.dashboard-action-item {
   margin-left: 20px;
 }
-.dashboard-sub-title{
+
+.dashboard-sub-title {
   font-weight: bold;
   font-size: 14px;
   margin-bottom: 10px;
 }
-.dashboard-sub-body{
+
+.dashboard-sub-body {
   display: flex;
   flex-wrap: wrap;
+  min-height: 80px;
 }
-.dashboard-sub-body-item{
+
+.dashboard-sub-body-item {
   cursor: pointer;
   width: 200px;
   padding-top: 30px;
   position: relative;
 }
-.dashboard-action-item-setting{
+
+.dashboard-action-item-setting {
   position: absolute;
   right: 10px;
   top: 10px;
   display: none;
 }
-.dashboard-action-item-setting:hover{
+
+.dashboard-action-item-setting:hover {
   color: $setting-color;
 }
-.dashboard-sub-body-item:hover,.dashboard-sub-body-item-selected{
+
+.dashboard-sub-body-item:hover, .dashboard-sub-body-item-selected {
   box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.dashboard-sub-body-item:hover .dashboard-action-item-setting{
+
+.dashboard-sub-body-item:hover .dashboard-action-item-setting {
   display: inline-block;
 }
-.dashboard-sub-body-item-selected .dashboard-action-item-setting{
+
+.dashboard-sub-body-item-selected .dashboard-action-item-setting {
   display: inline-block;
 }
-.dashboard-sub-body-item-app{
+
+.dashboard-sub-body-item-app {
   position: relative;
   margin: 0 auto;
   height: 48px;
@@ -164,21 +193,26 @@ $setting-color:#0db3a6;
   background-repeat: no-repeat;
   border-radius: 12px;
 }
-.dashboard-sub-body-item-title{
+
+.dashboard-sub-body-item-title {
   margin: 15px auto;
   text-align: center;
 }
-.dashboard-action-item-setting-menu{
+
+.dashboard-action-item-setting-menu {
   padding: 2px;
 }
-.dashboard-action-item-setting-menu-item{
+
+.dashboard-action-item-setting-menu-item {
   padding: 5px;
   cursor: pointer;
 }
-.dashboard-action-item-setting-menu-item:hover{
+
+.dashboard-action-item-setting-menu-item:hover {
   background-color: #eaecfd;
 }
-.dashboard-action-item-setting-menu-item-title{
+
+.dashboard-action-item-setting-menu-item-title {
   margin-left: 5px;
 }
 </style>

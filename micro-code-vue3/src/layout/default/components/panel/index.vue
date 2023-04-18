@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { ref, computed } from "vue";
-import { emitter } from "@/utils/mitt";
-import { onClickOutside } from "@vueuse/core";
+<script lang="ts" setup>
+import {computed, ref} from "vue";
+import {emitter} from "@/utils/mitt";
+import {onClickOutside} from "@vueuse/core";
 import Close from "@iconify-icons/ep/close";
 
 const target = ref(null);
@@ -34,17 +34,17 @@ emitter.on("openPanel", () => {
 
 <template>
   <div :class="{ show: show }" class="right-panel-container">
-    <div class="right-panel-background" />
+    <div class="right-panel-background"/>
     <div ref="target" class="right-panel bg-bg_color">
       <div class="right-panel-items">
         <div class="project-configuration">
           <h4 class="dark:text-white">项目配置</h4>
-          <span title="关闭配置" :class="iconClass">
+          <span :class="iconClass" title="关闭配置">
             <IconifyIconOffline
-              class="dark:text-white"
-              width="20px"
-              height="20px"
               :icon="Close"
+              class="dark:text-white"
+              height="20px"
+              width="20px"
               @click="show = !show"
             />
           </span>
@@ -52,7 +52,7 @@ emitter.on("openPanel", () => {
         <div
           class="border-b-[1px] border-solid border-[#dcdfe6] dark:border-[#303030]"
         />
-        <slot />
+        <slot/>
       </div>
     </div>
   </div>

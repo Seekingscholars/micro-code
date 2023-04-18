@@ -32,7 +32,7 @@ export default {
       default: '动态数据'
     }
   },
-  components: { CodeEditor },
+  components: {CodeEditor},
   data() {
     return {
       showWidgetEventDialogFlag: false,

@@ -46,7 +46,7 @@ export default {
         if (validation) {
           const validator = FormValidators[validation]
           if (validator) {
-            validator({ label: formItem.label, errorMsg: validationHint }, value, callback)
+            validator({label: formItem.label, errorMsg: validationHint}, value, callback)
           } else {
             callback('校验器' + validation + '未找到')
           }

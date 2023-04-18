@@ -3,20 +3,20 @@
     <el-button icon="el-icon-edit" plain round type="info" @click="showWidgetEventDialogFlag=true">
       编辑数据
     </el-button>
-    <el-dialog  v-model="showWidgetEventDialogFlag" :draggable="true"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
-      :destroy-on-close="true"
-      :show-close="true"
-      :title="label"
+    <el-dialog v-model="showWidgetEventDialogFlag" :close-on-click-modal="false"
+               :close-on-press-escape="false"
+               :destroy-on-close="true"
+               :draggable="true"
+               :show-close="true"
+               :title="label"
     >
       <code-editor ref="ecEditor" v-model="data" :mode="'javascript'" :readonly="false"></code-editor>
       <template #footer>
-      <div class="dialog-footer">
+        <div class="dialog-footer">
           <el-button @click="showWidgetEventDialogFlag = false">
             取消
-        </el-button>
-          <el-button type="primary" @click="saveEventHandler"> 保存 </el-button>
+          </el-button>
+          <el-button type="primary" @click="saveEventHandler"> 保存</el-button>
         </div>
       </template>
     </el-dialog>
@@ -35,7 +35,7 @@ export default {
       default: '动态数据'
     }
   },
-  components: { CodeEditor },
+  components: {CodeEditor},
   data() {
     return {
       showWidgetEventDialogFlag: false,

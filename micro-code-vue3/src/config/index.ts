@@ -1,8 +1,8 @@
-import { App } from "vue";
+import {App} from "vue";
 import axios from "axios";
 
 let config: object = {};
-const { VITE_PUBLIC_PATH } = import.meta.env;
+const {VITE_PUBLIC_PATH} = import.meta.env;
 
 const setConfig = (cfg?: unknown) => {
   config = Object.assign(config, cfg);
@@ -33,7 +33,7 @@ export const getServerConfig = async (app: App): Promise<undefined> => {
     method: "get",
     url: `${VITE_PUBLIC_PATH}serverConfig.json`
   })
-    .then(({ data: config }) => {
+    .then(({data: config}) => {
       let $config = app.config.globalProperties.$config;
       // 自动注入项目配置
       if (app && $config && typeof config === "object") {
@@ -49,4 +49,4 @@ export const getServerConfig = async (app: App): Promise<undefined> => {
     });
 };
 
-export { getConfig, setConfig };
+export {getConfig, setConfig};

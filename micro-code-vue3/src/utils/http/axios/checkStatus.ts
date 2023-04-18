@@ -1,5 +1,5 @@
-import { useUserStoreHook } from "@/store/modules/user";
-import { createMessage } from "@/utils/message";
+import {useUserStoreHook} from "@/store/modules/user";
+import {createMessage} from "@/utils/message";
 
 export function checkStatus(status: number, msg: string): void {
   const userStore = useUserStoreHook();

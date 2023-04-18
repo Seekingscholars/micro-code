@@ -1,6 +1,6 @@
-import { sort } from './sort'
+import {sort} from './sort'
 
-const install = function(Vue) {
+const install = function (Vue) {
   Vue.directive('sort', sort)
 }
 

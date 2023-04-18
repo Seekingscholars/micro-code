@@ -1,21 +1,20 @@
-<script setup lang="ts">
-import { useRoute } from "vue-router";
-import { emitter } from "@/utils/mitt";
+<script lang="ts" setup>
+import {useRoute} from "vue-router";
+import {emitter} from "@/utils/mitt";
 import SidebarItem from "./sidebarItem.vue";
-import leftCollapse from "./leftCollapse.vue";
-import { useNav } from "@/layout/default/hooks/useNav";
-import { storageLocal } from "@pureadmin/utils";
-import { ref, computed, watch, onBeforeMount } from "vue";
-import { findRouteByPath, getParentPaths } from "@/router/utils";
-import { usePermissionStoreHook } from "@/store/modules/permission";
+import {useNav} from "@/layout/default/hooks/useNav";
+import {storageLocal} from "@pureadmin/utils";
+import {computed, onBeforeMount, ref, watch} from "vue";
+import {findRouteByPath, getParentPaths} from "@/router/utils";
+import {usePermissionStoreHook} from "@/store/modules/permission";
 
 const route = useRoute();
 const showLogo = ref(
   storageLocal().getItem<StorageConfigs>("responsive-configure")?.showLogo ??
-    true
+  true
 );
 
-const { routers, pureApp, isCollapse, menuSelect, toggleSideBar } =
+const {routers, pureApp, isCollapse, menuSelect, toggleSideBar} =
   useNav();
 
 const subMenuData = ref([]);
@@ -61,22 +60,22 @@ watch(
     v-loading="menuData.length === 0"
     :class="['sidebar-container', showLogo ? 'has-logo' : '']"
   >
-    <el-scrollbar wrap-class="scrollbar-wrapper" class="pc">
+    <el-scrollbar class="pc" wrap-class="scrollbar-wrapper">
       <el-menu
+        :collapse="isCollapse"
+        :collapse-transition="false"
+        :default-active="route.path"
+        class="outer-most select-none"
+        mode="vertical"
         router
         unique-opened
-        mode="vertical"
-        class="outer-most select-none"
-        :collapse="isCollapse"
-        :default-active="route.path"
-        :collapse-transition="false"
         @select="indexPath => menuSelect(indexPath, routers)"
       >
         <sidebar-item
           v-for="routes in menuData"
           :key="routes.path"
-          :item="routes"
           :base-path="routes.path"
+          :item="routes"
           class="outer-most select-none"
         />
       </el-menu>

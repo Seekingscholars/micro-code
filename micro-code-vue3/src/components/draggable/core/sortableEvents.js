@@ -15,4 +15,4 @@ function isReadOnly(eventName) {
   return eventHandlerNames.indexOf(eventName) !== -1;
 }
 
-export { events, isReadOnly };
+export {events, isReadOnly};

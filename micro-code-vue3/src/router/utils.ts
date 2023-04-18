@@ -1,39 +1,32 @@
 import {
-  RouterHistory,
-  RouteRecordRaw,
-  RouteComponent,
-  createWebHistory,
   createWebHashHistory,
-  RouteRecordNormalized
+  createWebHistory,
+  RouteComponent,
+  RouteRecordNormalized,
+  RouteRecordRaw,
+  RouterHistory
 } from "vue-router";
-import { router } from "./index";
-import { isProxy, toRaw } from "vue";
-import { useTimeoutFn } from "@vueuse/core";
-import { RouteConfigs } from "@/layout/default/types";
-import {
-  isString,
-  cloneDeep,
-  isAllEmpty,
-  intersection,
-  storageSession,
-  isIncludeAllChildren
-} from "@pureadmin/utils";
-import { getConfig } from "@/config";
-import { buildHierarchyTree } from "@/utils/tree";
-import { sessionKey, type DataInfo } from "@/utils/auth";
-import { usePermissionStoreHook } from "@/store/modules/permission";
+import {router} from "./index";
+import {isProxy, toRaw} from "vue";
+import {useTimeoutFn} from "@vueuse/core";
+import {RouteConfigs} from "@/layout/default/types";
+import {cloneDeep, intersection, isAllEmpty, isIncludeAllChildren, isString, storageSession} from "@pureadmin/utils";
+import {getConfig} from "@/config";
+import {buildHierarchyTree} from "@/utils/tree";
+import {type DataInfo, sessionKey} from "@/utils/auth";
+import {usePermissionStoreHook} from "@/store/modules/permission";
+// 动态路由
+import {getAsyncRoutes} from "@/api/routes";
+
 const IFrame = () => import("@/layout/default/frameView.vue");
 // https://cn.vitejs.dev/guide/features.html#glob-import
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
-// 动态路由
-import { getAsyncRoutes } from "@/api/routes";
-
 function handRank(routeInfo: any) {
-  const { name, path, parentId, meta } = routeInfo;
+  const {name, path, parentId, meta} = routeInfo;
   return isAllEmpty(parentId)
     ? isAllEmpty(meta?.rank) ||
-      (meta?.rank === 0 && name !== "Home" && path !== "/")
+    (meta?.rank === 0 && name !== "Home" && path !== "/")
       ? true
       : false
     : false;
@@ -204,7 +197,7 @@ function initRouter() {
       });
     } else {
       return new Promise(resolve => {
-        getAsyncRoutes().then(({ data }) => {
+        getAsyncRoutes().then(({data}) => {
           handleAsyncRoutes(cloneDeep(data));
           storageSession().setItem(key, data);
           resolve(router);
@@ -213,7 +206,7 @@ function initRouter() {
     }
   } else {
     return new Promise(resolve => {
-      getAsyncRoutes().then(({ data }) => {
+      getAsyncRoutes().then(({data}) => {
         handleAsyncRoutes(cloneDeep(data));
         resolve(router);
       });
@@ -259,7 +252,7 @@ function formatTwoStageRoutes(routesList: RouteRecordRaw[]) {
         children: []
       });
     } else {
-      newRoutesList[0]?.children.push({ ...v });
+      newRoutesList[0]?.children.push({...v});
     }
   });
   return newRoutesList;
@@ -270,7 +263,7 @@ function handleAliveRoute(matched: RouteRecordNormalized[], mode?: string) {
   switch (mode) {
     case "add":
       matched.forEach(v => {
-        usePermissionStoreHook().cacheOperate({ mode: "add", name: v.name });
+        usePermissionStoreHook().cacheOperate({mode: "add", name: v.name});
       });
       break;
     case "delete":
@@ -286,7 +279,7 @@ function handleAliveRoute(matched: RouteRecordNormalized[], mode?: string) {
       });
       useTimeoutFn(() => {
         matched.forEach(v => {
-          usePermissionStoreHook().cacheOperate({ mode: "add", name: v.name });
+          usePermissionStoreHook().cacheOperate({mode: "add", name: v.name});
         });
       }, 100);
   }

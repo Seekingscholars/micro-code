@@ -6,9 +6,9 @@
 
 <script>
 /* eslint-disable no-unused-vars */
-import { Sortable } from 'sortablejs'
+import {Sortable} from 'sortablejs'
 import getUa from './ua'
-import { CONFIG, DOM_MAPPING_NAME } from './options'
+import {CONFIG, DOM_MAPPING_NAME} from './options'
 
 export default {
   name: 'ElTableDraggable',
@@ -53,7 +53,7 @@ export default {
       this.destroy()
       const ua = getUa()
 
-      const { WRAPPER, DRAGGABLE, OPTION } =
+      const {WRAPPER, DRAGGABLE, OPTION} =
         CONFIG[this.column ? 'COLUMN' : 'ROW']
 
       this.table = this.$children[0].$el.querySelector(WRAPPER)
@@ -61,7 +61,7 @@ export default {
       const elTableContext = this.$children[0]
       context.set(this.table, elTableContext)
       const vm = this
-      const { animation } = this
+      const {animation} = this
 
       // 根据不同种类自动注册的option
       const sortableOptions = OPTION(context, elTableContext, animation)
@@ -78,7 +78,7 @@ export default {
           // 首字母大写
           const eventName = `on${key.replace(
             /\b(\w)(\w*)/g,
-            function($0, $1, $2) {
+            function ($0, $1, $2) {
               return $1.toUpperCase() + $2.toLowerCase()
             }
           )}`
@@ -90,7 +90,7 @@ export default {
         // 绑定生成的那些options
         ...Object.keys(sortableOptions).reduce((options, event) => {
           const eventHandler = sortableOptions[event]
-          options[event] = function(...args) {
+          options[event] = function (...args) {
             if (event !== 'onMove') {
               vm.$emit(event, ...args)
             }

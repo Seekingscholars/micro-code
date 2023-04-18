@@ -18,7 +18,7 @@
       title="我是标题"
       v-bind="field.options"
     >
-      <RenderWidget :designer="designer" :widget="field" />
+      <RenderWidget :designer="designer" :widget="field"/>
     </el-drawer>
   </div>
 </template>

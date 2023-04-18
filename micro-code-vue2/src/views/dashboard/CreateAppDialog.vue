@@ -1,17 +1,18 @@
 <template>
   <el-dialog
+    :close-on-click-modal="false"
+    :show-close="true"
+    title="新建应用"
     v-bind="$attrs"
     width="880px"
-    :show-close="true"
-    :close-on-click-modal="false"
-    title="新建应用"
     @close="close"
   >
     <div class="dashboard-dialog-group">
-      <div class="dashboard-dialog-group-title"><i class="el-icon-s-opportunity" /><span class="dashboard-dialog-group-name">猜你想要</span></div>
+      <div class="dashboard-dialog-group-title"><i class="el-icon-s-opportunity"/><span
+        class="dashboard-dialog-group-name">猜你想要</span></div>
       <div class="dashboard-dialog-app">
         <div class="dashboard-dialog-template" @click="createEmptyApp">
-          <div class="dashboard-dialog-font"><i class="el-icon-plus" /></div>
+          <div class="dashboard-dialog-font"><i class="el-icon-plus"/></div>
           <div class="dashboard-dialog-create">创建空白应用</div>
         </div>
         <div class="dashboard-dialog-template">产研</div>
@@ -20,7 +21,8 @@
       </div>
     </div>
     <div class="dashboard-dialog-group">
-      <div class="dashboard-dialog-group-title"><i class="el-icon-star-on" /><span class="dashboard-dialog-group-name">热门模板</span></div>
+      <div class="dashboard-dialog-group-title"><i class="el-icon-star-on"/><span class="dashboard-dialog-group-name">热门模板</span>
+      </div>
       <div class="dashboard-dialog-app">
         <div class="dashboard-dialog-template">模板1</div>
         <div class="dashboard-dialog-template">模板2</div>
@@ -28,15 +30,16 @@
         <div class="dashboard-dialog-template">模板4</div>
       </div>
     </div>
-    <CreateEmptyAppDialog :visible.sync="showAppDialogFlag" ></CreateEmptyAppDialog>
+    <CreateEmptyAppDialog :visible.sync="showAppDialogFlag"></CreateEmptyAppDialog>
   </el-dialog>
 </template>
 
 <script>
 import CreateEmptyAppDialog from './CreateEmptyAppDialog'
+
 export default {
   name: 'CreateAppDialog',
-  components:{CreateEmptyAppDialog},
+  components: {CreateEmptyAppDialog},
   data() {
     return {
       showAppDialogFlag: false
@@ -47,7 +50,7 @@ export default {
       this.$emit('update:visible', false)
     },
     createEmptyApp() {
-      this.showAppDialogFlag=true
+      this.showAppDialogFlag = true
     }
   }
 }
@@ -55,20 +58,23 @@ export default {
 
 <style>
 
-.dashboard-dialog-app{
+.dashboard-dialog-app {
   width: 100%;
   margin: 15px;
   display: flex;
   flex-wrap: wrap;
 }
-.dashboard-dialog-group-title{
+
+.dashboard-dialog-group-title {
   font-weight: bold;
   font-size: 16px;
 }
-.dashboard-dialog-group-name{
+
+.dashboard-dialog-group-name {
   margin-left: 5px;
 }
-.dashboard-dialog-template{
+
+.dashboard-dialog-template {
   border-radius: 12px;
   width: 195px;
   height: 120px;
@@ -76,17 +82,20 @@ export default {
   background-color: #F5F6F8;
   cursor: pointer;
 }
-.dashboard-dialog-template:hover{
+
+.dashboard-dialog-template:hover {
   box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(-6px);
 }
-.dashboard-dialog-font{
+
+.dashboard-dialog-font {
   text-align: center;
   margin-top: 30px;
   color: #0db3a6;
   font-size: 32px;
 }
-.dashboard-dialog-create{
+
+.dashboard-dialog-create {
   margin-top: 10px;
   text-align: center;
   font-size: 14px;

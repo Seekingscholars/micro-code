@@ -1,8 +1,8 @@
 <template>
   <el-tree
     :data="dataList"
-    node-key="id"
     :default-expanded-keys="defaultExpandedKeys"
+    node-key="id"
     @node-expand="handleNodeExpand"
     @node-collapse="handleNodeCollapse"
   >
@@ -12,7 +12,7 @@
         <div :class="{ value: true, content: !data.type }">
           {{ data.value }}
         </div>
-        <div class="count" v-if="data.children">
+        <div v-if="data.children" class="count">
           {{ data.children.length }}项
         </div>
       </div>
@@ -35,14 +35,14 @@ export default {
     refresh() {
       this.index = 1;
       this.dataList = [
-        { id: 0, label: "全局变量", ...this.loadNode(this.$model) }
+        {id: 0, label: "全局变量", ...this.loadNode(this.$model)}
       ];
     },
     loadNode(value) {
       if (value === null) {
-        return { value: null };
+        return {value: null};
       } else if (typeof value === "function") {
-        return { value: "function", type: "function" };
+        return {value: "function", type: "function"};
       } else if (Array.isArray(value)) {
         const treeArray = [];
         for (let i = 0; i < value.length; i++) {
@@ -52,7 +52,7 @@ export default {
             ...this.loadNode(value[i])
           });
         }
-        return { value: "[]", type: "array", children: treeArray };
+        return {value: "[]", type: "array", children: treeArray};
       } else if (typeof value === "object") {
         const treeArray = [];
         Object.keys(value).forEach(key => {
@@ -62,9 +62,9 @@ export default {
             ...this.loadNode(value[key])
           });
         });
-        return { value: "{}", type: "object", children: treeArray };
+        return {value: "{}", type: "object", children: treeArray};
       } else {
-        return { value: value };
+        return {value: value};
       }
     },
     handleNodeExpand(data) {

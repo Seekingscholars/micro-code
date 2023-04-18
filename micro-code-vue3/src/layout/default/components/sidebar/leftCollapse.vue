@@ -1,6 +1,6 @@
-<script setup lang="ts">
-import { ref, computed } from "vue";
-import { useNav } from "@/layout/default/hooks/useNav";
+<script lang="ts" setup>
+import {computed, ref} from "vue";
+import {useNav} from "@/layout/default/hooks/useNav";
 import MenuFold from "@iconify-icons/ri/menu-fold-fill";
 
 interface Props {
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const visible = ref(false);
-const { tooltipEffect } = useNav();
+const {tooltipEffect} = useNav();
 
 const iconClass = computed(() => {
   return [
@@ -42,14 +42,14 @@ const toggleClick = () => {
 <template>
   <div class="container">
     <el-tooltip
-      placement="right"
-      :visible="visible"
-      :effect="tooltipEffect"
       :content="props.isActive ? '点击折叠' : '点击展开'"
+      :effect="tooltipEffect"
+      :visible="visible"
+      placement="right"
     >
       <IconifyIconOffline
-        :icon="MenuFold"
         :class="iconClass"
+        :icon="MenuFold"
         :style="{ transform: props.isActive ? 'none' : 'rotateY(180deg)' }"
         @click="toggleClick"
         @mouseenter="visible = true"

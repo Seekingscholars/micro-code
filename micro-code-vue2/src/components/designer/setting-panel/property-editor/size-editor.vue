@@ -21,11 +21,11 @@ export default {
   data() {
     return {
       widgetSizes: [
-        { label: 'default', value: '' },
-        { label: 'large', value: 'large' },
-        { label: 'medium', value: 'medium' },
-        { label: 'small', value: 'small' },
-        { label: 'mini', value: 'mini' }
+        {label: 'default', value: ''},
+        {label: 'large', value: 'large'},
+        {label: 'medium', value: 'medium'},
+        {label: 'small', value: 'small'},
+        {label: 'mini', value: 'mini'}
       ]
     }
   }

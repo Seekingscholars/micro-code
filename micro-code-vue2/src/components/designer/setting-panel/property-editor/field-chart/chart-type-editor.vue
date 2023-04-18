@@ -15,9 +15,9 @@ export default {
   data() {
     return {
       typeList: [
-        { label: '饼图', value: 'pie' },
-        { label: '仪表盘', value: 'gauge' },
-        { label: '漏斗图', value: 'funnel' }
+        {label: '饼图', value: 'pie'},
+        {label: '仪表盘', value: 'gauge'},
+        {label: '漏斗图', value: 'funnel'}
       ]
     }
   }

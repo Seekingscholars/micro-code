@@ -18,8 +18,8 @@ export default {
   data() {
     return {
       dataList: [
-        { label: 'default', value: '' },
-        { label: 'flex', value: 'flex' }
+        {label: 'default', value: ''},
+        {label: 'flex', value: 'flex'}
       ]
     }
   }

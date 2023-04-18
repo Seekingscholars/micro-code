@@ -31,10 +31,10 @@ export default {
   data() {
     return {
       uploadFileTypes: [
-        { value: 'doc', label: 'doc' },
-        { value: 'xls', label: 'xls' },
-        { value: 'docx', label: 'docx' },
-        { value: 'xlsx', label: 'xlsx' }
+        {value: 'doc', label: 'doc'},
+        {value: 'xls', label: 'xls'},
+        {value: 'docx', label: 'docx'},
+        {value: 'xlsx', label: 'xlsx'}
       ]
     }
   }

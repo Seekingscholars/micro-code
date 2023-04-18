@@ -11,10 +11,10 @@ const getContext = domElement => domElement.__draggable_context;
 
 class ComponentStructure {
   constructor({
-    nodes: { header, default: defaultNodes, footer },
-    root,
-    realList
-  }) {
+                nodes: {header, default: defaultNodes, footer},
+                root,
+                realList
+              }) {
     this.defaultNodes = defaultNodes;
     this.children = [...header, ...defaultNodes, ...footer];
     this.externalComponent = root.externalComponent;
@@ -28,13 +28,13 @@ class ComponentStructure {
   }
 
   render(h, attributes) {
-    const { tag, children, _isRootComponent } = this;
-    const option = !_isRootComponent ? children : { default: () => children };
+    const {tag, children, _isRootComponent} = this;
+    const option = !_isRootComponent ? children : {default: () => children};
     return h(tag, attributes, option);
   }
 
   updated() {
-    const { defaultNodes, realList } = this;
+    const {defaultNodes, realList} = this;
     defaultNodes.forEach((node, index) => {
       addContext(getHtmlElementFromNode(node), {
         element: realList[index],
@@ -48,8 +48,8 @@ class ComponentStructure {
   }
 
   getVmIndexFromDomIndex(domIndex, element) {
-    const { defaultNodes } = this;
-    const { length } = defaultNodes;
+    const {defaultNodes} = this;
+    const {length} = defaultNodes;
     const domChildren = element.children;
     const domElement = domChildren.item(domIndex);
 
@@ -72,4 +72,4 @@ class ComponentStructure {
   }
 }
 
-export { ComponentStructure };
+export {ComponentStructure};

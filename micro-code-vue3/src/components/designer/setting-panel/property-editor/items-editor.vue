@@ -1,30 +1,30 @@
 <template>
   <div>
 
-      <el-table :data="optionModel.items" border row-key="value">
-        <el-table-column label="排序" width="50px">
-          <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-        </el-table-column>
-        <el-table-column label="属性" prop="value">
-          <template #default="scope">
-            <el-input v-model="scope.row.value"></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="标签" prop="label">
-          <template #default="scope">
-            <el-input v-model="scope.row.label"></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" width="60px">
-          <template #default="scope">
-            <div class="operate">
-              <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除" @click="handleDelete(scope.row)"
-              ></i>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-button link @click="addNewItem">添加一项+</el-button>
+    <el-table :data="optionModel.items" border row-key="value">
+      <el-table-column label="排序" width="50px">
+        <i class="drag-handler el-icon-sort" style="cursor: move"></i>
+      </el-table-column>
+      <el-table-column label="属性" prop="value">
+        <template #default="scope">
+          <el-input v-model="scope.row.value"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column label="标签" prop="label">
+        <template #default="scope">
+          <el-input v-model="scope.row.label"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="60px">
+        <template #default="scope">
+          <div class="operate">
+            <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除" @click="handleDelete(scope.row)"
+            ></i>
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-button link @click="addNewItem">添加一项+</el-button>
 
   </div>
 </template>

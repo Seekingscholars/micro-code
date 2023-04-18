@@ -10,13 +10,13 @@
         <div class="title">{{ item.name }}</div>
       </template>
       <draggable
-        item-key="type"
         :clone="cloneWidget"
         :group="{ name: 'dragGroup', pull: 'clone', put: false }"
         :list="item.children"
         :move="checkMove"
         :sort="false"
         ghost-class="ghost"
+        item-key="type"
         tag="ul"
       >
         <template #item="{ element: ctn }">
@@ -31,7 +31,7 @@
 
 <script>
 import Draggable from "@/components/draggable";
-import { deepClone, generateId } from "@/utils/util";
+import {deepClone, generateId} from "@/utils/util";
 import widgetJson from "./widget.json";
 
 export default {

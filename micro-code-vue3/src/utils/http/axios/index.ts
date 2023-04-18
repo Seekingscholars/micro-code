@@ -1,19 +1,20 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
-import type { AxiosResponse } from 'axios';
-import { clone } from 'lodash-es';
-import { createMessage } from "@/utils/message";
-import type { RequestOptions, Result } from './axios.d';
-import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
-import { VAxios } from './Axios';
-import { checkStatus } from './checkStatus';
-import { RequestEnum, ResultEnum, ContentTypeEnum, ConfigEnum } from '@/enums/httpEnum';
-import { isString } from '@/utils/is';
-import { getToken } from '@/utils/auth';
-import { joinTimestamp, formatRequestDate,setObjToUrlParams ,deepMerge} from './helper';
-import { useUserStoreHook } from "@/store/modules/user";
+import type {AxiosResponse} from 'axios';
 import axios from 'axios';
+import {clone} from 'lodash-es';
+import {createMessage} from "@/utils/message";
+import type {RequestOptions, Result} from './axios.d';
+import type {AxiosTransform, CreateAxiosOptions} from './axiosTransform';
+import {VAxios} from './Axios';
+import {checkStatus} from './checkStatus';
+import {ConfigEnum, ContentTypeEnum, RequestEnum, ResultEnum} from '@/enums/httpEnum';
+import {isString} from '@/utils/is';
+import {getToken} from '@/utils/auth';
+import {deepMerge, formatRequestDate, joinTimestamp, setObjToUrlParams} from './helper';
+import {useUserStoreHook} from "@/store/modules/user";
+
 const userStore = useUserStoreHook();
 
 const urlPrefix = import.meta.env.VITE_API_URL_PREFIX;
@@ -28,18 +29,18 @@ const transform: AxiosTransform = {
    * @description: 处理响应数据。如果数据不是预期格式，可直接抛出错误
    */
   transformResponseHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    const { isTransformResponse } = options;
+    const {isTransformResponse} = options;
     // 不进行任何处理，直接返回
     if (!isTransformResponse) {
       return res.data;
     }
-    const { data } = res;
+    const {data} = res;
     if (!data) {
       // return '[HTTP] Request has no return value';
       throw new Error('请求出错，请稍候重试');
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data;
+    const {code, result, message} = data;
 
     // 这里逻辑可以根据项目进行修改
     const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
@@ -65,7 +66,7 @@ const transform: AxiosTransform = {
 
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options;
+    const {apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix} = options;
 
     if (joinPrefix) {
       config.url = `${urlPrefix}${config.url}`;
@@ -143,7 +144,7 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (axiosInstance: AxiosResponse, error: any) => {
-    const { response, code, message } = error || {};
+    const {response, code, message} = error || {};
     const msg: string = response?.data?.message ?? '';
     const err: string = error?.toString?.() ?? '';
     let errMessage = '';
@@ -186,7 +187,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // 基础接口地址
         // baseURL: globSetting.apiUrl,
 
-        headers: { 'Content-Type': ContentTypeEnum.JSON },
+        headers: {'Content-Type': ContentTypeEnum.JSON},
         // 如果是form-data格式
         // headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
         // 数据处理方式
@@ -222,4 +223,5 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
     ),
   );
 }
+
 export const defHttp = createAxios();

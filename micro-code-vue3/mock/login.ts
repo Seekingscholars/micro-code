@@ -1,11 +1,11 @@
 // 根据角色动态生成路由
-import { MockMethod } from "vite-plugin-mock";
+import {MockMethod} from "vite-plugin-mock";
 
 export default [
   {
     url: "/login",
     method: "post",
-    response: ({ body }) => {
+    response: ({body}) => {
       if (body.username === "admin") {
         return {
           success: true,

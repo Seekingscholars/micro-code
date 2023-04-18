@@ -135,4 +135,4 @@ function isHtmlAttribute(value) {
   );
 }
 
-export { isHtmlTag, isHtmlAttribute, isTransition };
+export {isHtmlTag, isHtmlAttribute, isTransition};

@@ -1,4 +1,5 @@
 import Sortable from "sortablejs";
+
 export const sort = {
   mounted(el, binding) {
     const option = binding.value;
