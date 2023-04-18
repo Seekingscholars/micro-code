@@ -9,14 +9,14 @@
         </div>
         <div class="dashboard-action">
           <div class="dashboard-action-item">
-            <el-input v-model="name" placeholder="请输入名称进行搜索" prefix-icon="el-icon-search" type="text" />
+            <el-input v-model="name" placeholder="请输入应用名称进行搜索" prefix-icon="el-icon-search" type="text" @input="handleSearch" clearable />
           </div>
           <div class="dashboard-action-item">
             <el-button icon="el-icon-plus" type="primary" @click="createApp">新建应用</el-button>
           </div>
         </div>
       </div>
-      <div v-for="item in appList" :key="item.category.id" class="dashboard-body">
+      <div v-for="item in filterAppList" :key="item.category.id" class="dashboard-body">
         <div class="dashboard-sub-title">{{ item.category.categoryName }}</div>
         <div class="dashboard-sub-body">
           <div
@@ -32,41 +32,44 @@
                 trigger="click"
               >
                 <div class="dashboard-action-item-setting-menu">
-                  <div class="dashboard-action-item-setting-menu-item"><i class="el-icon-edit" /><span
+                  <div class="dashboard-action-item-setting-menu-item" @click="()=>handleEditApp(app)"><i class="el-icon-edit" /><span
                     class="dashboard-action-item-setting-menu-item-title"
                   >编辑</span></div>
-                  <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c"><i
+                  <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c" @click="()=>handleDeleteApp(app)"><i
                     class="el-icon-delete"
                   /><span class="dashboard-action-item-setting-menu-item-title">删除</span></div>
                 </div>
                 <div slot="reference"><i class="el-icon-setting" /></div>
               </el-popover>
             </div>
-            <div class="dashboard-sub-body-item-app" />
+            <div class="dashboard-sub-body-item-app" :style="{backgroundColor:app.color}">
+              <svg-icon class="svg-icon" :icon-class="app.imageName" />
+            </div>
             <div class="dashboard-sub-body-item-title">{{ app.appName }}</div>
           </div>
         </div>
       </div>
     </el-card>
-    <Icons />
-    <CreateEmptyAppDialog v-if="showAppDialogFlag" :visible.sync="showAppDialogFlag" />
-    <CreateCategoryDrawer v-if="showAppDrawerFlag" :visible.sync="showAppDrawerFlag" />
+    <CreateEmptyAppDialog v-if="showAppDialogFlag" :visible.sync="showAppDialogFlag" :app="app" @ok="listApp" />
+    <CreateCategoryDrawer v-if="showAppDrawerFlag" :visible.sync="showAppDrawerFlag" @ok="listApp" />
   </div>
 </template>
 <script>
 import CreateEmptyAppDialog from './CreateEmptyAppDialog'
 import CreateCategoryDrawer from './CreateCategoryDrawer'
 import categoryApi from './api/category.api'
-import Icons from '@/components/icons/index.vue'
+import appApi from './api/app.api'
 
 export default {
   name: 'Dashboard',
-  components: { CreateEmptyAppDialog, CreateCategoryDrawer, Icons },
+  components: { CreateEmptyAppDialog, CreateCategoryDrawer },
   data() {
     return {
       name: '',
       appList: [],
+      filterAppList: [],
       selectAppId: null,
+      app: null,
       showAppDialogFlag: false,
       showAppDrawerFlag: false
 
@@ -83,17 +86,43 @@ export default {
   },
   methods: {
     async listApp() {
-      this.appList = await categoryApi.listApp() || []
+      this.filterAppList=this.appList = await categoryApi.listApp() || []
     },
     gotoApp() {
       const to = this.$router.resolve({ name: 'app' })
       window.open(to.href, '_self')
     },
+    handleSearch() {
+      if (this.name) {
+        this.filterAppList=[]
+        for (const app of this.appList) {
+          const filterAppList = app.appList.filter(item => item.appName.indexOf(this.name) >= 0)
+          if (filterAppList && filterAppList.length > 0) {
+            this.filterAppList.push({ category: app.category, appList: filterAppList })
+          }
+        }
+      } else {
+        this.filterAppList = this.appList
+      }
+    },
     handleDocumentClick() {
       this.selectAppId = null
     },
     createApp() {
+      this.app = null
       this.showAppDialogFlag = true
+    },
+    handleEditApp(app) {
+      this.selectAppId = null
+      this.app = app
+      this.showAppDialogFlag = true
+    },
+    handleDeleteApp(app) {
+      this.selectAppId = null
+      this.$confirm('您确定要删除“' + app.appName + '”吗？', '警告', { type: 'warning' }).then(async() => {
+        await appApi.remove({ id: app.id })
+        this.listApp()
+      })
     },
     createCategoryApp() {
       this.showAppDrawerFlag = true
@@ -130,7 +159,9 @@ $setting-color: #0db3a6;
 .dashboard-title-setting:hover {
   color: $setting-color;
 }
-
+.dashboard-body{
+  padding: 10px;
+}
 .dashboard-action {
   display: flex;
   justify-content: flex-end;
@@ -149,12 +180,12 @@ $setting-color: #0db3a6;
 .dashboard-sub-body {
   display: flex;
   flex-wrap: wrap;
-  min-height: 80px;
+  min-height: 130px;
 }
 
 .dashboard-sub-body-item {
   cursor: pointer;
-  width: 200px;
+  width: 150px;
   padding-top: 30px;
   position: relative;
 }
@@ -187,13 +218,13 @@ $setting-color: #0db3a6;
   margin: 0 auto;
   height: 48px;
   width: 48px;
-  background-color: #d5a60a;
-  background-image: url("../../assets/images/icon-cover-1.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
+  text-align: center;
+  line-height: 48px;
   border-radius: 12px;
 }
-
+.svg-icon{
+  color: #ffffff;
+}
 .dashboard-sub-body-item-title {
   margin: 15px auto;
   text-align: center;

@@ -118,8 +118,6 @@ export default {
       this.$emit('update:visible', false)
     },
     async submit() {
-      console.log(this.categoryList)
-      debugger
       for (let i = 0; i < this.categoryList.length; i++) {
         this.categoryList[i].orderNo = i + 1
         delete this.categoryList[i].key

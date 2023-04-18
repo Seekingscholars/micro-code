@@ -3,11 +3,11 @@
     <div class="color-list">
       <div v-for="item in colors" :key="item" :style="{backgroundColor:item}" class="color-item"
            @click="()=>handleColorClick(item)">
-        <svg-icon v-show="selectColor===item" class-name="colorIcon" icon-class="check"/>
+        <svg-icon v-show="model.color===item" class-name="colorIcon" icon-class="check"/>
       </div>
     </div>
     <div class="grid">
-      <div v-for="item of pageSvgIcons" :key="item" :class="{'icon-item':true,'icon-item-selected':selectIcon===item}"
+      <div v-for="item of pageSvgIcons" :key="item" :class="{'icon-item':true,'icon-item-selected':model.imageName===item}"
            @click="()=>handleItemClick(item)">
         <svg-icon :icon-class="item" class-name="disabled"/>
       </div>
@@ -29,15 +29,16 @@ import svgIcons from './svg-icons'
 
 export default {
   name: 'Icons',
+  props:{
+    model:Object
+  },
   data() {
     return {
       svgIcons,
-      colors: ['#7CFC00', '#FF8C00', '#BDB76B', '#FF6347',
+      colors: ['#1E90FF', '#FF8C00', '#BDB76B', '#FF6347',
         '#6495ED', '#8A2BE2', '#008B8B', '#778899'],
       currentPage: 1,
-      pageSize: 56,
-      selectIcon: null,
-      selectColor: null
+      pageSize: 56
     }
   },
   computed: {
@@ -50,10 +51,10 @@ export default {
   },
   methods: {
     handleColorClick(item) {
-      this.selectColor = item
+      this.model.color=item
     },
     handleItemClick(item) {
-      this.selectIcon = item
+      this.model.imageName=item
     }
   }
 }

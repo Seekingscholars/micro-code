@@ -5,6 +5,7 @@ import com.moxa.dream.boot.impl.ServiceImpl;
 import com.moxa.micro.app.model.AppModel;
 import com.moxa.micro.app.service.IAppService;
 import com.moxa.micro.app.view.AppLV;
+import com.moxa.micro.category.model.AppCategoryModel;
 import com.moxa.micro.category.service.IAppCategoryService;
 import com.moxa.micro.category.table.AppCategory;
 import com.moxa.micro.category.view.AppCategoryBean;
@@ -22,7 +23,7 @@ public class AppCategoryServiceImpl extends ServiceImpl<AppCategory, AppCategory
 
     @Override
     public List<AppCategoryBean> listApp() {
-        List<AppCategory> appCategoryLVList = this.selectList(null);
+        List<AppCategory> appCategoryLVList = this.selectList(new AppCategoryModel());
         List<AppCategoryBean> appCategoryBeanList = new ArrayList<>();
         if (CollUtil.isNotEmpty(appCategoryLVList)) {
             for (AppCategory appCategory : appCategoryLVList) {
