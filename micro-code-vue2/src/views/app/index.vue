@@ -24,23 +24,23 @@
           v-for="item in formList"
           :key="item.id"
           :class="{'app-form':true,'app-form-selected':selectFormId===item.id}"
-          @click="onFormClick"
+          @click="()=>onFormClick(item)"
+          @dblclick="()=>handleFormEdit(item)"
         >
           <div>
             <i class="el-icon-menu" />
             <span class="app-form-title">{{ item.formName }}</span>
           </div>
-          <div class="app-form-setting" @click.stop="selectFormId=item.id">
+          <div class="app-form-setting" @click.stop>
             <el-popover
-              :value="selectFormId===item.id"
               placement="bottom"
               trigger="click"
             >
               <div class="app-form-setting-menu">
-                <div class="app-form-setting-menu-item" @click="handleFormEdit"><i class="el-icon-edit" /><span
+                <div class="app-form-setting-menu-item" @click="()=>handleFormEdit(item)"><i class="el-icon-edit" /><span
                   class="app-form-setting-menu-item-title"
                 >编辑</span></div>
-                <div class="app-form-setting-menu-item" style="color: #ef5c5c"><i class="el-icon-delete" /><span
+                <div class="app-form-setting-menu-item" style="color: #ef5c5c" @click="()=>handleDeleteForm(item)"><i class="el-icon-delete" /><span
                   class="app-form-setting-menu-item-title"
                 >删除</span></div>
               </div>
@@ -66,48 +66,68 @@ export default {
   components: { FormRender },
   data() {
     return {
-      formJson: JSON.parse('{"widgetList":[{"type":"chart","name":"非坐标图","icon":"","options":{"name":"chart18894648","span":24,"height":350,"type":"pie","data":"[\\n        { value: 1048, name: \'Search Engine\' },\\n        { value: 735, name: \'Direct\' },\\n        { value: 580, name: \'Email\' },\\n        { value: 484, name: \'Union Ads\' },\\n        { value: 300, name: \'Video Ads\' }\\n      ]"},"chart-title":{"hidden":false,"title":"你好呀","color":"#333333","fontSize":18,"left":"left","top":"top"},"chart-legend":{"hidden":false,"icon":"rect","orient":"horizontal","left":"center","top":"top"},"id":"chart18894648"},{"type":"chart","name":"坐标图","icon":"","options":{"name":"chart18913546","span":24,"height":350,"dimension":"product","flip":false,"data":"[{\\"product\\":\\"Mon\\",\\"data1\\":120,\\"data2\\":130},{\\"product\\":\\"Tue\\",\\"data1\\":200,\\"data2\\":130},{\\"product\\":\\"Wed\\",\\"data1\\":150,\\"data2\\":312},{\\"product\\":\\"Thu\\",\\"data1\\":80,\\"data2\\":268},{\\"product\\":\\"Fri\\",\\"data1\\":70,\\"data2\\":155},{\\"product\\":\\"Sat\\",\\"data1\\":110,\\"data2\\":117},{\\"product\\":\\"Sun\\",\\"data1\\":130,\\"data2\\":160}]","items":[{"id":"item1","value":"data1","label":"","type":"bar","color":""},{"id":"item11645573","value":"data2","label":"","disabled":false,"type":"bar"}]},"chart-title":{"hidden":false,"title":"","color":"#333333","fontSize":18,"left":"left","top":"top"},"chart-legend":{"hidden":false,"icon":"rect","orient":"horizontal","left":"center","top":"top"},"chart-label":{"hidden":false,"position":"top"},"chart-xAxis":{"hidden":false,"rotate":0,"color":"#333333"},"chart-yAxis":{"hidden":false,"rotate":0,"color":"#333333"},"id":"chart18913546"}],"formConfig":{"size":"","labelWidth":80,"labelPosition":"left","disabled":false,"dataCode":"","functionCode":"","onCreated":"","onMounted":"","apis":[{"id":"1636693583371771905","name":"listUser","url":"/monitor/operlog/list","method":"GET","timeout":5000,"remark":null,"header":null,"param":"...searchForm","body":null,"successFunction":"users=res.rows","failFunction":null}],"labelAlign":"label-left-align","modelName":"formData","refName":"vForm","rulesName":"rules","cssCode":"","customClass":"","data":"","functions":"","layoutType":"PC","onFormDataChange":"","onFormCreated":"","onFormMounted":"listUser()","datasourceApis":[{"id":"1636693583371771905","name":"listUser","url":"/monitor/operlog/list","method":"GET","timeout":5000,"remark":null,"header":null,"param":"...searchForm","body":null,"successFunction":"users=res.rows","failFunction":null}]}}'),
+      appId: null,
       flushed: true,
       selectFormId: null,
       formList: [],
+      formData: {},
       app: {}
     }
   },
+  computed: {
+    formJson() {
+      if (this.formData.formJson) {
+        return JSON.parse(this.formData.formJson)
+      } else {
+        return {
+          widgetList: [],
+          formConfig: {}
+        }
+      }
+    }
+  },
   created() {
-    const appId = this.$route.params.appId
-    this.getApp(appId)
-  },
-  mounted() {
-    document.addEventListener('click', this.handleDocumentClick, false)
-  },
-  destroyed() {
-    document.removeEventListener('click', this.handleDocumentClick, false)
+    this.appId = this.$route.params.appId
+    this.getApp()
+    this.listForm()
   },
   methods: {
-    handleDocumentClick() {
-      this.selectFormId = null
-    },
     createAppForm() {
       const to = this.$router.resolve({ path: '/app/design/0', query: { appId: this.app.id }})
       window.open(to.href, '_self')
     },
-    handleFormEdit() {
-      this.handleDocumentClick()
-      const to = this.$router.resolve({ name: 'app-design' })
-      window.open(to.href, '_target')
+    handleFormEdit(form) {
+      const to = this.$router.resolve({ path: '/app/design/' + form.id })
+      window.open(to.href, '_self')
     },
-    onFormClick(item) {
-      this.flushed = false
-      this.$nextTick(() => {
-        setTimeout(() => this.flushed = true, 100)
+    handleDeleteForm(form) {
+      this.$confirm('您确定要删除表单“' + form.formName + '”吗？', '警告', { type: 'warning' }).then(async() => {
+        await formApi.remove({ id: form.id })
+        await this.listForm()
       })
+    },
+    async onFormClick(item) {
+      if (this.selectFormId !== item.id) {
+        this.selectFormId = item.id
+        this.flushed = false
+        this.formData = await formApi.get({ id: item.id }) || {}
+        this.$nextTick(() => {
+          this.flushed = true
+        })
+      }
     },
     gotoDashboard() {
       const to = this.$router.resolve({ path: '/' })
       window.open(to.href, '_self')
     },
-    async getApp(appId) {
-      this.app = await appApi.get({ id: appId }) || {}
+    async getApp() {
+      this.app = await appApi.get({ id: this.appId }) || {}
+    },
+    async listForm() {
+      this.formList = await formApi.list({ appId: this.appId }) || []
+      if (this.formList.length > 0) {
+        await this.onFormClick(this.formList[0])
+      }
     }
   }
 }
@@ -156,6 +176,7 @@ export default {
 
 .app-main {
   flex: 1;
+  padding: 10px;
 }
 
 .app-form {
@@ -180,6 +201,10 @@ export default {
 
 .app-form:hover .app-form-setting {
   display: inline-block;
+}
+
+.app-form-selected{
+  background-color: #eaecfd;
 }
 
 .app-form-selected .app-form-setting {

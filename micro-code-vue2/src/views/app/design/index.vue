@@ -38,8 +38,8 @@ export default {
   data() {
     return {
       modelForm: {
+        id: '',
         appId: '',
-        formId: '',
         formName: '未命名表单',
         formJson: ''
       }
@@ -53,7 +53,10 @@ export default {
   methods: {
     async getForm(formId) {
       if (formId && formId !== '0') {
-        await formApi.get({ id: formId })
+        this.modelForm = Object.assign(this.modelForm, await formApi.get({ id: formId }))
+        this.$nextTick(() => {
+          this.$refs.FormDesignerRef.setFormJson(this.modelForm.formJson)
+        })
       }
     },
     gotoApp() {
@@ -77,8 +80,7 @@ export default {
     },
     async submitForm() {
       this.modelForm.formJson = JSON.stringify(this.$refs.FormDesignerRef.getFormJson())
-      await formApi.saveOrEdit(this.modelForm, !!this.modelForm.formId)
-      this.gotoApp()
+      await formApi.saveOrEdit(this.modelForm, !!this.modelForm.id)
     }
   }
 }

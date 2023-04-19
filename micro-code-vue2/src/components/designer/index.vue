@@ -1,10 +1,10 @@
 <template>
   <div class="design-container">
     <div class="design-header">
-      <slot name="header"/>
+      <slot name="header" />
     </div>
     <div class="design-body">
-      <left-panel :designer="designer" class="design-body-left"/>
+      <left-panel :designer="designer" class="design-body-left" />
       <el-scrollbar class="design-body-center" height="calc(100vh - 112px)">
         <v-form-widget
           v-if="flushed"
@@ -13,7 +13,7 @@
           :form-config="designer.formConfig"
         />
       </el-scrollbar>
-      <setting-panel :designer="designer" class="design-body-right"/>
+      <setting-panel :designer="designer" class="design-body-right" />
     </div>
   </div>
 </template>
@@ -22,8 +22,8 @@
 import LeftPanel from './left-panel/index.vue'
 import SettingPanel from './setting-panel/index.vue'
 import VFormWidget from './form-widget/index.vue'
-import {createDesigner} from './designer'
-import {addWindowResizeHandler, getAllContainerWidgets, getAllFieldWidgets, getQueryParam} from '@/utils/util'
+import { createDesigner } from './designer'
+import { addWindowResizeHandler, getAllContainerWidgets, getAllFieldWidgets, getQueryParam } from '@/utils/util'
 
 export default {
   name: 'FormDesigner',
