@@ -61,7 +61,7 @@
 
 <script>
 import { option } from '@/utils/dragOption'
-import categoryApi from './api/category.api'
+import categoryApi from '@/api/category.api'
 
 export default {
   name: 'CreateCategoryDrawer',

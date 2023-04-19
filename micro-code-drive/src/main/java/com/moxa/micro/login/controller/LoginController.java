@@ -108,7 +108,7 @@ public class LoginController {
         }
         redisTemplate.delete(CommonConstant.PREFIX_USER_TOKEN + token);
         SecurityUtils.getSubject().logout();
-        return Result.ok(null, "退出登录成功");
+        return Result.ok();
     }
 
     /**

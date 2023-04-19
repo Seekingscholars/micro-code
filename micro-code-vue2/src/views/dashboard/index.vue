@@ -17,35 +17,37 @@
         </div>
       </div>
       <div v-for="item in filterAppList" :key="item.category.id" class="dashboard-body">
-        <div class="dashboard-sub-title">{{ item.category.categoryName }}</div>
-        <div v-if="item.appList&&item.appList.length>0" class="dashboard-sub-body">
-          <div
-            v-for="app in item.appList"
-            :key="app.id"
-            :class="{'dashboard-sub-body-item':true,'dashboard-sub-body-item-selected':selectAppId===app.id}"
-            @click="gotoApp"
-          >
-            <div class="dashboard-action-item-setting" @click.stop="selectAppId=app.id">
-              <el-popover
-                :value="selectAppId===app.id"
-                placement="bottom"
-                trigger="click"
-              >
-                <div class="dashboard-action-item-setting-menu">
-                  <div class="dashboard-action-item-setting-menu-item" @click="()=>handleEditApp(app)"><i class="el-icon-edit" /><span
-                    class="dashboard-action-item-setting-menu-item-title"
-                  >编辑</span></div>
-                  <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c" @click="()=>handleDeleteApp(app)"><i
-                    class="el-icon-delete"
-                  /><span class="dashboard-action-item-setting-menu-item-title">删除</span></div>
-                </div>
-                <div slot="reference"><i class="el-icon-setting" /></div>
-              </el-popover>
+        <div v-if="item.appList&&item.appList.length>0">
+          <div class="dashboard-sub-title">{{ item.category.categoryName }}</div>
+          <div class="dashboard-sub-body">
+            <div
+              v-for="app in item.appList"
+              :key="app.id"
+              :class="{'dashboard-sub-body-item':true,'dashboard-sub-body-item-selected':selectAppId===app.id}"
+              @click="()=>gotoApp(app)"
+            >
+              <div class="dashboard-action-item-setting" @click.stop="selectAppId=app.id">
+                <el-popover
+                  :value="selectAppId===app.id"
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <div class="dashboard-action-item-setting-menu">
+                    <div class="dashboard-action-item-setting-menu-item" @click="()=>handleEditApp(app)"><i class="el-icon-edit" /><span
+                      class="dashboard-action-item-setting-menu-item-title"
+                    >编辑</span></div>
+                    <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c" @click="()=>handleDeleteApp(app)"><i
+                      class="el-icon-delete"
+                    /><span class="dashboard-action-item-setting-menu-item-title">删除</span></div>
+                  </div>
+                  <div slot="reference"><i class="el-icon-setting" /></div>
+                </el-popover>
+              </div>
+              <div class="dashboard-sub-body-item-app" :style="{backgroundColor:app.color}">
+                <svg-icon class="svg-icon" :icon-class="app.imageName" />
+              </div>
+              <div class="dashboard-sub-body-item-title">{{ app.appName }}</div>
             </div>
-            <div class="dashboard-sub-body-item-app" :style="{backgroundColor:app.color}">
-              <svg-icon class="svg-icon" :icon-class="app.imageName" />
-            </div>
-            <div class="dashboard-sub-body-item-title">{{ app.appName }}</div>
           </div>
         </div>
       </div>
@@ -57,8 +59,8 @@
 <script>
 import CreateEmptyAppDialog from './CreateEmptyAppDialog'
 import CreateCategoryDrawer from './CreateCategoryDrawer'
-import categoryApi from './api/category.api'
-import appApi from './api/app.api'
+import categoryApi from '@/api/category.api'
+import appApi from '@/api/app.api'
 
 export default {
   name: 'Dashboard',
@@ -88,8 +90,8 @@ export default {
     async listApp() {
       this.filterAppList = this.appList = await categoryApi.listApp() || []
     },
-    gotoApp() {
-      const to = this.$router.resolve({ name: 'app' })
+    gotoApp(app) {
+      const to = this.$router.resolve({ path: '/app/overview/' + app.id })
       window.open(to.href, '_self')
     },
     handleSearch() {

@@ -30,7 +30,7 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/app',
+    path: '/app/overview/:appId',
     name: 'app',
     component: () => import('@/views/app/index'),
     meta: {
@@ -39,7 +39,7 @@ export const constantRoutes = [
     }
   },
   {
-    path: '/app/design',
+    path: '/app/design/:formId',
     name: 'app-design',
     component: () => import('@/views/app/design/index'),
     meta: {
@@ -49,7 +49,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/app/preview',
+    path: '/app/preview/:formId',
     name: 'app-preview',
     component: () => import('@/views/app/preview/index'),
     meta: {

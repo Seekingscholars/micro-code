@@ -35,8 +35,8 @@
 
 <script>
 import Icons from './components/icons/index.vue'
-import appApi from './api/app.api'
-import categoryApi from './api/category.api'
+import appApi from '@/api/app.api'
+import categoryApi from '@/api/category.api'
 export default {
   name: 'CreateEmptyAppDialog',
   components: { Icons },

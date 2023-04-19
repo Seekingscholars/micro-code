@@ -9,7 +9,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
-public abstract class BaseEntity extends BaseDict {
+public abstract class BaseEntity {
     /**
      * 创建人
      */

@@ -3,14 +3,13 @@ package com.moxa.micro.form.table;
 import com.moxa.dream.system.annotation.Column;
 import com.moxa.dream.system.annotation.Id;
 import com.moxa.dream.system.annotation.Table;
-import com.moxa.micro.core.entity.BaseEntity;
 import lombok.Data;
 
 import java.sql.Types;
 
 @Data
 @Table("app_form")
-public class AppForm extends BaseEntity {
+public class AppForm {
     @Id
     @Column(value = "id", jdbcType = Types.BIGINT)
     private Long id;
@@ -20,4 +19,24 @@ public class AppForm extends BaseEntity {
     private String formJson;
     @Column(value = "app_id", jdbcType = Types.BIGINT)
     private Long appId;
+    @Column(value = "del_flag", jdbcType = Types.SMALLINT)
+    private Integer delFlag;
+    @Column(value = "create_by", jdbcType = Types.VARCHAR)
+    private String createBy;
+    /**
+     * 创建时间
+     */
+    @Column(value = "create_time", jdbcType = Types.DATE)
+    private java.util.Date createTime;
+    /**
+     * 更新人
+     */
+    @Column(value = "update_by", jdbcType = Types.VARCHAR)
+    private String updateBy;
+    /**
+     * 更新时间
+     */
+    @Column(value = "update_time", jdbcType = Types.DATE)
+    private java.util.Date updateTime;
+
 }

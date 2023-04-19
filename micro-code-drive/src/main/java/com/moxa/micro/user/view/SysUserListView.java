@@ -1,7 +1,6 @@
 package com.moxa.micro.user.view;
 
 import com.moxa.dream.system.annotation.View;
-import com.moxa.micro.core.entity.BaseDict;
 import com.moxa.micro.user.table.$SysUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +11,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @View($SysUser.class)
-public class SysUserListView extends BaseDict {
+public class SysUserListView {
 
     /**
      * id

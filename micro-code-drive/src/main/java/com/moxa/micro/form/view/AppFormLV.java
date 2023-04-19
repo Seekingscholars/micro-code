@@ -1,15 +1,14 @@
 package com.moxa.micro.form.view;
 
 import com.moxa.dream.system.annotation.View;
-import com.moxa.micro.core.config.App;
+import com.moxa.micro.form.table.AppForm;
 import lombok.Data;
 
 @Data
-@View(App.class)
+@View(AppForm.class)
 public class AppFormLV {
     private Long id;
-    private Long categoryId;
-    private String appName;
-    private String imageName;
-    private String color;
+    private Long appId;
+    private String formName;
+
 }
