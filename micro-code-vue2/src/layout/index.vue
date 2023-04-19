@@ -2,15 +2,15 @@
   <div :class="classObj" class="app-wrapper">
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
-        <navbar/>
+        <navbar />
       </div>
-      <app-main/>
+      <app-main />
     </div>
   </div>
 </template>
 
 <script>
-import {AppMain, Navbar} from './components'
+import { AppMain, Navbar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     handleClickOutside() {
-      this.$store.dispatch('app/closeSideBar', {withoutAnimation: false})
+      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }
   }
 }

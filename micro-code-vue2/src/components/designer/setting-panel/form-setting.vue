@@ -1,20 +1,27 @@
 <template>
   <div>
-    <el-form :model="designer.formConfig" class="setting-form" label-position="left" label-width="120px"
-             size="mini" @submit.native.prevent
+    <el-form
+      :model="designer.formConfig"
+      class="setting-form"
+      label-position="left"
+      label-width="120px"
+      size="mini"
+      @submit.native.prevent
     >
       <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
         <el-collapse-item name="1" title="基本属性">
           <el-form-item label="组件大小">
             <el-select v-model="designer.formConfig.size" style="width: 100%">
-              <el-option v-for="item in formSizes" :key="item.value" :label="item.label"
-                         :value="item.value"
-              >
-              </el-option>
+              <el-option
+                v-for="item in formSizes"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
             </el-select>
           </el-form-item>
           <el-form-item label="标签宽度">
-            <el-input v-model="designer.formConfig.labelWidth" :min="0" style="width: 100%" type="number"></el-input>
+            <el-input v-model="designer.formConfig.labelWidth" :min="0" style="width: 100%" type="number" />
           </el-form-item>
           <el-form-item label="对齐方式">
             <el-radio-group v-model="designer.formConfig.labelPosition" class="radio-group-custom">
@@ -24,7 +31,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="表单禁用">
-            <el-switch v-model="designer.formConfig.disabled"></el-switch>
+            <el-switch v-model="designer.formConfig.disabled" />
           </el-form-item>
           <el-form-item label="全局数据">
             <el-button icon="el-icon-edit" plain round type="info" @click="editGlobalData">编写代码</el-button>
@@ -49,14 +56,20 @@
       </el-collapse>
     </el-form>
 
-    <el-dialog v-if="showFormEventDialogFlag"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
-               :visible.sync="showFormEventDialogFlag"
-               append-to-body class="small-padding-dialog" title="表单事件处理"
+    <el-dialog
+      v-if="showFormEventDialogFlag"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :destroy-on-close="true"
+      :show-close="true"
+      :visible.sync="showFormEventDialogFlag"
+      append-to-body
+      class="small-padding-dialog"
+      title="表单事件处理"
     >
-      <el-alert :closable="false" :title="'form.' + eventParamsMap[curEventName]" type="info"></el-alert>
-      <code-editor ref="ecEditor" v-model="formEventHandlerCode" :mode="'javascript'" :readonly="false"></code-editor>
-      <el-alert :closable="false" title="}" type="info"></el-alert>
+      <el-alert :closable="false" :title="'form.' + eventParamsMap[curEventName]" type="info" />
+      <code-editor ref="ecEditor" v-model="formEventHandlerCode" :mode="'javascript'" :readonly="false" />
+      <el-alert :closable="false" title="}" type="info" />
       <div slot="footer" class="dialog-footer">
         <el-button @click="showFormEventDialogFlag = false">
           取消
@@ -67,12 +80,18 @@
       </div>
     </el-dialog>
 
-    <el-dialog v-if="showEditFunctionDialogFlag"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
-               :visible.sync="showEditFunctionDialogFlag"
-               append-to-body class="small-padding-dialog" title="全局函数"
+    <el-dialog
+      v-if="showEditFunctionDialogFlag"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :destroy-on-close="true"
+      :show-close="true"
+      :visible.sync="showEditFunctionDialogFlag"
+      append-to-body
+      class="small-padding-dialog"
+      title="全局函数"
     >
-      <code-editor ref="gfEditor" v-model="functionCode" :mode="'javascript'" :readonly="false"></code-editor>
+      <code-editor ref="gfEditor" v-model="functionCode" :mode="'javascript'" :readonly="false" />
       <div slot="footer" class="dialog-footer">
         <el-button @click="showEditFunctionDialogFlag = false">
           取消
@@ -82,14 +101,20 @@
         </el-button>
       </div>
     </el-dialog>
-    <el-dialog v-if="showEditDataDialogFlag"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
-               :visible.sync="showEditDataDialogFlag"
-               append-to-body class="small-padding-dialog" title="全局数据"
+    <el-dialog
+      v-if="showEditDataDialogFlag"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :destroy-on-close="true"
+      :show-close="true"
+      :visible.sync="showEditDataDialogFlag"
+      append-to-body
+      class="small-padding-dialog"
+      title="全局数据"
     >
-      <el-alert :closable="false" title="{" type="info"></el-alert>
-      <code-editor ref="gfEditor" v-model="dataCode" :mode="'javascript'" :readonly="false"></code-editor>
-      <el-alert :closable="false" title="}" type="info"></el-alert>
+      <el-alert :closable="false" title="{" type="info" />
+      <code-editor ref="gfEditor" v-model="dataCode" :mode="'javascript'" :readonly="false" />
+      <el-alert :closable="false" title="}" type="info" />
       <div slot="footer" class="dialog-footer">
         <el-button @click="showEditDataDialogFlag = false">
           取消
@@ -107,7 +132,7 @@
 import CodeEditor from '@/components/code-editor/index'
 
 export default {
-  name: 'form-setting',
+  name: 'FormSetting',
   components: {
     CodeEditor
   },
@@ -118,11 +143,11 @@ export default {
     return {
       formActiveCollapseNames: ['1', '2'],
       formSizes: [
-        {label: 'default', value: ''},
-        {label: 'large', value: 'large'},
-        {label: 'medium', value: 'medium'},
-        {label: 'small', value: 'small'},
-        {label: 'mini', value: 'mini'}
+        { label: 'default', value: '' },
+        { label: 'large', value: 'large' },
+        { label: 'medium', value: 'medium' },
+        { label: 'small', value: 'small' },
+        { label: 'mini', value: 'mini' }
       ],
       showEditFunctionDialogFlag: false,
       showEditDataDialogFlag: false,

@@ -1,15 +1,24 @@
 <template>
   <div class="icons-container">
     <div class="color-list">
-      <div v-for="item in colors" :key="item" :style="{backgroundColor:item}" class="color-item"
-           @click="()=>handleColorClick(item)">
-        <svg-icon v-show="model.color===item" class-name="colorIcon" icon-class="check"/>
+      <div
+        v-for="item in colors"
+        :key="item"
+        :style="{backgroundColor:item}"
+        class="color-item"
+        @click="()=>handleColorClick(item)"
+      >
+        <svg-icon v-show="model.color===item" class-name="colorIcon" icon-class="check" />
       </div>
     </div>
     <div class="grid">
-      <div v-for="item of pageSvgIcons" :key="item" :class="{'icon-item':true,'icon-item-selected':model.imageName===item}"
-           @click="()=>handleItemClick(item)">
-        <svg-icon :icon-class="item" class-name="disabled"/>
+      <div
+        v-for="item of pageSvgIcons"
+        :key="item"
+        :class="{'icon-item':true,'icon-item-selected':model.imageName===item}"
+        @click="()=>handleItemClick(item)"
+      >
+        <svg-icon :icon-class="item" class-name="disabled" />
       </div>
     </div>
     <div class="footer">
@@ -29,8 +38,8 @@ import svgIcons from './svg-icons'
 
 export default {
   name: 'Icons',
-  props:{
-    model:Object
+  props: {
+    model: Object
   },
   data() {
     return {
@@ -51,10 +60,10 @@ export default {
   },
   methods: {
     handleColorClick(item) {
-      this.model.color=item
+      this.model.color = item
     },
     handleItemClick(item) {
-      this.model.imageName=item
+      this.model.imageName = item
     }
   }
 }

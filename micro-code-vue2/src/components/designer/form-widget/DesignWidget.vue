@@ -5,7 +5,7 @@
     :label-width="designer.formConfig.labelWidth + 'px'"
     :size="designer.formConfig.size"
   >
-    <RenderWidget :designer="designer" :widget="designer"/>
+    <RenderWidget :designer="designer" :widget="designer" />
   </el-form>
 </template>
 
@@ -15,7 +15,7 @@ import './container-widget/index'
 import RenderWidget from './RenderWidget'
 
 export default {
-  name: 'design-widget',
+  name: 'DesignWidget',
   inject: ['$model'],
   components: {
     RenderWidget
@@ -103,7 +103,7 @@ export default {
         if (api.failFunction) {
           failFunction = new Function('err', this.wrapWith(api.failFunction))
         }
-        request(param, {headers: api.header}).then(res => {
+        request(param, { headers: api.header }).then(res => {
           if (successFunction) {
             successFunction.call(this, res)
           }

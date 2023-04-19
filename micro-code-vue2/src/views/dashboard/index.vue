@@ -9,7 +9,7 @@
         </div>
         <div class="dashboard-action">
           <div class="dashboard-action-item">
-            <el-input v-model="name" placeholder="请输入应用名称进行搜索" prefix-icon="el-icon-search" type="text" @input="handleSearch" clearable />
+            <el-input v-model="name" placeholder="请输入应用名称进行搜索" prefix-icon="el-icon-search" type="text" clearable @input="handleSearch" />
           </div>
           <div class="dashboard-action-item">
             <el-button icon="el-icon-plus" type="primary" @click="createApp">新建应用</el-button>
@@ -18,7 +18,7 @@
       </div>
       <div v-for="item in filterAppList" :key="item.category.id" class="dashboard-body">
         <div class="dashboard-sub-title">{{ item.category.categoryName }}</div>
-        <div class="dashboard-sub-body">
+        <div v-if="item.appList&&item.appList.length>0" class="dashboard-sub-body">
           <div
             v-for="app in item.appList"
             :key="app.id"
@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     async listApp() {
-      this.filterAppList=this.appList = await categoryApi.listApp() || []
+      this.filterAppList = this.appList = await categoryApi.listApp() || []
     },
     gotoApp() {
       const to = this.$router.resolve({ name: 'app' })
@@ -94,7 +94,7 @@ export default {
     },
     handleSearch() {
       if (this.name) {
-        this.filterAppList=[]
+        this.filterAppList = []
         for (const app of this.appList) {
           const filterAppList = app.appList.filter(item => item.appName.indexOf(this.name) >= 0)
           if (filterAppList && filterAppList.length > 0) {
@@ -180,7 +180,6 @@ $setting-color: #0db3a6;
 .dashboard-sub-body {
   display: flex;
   flex-wrap: wrap;
-  min-height: 130px;
 }
 
 .dashboard-sub-body-item {

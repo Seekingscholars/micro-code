@@ -1,9 +1,11 @@
 <template>
-  <el-form-item :label="label"
-                :label-width="labelWidth + 'px'"
-                :prop="getPropName()" :rules="rules"
+  <el-form-item
+    :label="label"
+    :label-width="labelWidth + 'px'"
+    :prop="getPropName()"
+    :rules="rules"
   >
-    <slot></slot>
+    <slot />
   </el-form-item>
 </template>
 
@@ -11,7 +13,7 @@
 import FormValidators from '@/utils/validators'
 
 export default {
-  name: 'form-item-wrapper',
+  name: 'FormItemWrapper',
   props: {
     field: Object,
     designer: Object
@@ -46,7 +48,7 @@ export default {
         if (validation) {
           const validator = FormValidators[validation]
           if (validator) {
-            validator({label: formItem.label, errorMsg: validationHint}, value, callback)
+            validator({ label: formItem.label, errorMsg: validationHint }, value, callback)
           } else {
             callback('校验器' + validation + '未找到')
           }
@@ -65,17 +67,17 @@ export default {
   },
   computed: {
     label() {
-      if (!!this.field['form-item'].hidden) {
+      if (this.field['form-item'].hidden) {
         return ''
       }
       return this.field['form-item'].label
     },
 
     labelWidth() {
-      if (!!this.field['form-item'].hidden) {
+      if (this.field['form-item'].hidden) {
         return 0
       }
-      if (!!this.field['form-item'].width) {
+      if (this.field['form-item'].width) {
         return this.field['form-item'].width
       }
       return this.designer.formConfig.labelWidth

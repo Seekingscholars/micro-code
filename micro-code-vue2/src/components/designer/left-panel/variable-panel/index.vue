@@ -1,6 +1,11 @@
 <template>
-  <el-tree :data="dataList" :default-expanded-keys="defaultExpandedKeys" node-key="id" @node-expand="handleNodeExpand"
-           @node-collapse="handleNodeCollapse">
+  <el-tree
+    :data="dataList"
+    :default-expanded-keys="defaultExpandedKeys"
+    node-key="id"
+    @node-expand="handleNodeExpand"
+    @node-collapse="handleNodeCollapse"
+  >
     <div slot-scope="{ node, data }">
       <div class="flex">
         <div class="label">{{ data.label }}</div>
@@ -25,27 +30,27 @@ export default {
   methods: {
     refresh() {
       this.index = 1
-      this.dataList = [{id: 0, label: '全局变量', ...this.loadNode(this.$model)}]
+      this.dataList = [{ id: 0, label: '全局变量', ...this.loadNode(this.$model) }]
     },
     loadNode(value) {
       if (value === null) {
-        return {value: null}
+        return { value: null }
       } else if (typeof value === 'function') {
-        return {value: 'function', type: 'function'}
+        return { value: 'function', type: 'function' }
       } else if (Array.isArray(value)) {
         const treeArray = []
         for (let i = 0; i < value.length; i++) {
-          treeArray.push({id: this.index++, label: '[' + i + ']', ...this.loadNode(value[i])})
+          treeArray.push({ id: this.index++, label: '[' + i + ']', ...this.loadNode(value[i]) })
         }
-        return {value: '[]', type: 'array', children: treeArray}
+        return { value: '[]', type: 'array', children: treeArray }
       } else if (typeof value === 'object') {
         const treeArray = []
         Object.keys(value).forEach(key => {
-          treeArray.push({id: this.index++, label: key, ...this.loadNode(value[key])})
+          treeArray.push({ id: this.index++, label: key, ...this.loadNode(value[key]) })
         })
-        return {value: '{}', type: 'object', children: treeArray}
+        return { value: '{}', type: 'object', children: treeArray }
       } else {
-        return {value: value}
+        return { value: value }
       }
     },
     handleNodeExpand(data) {

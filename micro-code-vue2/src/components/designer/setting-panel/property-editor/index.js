@@ -1,9 +1,9 @@
-const requireComponent = require.context('./', true, /\w+\.vue$/)  //遍历当前目录和子目录
+const requireComponent = require.context('./', true, /\w+\.vue$/) // 遍历当前目录和子目录
 
-let comps = {}
+const comps = {}
 
 requireComponent.keys().map(fileName => {
-  let comp = requireComponent(fileName).default
+  const comp = requireComponent(fileName).default
   comps[comp.name] = comp
 })
 

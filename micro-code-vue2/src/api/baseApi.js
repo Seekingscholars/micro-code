@@ -11,44 +11,44 @@ export class BaseApi {
    * @param params
    */
   get = (params) => {
-    return request({url: this.requestUrl + '/get', method: 'get', params})
+    return request({ url: this.requestUrl + '/get', method: 'get', params })
   };
   /**
    * @param params
    */
   getOne = (params) => {
-    return request({url: this.requestUrl + '/getOne', method: 'get', params})
+    return request({ url: this.requestUrl + '/getOne', method: 'get', params })
   };
   /**
    * @param params
    */
   page = (params) => {
-    return request({url: this.requestUrl + '/page', method: 'get', params})
+    return request({ url: this.requestUrl + '/page', method: 'get', params })
   };
   /**
    *
    * @param params
    */
   list = (params) => {
-    return request({url: this.requestUrl + '/list', method: 'get', params})
+    return request({ url: this.requestUrl + '/list', method: 'get', params })
   };
   /**
    * @param params
    */
   save = (data) => {
-    return request({url: this.requestUrl + '/save', method: 'post', data})
+    return request({ url: this.requestUrl + '/save', method: 'post', data })
   };
   /**
    * @param params
    */
   postEdit = (data) => {
-    return request({url: this.requestUrl + '/edit', method: 'post', data})
+    return request({ url: this.requestUrl + '/edit', method: 'post', data })
   };
   /**
    * @param params
    */
   putEdit = (data) => {
-    return request({url: this.requestUrl + '/edit', method: 'put', data})
+    return request({ url: this.requestUrl + '/edit', method: 'put', data })
   };
   /**
    * @param params
@@ -65,7 +65,7 @@ export class BaseApi {
    */
   remove = (params) => {
     return request(
-      {url: this.requestUrl + '/remove', method: 'delete', params}
+      { url: this.requestUrl + '/remove', method: 'delete', params }
     )
   };
 
@@ -79,7 +79,7 @@ export class BaseApi {
       type: 'warning'
     }).then(() => {
       return request(
-        {url: this.requestUrl + '/removeBatch', method: 'get', params: params}
+        { url: this.requestUrl + '/removeBatch', method: 'get', params: params }
       )
     })
   };
