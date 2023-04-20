@@ -29,3 +29,8 @@ dream:
   listeners:
     - com.moxa.dream.drive.listener.DebugListener
 
+micro:
+  excludeUrls:
+    - /test/**
+    - /error
+

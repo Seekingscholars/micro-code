@@ -1,10 +1,12 @@
 <template>
   <div class="datasource-panel-container">
     <div class="header">
-      <div>所有数据源</div>
-      <div class="setting">
-        <i class="el-icon-circle-plus-outline" title="新建" @click="handleDataSource"/>
-      </div>
+      <div>所有API</div>
+      <el-tooltip content="新增api" effect="dark" placement="bottom">
+        <div class="setting">
+          <i class="el-icon-circle-plus-outline" @click="handleDataSource" />
+        </div>
+      </el-tooltip>
     </div>
     <el-tree
       :data="apis"
@@ -12,17 +14,16 @@
       node-key="id"
       @node-click="onNodeClick"
     />
-    <RestApi :datasource="datasource" :visible.sync="restApiOpen" @change="getList"/>
+    <RestApiDialog v-if="restApiOpen" :api="api" :visible.sync="restApiOpen" @change="getList" />
   </div>
 </template>
 
 <script>
-import RestApi from './component/RestApi'
-// import { getRestApi, listRestApi } from './component/RestApi/restApi'
-
+import RestApiDialog from './component/RestApiDialog'
+import restApi from '@/api/rest.api'
 export default {
   name: 'DatasourcePanel',
-  components: {RestApi},
+  components: { RestApiDialog },
   props: {
     designer: Object
   },
@@ -31,20 +32,15 @@ export default {
       selectId: null,
       apis: [],
       restApiOpen: false,
-      datasource: null
+      api: null
     }
   },
-  mounted() {
-    this.getList()
-  },
   methods: {
-    getList() {
-      // listRestApi().then(res => {
-      //   this.apis = res
-      //   this.designer.formConfig.apis=res
-      // })
+    async getList(formId) {
+      this.apis = await restApi.list({ formId }) || []
+      this.designer.formConfig.apis=this.apis
     },
-    renderContent(h, {node, data, store}) {
+    renderContent(h, { node, data, store }) {
       return (
         <div class='datasource'>
           <div>
@@ -52,7 +48,7 @@ export default {
           </div>
           <div>
             <el-dropdown onCommand={command => this.handleCommand(command, data)} size='mini' placement='bottom'>
-              <i class={{'hide': this.isHide(node, data), 'el-icon-more': true}}></i>
+              <i class={{ 'hide': this.isHide(node, data), 'el-icon-more': true }}></i>
               <el-dropdown-menu slot='dropdown'>
                 <el-dropdown-item command='edit' icon='el-icon-edit'>编辑</el-dropdown-item>
                 <el-dropdown-item command='delete' icon='el-icon-delete'>删除</el-dropdown-item>
@@ -68,17 +64,16 @@ export default {
       this.restApiOpen = true
     },
     isHide(node, data) {
-      return this.selectId != data.id
+      return this.selectId !== data.id
     },
-    handleEdit(data) {
-      getRestApi(data.id).then(res => {
-        this.datasource = res
-        this.restApiOpen = true
-      })
+    async handleEdit(data) {
+      this.api = data
+      this.restApiOpen = true
     },
     handleDelete(data) {
-      this.$confirm('确定删除该数据源吗？', '提示', {type: 'warning'}).then(
-        () => {
+      this.$confirm('确定删除数据源吗？', '提示', { type: 'warning' }).then(
+        async() => {
+          await restApi.remove({ id: data.id })
         }
       )
     },

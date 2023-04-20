@@ -59,8 +59,8 @@
 <script>
 import CreateEmptyAppDialog from './CreateEmptyAppDialog'
 import CreateCategoryDrawer from './CreateCategoryDrawer'
-import categoryApi from '@/api/category.api'
-import appApi from '@/api/app.api'
+import categoryApi from '@/api/category'
+import appApi from '@/api/app'
 
 export default {
   name: 'Dashboard',

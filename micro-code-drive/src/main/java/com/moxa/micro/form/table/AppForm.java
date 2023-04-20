@@ -21,6 +21,9 @@ public class AppForm {
     private Long appId;
     @Column(value = "del_flag", jdbcType = Types.SMALLINT)
     private Integer delFlag;
+    /**
+     * 创建人
+     */
     @Column(value = "create_by", jdbcType = Types.VARCHAR)
     private String createBy;
     /**

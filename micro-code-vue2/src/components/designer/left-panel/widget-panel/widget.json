@@ -589,10 +589,9 @@
           "name": "",
           "stripe": false,
           "border": false,
-          "size": "",
           "showHeader": true,
           "highlightCurrentRow": false,
-          "hidden": false,
+          "size": "",
           "span": 24,
           "data": ""
         },

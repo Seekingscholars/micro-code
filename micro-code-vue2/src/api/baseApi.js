@@ -33,25 +33,33 @@ export class BaseApi {
     return request({ url: this.requestUrl + '/list', method: 'get', params })
   };
   /**
-   * @param params
+   * @param data
    */
   save = (data) => {
     return request({ url: this.requestUrl + '/save', method: 'post', data })
   };
   /**
-   * @param params
+   * @param data
+   */
+  saveFetchKey = (data) => {
+    return request({ url: this.requestUrl + '/saveFetchKey', method: 'post', data })
+  };
+  /**
+   * @param data
    */
   postEdit = (data) => {
     return request({ url: this.requestUrl + '/edit', method: 'post', data })
   };
   /**
-   * @param params
+   * @param data
    */
   putEdit = (data) => {
     return request({ url: this.requestUrl + '/edit', method: 'put', data })
   };
   /**
-   * @param params
+   *
+   * @param data
+   * @param isUpdate
    */
   saveOrEdit = (data, isUpdate) => {
     if (isUpdate) {

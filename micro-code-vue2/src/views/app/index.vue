@@ -58,8 +58,8 @@
 
 <script>
 import FormRender from '@/components/render/index.vue'
-import appApi from '@/api/app.api'
-import formApi from '@/api/form.api'
+import appApi from '@/api/app'
+import formApi from '@/api/form'
 
 export default {
   name: 'App',

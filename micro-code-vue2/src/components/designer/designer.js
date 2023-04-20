@@ -13,8 +13,7 @@ export function createDesigner(vueInstance) {
       dataCode: '',
       functionCode: '',
       onCreated: '',
-      onMounted: '',
-      apis: []
+      onMounted: ''
     },
     design: true,
     selectedId: null,

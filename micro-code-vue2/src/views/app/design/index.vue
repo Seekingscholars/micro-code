@@ -1,6 +1,6 @@
 <template>
   <FormDesigner ref="FormDesignerRef">
-    <template slot="header">
+    <template #header>
       <div class="form-design-header">
         <div class="header-title">
           <el-tooltip content="上一级" effect="dark" placement="bottom">
@@ -27,14 +27,27 @@
         </div>
       </div>
     </template>
+    <template #left="{designer}">
+      <el-tab-pane label="数据源" name="datasource">
+        <div slot="label">
+          <el-tooltip content="数据源" placement="right">
+            <div class="icon-label"><i class="el-icon-coin"/></div>
+          </el-tooltip>
+        </div>
+        <el-scrollbar class="scrollbar">
+          <ApiPanel ref="ApiPanelRef" :designer="designer"/>
+        </el-scrollbar>
+      </el-tab-pane>
+    </template>
   </FormDesigner>
 </template>
 
 <script>
 import FormDesigner from '@/components/designer/index.vue'
-import formApi from '@/api/form.api'
+import formApi from '@/api/form'
+import ApiPanel from './components/api-panel/index'
 export default {
-  components: { FormDesigner },
+  components: { FormDesigner,ApiPanel },
   data() {
     return {
       modelForm: {
@@ -56,6 +69,7 @@ export default {
         this.modelForm = Object.assign(this.modelForm, await formApi.get({ id: formId }))
         this.$nextTick(() => {
           this.$refs.FormDesignerRef.setFormJson(this.modelForm.formJson)
+          this.$refs.ApiPanelRef.getList(formId)
         })
       }
     },

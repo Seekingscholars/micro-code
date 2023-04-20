@@ -1,9 +1,9 @@
 import { BaseApi } from '@/api/baseApi'
 
-class FormApi extends BaseApi {
+class Form extends BaseApi {
   constructor(requestUrl) {
     super(requestUrl)
   }
 }
 
-export default new FormApi('/form')
+export default new Form('/form')

@@ -4,7 +4,11 @@
       <slot name="header" />
     </div>
     <div class="design-body">
-      <left-panel :designer="designer" class="design-body-left" />
+      <left-panel :designer="designer" class="design-body-left" >
+        <template #left="{designer}">
+          <slot name="left" :designer="designer"></slot>
+        </template>
+      </left-panel>
       <el-scrollbar class="design-body-center" height="calc(100vh - 112px)">
         <v-form-widget
           v-if="flushed"

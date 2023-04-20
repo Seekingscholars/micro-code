@@ -22,6 +22,9 @@ public class App extends BaseEntity {
     private String color;
     @Column(value = "category_id", jdbcType = Types.BIGINT)
     private Long categoryId;
+    /**
+     * 创建人
+     */
     @Column(value = "create_by", jdbcType = Types.VARCHAR)
     private String createBy;
     /**

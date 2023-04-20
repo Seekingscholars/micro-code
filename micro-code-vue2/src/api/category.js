@@ -1,7 +1,7 @@
 import { BaseApi } from '@/api/baseApi'
 import request from '@/utils/request'
 
-class CategoryApi extends BaseApi {
+class Category extends BaseApi {
   constructor(requestUrl) {
     super(requestUrl)
   }
@@ -15,4 +15,4 @@ class CategoryApi extends BaseApi {
   }
 }
 
-export default new CategoryApi('/category')
+export default new Category('/category')

@@ -1,9 +1,9 @@
 import {BaseApi} from '@/api/baseApi'
 
-class AppApi extends BaseApi {
+class Api extends BaseApi {
   constructor(requestUrl) {
     super(requestUrl)
   }
 }
 
-export default new AppApi('/app')
+export default new Api('/api/rest')

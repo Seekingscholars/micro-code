@@ -13,13 +13,14 @@ import '@/icons' // icon
 import '@/permission' // permission control
 // 自定义指令
 import directives from './directives'
-
+import plugin from './plugin'
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
 
 Vue.use(directives)
+Vue.use(plugin)
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
