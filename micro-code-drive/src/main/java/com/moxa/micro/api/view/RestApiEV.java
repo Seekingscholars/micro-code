@@ -3,6 +3,8 @@ package com.moxa.micro.api.view;
 import com.moxa.dream.system.annotation.Column;
 import com.moxa.dream.system.annotation.Id;
 import com.moxa.dream.system.annotation.View;
+import com.moxa.dream.template.annotation.Wrap;
+import com.moxa.dream.template.wrap.ZeroWrapper;
 import com.moxa.micro.api.table.RestApi;
 import com.moxa.micro.core.entity.BaseEntity;
 import lombok.Data;
@@ -51,6 +53,7 @@ public class RestApiEV extends BaseEntity {
     /**
      * 删除标志（0代表存在 1代表删除）
      */
+    @Wrap(ZeroWrapper.class)
     private Integer delFlag;
     /**
      * 请求成功处理函数
