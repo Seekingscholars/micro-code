@@ -20,8 +20,8 @@ export default {
     this.renderAppForm(formId, password)
   },
   methods: {
-    async renderAppForm(id, password) {
-      const result = await formApi.getFormJson({ id, password }, { origin: true })
+    async renderAppForm(formId, password) {
+      const result = await formApi.getFormJson({ id: formId, password: password }, { origin: true })
       if (result.code === 200) {
         this.formJson = JSON.parse(result.result)
         this.flushed = true
