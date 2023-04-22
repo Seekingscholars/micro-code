@@ -291,15 +291,13 @@
           "placeholder": "",
           "span": 24,
           "size": "",
+          "multipleLimit": 0,
           "disabled": false,
-          "hidden": false,
+          "multiple": false,
           "clearable": true,
           "filterable": false,
           "allowCreate": false,
-          "remote": false,
-          "automaticDropdown": false,
-          "multiple": false,
-          "multipleLimit": 0
+          "automaticDropdown": false
         },
         "option-item": {
           "data": "",

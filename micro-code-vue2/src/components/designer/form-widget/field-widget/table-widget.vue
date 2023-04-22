@@ -23,13 +23,11 @@
     </el-table>
     <div v-if="!field.pagination.disabled" class="pagination">
       <el-pagination
-        :current-page="currentPage"
-        :page-size="pageSize"
+        :current-page.sync="currentPage"
+        :page-size.sync="field.pagination.pageSize"
         :page-sizes="pageSizes"
         :total="total"
         layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
       >
       </el-pagination>
     </div>
@@ -52,20 +50,17 @@ export default {
     }
   },
   computed: {
-    pageSize() {
-      return parseInt(this.field.pagination.pageSize)
-    },
     dataList() {
       const data = this.field.options.data
+      const currentPage = this.currentPage
+      const pageSize = this.field.pagination.pageSize
       const disabled = this.field.pagination.disabled
       let dataList
       if (!!data) {
-        let customFn = new Function(this.wrapWith('return ' + data))
+        const customFn = new Function(this.wrapWith('return ' + data))
         dataList = customFn.call(this)
       }
       if (dataList && !disabled) {
-        const currentPage = this.currentPage
-        const pageSize = this.field.pagination.pageSize
         this.total = dataList.length
         dataList = dataList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
       }
@@ -99,17 +94,6 @@ export default {
       return this.field.pagination.pageSizes.map(page => page.pageSize)
     }
   },
-  created() {
-    try {
-      this.dataList()
-    } catch (e) {
-      const message = e.message
-      if (message && message.endsWith('is not defined')) {
-        const index = message.indexOf(' ')
-        this.$set(this.$model, message.substr(0, index), [])
-      }
-    }
-  },
   methods: {
     // 更多操作触发
     handleCommand(command, row) {
@@ -124,12 +108,6 @@ export default {
       if (click) {
         new Function('row', this.wrapWith(click)).call(this, row)
       }
-    },
-    handleSizeChange(value) {
-      this.field.pagination.pageSize = value
-    },
-    handleCurrentChange(value) {
-      this.currentPage = value
     }
   }
 }

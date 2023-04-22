@@ -28,13 +28,8 @@ export default {
       wrapWith: this.wrapWith
     }
   },
-  watch: {
-    'designer.formConfig.dataCode'(dataCode) {
-      if (dataCode) {
-        const dataObject = new Function('return {' + dataCode + '}')()
-        Object.assign(this.$model, dataObject)
-      }
-    }
+  created() {
+    this.handleOnCreated()
   },
   mounted() {
     this.initDataSource()
@@ -64,9 +59,9 @@ export default {
       }
     },
     handleOnCreated() {
-      if (!!this.designer.formConfig && !!this.designer.formConfig.onCreated) {
-        const customFunc = new Function(this.wrapWith(this.designer.formConfig.onCreated))
-        customFunc.call(this)
+      if (this.designer.formConfig.dataCode) {
+        const customData = new Function('return {' + this.designer.formConfig.dataCode + '}').call(this)
+        Object.keys(customData).forEach(key => this.$set(this.$model, key, customData[key]))
       }
     },
 

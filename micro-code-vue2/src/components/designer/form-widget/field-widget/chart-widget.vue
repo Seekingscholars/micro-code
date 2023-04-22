@@ -1,5 +1,5 @@
 <template>
-  <div ref="chart" :style="style"/>
+  <div ref="chart" :style="style" />
 </template>
 
 <script>
@@ -15,20 +15,7 @@ export default {
       return {
         height: this.field.options.height + 'px'
       }
-    }
-  },
-  watch: {
-    field: {
-      handler() {
-        this.draw()
-      },
-      deep: true
-    }
-  },
-  mounted() {
-    this.$nextTick(() => this.draw())
-  },
-  methods: {
+    },
     dataList() {
       const data = this.field.options.data
       let dataList
@@ -36,14 +23,7 @@ export default {
         const customFn = new Function(this.wrapWith('return ' + data))
         dataList = customFn.call(this)
       }
-      return dataList || []
-    },
-    draw() {
-      const dataList = this.dataList()
-      if (!dataList) {
-        return
-      }
-      const chart = echarts.init(this.$refs.chart)
+      dataList = dataList || []
       const option = {
         tooltip: {
           trigger: 'axis'
@@ -133,6 +113,25 @@ export default {
           }
         ]
       }
+      return {
+        dataList, option
+      }
+    }
+  },
+  watch: {
+    dataList: {
+      handler(model) {
+        this.$nextTick(()=> this.draw(model.dataList, model.option))
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    draw(dataList, option) {
+      if (!dataList) {
+        return
+      }
+      const chart = echarts.init(this.$refs.chart)
       option && chart.setOption(option)
     }
   }

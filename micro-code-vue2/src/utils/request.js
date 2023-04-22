@@ -16,11 +16,41 @@ const service = axios.create({
     return status >= 200
   }
 })
-
+function tansParams(params) {
+  let result = ''
+  for (const propName of Object.keys(params)) {
+    const value = params[propName]
+    const part = encodeURIComponent(propName) + '='
+    if (value !== null && value !== '' && typeof (value) !== 'undefined') {
+      if (!Array.isArray(value)) {
+        if (typeof value === 'object') {
+          for (const key of Object.keys(value)) {
+            if (value[key] !== null && value[key] !== '' && typeof (value[key]) !== 'undefined') {
+              const params = propName + '[' + key + ']'
+              const subPart = encodeURIComponent(params) + '='
+              result += subPart + encodeURIComponent(value[key]) + '&'
+            }
+          }
+        } else {
+          result += part + encodeURIComponent(value) + '&'
+        }
+      } else {
+        result += value.map(v => part + encodeURIComponent(v)).join('&') + '&'
+      }
+    }
+  }
+  return result
+}
 // request拦截器
 service.interceptors.request.use(config => {
   config.headers['X-Access-Token'] = getToken()
   // get请求映射params参数
+  if (config.method === 'get' && config.params) {
+    let url = config.url + '?' + tansParams(config.params)
+    url = url.slice(0, -1)
+    config.params = {}
+    config.url = url
+  }
   return config
 }, error => {
   Promise.reject(error)
@@ -28,6 +58,9 @@ service.interceptors.request.use(config => {
 
 // 响应拦截器
 service.interceptors.response.use(res => {
+  if (res.config.origin) {
+    return res.data
+  }
   // 未设置状态码则默认成功状态
   const code = res.data.code || res.status
 

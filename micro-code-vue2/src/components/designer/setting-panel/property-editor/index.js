@@ -4,7 +4,9 @@ const comps = {}
 
 requireComponent.keys().map(fileName => {
   const comp = requireComponent(fileName).default
-  comps[comp.name] = comp
+  if (comp.name) {
+    comps[comp.name] = comp
+  }
 })
 
 export default comps

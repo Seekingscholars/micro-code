@@ -62,13 +62,6 @@ public abstract class BaseController<Service extends IService, EditView, SearchM
     }
 
     @ResponseBody
-    @PostMapping(value = "/saveFetchKey")
-    public Result saveFetchKey(@RequestBody EditView editView) {
-        service.insertFetchKey(editView);
-        return Result.ok(editView, "添加成功");
-    }
-
-    @ResponseBody
     @PutMapping(value = "/edit")
     public Result putEdit(@RequestBody EditView editView) {
         if (retBool(service.updateNonById(editView))) {

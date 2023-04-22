@@ -4,7 +4,7 @@
       <div>所有API</div>
       <el-tooltip content="新增api" effect="dark" placement="bottom">
         <div class="setting">
-          <i class="el-icon-circle-plus-outline" @click="handleDataSource" />
+          <i class="el-icon-circle-plus-outline" @click="handleCreateApi" />
         </div>
       </el-tooltip>
     </div>
@@ -14,7 +14,7 @@
       node-key="id"
       @node-click="onNodeClick"
     />
-    <RestApiDialog v-if="restApiOpen" :api="api" :visible.sync="restApiOpen" @change="getList" />
+    <RestApiDialog v-if="restApiOpen" :api="api" :visible.sync="restApiOpen" @change="()=>getList(formId)" />
   </div>
 </template>
 
@@ -31,14 +31,16 @@ export default {
     return {
       selectId: null,
       apis: [],
+      formId: null,
       restApiOpen: false,
       api: null
     }
   },
   methods: {
     async getList(formId) {
+      this.formId = formId
       this.apis = await restApi.list({ formId }) || []
-      this.designer.formConfig.apis=this.apis
+      this.designer.formConfig.apis = this.apis
     },
     renderContent(h, { node, data, store }) {
       return (
@@ -60,14 +62,15 @@ export default {
     onNodeClick(data) {
       this.selectId = data.id
     },
-    handleDataSource() {
+    handleCreateApi() {
+      this.api = { formId: this.formId }
       this.restApiOpen = true
     },
     isHide(node, data) {
       return this.selectId !== data.id
     },
-    async handleEdit(data) {
-      this.api = data
+    async handleEditApi(data) {
+      this.api = { ...data, formId: this.formId }
       this.restApiOpen = true
     },
     handleDelete(data) {
@@ -80,7 +83,7 @@ export default {
     handleCommand(command, data) {
       switch (command) {
         case 'edit':
-          this.handleEdit(data)
+          this.handleEditApi(data)
           break
         case 'delete':
           this.handleDelete(data)

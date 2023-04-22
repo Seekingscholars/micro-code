@@ -67,23 +67,11 @@ export default {
   data() {
     return {
       appId: null,
-      flushed: true,
+      flushed: false,
       selectFormId: null,
       formList: [],
-      formData: {},
+      formJson: {},
       app: {}
-    }
-  },
-  computed: {
-    formJson() {
-      if (this.formData.formJson) {
-        return JSON.parse(this.formData.formJson)
-      } else {
-        return {
-          widgetList: [],
-          formConfig: {}
-        }
-      }
     }
   },
   created() {
@@ -110,7 +98,8 @@ export default {
       if (this.selectFormId !== item.id) {
         this.selectFormId = item.id
         this.flushed = false
-        this.formData = await formApi.get({ id: item.id }) || {}
+        const formData = await formApi.get({ id: item.id })
+        this.formJson = JSON.parse(formData.formJson)
         this.$nextTick(() => {
           this.flushed = true
         })

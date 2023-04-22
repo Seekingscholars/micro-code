@@ -10,5 +10,4 @@ public class AppFormLV {
     private Long id;
     private Long appId;
     private String formName;
-
 }

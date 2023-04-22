@@ -7,6 +7,7 @@ import com.moxa.micro.core.entity.BaseEntity;
 import com.moxa.micro.form.table.AppForm;
 import lombok.Data;
 
+
 @Data
 @View(AppForm.class)
 public class AppFormEV extends BaseEntity {

@@ -1,8 +1,8 @@
 <template>
   <div class="panel-container">
-    <el-tabs :active-name="activeTab" style="height: 100%; overflow: hidden">
+    <el-tabs :active-name="activeTab" style="height: 100%;">
       <el-tab-pane label="组件设置" name="1">
-        <el-scrollbar height="calc(100vh - 112px)">
+        <el-scrollbar class="scrollbar">
           <template v-if="!!designer.selectedWidget">
             <el-form class="setting-form" label-position="left" label-width="120px" size="mini"
                      @submit.native.prevent
@@ -26,7 +26,7 @@
       </el-tab-pane>
 
       <el-tab-pane v-if="!!designer" label="表单设置" name="2">
-        <el-scrollbar height="calc(100vh - 112px)">
+        <el-scrollbar class="scrollbar">
           <form-setting :designer="designer" :form-config="designer.formConfig"></form-setting>
         </el-scrollbar>
       </el-tab-pane>
@@ -73,7 +73,6 @@ export default {
   },
   data() {
     return {
-      scrollerHeight: 0,
       activeTab: '2',
       widgetActiveCollapseNames: [],
       collapseList: [],
@@ -117,14 +116,6 @@ export default {
     } else {
       this.activeTab = '1'
     }
-
-    this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
-    addWindowResizeHandler(() => {
-      this.$nextTick(() => {
-        this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
-        //console.log(this.scrollerHeight)
-      })
-    })
   },
   methods: {
     getPropEditor(propName) {
@@ -167,7 +158,9 @@ export default {
   padding: 0px 10px 0 10px;
   width: 400px;
 }
-
+.scrollbar{
+height: calc(100vh - 102px)
+}
 .setting-form {
   padding-right: 10px;
 }

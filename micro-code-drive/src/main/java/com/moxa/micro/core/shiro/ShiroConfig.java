@@ -41,6 +41,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/sys/checkCaptcha", "anon");
         filterChainDefinitionMap.put("/sys/login", "anon");
         filterChainDefinitionMap.put("/sys/logout", "anon");
+        filterChainDefinitionMap.put("/form/getFormJson","anon");
 
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>(1);

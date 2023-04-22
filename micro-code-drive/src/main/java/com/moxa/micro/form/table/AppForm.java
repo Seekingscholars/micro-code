@@ -22,6 +22,26 @@ public class AppForm {
     @Column(value = "del_flag", jdbcType = Types.SMALLINT)
     private Integer delFlag;
     /**
+     * 是否分享
+     */
+    @Column(value="open",jdbcType = Types.SMALLINT)
+    private Boolean open;
+    /**
+     * 密码
+     */
+    @Column(value="password",jdbcType = Types.VARCHAR)
+    private String password;
+    /**
+     * 有效日期起
+     */
+    @Column(value = "start_expire_time", jdbcType = Types.DATE)
+    private java.util.Date startExpireTime;
+    /**
+     * 有效日期止
+     */
+    @Column(value = "end_expire_time", jdbcType = Types.DATE)
+    private java.util.Date endExpireTime;
+    /**
      * 创建人
      */
     @Column(value = "create_by", jdbcType = Types.VARCHAR)

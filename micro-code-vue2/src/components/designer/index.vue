@@ -9,7 +9,7 @@
           <slot name="left" :designer="designer"></slot>
         </template>
       </left-panel>
-      <el-scrollbar class="design-body-center" height="calc(100vh - 112px)">
+      <el-scrollbar class="design-body-center scrollbar">
         <v-form-widget
           v-if="flushed"
           ref="formRef"
@@ -85,14 +85,6 @@ export default {
     })
   },
   methods: {
-    showLink(configName) {
-      if (this.designerConfig[configName] === undefined) {
-        return true
-      }
-
-      return !!this.designerConfig[configName]
-    },
-
     setFormJson(formJson) {
       let modifiedFlag = false
       if (formJson) {
@@ -186,5 +178,8 @@ export default {
   flex: 1;
   border-left: 1px dotted #cccccc;
   border-right: 1px dotted #cccccc;
+}
+.scrollbar{
+  height: calc(100vh - 48px);
 }
 </style>

@@ -58,6 +58,16 @@ export const constantRoutes = [
     },
     hidden: true
   },
+  {
+    path: '/app/open/:formId',
+    name: 'app-open',
+    component: () => import('@/views/app/open/index'),
+    meta: {
+      icon: '',
+      title: '表单应用'
+    },
+    hidden: true
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

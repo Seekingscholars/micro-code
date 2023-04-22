@@ -1,55 +1,74 @@
 <template>
-  <FormDesigner ref="FormDesignerRef">
-    <template #header>
-      <div class="form-design-header">
-        <div class="header-title">
-          <el-tooltip content="上一级" effect="dark" placement="bottom">
-            <div class="header-title-back" @click="gotoApp">
-              <i class="el-icon-d-arrow-left" />
+  <div>
+    <FormDesigner ref="FormDesignerRef">
+      <template #header>
+        <div class="form-design-header">
+          <div class="header-title">
+            <el-tooltip content="上一级" effect="dark" placement="bottom">
+              <div class="header-title-back" @click="gotoApp">
+                <i class="el-icon-d-arrow-left" />
+              </div>
+            </el-tooltip>
+            <div class="header-title-name">
+              <el-input v-model="modelForm.formName" size="small" @blur="!modelForm.formName?modelForm.formName='未命名表单':''" />
             </div>
-          </el-tooltip>
-          <div class="header-title-name">
-            <el-input v-model="modelForm.formName" size="small" @blur="!modelForm.formName?modelForm.formName='未命名表单':''" />
+          </div>
+          <div class="header-right">
+            <el-button
+              size="small"
+              icon="el-icon-search"
+              type="warning"
+              round
+              @click="previewForm"
+            >预览
+            </el-button>
+            <el-button
+              size="small"
+              icon="el-icon-plus"
+              type="primary"
+              round
+              @click="submitForm"
+            >保存
+            </el-button>
+            <el-button
+              size="small"
+              icon="el-icon-link"
+              type="success"
+              round
+              @click="shareForm"
+            >分享
+            </el-button>
+
           </div>
         </div>
-        <div class="header-right">
-          <el-button
-            icon="el-icon-search"
-            @click="previewForm"
-          >预览
-          </el-button>
-          <el-button
-            icon="el-icon-plus"
-            type="primary"
-            @click="submitForm"
-          >保存
-          </el-button>
-        </div>
-      </div>
-    </template>
-    <template #left="{designer}">
-      <el-tab-pane label="数据源" name="datasource">
-        <div slot="label">
-          <el-tooltip content="数据源" placement="right">
-            <div class="icon-label"><i class="el-icon-coin"/></div>
-          </el-tooltip>
-        </div>
-        <el-scrollbar class="scrollbar">
-          <ApiPanel ref="ApiPanelRef" :designer="designer"/>
-        </el-scrollbar>
-      </el-tab-pane>
-    </template>
-  </FormDesigner>
+      </template>
+      <template #left="{designer}">
+        <el-tab-pane label="数据源" name="datasource">
+          <div slot="label">
+            <el-tooltip content="数据源" placement="right">
+              <div class="icon-label"><i class="el-icon-coin" /></div>
+            </el-tooltip>
+          </div>
+          <el-scrollbar class="scrollbar">
+            <ApiPanel ref="ApiPanelRef" :designer="designer" />
+          </el-scrollbar>
+        </el-tab-pane>
+      </template>
+    </FormDesigner>
+    <FormPermission v-if="showFormPermissionFlag" :visible.sync="showFormPermissionFlag" :form="modelForm" />
+  </div>
 </template>
 
 <script>
 import FormDesigner from '@/components/designer/index.vue'
 import formApi from '@/api/form'
 import ApiPanel from './components/api-panel/index'
+import FormPermission from './components/form-permission/index'
 export default {
-  components: { FormDesigner,ApiPanel },
+  components: { FormDesigner, ApiPanel, FormPermission },
   data() {
     return {
+      showFormPermissionFlag: false,
       modelForm: {
         id: '',
         appId: '',
@@ -88,13 +107,20 @@ export default {
       const storage = window.sessionStorage
       storage.setItem(key, JSON.stringify(formJson))
       const to = this.$router.resolve({
-        name: 'app-preview'
+        path: '/app/preview/0'
       })
       window.open(to.href, '_blank')
     },
     async submitForm() {
       this.modelForm.formJson = JSON.stringify(this.$refs.FormDesignerRef.getFormJson())
       await formApi.saveOrEdit(this.modelForm, !!this.modelForm.id)
+    },
+    shareForm() {
+      this.showFormPermissionFlag = true
+      // const to = this.$router.resolve({
+      //   path: '/app/preview/fghfghfjhgj'
+      // })
+      // console.log(to)
     }
   }
 }
@@ -119,10 +145,18 @@ export default {
   font-size: 18px;
   border-bottom: 1px dashed #b0b0b0;
 }
+.form-design-header .header-center{
+  display: flex;
+  line-height: 48px;
+}
+.form-design-header .header-center .header-center-toolbar{
+  margin-right: 10px;
+  cursor: pointer;
+}
 .form-design-header .header-right {
   display: flex;
   height: 100%;
-  line-height: 48px;
   margin-right: 20px;
+  padding: 5px;
 }
 </style>

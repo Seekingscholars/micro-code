@@ -5,7 +5,7 @@
 import DesignWidget from '../designer/form-widget/DesignWidget'
 
 export default {
-  name: 'VFormRender',
+  name: 'FormRender',
   componentName: 'VFormRender',
   components: {
     DesignWidget
