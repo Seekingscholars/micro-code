@@ -30,7 +30,7 @@ public class AppFormServiceImpl extends ServiceImpl<AppFormLV, AppFormEV> implem
     @Override
     public Result<String> getFormJson(Long id, String password) {
         AppForm appForm = templateMapper.selectById(AppForm.class, id);
-        if(appForm==null||!appForm.getOpen()){
+        if(appForm==null||appForm.getOpen()==null||!appForm.getOpen()){
             return new Result(1004,"表单"+id+"不存在");
         }
         Date startExpireTime = appForm.getStartExpireTime();
@@ -44,7 +44,7 @@ public class AppFormServiceImpl extends ServiceImpl<AppFormLV, AppFormEV> implem
         }
         String formPassword = appForm.getPassword();
         if(StrUtil.isNotEmpty(formPassword)&&!formPassword.equals(password)){
-            return new Result(1001, SecureUtil.md5(SecureUtil.md5(formPassword)));
+            return new Result(1001, SecureUtil.md5(SecureUtil.md5(formPassword)+formPassword));
         }
 
         return Result.ok(appForm.getFormJson());

@@ -42,11 +42,11 @@ export default {
             if (!value) {
               return false
             }
-            if (md5(md5(value.trim())) === message) {
+            value = value.trim()
+            if (md5(md5(value) + value) === message) {
               formApi.getFormJson({ id: formId, password: value }).then(res => {
                 _this.formJson = JSON.parse(res)
                 _this.flushed = true
-                _this.$message.close()
               })
               MessageBox.close()
               return true

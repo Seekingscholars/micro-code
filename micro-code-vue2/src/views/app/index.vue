@@ -11,11 +11,11 @@
             </span>
           </span>
         </el-tooltip>
-        <el-tooltip content="新建表单" effect="dark" placement="bottom">
-          <span class="app-header-title-icon" @click="createAppForm">
-            <i class="el-icon-plus" />
-          </span>
-        </el-tooltip>
+        <div class="app-header-title-toolbar">
+          <el-button icon="el-icon-plus" size="small" type="warning" round @click="createProcessForm">流程表单</el-button>
+          <el-button icon="el-icon-plus" size="small" type="primary" round @click="createAppForm">高级表单</el-button>
+          <el-button icon="el-icon-plus" size="small" type="success" round @click="createAppForm">仪表盘</el-button>
+        </div>
       </div>
     </div>
     <div class="app-container">
@@ -80,6 +80,10 @@ export default {
     this.listForm()
   },
   methods: {
+    createProcessForm() {
+      const to = this.$router.resolve({ path: '/app/process/0', query: { appId: this.app.id }})
+      window.open(to.href, '_self')
+    },
     createAppForm() {
       const to = this.$router.resolve({ path: '/app/design/0', query: { appId: this.app.id }})
       window.open(to.href, '_self')
@@ -146,9 +150,9 @@ export default {
   margin-left: 5px;
 }
 
-.app-header-title-icon {
-  margin-left: 10px;
-  cursor: pointer;
+.app-header-title-toolbar{
+  margin-left: 15px;
+  display: inline-block;
 }
 
 .app-container {

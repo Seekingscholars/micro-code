@@ -1,13 +1,17 @@
 server:
-  port: 3100
+  port: 4100
   servlet:
     context-path: /micro
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,httptrace
 spring:
   datasource:
     master:
       pool-name: MasterDataSource
-      jdbc-url: jdbc:postgresql://150.158.30.246:5432/sooth
+      jdbc-url: jdbc:postgresql://150.158.30.246:5432/micro
       username: postgres
       password: moxa@0858
       driver-class-name: org.postgresql.Driver
@@ -18,7 +22,12 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1800000
       connection-timeout: 30000
-
+  #redis 配置
+  redis:
+    database: 0
+    host: 150.158.30.246
+    port: 6379
+    password: moxa@redis
 dream:
   toSQL: com.moxa.dream.antlr.sql.ToPGSQL
   listeners:

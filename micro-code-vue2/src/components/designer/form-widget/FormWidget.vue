@@ -1,5 +1,7 @@
 <template>
   <el-form
+    ref="form"
+    :model="$model"
     :disabled="designer.formConfig.disabled"
     :label-position="designer.formConfig.labelPosition"
     :label-width="designer.formConfig.labelWidth + 'px'"
@@ -116,8 +118,14 @@ export default {
           this.$model[api.name] = this.requestApi(api)
         }
       }
+    },
+    validate: function(callback) {
+      this.$refs.form.validate(valid => {
+        if (valid && callback) {
+          callback(this.$model)
+        }
+      })
     }
-
   }
 }
 </script>

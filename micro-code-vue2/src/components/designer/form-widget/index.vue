@@ -1,18 +1,18 @@
 <template>
   <div class="form-widget-container">
-    <DesignWidget :designer="designer"></DesignWidget>
+    <FormWidget :designer="designer"></FormWidget>
   </div>
 </template>
 
 <script>
 import '@/styles/global.scss'
-import DesignWidget from './DesignWidget'
+import FormWidget from './FormWidget'
 
 export default {
   name: 'VFormWidget',
   componentName: 'VFormWidget',
   components: {
-    DesignWidget
+    FormWidget
   },
   props: {
     designer: Object,

@@ -1,14 +1,14 @@
 <template>
-  <DesignWidget :designer="this.formJson"></DesignWidget>
+  <FormWidget :designer="this.formJson"></FormWidget>
 </template>
 <script>
-import DesignWidget from '../designer/form-widget/DesignWidget'
+import FormWidget from '../designer/form-widget/FormWidget'
 
 export default {
   name: 'FormRender',
   componentName: 'VFormRender',
   components: {
-    DesignWidget
+    FormWidget
   },
   props: {
     formJson: {

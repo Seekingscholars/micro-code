@@ -25,12 +25,12 @@ export default {
       const required = formItem.required
       const validation = formItem.validation
       if (required || validation) {
-        const form = formItem.form
+        const group = this.field.options.group
         const name = this.field.options.name
         const validationHint = formItem.validationHint
         let dataModel
-        if (form) {
-          dataModel = this.$model[form]
+        if (group) {
+          dataModel = this.$model[group]
         } else {
           dataModel = this.$model
         }
