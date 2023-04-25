@@ -22,9 +22,8 @@
 </template>
 
 <script>
-import widgetJson from './widget.json'
 import Draggable from 'vuedraggable'
-import {deepClone, generateId} from '@/utils/util'
+import { deepClone, generateId } from '@/utils/util'
 
 export default {
   name: 'WidgetPanel',
@@ -44,9 +43,10 @@ export default {
     this.loadWidgets()
   },
   methods: {
-    loadWidgets() {
-      this.widgetList = widgetJson
-      this.activeNames = widgetJson.map(widget => widget.type)
+    async loadWidgets() {
+      const widgetJson = await import('./widget.json')
+      this.widgetList = widgetJson.default
+      this.activeNames = this.widgetList.map(widget => widget.type)
     },
 
     cloneWidget(widget) {

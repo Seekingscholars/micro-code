@@ -1,8 +1,6 @@
-import {deepClone, generateId, getDefaultFormConfig, overwriteObj} from '@/utils/util'
+import {deepClone, generateId, overwriteObj} from '@/utils/util'
 
 export function createDesigner(vueInstance) {
-  const defaultFormConfig = getDefaultFormConfig()
-
   return {
     widgetList: [],
     formConfig: {
@@ -22,18 +20,6 @@ export function createDesigner(vueInstance) {
     selectedWidgetName: null, // 选中组件名称（唯一）
     vueInstance: vueInstance,
     formWidget: null, // 表单设计容器
-    initDesigner() {
-      this.widgetList = []
-      this.formConfig = deepClone(defaultFormConfig)
-    },
-    clearDesigner() {
-      this.widgetList = []
-      this.selectedId = null
-      this.selectedWidgetName = null
-      this.selectedWidget = {} // this.selectedWidget = null
-      overwriteObj(this.formConfig, defaultFormConfig) //
-    },
-
     loadFormJson(formJson) {
       let modifiedFlag = false
 

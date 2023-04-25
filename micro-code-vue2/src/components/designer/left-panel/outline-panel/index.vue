@@ -1,6 +1,14 @@
 <template>
-  <el-tree :allow-drop="allowDrop" :data="designer.widgetList" :expand-on-click-node="false" :props="defaultProps" default-expand-all
-           draggable node-key="id" @node-click="handleNodeClick">
+  <el-tree
+    :allow-drop="allowDrop"
+    :data="designer.widgetList"
+    :expand-on-click-node="false"
+    :props="defaultProps"
+    default-expand-all
+    draggable
+    node-key="id"
+    @node-click="handleNodeClick"
+  >
     <div slot-scope="{ node, data }">
       <div>{{ getLabel(data) }}</div>
     </div>

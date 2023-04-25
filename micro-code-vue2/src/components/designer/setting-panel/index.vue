@@ -4,21 +4,31 @@
       <el-tab-pane label="组件设置" name="1">
         <el-scrollbar class="scrollbar">
           <template v-if="!!designer.selectedWidget">
-            <el-form class="setting-form" label-position="left" label-width="120px" size="mini"
-                     @submit.native.prevent
+            <el-form
+              class="setting-form"
+              label-position="left"
+              label-width="120px"
+              size="mini"
+              @submit.native.prevent
             >
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <el-collapse-item v-for="item in collapseList" v-if="designer.selectedWidget[item.type]"
-                                  :key="item.type"
-                                  :name="item.type" :title="item.name"
+                <div  v-for="item in collapseList"  :key="item.type">
+                <el-collapse-item
+                  v-if="designer.selectedWidget[item.type]"
+                  :name="item.type"
+                  :title="item.name"
                 >
                   <template v-for="propName in Object.keys(designer.selectedWidget[item.type])">
-                    <component :is="getPropEditor(propName)" v-if="getPropEditor(propName)!=null"
-                               :designer="designer" :option-model="designer.selectedWidget[item.type]"
-                               :selected-widget="designer.selectedWidget"
+                    <component
+                      :is="getPropEditor(propName)"
+                      v-if="getPropEditor(propName)!=null"
+                      :designer="designer"
+                      :option-model="designer.selectedWidget[item.type]"
+                      :selected-widget="designer.selectedWidget"
                     />
                   </template>
                 </el-collapse-item>
+                </div>
               </el-collapse>
             </el-form>
           </template>
@@ -27,19 +37,25 @@
 
       <el-tab-pane v-if="!!designer" label="表单设置" name="2">
         <el-scrollbar class="scrollbar">
-          <form-setting :designer="designer" :form-config="designer.formConfig"></form-setting>
+          <form-setting :designer="designer" :form-config="designer.formConfig" />
         </el-scrollbar>
       </el-tab-pane>
     </el-tabs>
 
-    <el-dialog v-if="showWidgetEventDialogFlag"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="true"
-               :visible.sync="showWidgetEventDialogFlag"
-               append-to-body class="small-padding-dialog" title="组件事件处理"
+    <el-dialog
+      v-if="showWidgetEventDialogFlag"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :destroy-on-close="true"
+      :show-close="true"
+      :visible.sync="showWidgetEventDialogFlag"
+      append-to-body
+      class="small-padding-dialog"
+      title="组件事件处理"
     >
-      <el-alert :closable="false" :title="eventHeader" type="info"></el-alert>
-      <code-editor ref="ecEditor" v-model="eventHandlerCode" :mode="'javascript'" :readonly="false"></code-editor>
-      <el-alert :closable="false" title="}" type="info"></el-alert>
+      <el-alert :closable="false" :title="eventHeader" type="info" />
+      <code-editor ref="ecEditor" v-model="eventHandlerCode" :mode="'javascript'" :readonly="false" />
+      <el-alert :closable="false" title="}" type="info" />
       <div slot="footer" class="dialog-footer">
         <el-button @click="showWidgetEventDialogFlag = false">
           取消
@@ -57,7 +73,6 @@
 import CodeEditor from '@/components/code-editor/index'
 import PropertyEditors from './property-editor'
 import FormSetting from './form-setting'
-import {addWindowResizeHandler} from '@/utils/util'
 import collapseJson from './collapse.json'
 
 export default {
@@ -97,14 +112,14 @@ export default {
   watch: {
     'designer.selectedWidget': {
       handler(val) {
-        if (!!val) {
+        if (val) {
           this.activeTab = '1'
         }
       }
     }
   },
   created() {
-    this.$on('editEventHandler', function (eventName, eventParams) {
+    this.$on('editEventHandler', function(eventName, eventParams) {
       this.editEventHandler(eventName, eventParams)
     })
   },
@@ -120,11 +135,11 @@ export default {
   methods: {
     getPropEditor(propName) {
       const editorName = `${propName}-editor`
-      let ownPropEditorName = `${this.designer.selectedWidget.type}-${editorName}`
-      if (!!this.$options.components[ownPropEditorName]) {  //局部注册的属性编辑器组件
+      const ownPropEditorName = `${this.designer.selectedWidget.type}-${editorName}`
+      if (this.$options.components[ownPropEditorName]) { // 局部注册的属性编辑器组件
         return ownPropEditorName
       }
-      if (!!this.$options.components[editorName]) {  //局部注册的属性编辑器组件
+      if (this.$options.components[editorName]) { // 局部注册的属性编辑器组件
         return editorName
       }
       return null
@@ -144,7 +159,6 @@ export default {
     },
 
     saveEventHandler() {
-
       this.designer.selectedWidget.events[this.curEventName] = this.eventHandlerCode
       this.showWidgetEventDialogFlag = false
     }

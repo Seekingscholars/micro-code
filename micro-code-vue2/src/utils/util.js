@@ -14,7 +14,7 @@ export function isEmptyStr(str) {
 }
 
 export const generateId = function() {
-  return new Date().getTime() % (1000 * 60 * 60 * 8) + index++
+  return (new Date().getTime() % (1000 * 60 * 60 * 24) + index++).toString(36)
 }
 
 export const deepClone = function(data, apply = function(data, label) {
@@ -332,32 +332,4 @@ export function getQueryParam(variable) {
   }
 
   return undefined
-}
-
-export function getDefaultFormConfig() {
-  return {
-    modelName: 'formData',
-    refName: 'vForm',
-    rulesName: 'rules',
-    labelWidth: 80,
-    labelPosition: 'left',
-    size: '',
-    labelAlign: 'label-left-align',
-    cssCode: '',
-    customClass: '',
-    data: '',
-    functions: '',
-    layoutType: 'PC',
-
-    onCreated: '',
-    onMounted: '',
-    onFormDataChange: ''
-  }
-}
-
-export function buildDefaultFormJson() {
-  return {
-    widgetList: [],
-    formConfig: deepClone(getDefaultFormConfig())
-  }
 }

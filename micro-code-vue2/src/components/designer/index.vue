@@ -105,24 +105,12 @@ export default {
         formConfig: this.designer.formConfig
       }
     },
-
-    clearDesigner() {
-      this.$refs.toolbarRef.clearFormWidget()
-    },
-
     /**
      * 刷新表单设计器
      */
     refreshDesigner() {
       this.flushed = false
       this.$nextTick(() => setTimeout(() => (this.flushed = true), 100))
-    },
-
-    /**
-     * 预览表单
-     */
-    previewForm() {
-      this.$refs.toolbarRef.previewForm()
     },
     /**
      * 获取所有字段组件
