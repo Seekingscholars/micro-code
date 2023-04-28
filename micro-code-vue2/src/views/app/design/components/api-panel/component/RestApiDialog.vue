@@ -3,6 +3,9 @@
     <el-tabs v-model="activeTab" class="no-box-shadow no-padding" type="border-card">
       <el-tab-pane label="请求配置" name="info">
         <el-form ref="form" :model="modelForm" :rules="rules" label-position="right" label-width="80px">
+          <el-form-item label="数据源" prop="datasourceId">
+            <el-input v-model="modelForm.datasourceId" />
+          </el-form-item>
           <el-form-item label="函数名称" prop="name">
             <el-input v-model="modelForm.name" />
           </el-form-item>
@@ -75,6 +78,7 @@ export default {
       requestMethod: [{ label: 'GET', value: 'GET' }, { label: 'POST', value: 'POST' }, { label: 'PUT', value: 'PUT' }, { label: 'DELETE', value: 'DELETE' }],
       modelForm: {
         id: undefined,
+        datasourceId: undefined,
         name: undefined,
         url: undefined,
         method: 'GET',
