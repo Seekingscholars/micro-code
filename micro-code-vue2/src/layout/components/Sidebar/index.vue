@@ -1,20 +1,12 @@
 <template>
-  <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
-        :active-text-color="variables.menuActiveText"
-        :background-color="variables.menuBg"
-        :collapse="isCollapse"
-        :collapse-transition="false"
-        :default-active="activeMenu"
-        :text-color="variables.menuText"
-        :unique-opened="false"
-        mode="vertical"
-      >
-        <sidebar-item v-for="route in routes" :key="route.path" :base-path="route.path" :item="route" />
-      </el-menu>
-    </el-scrollbar>
+  <div>
+    <el-menu
+      class="menu"
+      :default-active="activeMenu"
+      mode="horizontal"
+    >
+      <sidebar-item v-for="route in routes" :key="route.path" :base-path="route.path" :item="route" />
+    </el-menu>
   </div>
 </template>
 
@@ -42,9 +34,6 @@ export default {
       }
       return path
     },
-    showLogo() {
-      return this.$store.state.settings.sidebarLogo
-    },
     variables() {
       return variables
     },
@@ -54,3 +43,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.menu{
+  display: flex;
+}
+</style>

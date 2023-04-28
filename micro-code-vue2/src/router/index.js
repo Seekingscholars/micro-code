@@ -26,7 +26,17 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '工作台', icon: '' }
+      meta: { title: '工作台', icon: 'home-filled' }
+    }]
+  },
+  {
+    path: '/datasource',
+    component: Layout,
+    children: [{
+      path: '/datasource',
+      name: 'datasource',
+      component: () => import('@/views/datasource/index'),
+      meta: { title: '数据源', icon: 'coin' }
     }]
   },
   {
@@ -36,7 +46,8 @@ export const constantRoutes = [
     meta: {
       icon: '',
       title: '我的应用'
-    }
+    },
+    hidden: true
   },
   {
     path: '/app/design/:formId',

@@ -10,6 +10,9 @@
     >
       <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
         <el-collapse-item name="1" title="基本属性">
+          <el-form-item label="表单宽度">
+            <el-input v-model="designer.formConfig.width" />
+          </el-form-item>
           <el-form-item label="组件大小">
             <el-select v-model="designer.formConfig.size" style="width: 100%">
               <el-option

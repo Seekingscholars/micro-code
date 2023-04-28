@@ -1,14 +1,18 @@
 <template>
-  <el-form
-    ref="form"
-    :model="$model"
-    :disabled="designer.formConfig.disabled"
-    :label-position="designer.formConfig.labelPosition"
-    :label-width="designer.formConfig.labelWidth + 'px'"
-    :size="designer.formConfig.size"
-  >
-    <RenderWidget :designer="designer" :widget="designer" />
-  </el-form>
+  <div class="form-container">
+    <div class="form-main" :style="{width:designer.formConfig.width}">
+      <el-form
+        ref="form"
+        :model="$model"
+        :disabled="designer.formConfig.disabled"
+        :label-position="designer.formConfig.labelPosition"
+        :label-width="designer.formConfig.labelWidth + 'px'"
+        :size="designer.formConfig.size"
+      >
+        <RenderWidget :designer="designer" :widget="designer" />
+      </el-form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -129,3 +133,16 @@ export default {
   }
 }
 </script>
+<style scoped>
+.form-container{
+  width: 100%;
+  height: 100%;
+  background-color: #f5f6f8;
+}
+.form-main{
+  height: 100%;
+  background-color: #ffffff;
+  width: 100%;
+  margin: 0 auto;
+}
+</style>

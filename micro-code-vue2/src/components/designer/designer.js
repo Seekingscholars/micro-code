@@ -4,6 +4,7 @@ export function createDesigner(vueInstance) {
   return {
     widgetList: [],
     formConfig: {
+      width: '100%',
       size: '',
       labelWidth: 80,
       labelPosition: 'left',

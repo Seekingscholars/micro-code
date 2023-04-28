@@ -25,9 +25,9 @@ export default {
 .form-widget-container {
   padding: 10px;
   contain: paint;
-
+  height: 100%;
   .form-widget-list {
-    height: 60vh;
+    height: calc(100vh - 76px);
     padding: 10px;
   }
 

@@ -12,22 +12,22 @@
               @submit.native.prevent
             >
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <div  v-for="item in collapseList"  :key="item.type">
-                <el-collapse-item
-                  v-if="designer.selectedWidget[item.type]"
-                  :name="item.type"
-                  :title="item.name"
-                >
-                  <template v-for="propName in Object.keys(designer.selectedWidget[item.type])">
-                    <component
-                      :is="getPropEditor(propName)"
-                      v-if="getPropEditor(propName)!=null"
-                      :designer="designer"
-                      :option-model="designer.selectedWidget[item.type]"
-                      :selected-widget="designer.selectedWidget"
-                    />
-                  </template>
-                </el-collapse-item>
+                <div v-for="item in collapseList" :key="item.type">
+                  <el-collapse-item
+                    v-if="designer.selectedWidget[item.type]"
+                    :name="item.type"
+                    :title="item.name"
+                  >
+                    <template v-for="propName in Object.keys(designer.selectedWidget[item.type])">
+                      <component
+                        :is="getPropEditor(propName)"
+                        v-if="getPropEditor(propName)!=null"
+                        :designer="designer"
+                        :option-model="designer.selectedWidget[item.type]"
+                        :selected-widget="designer.selectedWidget"
+                      />
+                    </template>
+                  </el-collapse-item>
                 </div>
               </el-collapse>
             </el-form>
