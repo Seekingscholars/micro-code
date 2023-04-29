@@ -17,7 +17,7 @@
 
 <script>
 import request from '@/utils/request'
-import './container-widget/index'
+import './widget/index'
 import RenderWidget from './RenderWidget'
 
 export default {

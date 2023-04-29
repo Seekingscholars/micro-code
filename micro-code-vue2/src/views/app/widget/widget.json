@@ -1,0 +1,47 @@
+[
+  {
+    "type": "advance",
+    "name": "高级组件",
+    "children": [
+      {
+        "type": "submit",
+        "name": "提交",
+        "icon": "text-field",
+        "options": {
+          "name": "",
+          "group": "",
+          "type": "text",
+          "defaultValue": "",
+          "placeholder": "",
+          "size": "",
+          "readonly": false,
+          "disabled": false,
+          "hidden": false,
+          "clearable": true,
+          "showPassword": false,
+          "span": 24,
+          "minLength": null,
+          "maxLength": null,
+          "showWordLimit": false
+        },
+        "form-item": {
+          "label": "提交",
+          "disabled": false,
+          "hidden": false,
+          "width": null,
+          "required": false,
+          "validation": "",
+          "validationHint": ""
+        },
+        "events": {
+          "onValidate": "",
+          "onAppendButtonClick": "",
+          "input": "",
+          "change": "",
+          "focus": "",
+          "blur": ""
+        }
+      }
+    ]
+  }
+]

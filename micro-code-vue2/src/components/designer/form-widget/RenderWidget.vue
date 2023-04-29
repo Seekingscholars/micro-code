@@ -1,6 +1,5 @@
 <script>
 import Draggable from 'vuedraggable'
-import FieldComponents from './field-widget'
 import ColWrapper from './wrapper/ColWrapper'
 import StaticWrapper from './wrapper/StaticWrapper'
 import FormItemWrapper from './wrapper/FormItemWrapper'
@@ -12,8 +11,7 @@ export default {
     Draggable,
     ColWrapper,
     StaticWrapper,
-    FormItemWrapper,
-    ...FieldComponents
+    FormItemWrapper
   },
   props: {
     designer: Object,

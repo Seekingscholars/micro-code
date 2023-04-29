@@ -45,7 +45,8 @@ export default {
   methods: {
     async loadWidgets() {
       const widgetJson = await import('./widget.json')
-      this.widgetList = widgetJson.default
+      const customWidgetJson=await import('@/views/app/widget/widget.json')
+      this.widgetList = [...widgetJson.default, ...customWidgetJson.default]
       this.activeNames = this.widgetList.map(widget => widget.type)
     },
 
