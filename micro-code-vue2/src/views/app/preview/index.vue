@@ -4,7 +4,6 @@
 <script>
 import FormRender from '@/components/render/index.vue'
 import formApi from '@/api/form'
-import '@/views/app/widget/component/index'
 export default {
   components: { FormRender },
   data() {

@@ -22,7 +22,6 @@ export default {
       },
 
       set(newValue) {
-        //if ((!newValue && (newValue !== 0)) || isNaN(newValue)) {
         if ((newValue === undefined) || (newValue === null) || isNaN(newValue)) {
           this.optionModel.min = null
         } else {

@@ -1,4 +1,4 @@
-import {deepClone, generateId, overwriteObj} from '@/utils/util'
+import { deepClone, generateId } from '@/utils/util'
 
 export function createDesigner(vueInstance) {
   return {
@@ -29,8 +29,7 @@ export function createDesigner(vueInstance) {
         modifiedFlag = true
       }
       if (!!formJson && !!formJson.formConfig) {
-        // this.formConfig = importObj.formConfig
-        overwriteObj(this.formConfig, formJson.formConfig) /* 用=赋值，会导致inject依赖注入的formConfig属性变成非响应式 */
+        this.formConfig = Object.assign(this.formConfig, formJson.formConfig)
         modifiedFlag = true
       }
 
@@ -51,7 +50,7 @@ export function createDesigner(vueInstance) {
     clearSelected() {
       this.selectedId = null
       this.selectedWidgetName = null
-      this.selectedWidget = {} // this.selectedWidget = null
+      this.selectedWidget = {}
     },
 
     cloneWidget(widget) {
@@ -86,23 +85,6 @@ export function createDesigner(vueInstance) {
           const targetWidget = this.findWidget(handler, widget)
           if (targetWidget) {
             return targetWidget
-          }
-        }
-      }
-    },
-    removeWidgetById(widgetId, parentWidget = this) {
-      if (!parentWidget) {
-        return
-      }
-      if (parentWidget.widgetList) {
-        const widgetList = parentWidget.widgetList
-        for (let i = 0; i < widgetList.length; i++) {
-          const widget = widgetList[i]
-          if (widget.id === widgetId) {
-            widgetList.splice(i, 1)
-            return
-          } else {
-            this.removeWidgetById(widgetId, widget)
           }
         }
       }

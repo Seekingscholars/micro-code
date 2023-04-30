@@ -64,7 +64,6 @@ import FormDesigner from '@/components/designer/index.vue'
 import formApi from '@/api/form'
 import ApiPanel from './components/api-panel/index'
 import FormPermission from './components/form-permission/index'
-import '@/views/app/widget/component/index'
 export default {
   components: { FormDesigner, ApiPanel, FormPermission },
   data() {

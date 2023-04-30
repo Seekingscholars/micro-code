@@ -27,7 +27,6 @@ import LeftPanel from './left-panel/index.vue'
 import SettingPanel from './setting-panel/index.vue'
 import VFormWidget from './form-widget/index.vue'
 import { createDesigner } from './designer'
-import { addWindowResizeHandler, getAllContainerWidgets, getAllFieldWidgets, getQueryParam } from '@/utils/util'
 
 export default {
   name: 'FormDesigner',
@@ -58,11 +57,6 @@ export default {
   },
   mounted() {
     this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
-    addWindowResizeHandler(() => {
-      this.$nextTick(() => {
-        this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
-      })
-    })
   },
   methods: {
     setFormJson(formJson) {
@@ -91,22 +85,8 @@ export default {
     refreshDesigner() {
       this.flushed = false
       this.$nextTick(() => setTimeout(() => (this.flushed = true), 100))
-    },
-    /**
-     * 获取所有字段组件
-     * @returns {*[]}
-     */
-    getFieldWidgets(widgetList = null) {
-      return widgetList
-        ? getAllFieldWidgets(widgetList)
-        : getAllFieldWidgets(this.designer.widgetList)
-    },
-
-    getWidgetRef(widgetName, showError = false) {
-      return this.$refs['formRef'].getWidgetRef(widgetName, showError)
     }
 
-    // TODO: 增加更多方法！！
   }
 }
 </script>

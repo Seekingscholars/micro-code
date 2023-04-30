@@ -40,7 +40,7 @@
             <el-menu-item
               v-for="item in formList"
               :key="item.id"
-              :index="item.id"
+              :index="item.id.toString()"
               @click="()=>onFormClick(item)"
             >
               <div class="menu-item">
@@ -74,7 +74,6 @@
 import FormRender from '@/components/render/index.vue'
 import appApi from '@/api/app'
 import formApi from '@/api/form'
-
 export default {
   name: 'App',
   components: { FormRender },
@@ -115,7 +114,7 @@ export default {
     },
     async onFormClick(item) {
       if (this.selectFormId !== item.id) {
-        this.selectFormId = item.id
+        this.selectFormId = item.id.toString()
         this.flushed = false
         const formData = await formApi.get({ id: item.id })
         this.formJson = JSON.parse(formData.formJson)
