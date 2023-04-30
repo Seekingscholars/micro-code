@@ -3,7 +3,7 @@
     <div class="design-header">
       <slot name="header" />
     </div>
-    <div class="design-body">
+    <div class="design-body" v-if="flushed">
       <left-panel :designer="designer" class="design-body-left" >
         <template #left="{designer}">
           <slot name="left" :designer="designer"></slot>
@@ -11,7 +11,6 @@
       </left-panel>
       <el-scrollbar class="design-body-center scrollbar">
         <v-form-widget
-          v-if="flushed"
           ref="formRef"
           :designer="designer"
           :form-config="designer.formConfig"

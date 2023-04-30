@@ -4,13 +4,24 @@
       <template #header>
         <div class="form-design-header">
           <div class="header-title">
-            <el-tooltip content="上一级" effect="dark" placement="bottom">
-              <div class="header-title-back" @click="gotoApp">
+            <el-tooltip
+              content="上一级"
+              effect="dark"
+              placement="bottom"
+            >
+              <div
+                class="header-title-back"
+                @click="gotoApp"
+              >
                 <i class="el-icon-d-arrow-left" />
               </div>
             </el-tooltip>
             <div class="header-title-name">
-              <el-input v-model="modelForm.formName" size="small" @blur="!modelForm.formName?modelForm.formName='未命名表单':''" />
+              <el-input
+                v-model="modelForm.formName"
+                size="small"
+                @blur="!modelForm.formName?modelForm.formName='未命名表单':''"
+              />
             </div>
           </div>
           <div class="header-right">
@@ -43,19 +54,32 @@
         </div>
       </template>
       <template #left="{designer}">
-        <el-tab-pane label="数据源" name="datasource">
+        <el-tab-pane
+          label="数据源"
+          name="datasource"
+        >
           <div slot="label">
-            <el-tooltip content="数据源" placement="right">
+            <el-tooltip
+              content="数据源"
+              placement="right"
+            >
               <div class="icon-label"><i class="el-icon-coin" /></div>
             </el-tooltip>
           </div>
           <el-scrollbar class="scrollbar">
-            <ApiPanel ref="ApiPanelRef" :designer="designer" />
+            <ApiPanel
+              ref="ApiPanelRef"
+              :designer="designer"
+            />
           </el-scrollbar>
         </el-tab-pane>
       </template>
     </FormDesigner>
-    <FormPermission v-if="showFormPermissionFlag" :visible.sync="showFormPermissionFlag" :form="modelForm" />
+    <FormPermission
+      v-if="showFormPermissionFlag"
+      :visible.sync="showFormPermissionFlag"
+      :form="modelForm"
+    />
   </div>
 </template>
 
@@ -84,11 +108,19 @@ export default {
   },
   methods: {
     async getForm(formId) {
+      let widgetJson = await import('@/views/app/widget/widget.json')
+      widgetJson = widgetJson.default
       if (formId && formId !== '0') {
         this.modelForm = Object.assign(this.modelForm, await formApi.get({ id: formId }))
         this.$nextTick(() => {
-          this.$refs.FormDesignerRef.setFormJson(this.modelForm.formJson)
+          const formJson = JSON.parse(this.modelForm.formJson)
+          formJson.widgetJson = widgetJson
+          this.$refs.FormDesignerRef.setFormJson(formJson)
           this.$refs.ApiPanelRef.getList(formId)
+        })
+      } else {
+        this.$refs.FormDesignerRef.setFormJson({
+          widgetJson: widgetJson
         })
       }
     },

@@ -33,14 +33,14 @@
               <el-radio-button label="top">顶部对齐</el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="表单禁用">
-            <el-switch v-model="designer.formConfig.disabled" />
-          </el-form-item>
           <el-form-item label="全局数据">
             <el-button icon="el-icon-edit" plain round type="info" @click="editGlobalData">编写代码</el-button>
           </el-form-item>
           <el-form-item label="全局函数">
             <el-button icon="el-icon-edit" plain round type="info" @click="editGlobalFunction">编写代码</el-button>
+          </el-form-item>
+          <el-form-item label="表单禁用">
+            <el-switch v-model="designer.formConfig.disabled" />
           </el-form-item>
         </el-collapse-item>
 

@@ -14,6 +14,7 @@ export function createDesigner(vueInstance) {
       onCreated: '',
       onMounted: ''
     },
+    widgetJson: null,
     design: true,
     selectedId: null,
     selectedWidget: null,
@@ -23,14 +24,18 @@ export function createDesigner(vueInstance) {
     formWidget: null, // 表单设计容器
     loadFormJson(formJson) {
       let modifiedFlag = false
-
-      if (!!formJson && !!formJson.widgetList) {
-        this.widgetList = formJson.widgetList
-        modifiedFlag = true
-      }
-      if (!!formJson && !!formJson.formConfig) {
-        this.formConfig = Object.assign(this.formConfig, formJson.formConfig)
-        modifiedFlag = true
+      if (formJson) {
+        if (formJson.widgetList) {
+          this.widgetList = formJson.widgetList
+          modifiedFlag = true
+        }
+        if (formJson.formConfig) {
+          this.formConfig = Object.assign(this.formConfig, formJson.formConfig)
+          modifiedFlag = true
+        }
+        if (formJson.widgetJson) {
+          this.widgetJson = formJson.widgetJson
+        }
       }
 
       return modifiedFlag

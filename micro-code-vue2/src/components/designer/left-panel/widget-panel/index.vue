@@ -1,6 +1,14 @@
 <template>
-  <el-collapse v-model="activeNames" class="widget-collapse">
-    <el-collapse-item v-for="(item,index) in widgetList" :key="item.type+index" :name="item.type" :title="item.name">
+  <el-collapse
+    v-model="activeNames"
+    class="widget-collapse"
+  >
+    <el-collapse-item
+      v-for="(item,index) in widgetList"
+      :key="item.type+index"
+      :name="item.type"
+      :title="item.name"
+    >
       <template slot="title">
         <div class="title">{{ item.name }}</div>
       </template>
@@ -13,7 +21,12 @@
         ghost-class="ghost"
         tag="ul"
       >
-        <li v-for="(ctn,index) in item.children" :key="ctn.type+index" :title="ctn.name" class="widget-item">
+        <li
+          v-for="(ctn,index) in item.children"
+          :key="ctn.type+index"
+          :title="ctn.name"
+          class="widget-item"
+        >
           <span>{{ ctn.name }}</span>
         </li>
       </draggable>
@@ -45,8 +58,11 @@ export default {
   methods: {
     async loadWidgets() {
       const widgetJson = await import('./widget.json')
-      const customWidgetJson=await import('@/views/app/widget/widget.json')
-      this.widgetList = [...widgetJson.default, ...customWidgetJson.default]
+      if (this.designer.widgetJson) {
+        this.widgetList = [...widgetJson.default, ...this.designer.widgetJson]
+      } else {
+        this.widgetList = widgetJson.default
+      }
       this.activeNames = this.widgetList.map(widget => widget.type)
     },
 

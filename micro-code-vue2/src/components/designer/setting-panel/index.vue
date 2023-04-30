@@ -11,25 +11,7 @@
               size="mini"
               @submit.native.prevent
             >
-              <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <div v-for="item in collapseList" :key="item.type">
-                  <el-collapse-item
-                    v-if="designer.selectedWidget[item.type]"
-                    :name="item.type"
-                    :title="item.name"
-                  >
-                    <template v-for="propName in Object.keys(designer.selectedWidget[item.type])">
-                      <component
-                        :is="getPropEditor(propName)"
-                        v-if="getPropEditor(propName)!=null"
-                        :designer="designer"
-                        :option-model="designer.selectedWidget[item.type]"
-                        :selected-widget="designer.selectedWidget"
-                      />
-                    </template>
-                  </el-collapse-item>
-                </div>
-              </el-collapse>
+              <FormEditor :designer="designer"></FormEditor>
             </el-form>
           </template>
         </el-scrollbar>
@@ -71,9 +53,8 @@
 
 <script>
 import CodeEditor from '@/components/code-editor/index'
-import PropertyEditors from './property-editor'
 import FormSetting from './form-setting'
-import collapseJson from './collapse.json'
+import FormEditor from './form-editor'
 
 export default {
   name: 'SettingPanel',
@@ -81,7 +62,7 @@ export default {
   components: {
     CodeEditor,
     FormSetting,
-    ...PropertyEditors
+    FormEditor
   },
   props: {
     designer: Object
@@ -89,8 +70,6 @@ export default {
   data() {
     return {
       activeTab: '2',
-      widgetActiveCollapseNames: [],
-      collapseList: [],
       showWidgetEventDialogFlag: false,
       eventHandlerCode: '',
       curEventName: '',
@@ -124,8 +103,6 @@ export default {
     })
   },
   mounted() {
-    this.collapseList = collapseJson
-    this.widgetActiveCollapseNames = collapseJson.map(collapse => collapse.type)
     if (!this.designer.selectedWidget) {
       this.activeTab = '2'
     } else {
@@ -133,18 +110,6 @@ export default {
     }
   },
   methods: {
-    getPropEditor(propName) {
-      const editorName = `${propName}-editor`
-      const ownPropEditorName = `${this.designer.selectedWidget.type}-${editorName}`
-      if (this.$options.components[ownPropEditorName]) { // 局部注册的属性编辑器组件
-        return ownPropEditorName
-      }
-      if (this.$options.components[editorName]) { // 局部注册的属性编辑器组件
-        return editorName
-      }
-      return null
-    },
-
     editEventHandler(eventName, eventParams) {
       this.curEventName = eventName
       this.eventHeader = `${this.optionModel.name}.${eventName}(${eventParams.join(', ')}) {`
