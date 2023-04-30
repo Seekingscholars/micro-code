@@ -2,7 +2,7 @@ package com.moxa.micro.core.dream.sequence;
 
 import com.moxa.dream.system.table.TableInfo;
 import com.moxa.dream.template.sequence.AbstractSequence;
-import com.moxa.micro.core.exception.MicroException;
+import com.moxa.micro.core.exception.SoothException;
 import com.moxa.micro.core.util.SnowFlake;
 
 public class SnowFlakeSequence extends AbstractSequence {
@@ -17,6 +17,6 @@ public class SnowFlakeSequence extends AbstractSequence {
         } else if (type == Integer.class) {
             return nextId.intValue();
         }
-        throw new MicroException("不支持的主键类型：" + type.getName());
+        throw new SoothException("不支持的主键类型：" + type.getName());
     }
 }

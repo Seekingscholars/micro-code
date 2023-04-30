@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="布局模式">
-    <el-select v-model="optionModel.justify">
+    <el-select v-model="optionModel.justify" style="width: 100%">
       <el-option
         v-for="item in dataList"
         :key="item.value"

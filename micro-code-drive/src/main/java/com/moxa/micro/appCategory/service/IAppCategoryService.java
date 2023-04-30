@@ -1,8 +1,8 @@
-package com.moxa.micro.category.service;
+package com.moxa.micro.appCategory.service;
 
 import com.moxa.dream.template.service.IService;
-import com.moxa.micro.category.table.AppCategory;
-import com.moxa.micro.category.view.AppCategoryBean;
+import com.moxa.micro.appCategory.table.AppCategory;
+import com.moxa.micro.appCategory.view.AppCategoryBean;
 
 import java.util.List;
 

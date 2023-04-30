@@ -136,11 +136,10 @@ export default {
 <style lang="scss" scoped>
 $setting-color: #0db3a6;
 .dashboard-container {
-  padding: 10px;
 }
 
 .dashboard-card {
-  margin: 10px;
+  margin: 20px;
 }
 
 .dashboard-header {

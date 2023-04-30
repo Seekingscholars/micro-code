@@ -5,7 +5,7 @@ import com.moxa.dream.system.config.Page;
 import com.moxa.dream.template.service.IService;
 import com.moxa.micro.core.entity.PageModel;
 import com.moxa.micro.core.entity.Result;
-import com.moxa.micro.core.exception.MicroException;
+import com.moxa.micro.core.exception.SoothException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public abstract class BaseController<Service extends IService, EditView, SearchM
 
     public BaseController(String bizModule) {
         if (StrUtil.isBlank(bizModule)) {
-            throw new MicroException("业务模块名不能为空");
+            throw new SoothException("业务模块名不能为空");
         }
         this.bizModule = bizModule;
     }

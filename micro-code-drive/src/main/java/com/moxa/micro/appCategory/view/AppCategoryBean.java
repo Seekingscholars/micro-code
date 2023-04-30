@@ -1,7 +1,7 @@
-package com.moxa.micro.category.view;
+package com.moxa.micro.appCategory.view;
 
 import com.moxa.micro.app.view.AppLV;
-import com.moxa.micro.category.table.AppCategory;
+import com.moxa.micro.appCategory.table.AppCategory;
 import lombok.Data;
 
 import java.util.List;

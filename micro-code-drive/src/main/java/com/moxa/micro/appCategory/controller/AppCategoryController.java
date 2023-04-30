@@ -1,9 +1,9 @@
-package com.moxa.micro.category.controller;
+package com.moxa.micro.appCategory.controller;
 
-import com.moxa.micro.category.model.AppCategoryModel;
-import com.moxa.micro.category.service.IAppCategoryService;
-import com.moxa.micro.category.table.AppCategory;
-import com.moxa.micro.category.view.AppCategoryBean;
+import com.moxa.micro.appCategory.model.AppCategoryModel;
+import com.moxa.micro.appCategory.service.IAppCategoryService;
+import com.moxa.micro.appCategory.table.AppCategory;
+import com.moxa.micro.appCategory.view.AppCategoryBean;
 import com.moxa.micro.core.controller.BaseController;
 import com.moxa.micro.core.entity.Result;
 import org.springframework.web.bind.annotation.*;

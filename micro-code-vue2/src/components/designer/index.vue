@@ -40,41 +40,21 @@ export default {
   },
   provide() {
     return {
-      serverFieldList: this.fieldList,
-      getDesignerConfig: () => this.designerConfig,
-      getBannedWidgets: () => this.bannedWidgets,
       $model: this.dataModel
     }
   },
   props: {
-    /* 禁止显示的组件名称数组 */
-    bannedWidgets: {
-      type: Array,
-      default: () => []
-    },
 
-    designerConfig: {
-      type: Object,
-      default: () => {
-        return {}
-      }
-    }
   },
   data() {
     return {
-      vsCodeFlag: false,
-      caseName: '',
       flushed: true,
       scrollerHeight: 0,
       designer: createDesigner(this),
-
-      fieldList: [],
       dataModel: {}
     }
   },
   created() {
-    this.vsCodeFlag = getQueryParam('vscode') === 1
-    this.caseName = getQueryParam('case')
   },
   mounted() {
     this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
@@ -122,22 +102,8 @@ export default {
         : getAllFieldWidgets(this.designer.widgetList)
     },
 
-    /**
-     * 获取所有容器组件
-     * @returns {*[]}
-     */
-    getContainerWidgets(widgetList = null) {
-      return widgetList
-        ? getAllContainerWidgets(widgetList)
-        : getAllContainerWidgets(this.designer.widgetList)
-    },
-
     getWidgetRef(widgetName, showError = false) {
       return this.$refs['formRef'].getWidgetRef(widgetName, showError)
-    },
-
-    getSelectedWidgetRef() {
-      return this.$refs['formRef'].getSelectedWidgetRef()
     }
 
     // TODO: 增加更多方法！！

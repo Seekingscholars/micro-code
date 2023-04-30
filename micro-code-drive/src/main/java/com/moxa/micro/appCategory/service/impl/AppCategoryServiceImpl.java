@@ -1,14 +1,14 @@
-package com.moxa.micro.category.service.impl;
+package com.moxa.micro.appCategory.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.moxa.dream.boot.impl.ServiceImpl;
 import com.moxa.micro.app.model.AppModel;
 import com.moxa.micro.app.service.IAppService;
 import com.moxa.micro.app.view.AppLV;
-import com.moxa.micro.category.model.AppCategoryModel;
-import com.moxa.micro.category.service.IAppCategoryService;
-import com.moxa.micro.category.table.AppCategory;
-import com.moxa.micro.category.view.AppCategoryBean;
+import com.moxa.micro.appCategory.model.AppCategoryModel;
+import com.moxa.micro.appCategory.service.IAppCategoryService;
+import com.moxa.micro.appCategory.table.AppCategory;
+import com.moxa.micro.appCategory.view.AppCategoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" label-position="left">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      label-position="left"
+    >
 
       <div class="title-container">
         <h3 class="title">MICRO CODE</h3>
@@ -34,8 +40,18 @@
           style="width: 70%"
         />
         <div class="login-code">
-          <img v-if="codeForm.imgUrl" :src="codeForm.imgUrl" class="login-code-img" @click="handleChangeCode">
-          <img v-else class="login-code-img" src="../../assets/images/checkcode.png" @click="handleChangeCode">
+          <img
+            v-if="codeForm.imgUrl"
+            :src="codeForm.imgUrl"
+            class="login-code-img"
+            @click="handleChangeCode"
+          >
+          <img
+            v-else
+            class="login-code-img"
+            src="../../assets/images/checkcode.png"
+            @click="handleChangeCode"
+          >
         </div>
       </el-form-item>
 

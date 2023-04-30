@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="水平排列">
-    <el-select v-model="optionModel.type">
+    <el-select v-model="optionModel.type" style="width: 100%">
       <el-option v-for="item in dataList" :key="item.value" :label="item.label"
                  :value="item.value"
       >

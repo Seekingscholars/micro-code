@@ -8,6 +8,8 @@ import com.moxa.micro.form.view.AppFormEV;
 import com.moxa.micro.form.view.AppFormPermission;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/form")
@@ -38,5 +40,11 @@ public class AppFormController extends BaseController<IAppFormService, AppFormEV
     public Result getFormJson(@RequestParam(name = "id") Long id,@RequestParam(name="password",required = false)String password) {
         Result result = service.getFormJson(id,password);
         return result;
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/submit")
+    public Result submit(@RequestBody Map<String,Object>map) {
+        return Result.ok();
     }
 }

@@ -6,13 +6,11 @@
   </el-carousel>
 </template>
 <script>
-import RenderWidget from '../RenderWidget'
 
 export default {
   name: 'carousel-widget',
   componentName: 'ContainerWidget',
   components: {
-    RenderWidget
   },
   props: {
     field: Object,

@@ -28,7 +28,7 @@ export default {
   height: 100%;
   overflow-x: auto;
   .form-widget-list {
-    height: calc(100vh - 86px);
+    height: calc(100vh - 100px);
     padding: 10px;
   }
 

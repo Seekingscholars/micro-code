@@ -1,4 +1,4 @@
-package com.moxa.micro.category.table;
+package com.moxa.micro.appCategory.table;
 
 import com.moxa.dream.system.annotation.Column;
 import com.moxa.dream.system.annotation.Id;

@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.moxa.dream.boot.impl.ServiceImpl;
 import com.moxa.micro.core.entity.LoginUser;
-import com.moxa.micro.core.exception.MicroException;
+import com.moxa.micro.core.exception.SoothException;
 import com.moxa.micro.core.util.ClientUtil;
 import com.moxa.micro.user.mapper.SysUserMapper;
 import com.moxa.micro.user.model.BasicInfoModel;
@@ -34,20 +34,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserListView, SysUser> im
         String newPassword = userPasswordModel.getPassword();
         String confirmPassword = userPasswordModel.getConfirmPassword();
         if (StrUtil.isEmpty(oldPassword)) {
-            throw new MicroException("旧密码不允许为空");
+            throw new SoothException("旧密码不允许为空");
         }
         if (StrUtil.isEmpty(newPassword)) {
-            throw new MicroException("新密码不允许为空");
+            throw new SoothException("新密码不允许为空");
         }
         if (!newPassword.equals(confirmPassword)) {
-            throw new MicroException("两次输入密码不一致");
+            throw new SoothException("两次输入密码不一致");
         }
         LoginUser loginUser = ClientUtil.getLoginUser();
         if (loginUser == null) {
-            throw new MicroException("用户不存在");
+            throw new SoothException("用户不存在");
         }
         if (!BCrypt.checkpw(oldPassword, loginUser.getPassword())) {
-            throw new MicroException("旧密码输入错误");
+            throw new SoothException("旧密码输入错误");
         }
         String password = BCrypt.hashpw(userPasswordModel.getPassword());
         return sysUserMapper.updatePassword(loginUser.getId(), password);
@@ -57,7 +57,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserListView, SysUser> im
     public int updateBasicInfo(BasicInfoModel basicInfoModel) {
         LoginUser loginUser = ClientUtil.getLoginUser();
         if (loginUser == null) {
-            throw new MicroException("用户不存在");
+            throw new SoothException("用户不存在");
         }
         basicInfoModel.setId(loginUser.getId());
         return templateMapper.updateById(basicInfoModel);

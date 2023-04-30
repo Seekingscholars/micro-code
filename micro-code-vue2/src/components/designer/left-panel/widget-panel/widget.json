@@ -14,7 +14,6 @@
           "type": "",
           "justify": "start",
           "align": "",
-          "hidden": false,
           "span": 24
         }
       },
@@ -127,14 +126,13 @@
           "defaultValue": "",
           "placeholder": "",
           "size": "",
-          "readonly": false,
-          "disabled": false,
-          "hidden": false,
-          "clearable": true,
-          "showPassword": false,
           "span": 24,
           "minLength": null,
           "maxLength": null,
+          "readonly": false,
+          "disabled": false,
+          "clearable": true,
+          "showPassword": false,
           "showWordLimit": false
         },
         "form-item": {
@@ -537,9 +535,9 @@
           "name": "",
           "label": "",
           "size": "",
+          "type": "",
           "disabled": false,
           "hidden": false,
-          "type": "",
           "plain": false,
           "round": false,
           "circle": false,

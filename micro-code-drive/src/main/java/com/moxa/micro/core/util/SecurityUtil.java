@@ -9,7 +9,7 @@ public class SecurityUtil {
     /**
      * 加密key
      */
-    private static final String key = "DreamDrivemirco!";
+    private static final String key = "DreamDriveSooth!";
 
     //---AES加密---------begin---------
 

@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="显示类型">
-    <el-select v-model="optionModel.type">
+    <el-select v-model="optionModel.type" style="width:100%">
       <el-option label="default" value=""></el-option>
       <el-option label="primary" value="primary"></el-option>
       <el-option label="success" value="success"></el-option>

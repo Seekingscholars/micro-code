@@ -8,7 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moxa.micro.core.constant.CommonConstant;
 import com.moxa.micro.core.entity.Result;
-import com.moxa.micro.core.exception.MicroException;
+import com.moxa.micro.core.exception.SoothException;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -98,9 +98,9 @@ public class JwtUtil {
      *
      * @param request
      * @return
-     * @throws MicroException
+     * @throws SoothException
      */
-    public static String getUserNameByToken(HttpServletRequest request) throws MicroException {
+    public static String getUserNameByToken(HttpServletRequest request) throws SoothException {
         String accessToken = request.getHeader(CommonConstant.X_ACCESS_TOKEN);
         String username = getUsername(accessToken);
         return username;

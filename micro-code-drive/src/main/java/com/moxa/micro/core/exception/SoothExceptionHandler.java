@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
-public class MicroExceptionHandler {
+public class SoothExceptionHandler {
     /**
      * 处理自定义异常
      */
-    @ExceptionHandler(MicroException.class)
-    public Result<?> handleMicroException(MicroException e) {
+    @ExceptionHandler(SoothException.class)
+    public Result<?> handleMicroException(SoothException e) {
         Throwable throwable = e.getCause();
         if (throwable != null) {
             handleThrowable(throwable);

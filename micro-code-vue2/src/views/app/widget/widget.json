@@ -6,40 +6,18 @@
       {
         "type": "submit",
         "name": "提交",
-        "icon": "text-field",
+        "icon": "",
         "options": {
           "name": "",
-          "group": "",
-          "type": "text",
-          "defaultValue": "",
-          "placeholder": "",
-          "size": "",
-          "readonly": false,
-          "disabled": false,
-          "hidden": false,
-          "clearable": true,
-          "showPassword": false,
-          "span": 24,
-          "minLength": null,
-          "maxLength": null,
-          "showWordLimit": false
-        },
-        "form-item": {
           "label": "提交",
+          "size": "",
+          "button-type": "",
+          "icon": null,
+          "span": 24,
           "disabled": false,
-          "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
-        },
-        "events": {
-          "onValidate": "",
-          "onAppendButtonClick": "",
-          "input": "",
-          "change": "",
-          "focus": "",
-          "blur": ""
+          "plain": false,
+          "round": false,
+          "circle": false
         }
       }
     ]

@@ -3,6 +3,7 @@
 </template>
 <script>
 import FormRender from '@/components/render/index.vue'
+import '@/views/app/widget/component/index'
 import formApi from '@/api/form'
 import { Message, MessageBox } from 'element-ui'
 import md5 from 'js-md5'

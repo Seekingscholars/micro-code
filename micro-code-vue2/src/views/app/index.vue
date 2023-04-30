@@ -2,8 +2,15 @@
   <div class="app-root">
     <div class="app-header">
       <div class="app-header-title">
-        <el-tooltip content="上一级" effect="dark" placement="bottom">
-          <span class="app-header-title-name" @click="gotoDashboard">
+        <el-tooltip
+          content="上一级"
+          effect="dark"
+          placement="bottom"
+        >
+          <span
+            class="app-header-title-name"
+            @click="gotoDashboard"
+          >
             <span>
               <i class="el-icon-d-arrow-left" />
             </span>
@@ -11,48 +18,55 @@
             </span>
           </span>
         </el-tooltip>
-        <el-tooltip content="新建表单" effect="dark" placement="bottom">
-          <span class="app-header-title-icon" @click="createAppForm">
+        <el-tooltip
+          content="新建表单"
+          effect="dark"
+          placement="bottom"
+        >
+          <span
+            class="app-header-title-icon"
+            @click="createAppForm"
+          >
             <i class="el-icon-plus" />
           </span>
         </el-tooltip>
       </div>
     </div>
-    <div class="app-container">
+    <el-container class="app-container">
       <div class="app-aside">
-        <div
-          v-for="item in formList"
-          :key="item.id"
-          :class="{'app-form':true,'app-form-selected':selectFormId===item.id}"
-          @click="()=>onFormClick(item)"
-          @dblclick="()=>handleFormEdit(item)"
-        >
-          <div>
-            <i class="el-icon-menu" />
-            <span class="app-form-title">{{ item.formName }}</span>
-          </div>
-          <div class="app-form-setting" @click.stop>
-            <el-popover
-              placement="bottom"
-              trigger="click"
+        <el-scrollbar :style="{height:height+'px'}">
+          <el-menu
+            :default-active="selectFormId">
+            <el-menu-item
+              v-for="item in formList"
+              :key="item.id"
+              :index="item.id"
+              @click="()=>onFormClick(item)"
             >
-              <div class="app-form-setting-menu">
-                <div class="app-form-setting-menu-item" @click="()=>handleFormEdit(item)"><i class="el-icon-edit" /><span
-                  class="app-form-setting-menu-item-title"
-                >编辑</span></div>
-                <div class="app-form-setting-menu-item" style="color: #ef5c5c" @click="()=>handleDeleteForm(item)"><i class="el-icon-delete" /><span
-                  class="app-form-setting-menu-item-title"
-                >删除</span></div>
+              <div class="menu-item">
+                <div>
+                  <i class="el-icon-document" />
+                  <span slot="title">{{ item.formName }}</span>
+                </div>
+                <div class="menu-item-toolbar">
+                  <span @click="()=>handleFormEdit(item)"><i class="el-icon-edit" title="编辑"/></span>
+                  <span
+                    style="color: #ef5c5c"
+                    @click="()=>handleDeleteForm(item)"
+                  ><i class="el-icon-delete" title="删除"/></span>
+                </div>
               </div>
-              <div slot="reference"><i class="el-icon-more" /></div>
-            </el-popover>
-          </div>
-        </div>
+            </el-menu-item>
+          </el-menu>
+        </el-scrollbar>
       </div>
       <div class="app-main">
-        <FormRender v-if="flushed" :form-json="formJson" />
+        <FormRender
+          v-if="flushed"
+          :form-json="formJson"
+        />
       </div>
-    </div>
+    </el-container>
   </div>
 </template>
 
@@ -72,6 +86,11 @@ export default {
       formList: [],
       formJson: {},
       app: {}
+    }
+  },
+  computed: {
+    height: () => {
+      return window.innerHeight - 90
     }
   },
   created() {
@@ -167,49 +186,16 @@ export default {
   flex: 1;
   padding: 10px;
 }
-
-.app-form {
-  padding: 15px 5px 15px 15px;
+.menu-item{
   display: flex;
   justify-content: space-between;
-  /*cursor: pointer;*/
-  /*border-radius: 12px;*/
-}
-
-.app-form-title {
-  margin-left: 5px;
-}
-
-.app-form-setting {
-  display: none;
-}
-
-.app-form:hover {
-  background-color: #f6f4f4;
-}
-
-.app-form:hover .app-form-setting {
-  display: inline-block;
-}
-
-.app-form-selected{
-  background-color: #eaecfd;
-}
-
-.app-form-selected .app-form-setting {
-  display: inline-block;
-}
-
-.app-form-setting-menu-item {
-  padding: 5px;
   cursor: pointer;
 }
-
-.app-form-setting-menu-item:hover {
-  background-color: #eaecfd;
+.menu-item-toolbar{
+display: none;
+}
+.menu-item:hover .menu-item-toolbar{
+  display: inline-block;
 }
 
-.app-form-setting-menu-item-title {
-  margin-left: 5px;
-}
 </style>

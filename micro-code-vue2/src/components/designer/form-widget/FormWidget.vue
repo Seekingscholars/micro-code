@@ -31,7 +31,8 @@ export default {
   },
   provide() {
     return {
-      wrapWith: this.wrapWith
+      wrapWith: this.wrapWith,
+      validate: this.validate
     }
   },
   created() {
@@ -138,11 +139,14 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #f5f6f8;
+  position: relative;
 }
 .form-main{
   height: 100%;
   background-color: #ffffff;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  padding: 10px;
 }
 </style>
