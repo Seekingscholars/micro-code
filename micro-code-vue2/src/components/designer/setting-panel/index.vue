@@ -1,7 +1,13 @@
 <template>
   <div class="panel-container">
-    <el-tabs :active-name="activeTab" style="height: 100%;">
-      <el-tab-pane label="组件设置" name="1">
+    <el-tabs
+      :active-name="activeTab"
+      style="height: 100%;"
+    >
+      <el-tab-pane
+        label="组件设置"
+        name="1"
+      >
         <el-scrollbar class="scrollbar">
           <template v-if="!!designer.selectedWidget">
             <el-form
@@ -11,15 +17,22 @@
               size="mini"
               @submit.native.prevent
             >
-              <FormEditor :designer="designer"></FormEditor>
+              <FormEditor :designer="designer" />
             </el-form>
           </template>
         </el-scrollbar>
       </el-tab-pane>
 
-      <el-tab-pane v-if="!!designer" label="表单设置" name="2">
+      <el-tab-pane
+        v-if="!!designer"
+        label="表单设置"
+        name="2"
+      >
         <el-scrollbar class="scrollbar">
-          <form-setting :designer="designer" :form-config="designer.formConfig" />
+          <form-setting
+            :designer="designer"
+            :form-config="designer.formConfig"
+          />
         </el-scrollbar>
       </el-tab-pane>
     </el-tabs>
@@ -35,14 +48,33 @@
       class="small-padding-dialog"
       title="组件事件处理"
     >
-      <el-alert :closable="false" :title="eventHeader" type="info" />
-      <code-editor ref="ecEditor" v-model="eventHandlerCode" :mode="'javascript'" :readonly="false" />
-      <el-alert :closable="false" title="}" type="info" />
-      <div slot="footer" class="dialog-footer">
+      <el-alert
+        :closable="false"
+        :title="eventHeader"
+        type="info"
+      />
+      <code-editor
+        ref="ecEditor"
+        v-model="eventHandlerCode"
+        :mode="'javascript'"
+        :readonly="false"
+      />
+      <el-alert
+        :closable="false"
+        title="}"
+        type="info"
+      />
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button @click="showWidgetEventDialogFlag = false">
           取消
         </el-button>
-        <el-button type="primary" @click="saveEventHandler">
+        <el-button
+          type="primary"
+          @click="saveEventHandler"
+        >
           确定
         </el-button>
       </div>

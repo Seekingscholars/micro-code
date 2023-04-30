@@ -109,18 +109,22 @@ export default {
   methods: {
     async getForm(formId) {
       let widgetJson = await import('@/views/app/widget/widget.json')
+      let collapseJson = await import('@/views/app/widget/collapse.json')
       widgetJson = widgetJson.default
+      collapseJson = collapseJson.default
       if (formId && formId !== '0') {
         this.modelForm = Object.assign(this.modelForm, await formApi.get({ id: formId }))
         this.$nextTick(() => {
           const formJson = JSON.parse(this.modelForm.formJson)
           formJson.widgetJson = widgetJson
+          formJson.collapseJson = collapseJson
           this.$refs.FormDesignerRef.setFormJson(formJson)
           this.$refs.ApiPanelRef.getList(formId)
         })
       } else {
         this.$refs.FormDesignerRef.setFormJson({
-          widgetJson: widgetJson
+          widgetJson: widgetJson,
+          collapseJson: collapseJson
         })
       }
     },

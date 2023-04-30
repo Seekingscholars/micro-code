@@ -1,5 +1,4 @@
 import { deepClone, generateId } from '@/utils/util'
-
 export function createDesigner(vueInstance) {
   return {
     widgetList: [],
@@ -15,6 +14,7 @@ export function createDesigner(vueInstance) {
       onMounted: ''
     },
     widgetJson: null,
+    collapseJson: null,
     design: true,
     selectedId: null,
     selectedWidget: null,
@@ -35,6 +35,9 @@ export function createDesigner(vueInstance) {
         }
         if (formJson.widgetJson) {
           this.widgetJson = formJson.widgetJson
+        }
+        if (formJson.collapseJson) {
+          this.collapseJson = formJson.collapseJson
         }
       }
 

@@ -13,22 +13,18 @@ export default {
     }
   },
   created() {
-    this.collapseList = collapseJson
-    this.widgetActiveCollapseNames = collapseJson.map(collapse => collapse.type)
+    if (this.designer.collapseJson) {
+      this.collapseList = [...collapseJson, ...this.designer.collapseJson]
+    } else {
+      this.collapseList = collapseJson
+    }
+    this.widgetActiveCollapseNames = this.collapseList.map(collapse => collapse.type)
   },
   methods: {
     getPropEditor(propName) {
       const editorName = `${propName}-editor`
       const ownPropEditorName = `${this.designer.selectedWidget.type}-${editorName}`
-      let editor = PropertyEditors[ownPropEditorName]
-      if (editor != null) {
-        return editor
-      }
-      editor = PropertyEditors[editorName]
-      if (editor != null) {
-        return editor
-      }
-      return null
+      return PropertyEditors[ownPropEditorName] || this.$root.$options.components[ownPropEditorName] || PropertyEditors[editorName] || this.$root.$options.components[editorName]
     }
   },
   render() {

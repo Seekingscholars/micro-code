@@ -18,6 +18,9 @@
           "plain": false,
           "round": false,
           "circle": false
+        },
+        "datasource": {
+          "database": ""
         }
       }
     ]

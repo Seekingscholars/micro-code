@@ -3,20 +3,43 @@
     <el-card class="dashboard-card">
       <div class="dashboard-header">
         <div class="dashboard-title"><span>我的应用</span>
-          <el-tooltip content="应用分组设置" effect="dark" placement="right">
-            <i class="dashboard-title-setting el-icon-setting" style="cursor: pointer" @click="createCategoryApp" />
+          <el-tooltip
+            content="应用分组设置"
+            effect="dark"
+            placement="right"
+          >
+            <i
+              class="dashboard-title-setting el-icon-setting"
+              style="cursor: pointer"
+              @click="createCategoryApp"
+            />
           </el-tooltip>
         </div>
         <div class="dashboard-action">
           <div class="dashboard-action-item">
-            <el-input v-model="name" placeholder="请输入应用名称进行搜索" prefix-icon="el-icon-search" type="text" clearable @input="handleSearch" />
+            <el-input
+              v-model="name"
+              placeholder="请输入应用名称进行搜索"
+              prefix-icon="el-icon-search"
+              type="text"
+              clearable
+              @input="handleSearch"
+            />
           </div>
           <div class="dashboard-action-item">
-            <el-button icon="el-icon-plus" type="primary" @click="createApp">新建应用</el-button>
+            <el-button
+              icon="el-icon-plus"
+              type="primary"
+              @click="createApp"
+            >新建应用</el-button>
           </div>
         </div>
       </div>
-      <div v-for="item in filterAppList" :key="item.category.id" class="dashboard-body">
+      <div
+        v-for="item in filterAppList"
+        :key="item.category.id"
+        class="dashboard-body"
+      >
         <div v-if="item.appList&&item.appList.length>0">
           <div class="dashboard-sub-title">{{ item.category.categoryName }}</div>
           <div class="dashboard-sub-body">
@@ -26,25 +49,41 @@
               :class="{'dashboard-sub-body-item':true,'dashboard-sub-body-item-selected':selectAppId===app.id}"
               @click="()=>gotoApp(app)"
             >
-              <div class="dashboard-action-item-setting" @click.stop="selectAppId=app.id">
+              <div
+                class="dashboard-action-item-setting"
+                @click.stop="selectAppId=app.id"
+              >
                 <el-popover
                   :value="selectAppId===app.id"
                   placement="bottom"
                   trigger="click"
                 >
                   <div class="dashboard-action-item-setting-menu">
-                    <div class="dashboard-action-item-setting-menu-item" @click="()=>handleEditApp(app)"><i class="el-icon-edit" /><span
+                    <div
+                      class="dashboard-action-item-setting-menu-item"
+                      @click="()=>handleEditApp(app)"
+                    ><i class="el-icon-edit" /><span
                       class="dashboard-action-item-setting-menu-item-title"
                     >编辑</span></div>
-                    <div class="dashboard-action-item-setting-menu-item" style="color: #ef5c5c" @click="()=>handleDeleteApp(app)"><i
+                    <div
+                      class="dashboard-action-item-setting-menu-item"
+                      style="color: #ef5c5c"
+                      @click="()=>handleDeleteApp(app)"
+                    ><i
                       class="el-icon-delete"
                     /><span class="dashboard-action-item-setting-menu-item-title">删除</span></div>
                   </div>
                   <div slot="reference"><i class="el-icon-setting" /></div>
                 </el-popover>
               </div>
-              <div class="dashboard-sub-body-item-app" :style="{backgroundColor:app.color}">
-                <svg-icon class="svg-icon" :icon-class="app.imageName" />
+              <div
+                class="dashboard-sub-body-item-app"
+                :style="{backgroundColor:app.color}"
+              >
+                <svg-icon
+                  class="svg-icon"
+                  :icon-class="app.imageName"
+                />
               </div>
               <div class="dashboard-sub-body-item-title">{{ app.appName }}</div>
             </div>
@@ -52,8 +91,17 @@
         </div>
       </div>
     </el-card>
-    <CreateEmptyAppDialog v-if="showAppDialogFlag" :visible.sync="showAppDialogFlag" :app="app" @ok="listApp" />
-    <CreateCategoryDrawer v-if="showAppDrawerFlag" :visible.sync="showAppDrawerFlag" @ok="listApp" />
+    <CreateEmptyAppDialog
+      v-if="showAppDialogFlag"
+      :visible.sync="showAppDialogFlag"
+      :app="app"
+      @ok="listApp"
+    />
+    <CreateCategoryDrawer
+      v-if="showAppDrawerFlag"
+      :visible.sync="showAppDrawerFlag"
+      @ok="listApp"
+    />
   </div>
 </template>
 <script>
