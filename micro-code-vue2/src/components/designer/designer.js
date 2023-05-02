@@ -9,8 +9,6 @@ export function createDesigner(vueInstance) {
       labelPosition: 'left',
       disabled: false,
       dataCode: '',
-      functionCode: '',
-      onCreated: '',
       onMounted: ''
     },
     widgetJson: null,
@@ -64,7 +62,7 @@ export function createDesigner(vueInstance) {
     cloneWidget(widget) {
       return deepClone(widget, (data, label) => {
         if (label === 'id') {
-          return generateId()
+          return data.type+generateId()
         }
         return data[label]
       })

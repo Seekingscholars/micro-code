@@ -84,7 +84,6 @@ export default {
       typeList: [
         {value: 'bar', label: '柱状图'},
         {value: 'line', label: '折线图'},
-        {value: 'pie', label: '饼图'},
         {value: 'scatter', label: '散点图'}
       ]
     }

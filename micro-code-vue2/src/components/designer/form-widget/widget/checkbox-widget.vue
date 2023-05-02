@@ -1,5 +1,5 @@
 <template>
-  <el-checkbox-group v-model="dataModel[field.options.name]"
+  <el-checkbox-group v-model="value"
                      :disabled="field.options.disabled" :size="field.options.size"
                      v-on="getListeners(field)"
   >
@@ -29,13 +29,26 @@ export default {
     field: Object
   },
   computed: {
+    value: {
+      get() {
+        if (!this.dataModel[this.field.options.name]){
+          return []
+        }else {
+          return this.dataModel[this.field.options.name]
+        }
+      },
+
+      set(newValue) {
+        this.dataModel[this.field.options.name]=newValue
+      }
+    },
     dataList() {
       const optionItem = this.field['option-item']
       const data = optionItem.data
       const items = optionItem.items
       let dataList
       if (!!data) {
-        let customFn = new Function(this.wrapWith('return ' + data))
+        const customFn = new Function(this.wrapWith('return ' + data))
         dataList = customFn.call(this)
       } else if (items) {
         dataList = items
@@ -45,8 +58,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-
-</style>

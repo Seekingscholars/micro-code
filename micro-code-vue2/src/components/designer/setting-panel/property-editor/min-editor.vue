@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="最小值">
-    <el-input-number v-model="minValue" class="hide-spin-button" style="width: 100%"></el-input-number>
+    <el-input-number v-model="minValue" style="width: 100%"></el-input-number>
   </el-form-item>
 </template>
 

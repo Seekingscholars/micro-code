@@ -1,7 +1,7 @@
 <template>
-  <el-form-item :label="默认值">
+  <el-form-item label="默认值">
     <el-switch v-model="optionModel.defaultValue" active-text="true"
-               inactive-text="false" @change="emitDefaultValueChange"
+               inactive-text="false"
     ></el-switch>
   </el-form-item>
 </template>

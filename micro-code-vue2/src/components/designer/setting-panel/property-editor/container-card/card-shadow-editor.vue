@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="阴影">
-    <el-select v-model="optionModel.shadow">
+    <el-select v-model="optionModel.shadow" style="width: 100%">
       <el-option v-for="item in dataList" :key="item.value" :label="item.label"
                  :value="item.value"
       >

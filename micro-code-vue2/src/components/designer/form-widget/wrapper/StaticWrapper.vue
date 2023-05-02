@@ -1,19 +1,39 @@
 <template>
   <div class="widget-wrapper drag-handler">
-    <div v-if="designer.design" v-show="!widget.options.hidden" :class="[selected ? 'selected' : '']"
-         class="static-content-item" @click.stop="selectWidget(widget)"
+    <div
+      v-if="designer.design"
+      v-show="!widget.options.hidden"
+      :class="[selected ? 'selected' : '']"
+      class="static-content-item"
+      @click.stop="selectWidget(widget)"
     >
-      <slot></slot>
-      <div v-if="!!designer.design" v-show="designer.selectedId === widget.id" class="widget-action">
-      <span class="widget-action-copy" title="复制">
-      <i class="el-icon-copy-document" @click.stop="cloneWidget"></i>
+      <slot />
+      <div
+        v-if="!!designer.design"
+        v-show="designer.selectedId === widget.id"
+        class="widget-action"
+      >
+        <span
+          class="widget-action-copy"
+          title="复制"
+        >
+          <i
+            class="el-icon-copy-document"
+            @click.stop="cloneWidget"
+          />
         </span>
-        <span class="widget-action-delete" title="删除">
-        <i class="el-icon-delete" @click.stop="removeWidget"></i>
-      </span>
+        <span
+          class="widget-action-delete"
+          title="删除"
+        >
+          <i
+            class="el-icon-delete"
+            @click.stop="removeWidget"
+          />
+        </span>
       </div>
     </div>
-    <slot v-else></slot>
+    <slot v-else />
   </div>
 </template>
 
@@ -36,15 +56,19 @@ export default {
       this.designer.setSelected(widget)
     },
     cloneWidget() {
-      if (!!this.parentWidget) {
+      if (this.parentWidget) {
         const widgetList = this.parentWidget.widgetList
-        let newCon = this.designer.cloneWidget(this.widget)
+        const newCon = this.designer.cloneWidget(this.widget)
+        debugger
+        if (newCon.options) {
+          newCon.options.name = newCon.id
+        }
         widgetList.splice(this.indexOfParentList + 1, 0, newCon)
         this.selectWidget(newCon)
       }
     },
     removeWidget() {
-      if (!!this.parentWidget) {
+      if (this.parentWidget) {
         const widgetList = this.parentWidget.widgetList
         let nextSelected = null
         if (this.indexOfParentList + 1 < widgetList.length) {

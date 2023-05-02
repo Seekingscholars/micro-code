@@ -13,8 +13,3 @@ export default {
   mixins: [fieldMixin]
 }
 </script>
-
-<style lang="scss" scoped>
-
-
-</style>

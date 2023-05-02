@@ -1,7 +1,7 @@
 <template>
   <el-form-item label="激活折叠面板">
     <el-select v-model="optionModel.active" multiple style="width: 100%">
-      <el-option v-for="item in dataList" :key="item.value" :label="item.label"
+      <el-option v-for="item in widgetList" :key="item.value" :label="item.label"
                  :value="item.value"
       >
       </el-option>
@@ -13,32 +13,22 @@
 export default {
   name: 'collapse-active-editor',
   props: {
+    selectedWidget: Object,
     optionModel: Object
   },
-  data() {
-    return {
-      dataList: []
-    }
-  },
-  watch: {
-    'optionModel.tabs'(newValue) {
-      this.changeDataList(newValue)
-    }
-  },
-  mounted() {
-    this.changeDataList(this.optionModel.tabs)
-  },
-  methods: {
-    changeDataList(dataList) {
+  computed: {
+    widgetList() {
+      debugger
+      const dataList = this.selectedWidget.widgetList
       if (dataList) {
-        this.dataList = dataList.map(tab => {
+        return dataList.map(tab => {
           return {
-            label: tab.label,
+            label: tab.name,
             value: tab.value
           }
         })
       } else {
-        this.dataList = []
+        return []
       }
     }
   }

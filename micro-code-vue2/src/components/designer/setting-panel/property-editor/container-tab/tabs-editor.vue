@@ -1,54 +1,75 @@
 <template>
-  <ElTableDraggable ref="ElTableDraggable" :list="designer.selectedWidget.widgetList" handle=".drag-handler">
-    <el-table :data="designer.selectedWidget.widgetList" border row-key="value">
-      <el-table-column label="排序" width="50px">
-        <i class="drag-handler el-icon-sort" style="cursor: move"/>
-      </el-table-column>
-      <!--      <el-table-column label="属性" prop="value">-->
-      <!--        <template slot-scope="scope">-->
-      <!--          <el-input v-model="scope.row.value"></el-input>-->
-      <!--        </template>-->
-      <!--      </el-table-column>-->
-      <el-table-column label="标签" prop="name">
+  <div>
+    <el-table
+      v-sort="dragOption"
+      :data="designer.selectedWidget.widgetList"
+      border
+      row-key="value"
+    >
+      <el-table-column
+        label="标签"
+        prop="name"
+      >
         <template slot-scope="scope">
-          <el-input v-model="scope.row.name"/>
+          <el-input v-model="scope.row.name" />
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="60px">
+      <el-table-column
+        label="操作"
+        width="60px"
+      >
         <template slot-scope="scope">
-          <div class="operate">
-            <i
-              class="el-icon-delete"
-              style="color: red;cursor: pointer"
-              title="删除"
+          <div class="toolbar">
+            <div
+              class="drag-handler toolbar-button"
+              style="cursor: move"
+            >
+              <i
+                class="el-icon-sort"
+                title="排序"
+              />
+            </div>
+            <div
+              class="toolbar-button"
               @click="deleteTabPane(scope.row)"
-            />
+            >
+              <i
+                class="el-icon-delete"
+                style="color: red;cursor: pointer"
+                title="删除"
+              />
+            </div>
           </div>
         </template>
       </el-table-column>
     </el-table>
-    <el-button type="text" @click="addTabPane">添加一项+</el-button>
-  </ElTableDraggable>
+    <el-button
+      type="text"
+      @click="addTabPane"
+    >添加一项+</el-button>
+  </div>
 </template>
 <script>
-import {deepClone} from '@/utils/util'
-import ElTableDraggable from '../../ElTableDraggable'
+import { deepClone } from '@/utils/util'
+import { option } from '@/utils/dragOption'
 
 export default {
   name: 'tabs-editor',
   componentName: 'PropertyEditor',
-  components: {
-    ElTableDraggable
-  },
   props: {
     optionModel: Object,
     designer: Object
+  },
+  computed: {
+    dragOption() {
+      return option(this.designer.selectedWidget.widgetList)
+    }
   },
   methods: {
     addTabPane() {
       const newTab = deepClone(this.designer.selectedWidget.widgetList[0])
       newTab.value = 'tab' + (this.designer.selectedWidget.widgetList.length + 1)
-      newTab.label = '标签' + (this.designer.selectedWidget.widgetList.length + 1)
+      newTab.name = '标签' + (this.designer.selectedWidget.widgetList.length + 1)
       this.designer.selectedWidget.widgetList.push(newTab)
     },
     deleteTabPane(row) {
@@ -60,9 +81,6 @@ export default {
         for (let i = 0; i < this.designer.selectedWidget.widgetList.length; i++) {
           if (this.designer.selectedWidget.widgetList[i].value === row.value) {
             this.designer.selectedWidget.widgetList.splice(i, 1)
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init()
-            })
             break
           }
         }
@@ -72,4 +90,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.toolbar {
+  display: flex;
+}
+.toolbar-button {
+  margin-right: 20px;
+}
+
 </style>

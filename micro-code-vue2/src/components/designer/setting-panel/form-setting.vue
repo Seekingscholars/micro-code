@@ -59,38 +59,14 @@
               @click="editGlobalData"
             >编写代码</el-button>
           </el-form-item>
-          <el-form-item label="全局函数">
-            <el-button
-              icon="el-icon-edit"
-              plain
-              round
-              type="info"
-              @click="editGlobalFunction"
-            >编写代码</el-button>
-          </el-form-item>
           <el-form-item label="表单禁用">
             <el-switch v-model="designer.formConfig.disabled" />
           </el-form-item>
         </el-collapse-item>
-
         <el-collapse-item
           name="2"
           title="事件属性"
         >
-          <el-form-item
-            label="onCreated"
-            label-width="120px"
-          >
-            <el-button
-              icon="el-icon-edit"
-              plain
-              round
-              type="info"
-              @click="editFormEventHandler('onCreated')"
-            >
-              编写代码
-            </el-button>
-          </el-form-item>
           <el-form-item
             label="onMounted"
             label-width="120px"
@@ -108,7 +84,6 @@
         </el-collapse-item>
       </el-collapse>
     </el-form>
-
     <el-dialog
       v-if="showFormEventDialogFlag"
       :close-on-click-modal="false"
@@ -146,39 +121,6 @@
         <el-button
           type="primary"
           @click="saveFormEventHandler"
-        >
-          确定
-        </el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog
-      v-if="showEditFunctionDialogFlag"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
-      :destroy-on-close="true"
-      :show-close="true"
-      :visible.sync="showEditFunctionDialogFlag"
-      append-to-body
-      class="small-padding-dialog"
-      title="全局函数"
-    >
-      <code-editor
-        ref="gfEditor"
-        v-model="functionCode"
-        :mode="'javascript'"
-        :readonly="false"
-      />
-      <div
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="showEditFunctionDialogFlag = false">
-          取消
-        </el-button>
-        <el-button
-          type="primary"
-          @click="saveGlobalFunction"
         >
           确定
         </el-button>
@@ -226,7 +168,6 @@
         </el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
@@ -251,7 +192,6 @@ export default {
         { label: 'small', value: 'small' },
         { label: 'mini', value: 'mini' }
       ],
-      showEditFunctionDialogFlag: false,
       showEditDataDialogFlag: false,
       dataCode: '',
       functionCode: '',
@@ -272,16 +212,6 @@ export default {
       this.dataCode = this.designer.formConfig.dataCode
       this.showEditDataDialogFlag = true
     },
-    editGlobalFunction() {
-      this.functionCode = this.designer.formConfig.functionCode
-      this.showEditFunctionDialogFlag = true
-    },
-
-    saveGlobalFunction() {
-      this.designer.formConfig.functionCode = this.functionCode
-      console.log(this.designer.formConfig.functionCode)
-      this.showEditFunctionDialogFlag = false
-    },
 
     saveGlobalData() {
       this.designer.formConfig.dataCode = this.dataCode
@@ -301,47 +231,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.setting-form {
-  ::v-deep .el-form-item__label {
-    font-size: 13px;
-    //text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  ::v-deep .el-form-item--mini.el-form-item {
-    margin-bottom: 6px;
-  }
-
-  .radio-group-custom {
-    ::v-deep .el-radio-button__inner {
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-  }
-
-  .custom-divider.el-divider--horizontal {
-    margin: 10px 0;
-  }
-}
-
-.setting-collapse {
-  ::v-deep .el-collapse-item__content {
-    padding-bottom: 6px;
-  }
-
-  ::v-deep .el-collapse-item__header {
-    font-style: italic;
-    font-weight: bold;
-  }
-}
-
-.small-padding-dialog {
-  ::v-deep .el-dialog__body {
-    padding: 6px 15px 12px 15px;
-  }
-}
-
-</style>

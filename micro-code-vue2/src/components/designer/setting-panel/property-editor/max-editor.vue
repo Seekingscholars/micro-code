@@ -1,6 +1,6 @@
 <template>
   <el-form-item label="最大值">
-    <el-input-number v-model="maxValue" class="hide-spin-button" style="width: 100%"></el-input-number>
+    <el-input-number v-model="maxValue" style="width: 100%"></el-input-number>
   </el-form-item>
 </template>
 
@@ -28,7 +28,6 @@ export default {
         }
       }
     }
-
   }
 }
 </script>

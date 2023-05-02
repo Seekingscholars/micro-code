@@ -47,7 +47,6 @@
         "widgetList": [],
         "options": {
           "name": "",
-          "hidden": false,
           "shadow": "never"
         }
       },
@@ -57,13 +56,14 @@
         "icon": "",
         "widgetList": [],
         "options": {
+          "name": "",
+          "title": "抽屉",
           "direction": "rtl",
+          "width": "30%",
           "show-close": true,
+          "modal": false,
           "withHeader": true,
-          "wrapperClosable": true,
-          "hidden": false,
-          "visible": true,
-          "size": "30%"
+          "visible": true
         }
       },
       {
@@ -73,8 +73,8 @@
         "widgetList": [],
         "options": {
           "name": "",
-          "label": "弹窗",
-          "width": 50,
+          "title": "弹窗",
+          "width": "50%",
           "visible": true,
           "fullscreen": false,
           "showClose": true,
@@ -99,15 +99,6 @@
           "active": [],
           "tabs": ""
         }
-      },
-      {
-        "type": "carousel",
-        "name": "走马灯",
-        "icon": "",
-        "options": {
-          "name": "",
-          "label": ""
-        }
       }
     ]
   },
@@ -127,8 +118,8 @@
           "placeholder": "",
           "size": "",
           "span": 24,
-          "minLength": null,
-          "maxLength": null,
+          "minlength": null,
+          "maxlength": null,
           "readonly": false,
           "disabled": false,
           "clearable": true,
@@ -137,12 +128,12 @@
         },
         "form-item": {
           "label": "输入框",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         },
         "events": {
           "onValidate": "",
@@ -163,23 +154,22 @@
           "defaultValue": null,
           "placeholder": "",
           "size": "",
-          "disabled": false,
-          "hidden": false,
           "span": 24,
-          "min": -100000000000,
-          "max": 100000000000,
+          "min": -100000000000000,
+          "max": 100000000000000,
           "precision": 0,
           "step": 1,
-          "controlsPosition": "right"
+          "controlsPosition": "right",
+          "disabled": false
         },
         "form-item": {
           "label": "计数器",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         },
         "events": {
           "change": "",
@@ -196,11 +186,10 @@
           "name": "",
           "defaultValue": null,
           "size": "",
+          "span": 24,
           "buttonStyle": false,
           "border": false,
-          "disabled": false,
-          "hidden": false,
-          "span": 24
+          "disabled": false
         },
         "option-item": {
           "data": "",
@@ -221,12 +210,12 @@
         },
         "form-item": {
           "label": "单选框",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         },
         "events": {
           "change": "",
@@ -241,11 +230,10 @@
           "name": "",
           "defaultValue": [],
           "size": "",
+          "span": 24,
           "buttonStyle": false,
           "border": false,
-          "disabled": false,
-          "hidden": false,
-          "span": 24
+          "disabled": false
         },
         "option-item": {
           "data": "",
@@ -266,12 +254,12 @@
         },
         "form-item": {
           "label": "多选框",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         },
         "events": {
           "change": "",
@@ -294,8 +282,7 @@
           "multiple": false,
           "clearable": true,
           "filterable": false,
-          "allowCreate": false,
-          "automaticDropdown": false
+          "allowCreate": false
         },
         "option-item": {
           "data": "",
@@ -316,12 +303,12 @@
         },
         "form-item": {
           "label": "选择框",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         },
         "events": {
           "change": "",
@@ -339,20 +326,19 @@
           "type": "date",
           "placeholder": "",
           "size": "",
+          "span": 24,
           "readonly": false,
           "disabled": false,
-          "hidden": false,
-          "clearable": true,
-          "span": 24
+          "clearable": true
         },
         "form-item": {
           "label": "日期",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         }
       },
       {
@@ -362,26 +348,23 @@
         "options": {
           "name": "",
           "group": "",
-          "defaultValue": null,
-          "disabled": false,
-          "hidden": false,
+          "defaultValue": false,
           "span": 24,
           "switchWidth": 40,
           "activeText": "",
           "inactiveText": "",
           "activeColor": null,
           "inactiveColor": null,
-          "change": "",
-          "onValidate": ""
+          "disabled": false
         },
         "form-item": {
           "label": "开关",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         }
       },
       {
@@ -392,8 +375,6 @@
           "name": "",
           "group": "",
           "defaultValue": null,
-          "disabled": false,
-          "hidden": false,
           "span": 24,
           "max": 5,
           "lowThreshold": 2,
@@ -401,41 +382,39 @@
           "allowHalf": false,
           "showText": false,
           "showScore": false,
-          "change": "",
-          "onValidate": ""
+          "disabled": false
         },
         "form-item": {
           "label": "评分",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         }
       },
       {
         "type": "color",
-        "name": "颜色选择器",
+        "name": "颜色",
         "icon": "color-field",
         "options": {
           "name": "",
           "group": "",
           "defaultValue": null,
           "size": "",
-          "disabled": false,
-          "hidden": false,
           "change": "",
-          "onValidate": ""
+          "onValidate": "",
+          "disabled": false
         },
         "form-item": {
-          "label": "颜色选择器",
+          "label": "颜色",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         }
       },
       {
@@ -445,31 +424,28 @@
         "options": {
           "name": "",
           "group": "",
-          "showStops": true,
           "size": "",
-          "disabled": false,
-          "hidden": false,
           "min": 0,
           "max": 100,
           "step": 10,
-          "range": false,
           "height": null,
-          "change": "",
-          "onValidate": ""
+          "showStops": true,
+          "disabled": false,
+          "range": false
         },
         "form-item": {
           "label": "滑块",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         }
       },
       {
         "type": "cascader",
-        "name": "级联选择器",
+        "name": "级联选择",
         "icon": "cascader-field",
         "options": {
           "name": "",
@@ -505,20 +481,16 @@
             }
           ],
           "customRule": "",
-          "customRuleHint": "",
-          "change": "",
-          "focus": "",
-          "blur": "",
-          "onValidate": ""
+          "customRuleHint": ""
         },
         "form-item": {
-          "label": "级联选择器",
+          "label": "级联选择",
+          "width": null,
+          "validation": "",
+          "validationHint": "",
           "disabled": false,
           "hidden": false,
-          "width": null,
-          "required": false,
-          "validation": "",
-          "validationHint": ""
+          "required": false
         }
       }
     ]
@@ -533,16 +505,15 @@
         "icon": "",
         "options": {
           "name": "",
-          "label": "",
+          "label": "按钮",
           "size": "",
           "type": "",
+          "icon": null,
+          "span": 24,
           "disabled": false,
-          "hidden": false,
           "plain": false,
           "round": false,
-          "circle": false,
-          "icon": null,
-          "span": 24
+          "circle": false
         },
         "events": {
           "click": ""
@@ -554,11 +525,9 @@
         "icon": "divider",
         "options": {
           "name": "",
-          "label": "",
-          "direction": "horizontal",
-          "contentPosition": "center",
-          "hidden": false,
-          "onMounted": ""
+          "label": "分割线",
+          "span": 24,
+          "contentPosition": "center"
         }
       },
       {
@@ -583,23 +552,23 @@
         "icon": "",
         "options": {
           "name": "",
+          "size": "",
+          "span": 24,
+          "data": "",
           "stripe": false,
           "border": false,
           "showHeader": true,
-          "highlightCurrentRow": false,
-          "size": "",
-          "span": 24,
-          "data": ""
+          "highlightCurrentRow": false
         },
         "table-column": {
           "columns": []
         },
         "table-toolbar": {
-          "disabled": false,
           "showCount": 2,
           "label": "操作",
           "align": "center",
           "width": "",
+          "disabled": false,
           "toolbar": [
             {
               "id": "button1",
@@ -641,11 +610,11 @@
         "options": {
           "name": "",
           "span": 24,
+          "data": "",
           "highlightCurrent": false,
           "defaultExpandAll": false,
           "showCheckbox": false,
-          "checkStrictly": false,
-          "data": ""
+          "checkStrictly": false
         }
       },
       {
@@ -656,99 +625,8 @@
           "name": "",
           "label": "",
           "span": 24,
-          "small": false,
-          "pageSize": 10
-        }
-      },
-      {
-        "type": "descriptions",
-        "name": "描述",
-        "icon": "",
-        "options": {
-          "name": "",
-          "label": "",
-          "span": 24
-        }
-      },
-      {
-        "type": "timeline",
-        "name": "时间线",
-        "icon": "",
-        "options": {
-          "name": "",
-          "label": "",
-          "span": 24
-        }
-      },
-      {
-        "type": "calendar",
-        "name": "日历",
-        "icon": "",
-        "options": {
-          "name": "",
-          "label": "",
-          "span": 24
-        }
-      },
-      {
-        "type": "picture-upload",
-        "name": "图片上传",
-        "icon": "picture-upload-field",
-        "options": {
-          "name": "",
-          "label": "",
-          "disabled": false,
-          "hidden": false,
-          "customRule": "",
-          "customRuleHint": "",
-          "uploadURL": "",
-          "uploadTip": "",
-          "withCredentials": false,
-          "multipleSelect": false,
-          "showFileList": true,
-          "limit": 3,
-          "fileMaxSize": 5,
-          "fileTypes": [
-            "jpg",
-            "jpeg",
-            "png"
-          ],
-          "onBeforeUpload": "",
-          "onUploadSuccess": "",
-          "onUploadError": "",
-          "onFileRemove": "",
-          "onValidate": ""
-        }
-      },
-      {
-        "type": "file-upload",
-        "name": "文件上传",
-        "icon": "file-upload-field",
-        "options": {
-          "name": "",
-          "label": "",
-          "disabled": false,
-          "hidden": false,
-          "customRule": "",
-          "customRuleHint": "",
-          "uploadURL": "",
-          "uploadTip": "",
-          "withCredentials": false,
-          "multipleSelect": false,
-          "showFileList": true,
-          "limit": 3,
-          "fileMaxSize": 5,
-          "fileTypes": [
-            "doc",
-            "docx",
-            "xls",
-            "xlsx"
-          ],
-          "onBeforeUpload": "",
-          "onUploadSuccess": "",
-          "onUploadError": "",
-          "onFileRemove": "",
-          "onValidate": ""
+          "pageSize": 10,
+          "small": false
         }
       },
       {
@@ -759,14 +637,13 @@
           "name": "",
           "label": "",
           "placeholder": "",
-          "disabled": false,
-          "hidden": false,
           "customRule": "",
           "customRuleHint": "",
           "minLength": null,
           "maxLength": null,
-          "showWordLimit": false,
-          "onValidate": ""
+          "onValidate": "",
+          "disabled": false,
+          "showWordLimit": false
         }
       },
       {
@@ -775,20 +652,7 @@
         "icon": "html-text",
         "options": {
           "name": "",
-          "hidden": false,
           "htmlContent": "<b>html text</b>",
-          "onMounted": ""
-        }
-      },
-      {
-        "type": "static-text",
-        "name": "静态文字",
-        "icon": "static-text",
-        "options": {
-          "name": "",
-          "hidden": false,
-          "textContent": "static text",
-          "fontSize": "13px",
           "onMounted": ""
         }
       },
