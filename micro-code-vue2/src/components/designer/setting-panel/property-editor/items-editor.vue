@@ -1,10 +1,6 @@
 <template>
   <div>
-    <ElTableDraggable ref="ElTableDraggable" :list="optionModel.items" handle=".drag-handler">
-      <el-table :data="optionModel.items" border row-key="value">
-        <el-table-column label="排序" width="50px">
-          <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-        </el-table-column>
+      <el-table v-sort="dragOption" :data="optionModel.items" border row-key="value">
         <el-table-column label="属性" prop="value">
           <template slot-scope="scope">
             <el-input v-model="scope.row.value"></el-input>
@@ -17,27 +13,43 @@
         </el-table-column>
         <el-table-column label="操作" width="60px">
           <template slot-scope="scope">
-            <div class="operate">
-              <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除" @click="handleDelete(scope.row)"
-              ></i>
+            <div class="toolbar">
+              <div
+                class="drag-handler toolbar-button"
+                style="cursor: move"
+              >
+                <i
+                  class="el-icon-sort"
+                  title="排序"
+                />
+              </div>
+              <div
+                class="toolbar-button"
+                @click="handleDelete(scope.row)"
+              >
+                <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"></i>
+              </div>
             </div>
           </template>
         </el-table-column>
       </el-table>
       <el-button type="text" @click="addNewItem">添加一项+</el-button>
-    </ElTableDraggable>
   </div>
 </template>
 
 <script>
-import ElTableDraggable from '../ElTableDraggable'
-
+import { option } from '@/utils/dragOption'
 export default {
   name: 'items-editor',
   props: {
     optionModel: Object
   },
-  components: {ElTableDraggable},
+  components: {},
+  computed: {
+    dragOption() {
+      return option(this.optionModel.items)
+    }
+  },
   data() {
     return {
       modelForm: {
@@ -54,9 +66,6 @@ export default {
         for (let i = 0; i < this.optionModel.items.length; i++) {
           if (this.optionModel.items[i].value === row.value) {
             this.optionModel.items.splice(i, 1)
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init()
-            })
             break
           }
         }
@@ -68,17 +77,16 @@ export default {
         label: '',
         disabled: false
       })
-      this.$nextTick(() => {
-        this.$refs.ElTableDraggable.init()
-      })
     }
   }
 }
 </script>
 
 <style scoped>
-.operate {
+.toolbar {
   display: flex;
-  justify-content: space-between;
+}
+.toolbar-button {
+  margin-right: 20px;
 }
 </style>

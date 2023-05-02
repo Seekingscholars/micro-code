@@ -119,7 +119,6 @@ export default {
           formJson.widgetJson = widgetJson
           formJson.collapseJson = collapseJson
           this.$refs.FormDesignerRef.setFormJson(formJson)
-          this.$refs.ApiPanelRef.getList(formId)
         })
       } else {
         this.$refs.FormDesignerRef.setFormJson({

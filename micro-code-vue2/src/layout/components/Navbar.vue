@@ -10,7 +10,7 @@
           <i class="el-icon-caret-bottom"/>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <el-dropdown-item divided @click.native="logout">
+          <el-dropdown-item @click.native="logout">
             <span style="display:block;">退出系统</span>
           </el-dropdown-item>
         </el-dropdown-menu>

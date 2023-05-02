@@ -113,7 +113,7 @@ export default {
       })
     },
     async onFormClick(item) {
-      if (this.selectFormId !== item.id) {
+      if (this.selectFormId !== item.id.toString()) {
         this.selectFormId = item.id.toString()
         this.flushed = false
         const formData = await formApi.get({ id: item.id })

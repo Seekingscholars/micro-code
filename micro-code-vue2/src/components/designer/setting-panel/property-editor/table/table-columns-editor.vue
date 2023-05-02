@@ -1,32 +1,45 @@
 <template>
   <div>
-    <ElTableDraggable ref="ElTableDraggable" :list="optionModel.columns" handle=".drag-handler">
-      <el-table :data="optionModel.columns" border row-key="id">
-        <el-table-column label="排序" width="50px">
-          <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-        </el-table-column>
-        <el-table-column label="属性" prop="prop">
-          <template slot-scope="scope">
-            <el-input v-model="scope.row.prop"></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="标签" prop="label">
-          <template slot-scope="scope">
-            <el-input v-model="scope.row.label"></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" width="60px">
-          <template slot-scope="scope">
-            <div class="operate">
-              <i class="el-icon-edit" style="cursor: pointer" title="编辑" @click="handleEdit(scope.row)"></i>
-              <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除" @click="handleDelete(scope.row)"
-              ></i>
+    <el-table v-sort="dragOption" :data="optionModel.columns" border row-key="id">
+      <el-table-column label="属性" prop="prop">
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.prop"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column label="标签" prop="label">
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.label"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="100px">
+        <template slot-scope="scope">
+          <div class="toolbar">
+            <div
+              class="drag-handler toolbar-button"
+              style="cursor: move"
+            >
+              <i
+                class="el-icon-sort"
+                title="排序"
+              />
             </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-button type="text" @click="addNewColumn">添加一项+</el-button>
-    </ElTableDraggable>
+            <div
+              class="toolbar-button"
+              @click="handleEdit(scope.row)"
+            >
+              <i class="el-icon-edit" style="cursor: pointer" title="编辑"></i>
+            </div>
+            <div
+              class="toolbar-button"
+              @click="handleDelete(scope.row)"
+            >
+              <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"></i>
+            </div>
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-button type="text" @click="addNewColumn">添加一项+</el-button>
     <el-dialog v-if="showItemDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="false"
                :visible.sync="showItemDialogFlag"
@@ -76,9 +89,8 @@
 </template>
 
 <script>
-import {generateId} from '@/utils/util'
-import ElTableDraggable from '../../ElTableDraggable'
-
+import {generateId } from '@/utils/util'
+import { option } from '@/utils/dragOption'
 export default {
   name: 'table-columns-editor',
   props: {
@@ -86,7 +98,11 @@ export default {
     selectedWidget: Object,
     optionModel: Object
   },
-  components: {ElTableDraggable},
+  computed: {
+    dragOption() {
+      return option(this.optionModel.columns)
+    }
+  },
   data() {
     return {
       showItemDialogFlag: false,
@@ -128,9 +144,6 @@ export default {
         for (let i = 0; i < this.optionModel.columns.length; i++) {
           if (this.optionModel.columns[i].id === row.id) {
             this.optionModel.columns.splice(i, 1)
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init()
-            })
             break
           }
         }
@@ -144,9 +157,6 @@ export default {
         showOverflowTooltip: true,
         width: ''
       })
-      this.$nextTick(() => {
-        this.$refs.ElTableDraggable.init()
-      })
     },
     saveItem() {
       Object.assign(this.row, this.modelForm)
@@ -157,8 +167,10 @@ export default {
 </script>
 
 <style scoped>
-.operate {
+.toolbar {
   display: flex;
-  justify-content: space-between;
+}
+.toolbar-button {
+  margin-right: 20px;
 }
 </style>

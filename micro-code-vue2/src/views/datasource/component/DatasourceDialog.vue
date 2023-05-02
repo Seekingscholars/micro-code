@@ -27,6 +27,7 @@
         <el-select
           v-model="modelForm.type"
           placeholder="请选择数据源类型"
+          disabled
           style="width: 100%"
         >
           <el-option

@@ -18,6 +18,7 @@ export default {
   methods: {
     handleSubmit() {
       this.validate(form => {
+        this.$message.success(JSON.stringify(form))
       })
     }
   }

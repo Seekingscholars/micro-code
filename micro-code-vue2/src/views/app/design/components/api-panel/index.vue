@@ -2,9 +2,16 @@
   <div class="datasource-panel-container">
     <div class="header">
       <div>所有API</div>
-      <el-tooltip content="新增api" effect="dark" placement="bottom">
+      <el-tooltip
+        content="新增api"
+        effect="dark"
+        placement="bottom"
+      >
         <div class="setting">
-          <i class="el-icon-circle-plus-outline" @click="handleCreateApi" />
+          <i
+            class="el-icon-circle-plus-outline"
+            @click="handleCreateApi"
+          />
         </div>
       </el-tooltip>
     </div>
@@ -14,7 +21,12 @@
       node-key="id"
       @node-click="onNodeClick"
     />
-    <RestApiDialog v-if="restApiOpen" :api="api" :visible.sync="restApiOpen" @change="()=>getList(formId)" />
+    <RestApiDialog
+      v-if="restApiOpen"
+      :api="api"
+      :visible.sync="restApiOpen"
+      @change="()=>getList(formId)"
+    />
   </div>
 </template>
 
@@ -36,26 +48,29 @@ export default {
       api: null
     }
   },
+  created() {
+    const formId = this.$route.params.formId
+    this.getList(formId)
+  },
   methods: {
     async getList(formId) {
       this.formId = formId
-      this.apis = await restApi.list({ formId }) || []
-      this.designer.formConfig.apis = this.apis
+      const apis = await restApi.list({ formId }) || []
+      this.designer.formConfig.apis = apis
+      this.apis = apis
     },
     renderContent(h, { node, data, store }) {
       return (
-        <div class='datasource'>
+        <div class='menu-item'>
           <div>
-            <span class='name'>{data.name}</span>
+            <span slot='title'>{data.name}</span>
           </div>
-          <div>
-            <el-dropdown onCommand={command => this.handleCommand(command, data)} size='mini' placement='bottom'>
-              <i class={{ 'hide': this.isHide(node, data), 'el-icon-more': true }}></i>
-              <el-dropdown-menu slot='dropdown'>
-                <el-dropdown-item command='edit' icon='el-icon-edit'>编辑</el-dropdown-item>
-                <el-dropdown-item command='delete' icon='el-icon-delete'>删除</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+          <div class='menu-item-toolbar'>
+            <span onClick={() => this.handleEditApi(data)}><i class='el-icon-edit' title='编辑'/></span>
+            <span
+              style='color: #ef5c5c;margin-left:10px;margin-right:10px;'
+              onClick={() => this.handleDelete(data)}
+            ><i class='el-icon-delete' title='删除'/></span>
           </div>
         </div>)
     },
@@ -116,10 +131,18 @@ export default {
     font-size: 20px;
     cursor: pointer;
   }
-
-  .hide {
-    display: none;
-  }
+}
+.menu-item{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+}
+.menu-item-toolbar{
+  display: none;
+}
+.menu-item:hover .menu-item-toolbar{
+  display: inline-block;
 }
 
 </style>

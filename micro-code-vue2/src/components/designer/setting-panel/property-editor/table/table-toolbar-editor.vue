@@ -1,28 +1,40 @@
 <template>
   <div>
-    <ElTableDraggable ref="ElTableDraggable" :list="optionModel.toolbar" handle=".drag-handler">
-      <el-table :data="optionModel.toolbar" border row-key="id">
-        <el-table-column label="排序" width="50px">
-          <i class="drag-handler el-icon-sort" style="cursor: move"></i>
-        </el-table-column>
+      <el-table  v-sort="dragOption" :data="optionModel.toolbar" border row-key="id">
         <el-table-column label="标签" prop="label">
           <template slot-scope="scope">
             <el-input v-model="scope.row.label"></el-input>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="60px">
+        <el-table-column label="操作" width="100px">
           <template slot-scope="scope">
-            <div class="operate">
-              <i class="el-icon-edit" style="cursor: pointer" title="编辑" @click="handleEdit(scope.row)"></i>
-              <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"
-                 @click="handleDelete(scope.row)"
-              ></i>
+            <div class="toolbar">
+              <div
+                class="drag-handler toolbar-button"
+                style="cursor: move"
+              >
+                <i
+                  class="el-icon-sort"
+                  title="排序"
+                />
+              </div>
+              <div
+                class="toolbar-button"
+                @click="handleEdit(scope.row)"
+              >
+                <i class="el-icon-edit" style="cursor: pointer" title="编辑"></i>
+              </div>
+              <div
+                class="toolbar-button"
+                @click="handleDelete(scope.row)"
+              >
+                <i class="el-icon-delete" style="color: red;cursor: pointer" title="删除"></i>
+              </div>
             </div>
           </template>
         </el-table-column>
       </el-table>
       <el-button type="text" @click="addNewColumn">添加一项+</el-button>
-    </ElTableDraggable>
     <el-dialog v-if="showItemDialogFlag"
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true" :show-close="false"
                :visible.sync="showItemDialogFlag"
@@ -55,9 +67,8 @@
 
 <script>
 import {generateId} from '@/utils/util'
-import ElTableDraggable from '../../ElTableDraggable'
 import CodeEditor from '@/components/code-editor/index'
-
+import { option } from '@/utils/dragOption'
 export default {
   name: 'table-toolbar-editor',
   props: {
@@ -65,7 +76,7 @@ export default {
     selectedWidget: Object,
     optionModel: Object
   },
-  components: {ElTableDraggable, CodeEditor},
+  components: {CodeEditor},
   data() {
     return {
       showItemDialogFlag: false,
@@ -77,6 +88,11 @@ export default {
         tooltip: '',
         click: ''
       }
+    }
+  },
+  computed: {
+    dragOption() {
+      return option(this.optionModel.toolbar)
     }
   },
   methods: {
@@ -95,9 +111,6 @@ export default {
         for (let i = 0; i < this.optionModel.toolbar.length; i++) {
           if (this.optionModel.toolbar[i].id === row.id) {
             this.optionModel.toolbar.splice(i, 1)
-            this.$nextTick(() => {
-              this.$refs.ElTableDraggable.init()
-            })
             break
           }
         }
@@ -105,9 +118,6 @@ export default {
     },
     addNewColumn() {
       this.optionModel.toolbar.push({id: 'button' + generateId(), label: '', title: '', icon: '', click: ''})
-      this.$nextTick(() => {
-        this.$refs.ElTableDraggable.init()
-      })
     }
 
   }
@@ -115,8 +125,10 @@ export default {
 </script>
 
 <style scoped>
-.operate {
+.toolbar {
   display: flex;
-  justify-content: space-between;
+}
+.toolbar-button {
+  margin-right: 20px;
 }
 </style>

@@ -238,7 +238,11 @@ export default {
   },
   computed: {
     title() {
-      return '创建REST API'
+      if (this.modelForm.id) {
+        return '编辑REST API'
+      } else {
+        return '创建REST API'
+      }
     }
   },
   mounted() {
