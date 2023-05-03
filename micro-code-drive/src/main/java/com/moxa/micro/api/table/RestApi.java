@@ -22,6 +22,11 @@ public class RestApi {
     @Column(value="name",jdbcType = Types.VARCHAR)
     private String name;
     /**
+     * 数据源
+     */
+    @Column(value="datasource_id",jdbcType = Types.BIGINT)
+    private Long datasourceId;
+    /**
      * 请求地址
      */
     @Column(value="url",jdbcType = Types.VARCHAR)

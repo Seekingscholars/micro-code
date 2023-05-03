@@ -1,6 +1,9 @@
 <template>
   <div class="form-container">
-    <div class="form-main" :style="{width:designer.formConfig.width}">
+    <div
+      class="form-main"
+      :style="{width:designer.formConfig.width}"
+    >
       <el-form
         ref="form"
         :model="$model"
@@ -9,16 +12,19 @@
         :label-width="designer.formConfig.labelWidth + 'px'"
         :size="designer.formConfig.size"
       >
-        <RenderWidget :designer="designer" :widget="designer" />
+        <RenderWidget
+          :designer="designer"
+          :widget="designer"
+        />
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
-import request from '@/utils/request'
 import './widget/index'
 import RenderWidget from './RenderWidget'
+import { wrapWith } from '../designer'
 
 export default {
   name: 'DesignWidget',
@@ -31,7 +37,6 @@ export default {
   },
   provide() {
     return {
-      wrapWith: this.wrapWith,
       validate: this.validate
     }
   },
@@ -39,7 +44,6 @@ export default {
     this.handleOnCreated()
   },
   mounted() {
-    this.initDataSource()
     this.handleOnMounted()
   },
   methods: {
@@ -74,54 +78,8 @@ export default {
 
     handleOnMounted() {
       if (!!this.designer.formConfig && !!this.designer.formConfig.onMounted) {
-        const customFunc = new Function(this.wrapWith(this.designer.formConfig.onMounted))
+        const customFunc = new Function(wrapWith(this.designer.formConfig.onMounted))
         customFunc.call(this)
-      }
-    },
-    wrapWith(event) {
-      return 'with(this.$model){\n' + event + '\n}'
-    },
-    requestApi(api) {
-      return () => {
-        const param = {
-          url: api.url,
-          method: api.method,
-          data: api.data
-        }
-        if (api.param) {
-          param.params = new Function(this.wrapWith('return {' + api.param + '}')).call(this)
-        }
-        if (api.data) {
-          param.data = new Function(this.wrapWith('return {' + api.data + '}')).call(this)
-        }
-        if (api.timeout) {
-          param.timeout = api.timeout
-        }
-        let successFunction
-        if (api.successFunction) {
-          successFunction = new Function('res', this.wrapWith(api.successFunction))
-        }
-        let failFunction
-        if (api.failFunction) {
-          failFunction = new Function('err', this.wrapWith(api.failFunction))
-        }
-        request(param, { headers: api.header }).then(res => {
-          if (successFunction) {
-            successFunction.call(this, res)
-          }
-        }).catch(err => {
-          if (failFunction) {
-            failFunction.call(this, err)
-          }
-        })
-      }
-    },
-    initDataSource() {
-      const apis = this.designer.formConfig.apis
-      if (apis) {
-        for (const api of apis) {
-          this.$model[api.name] = this.requestApi(api)
-        }
       }
     },
     validate: function(callback) {

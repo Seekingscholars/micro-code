@@ -35,7 +35,7 @@
 </template>
 <script>
 import fieldMixin from './fieldMixin'
-
+import{ wrapWith } from '../../designer'
 export default {
   name: 'table-widget',
   componentName: 'FieldWidget',
@@ -57,7 +57,7 @@ export default {
       const disabled = this.field.pagination.disabled
       let dataList
       if (!!data) {
-        const customFn = new Function(this.wrapWith('return ' + data))
+        const customFn = new Function(wrapWith('return ' + data))
         dataList = customFn.call(this)
       }
       if (dataList && !disabled) {
@@ -106,7 +106,7 @@ export default {
     },
     callClick(click, row) {
       if (click) {
-        new Function('row', this.wrapWith(click)).call(this, row)
+        new Function('row', wrapWith(click)).call(this, row)
       }
     }
   }

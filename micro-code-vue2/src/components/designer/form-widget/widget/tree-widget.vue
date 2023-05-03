@@ -11,7 +11,7 @@
 <script>
 
 import fieldMixin from './fieldMixin'
-
+import{ wrapWith } from '../../designer'
 export default {
   name: 'tree-widget',
   componentName: 'FieldWidget',
@@ -21,7 +21,7 @@ export default {
       const data = this.field.options.data
       let dataList
       if (!!data) {
-        let customFn = new Function(this.wrapWith('return ' + data))
+        const customFn = new Function(wrapWith('return ' + data))
         dataList = customFn.call(this)
       }
       return dataList || []

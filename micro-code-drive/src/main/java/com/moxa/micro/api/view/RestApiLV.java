@@ -16,6 +16,10 @@ public class RestApiLV {
      */
     private String name;
     /**
+     * 数据源
+     */
+    private Long datasourceId;
+    /**
      * 请求地址
      */
     private String url;

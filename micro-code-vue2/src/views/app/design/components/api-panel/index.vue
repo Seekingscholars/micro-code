@@ -25,7 +25,7 @@
       v-if="restApiOpen"
       :api="api"
       :visible.sync="restApiOpen"
-      @change="()=>getList(formId)"
+      @change="getList"
     />
   </div>
 </template>
@@ -49,15 +49,12 @@ export default {
     }
   },
   created() {
-    const formId = this.$route.params.formId
-    this.getList(formId)
+    this.formId = this.$route.params.formId
+    this.getList()
   },
   methods: {
-    async getList(formId) {
-      this.formId = formId
-      const apis = await restApi.list({ formId }) || []
-      this.designer.formConfig.apis = apis
-      this.apis = apis
+    async getList() {
+      this.apis = await restApi.list({ formId: this.formId }) || []
     },
     renderContent(h, { node, data, store }) {
       return (
@@ -92,6 +89,7 @@ export default {
       this.$confirm('确定删除数据源吗？', '提示', { type: 'warning' }).then(
         async() => {
           await restApi.remove({ id: data.id })
+          await this.getList()
         }
       )
     },

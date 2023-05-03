@@ -5,7 +5,7 @@
 <script>
 import fieldMixin from './fieldMixin'
 import * as echarts from 'echarts'
-
+import { wrapWith }from '../../designer'
 export default {
   name: 'chart-widget',
   componentName: 'FieldWidget',
@@ -20,7 +20,7 @@ export default {
       const data = this.field.options.data
       let dataList
       if (data) {
-        const customFn = new Function(this.wrapWith('return ' + data))
+        const customFn = new Function(wrapWith('return ' + data))
         dataList = customFn.call(this)
       }
       dataList = dataList || []

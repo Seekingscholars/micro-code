@@ -11,7 +11,7 @@
 
 <script>
 import fieldMixin from './fieldMixin'
-
+import { wrapWith }from '../../designer'
 export default {
   name: 'select-widget',
   componentName: 'FieldWidget',
@@ -23,7 +23,7 @@ export default {
       const items = optionItem.items
       let dataList
       if (!!data) {
-        let customFn = new Function(this.wrapWith('return ' + data))
+        let customFn = new Function(wrapWith('return ' + data))
         dataList = customFn.call(this)
       } else if (items) {
         dataList = items

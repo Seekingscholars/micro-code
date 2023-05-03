@@ -22,12 +22,19 @@
           label-width="80px"
         >
           <el-form-item
+            label="函数名称"
+            prop="name"
+          >
+            <el-input v-model="modelForm.name" placeholder="请输入函数名称"/>
+          </el-form-item>
+          <el-form-item
             label="数据源"
             prop="datasourceId"
           >
             <el-select
               v-model="modelForm.datasourceId"
               style="width:100%"
+              placeholder="请选择数据源"
             >
               <el-option
                 v-for="item in datasoutceList"
@@ -38,16 +45,10 @@
             </el-select>
           </el-form-item>
           <el-form-item
-            label="函数名称"
-            prop="name"
-          >
-            <el-input v-model="modelForm.name" />
-          </el-form-item>
-          <el-form-item
             label="请求地址"
             prop="url"
           >
-            <el-input v-model="modelForm.url" />
+            <el-input v-model="modelForm.url" placeholder="请输入请求地址，列如：/test"/>
           </el-form-item>
           <el-form-item
             label="请求方法"
@@ -56,6 +57,7 @@
             <el-select
               v-model="modelForm.method"
               style="width: 100%"
+              placeholder="请选择请求方法"
             >
               <el-option
                 v-for="item in requestMethod"
@@ -69,13 +71,13 @@
             label="超时时长"
             prop="timeout"
           >
-            <el-input v-model="modelForm.timeout" />
+            <el-input v-model="modelForm.timeout" placeholder="请输入超时时长，默认取数据源设置的超时时长"/>
           </el-form-item>
           <el-form-item
             label="函数备注"
             prop="remark"
           >
-            <el-input v-model="modelForm.remark" />
+            <el-input v-model="modelForm.remark" placeholder="请输入函数备注"/>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -224,6 +226,9 @@ export default {
         failFunction: undefined
       },
       rules: {
+        datasourceId: [
+          { required: true, message: '数据源不能为空', trigger: 'change' }
+        ],
         name: [
           { required: true, message: '函数名称不能为空', trigger: 'blur' }
         ],

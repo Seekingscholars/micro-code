@@ -201,7 +201,10 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      this.$modal.confirm('是否确认删除数据源名称为"' + row.name + '"的数据项？').then(() => datasourceApi.remove({ id: row.id }))
+      this.$modal.confirm('是否确认删除数据源名称为"' + row.name + '"的数据项？').then(async () => {
+        await datasourceApi.remove({ id: row.id })
+        await this.getList()
+      })
     }
   }
 }

@@ -1,10 +1,11 @@
+import { wrapWith }from '../../designer'
 export default {
   props: {
     field: Object,
     parentWidget: Object,
     designer: Object
   },
-  inject: ['$model', 'wrapWith'],
+  inject: ['$model'],
 
   watch: {
     'field.options.defaultValue'(newValue) {
@@ -56,7 +57,7 @@ export default {
         Object.keys(field.events).forEach(name => {
           const event = field.events[name]
           if (event) {
-            const func = new Function(this.wrapWith(event))
+            const func = new Function(wrapWith(event))
             eventMap[name] = this.callFunc(func)
           }
         })

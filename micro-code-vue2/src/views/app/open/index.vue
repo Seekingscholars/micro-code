@@ -1,16 +1,18 @@
 <template>
-  <FormRender v-if="flushed" :form-json="formJson" />
+  <FormRender v-if="flushed" :form-json="formJson" :data-model="dataModel"/>
 </template>
 <script>
 import FormRender from '@/components/render/index.vue'
 import formApi from '@/api/form'
 import { Message, MessageBox } from 'element-ui'
 import md5 from 'js-md5'
+import { getRest } from '../apiUtil'
 export default {
   components: { FormRender },
   data() {
     return {
       formJson: {},
+      dataModel: {},
       flushed: false
     }
   },
@@ -21,6 +23,7 @@ export default {
   },
   methods: {
     async renderAppForm(formId, password) {
+      await getRest(formId, this.dataModel, this)
       const result = await formApi.getFormJson({ id: formId, password: password }, { origin: true })
       if (result.code === 200) {
         this.formJson = JSON.parse(result.result)

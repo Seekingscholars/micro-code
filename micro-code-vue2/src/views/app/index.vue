@@ -36,7 +36,8 @@
       <div class="app-aside">
         <el-scrollbar :style="{height:height+'px'}">
           <el-menu
-            :default-active="selectFormId">
+            :default-active="selectFormId"
+          >
             <el-menu-item
               v-for="item in formList"
               :key="item.id"
@@ -49,11 +50,17 @@
                   <span slot="title">{{ item.formName }}</span>
                 </div>
                 <div class="menu-item-toolbar">
-                  <span @click="()=>handleFormEdit(item)"><i class="el-icon-edit" title="编辑"/></span>
+                  <span @click="()=>handleFormEdit(item)"><i
+                    class="el-icon-edit"
+                    title="编辑"
+                  /></span>
                   <span
                     style="color: #ef5c5c"
                     @click="()=>handleDeleteForm(item)"
-                  ><i class="el-icon-delete" title="删除"/></span>
+                  ><i
+                    class="el-icon-delete"
+                    title="删除"
+                  /></span>
                 </div>
               </div>
             </el-menu-item>
@@ -64,6 +71,7 @@
         <FormRender
           v-if="flushed"
           :form-json="formJson"
+          :data-model="dataModel"
         />
       </div>
     </el-container>
@@ -74,6 +82,7 @@
 import FormRender from '@/components/render/index.vue'
 import appApi from '@/api/app'
 import formApi from '@/api/form'
+import { getRest } from './apiUtil'
 export default {
   name: 'App',
   components: { FormRender },
@@ -83,6 +92,7 @@ export default {
       flushed: false,
       selectFormId: null,
       formList: [],
+      dataModel: {},
       formJson: {},
       app: {}
     }
@@ -114,6 +124,8 @@ export default {
     },
     async onFormClick(item) {
       if (this.selectFormId !== item.id.toString()) {
+        this.dataModel = {}
+        await getRest(item.id, this.dataModel, this)
         this.selectFormId = item.id.toString()
         this.flushed = false
         const formData = await formApi.get({ id: item.id })

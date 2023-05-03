@@ -62,7 +62,7 @@ export function createDesigner(vueInstance) {
     cloneWidget(widget) {
       return deepClone(widget, (data, label) => {
         if (label === 'id') {
-          return data.type+generateId()
+          return data.type + generateId()
         }
         return data[label]
       })
@@ -96,4 +96,7 @@ export function createDesigner(vueInstance) {
       }
     }
   }
+}
+export const wrapWith = (event) => {
+  return 'with(this.$model){\n' + event + '\n}'
 }

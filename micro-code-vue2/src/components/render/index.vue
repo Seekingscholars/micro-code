@@ -1,5 +1,5 @@
 <template>
-  <FormWidget :designer="this.formJson"></FormWidget>
+  <FormWidget :designer="formJson"></FormWidget>
 </template>
 <script>
 import FormWidget from '../designer/form-widget/FormWidget'
@@ -13,16 +13,15 @@ export default {
   props: {
     formJson: {
       type: Object
+    },
+    dataModel: {
+      required: false,
+      default: {}
     }
   },
   provide() {
     return {
       $model: this.dataModel
-    }
-  },
-  data() {
-    return {
-      dataModel: {}
     }
   }
 }

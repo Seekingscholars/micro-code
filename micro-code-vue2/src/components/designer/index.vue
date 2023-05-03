@@ -3,20 +3,32 @@
     <div class="design-header">
       <slot name="header" />
     </div>
-    <div class="design-body" v-if="flushed">
-      <left-panel :designer="designer" class="design-body-left" >
+    <div
+      v-if="flushed"
+      class="design-body"
+    >
+      <left-panel
+        :designer="designer"
+        class="design-body-left"
+      >
         <template #left="{designer}">
-          <slot name="left" :designer="designer"></slot>
+          <slot
+            name="left"
+            :designer="designer"
+          />
         </template>
       </left-panel>
       <el-scrollbar class="design-body-center scrollbar">
-        <v-form-widget
+        <DesignWidget
           ref="formRef"
           :designer="designer"
           :form-config="designer.formConfig"
         />
       </el-scrollbar>
-      <setting-panel :designer="designer" class="design-body-right" />
+      <setting-panel
+        :designer="designer"
+        class="design-body-right"
+      />
     </div>
   </div>
 </template>
@@ -24,17 +36,15 @@
 <script>
 import LeftPanel from './left-panel/index.vue'
 import SettingPanel from './setting-panel/index.vue'
-import VFormWidget from './form-widget/index.vue'
+import DesignWidget from './form-widget/index.vue'
 import { createDesigner } from './designer'
 
 export default {
   name: 'FormDesigner',
-  componentName: 'FormDesigner',
-
   components: {
     LeftPanel,
     SettingPanel,
-    VFormWidget
+    DesignWidget
   },
   provide() {
     return {
@@ -42,17 +52,17 @@ export default {
     }
   },
   props: {
-
+    dataModel: {
+      required: false,
+      default: {}
+    }
   },
   data() {
     return {
       flushed: true,
       scrollerHeight: 0,
-      designer: createDesigner(this),
-      dataModel: {}
+      designer: createDesigner(this)
     }
-  },
-  created() {
   },
   mounted() {
     this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'

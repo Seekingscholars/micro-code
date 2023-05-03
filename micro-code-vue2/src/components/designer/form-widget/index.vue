@@ -9,8 +9,8 @@ import '@/styles/global.scss'
 import FormWidget from './FormWidget'
 
 export default {
-  name: 'VFormWidget',
-  componentName: 'VFormWidget',
+  name: 'DesignWidget',
+  componentName: 'DesignWidget',
   components: {
     FormWidget
   },

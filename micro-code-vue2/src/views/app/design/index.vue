@@ -1,6 +1,9 @@
 <template>
   <div>
-    <FormDesigner ref="FormDesignerRef">
+    <FormDesigner
+      ref="FormDesignerRef"
+      :data-model="dataModel"
+    >
       <template #header>
         <div class="form-design-header">
           <div class="header-title">
@@ -88,11 +91,13 @@ import FormDesigner from '@/components/designer/index.vue'
 import formApi from '@/api/form'
 import ApiPanel from './components/api-panel/index'
 import FormPermission from './components/form-permission/index'
+import { getRest } from '../apiUtil'
 export default {
   components: { FormDesigner, ApiPanel, FormPermission },
   data() {
     return {
       showFormPermissionFlag: false,
+      dataModel: {},
       modelForm: {
         id: '',
         appId: '',
@@ -113,6 +118,7 @@ export default {
       widgetJson = widgetJson.default
       collapseJson = collapseJson.default
       if (formId && formId !== '0') {
+        await getRest(formId, this.dataModel, this)
         this.modelForm = Object.assign(this.modelForm, await formApi.get({ id: formId }))
         this.$nextTick(() => {
           const formJson = JSON.parse(this.modelForm.formJson)
@@ -138,11 +144,11 @@ export default {
     },
     previewForm() {
       const formJson = this.$refs.FormDesignerRef.getFormJson()
-      const key = 'preview'
+      const key = this.modelForm.id
       const storage = window.sessionStorage
       storage.setItem(key, JSON.stringify(formJson))
       const to = this.$router.resolve({
-        path: '/app/preview/0'
+        path: '/app/preview/' + key
       })
       window.open(to.href, '_blank')
     },
@@ -152,10 +158,6 @@ export default {
     },
     shareForm() {
       this.showFormPermissionFlag = true
-      // const to = this.$router.resolve({
-      //   path: '/app/preview/fghfghfjhgj'
-      // })
-      // console.log(to)
     }
   }
 }
