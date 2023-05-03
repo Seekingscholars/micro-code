@@ -36,6 +36,10 @@ public class DatasourceEV extends BaseEntity {
      */
     private Integer timeout;
     /**
+     * 请求头
+     */
+    private String header;
+    /**
      * 用户名
      */
     private String username;

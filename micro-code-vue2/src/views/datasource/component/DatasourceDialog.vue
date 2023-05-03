@@ -216,6 +216,9 @@ export default {
     async get(id) {
       const modelForm = await datasourceApi.get({ id })
       this.modelForm = Object.assign(this.modelForm, modelForm)
+      if (this.modelForm.header) {
+        this.headers = JSON.parse(this.modelForm.header)
+      }
     },
     addHeader() {
       this.headers.push({ key: '', value: '' })
@@ -227,6 +230,7 @@ export default {
       this.$refs['form'].validate(async valid => {
         if (valid) {
           this.buttonLoading = true
+          this.modelForm.header = JSON.stringify(this.headers)
           await datasourceApi.saveOrEdit(this.modelForm, !!this.modelForm.id)
           this.buttonLoading = false
           this.$emit('change')

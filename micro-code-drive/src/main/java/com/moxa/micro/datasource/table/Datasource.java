@@ -37,6 +37,11 @@ public class Datasource {
     @Column(value="timeout",jdbcType = Types.INTEGER)
     private Integer timeout;
     /**
+     * 请求头
+     */
+    @Column(value="header",jdbcType = Types.VARCHAR)
+    private String header;
+    /**
      * 用户名
      */
     @Column(value="username",jdbcType = Types.VARCHAR)

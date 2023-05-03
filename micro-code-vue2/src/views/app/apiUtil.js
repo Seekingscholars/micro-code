@@ -1,11 +1,13 @@
 import restApi from '@/api/rest.api'
+import datasourceApi from '@/api/datasource.api'
 import request from '@/utils/request'
 export const wrapWith = (event) => {
   return 'with(this.dataModel){\n' + event + '\n}'
 }
-const requestApi = (api, _this) => {
+const requestApi = (api, datasource, _this) => {
   return () => {
     const param = {
+      baseURL: datasource.url,
       url: api.url,
       method: api.method,
       data: api.data
@@ -27,7 +29,17 @@ const requestApi = (api, _this) => {
     if (api.failFunction) {
       failFunction = new Function('err', wrapWith(api.failFunction))
     }
-    request(param, { headers: api.header }).then(res => {
+    const headers = {}
+    if (datasource.header) {
+      for (const header of JSON.parse(datasource.header)) {
+        headers[header.key] = header.value
+      }
+    }
+    if (api.header) {
+      const header = new Function(wrapWith('return {' + api.header + '}')).call(_this)
+      param.headers = Object.assign(headers, header)
+    }
+    request(param).then(res => {
       if (successFunction) {
         successFunction.call(_this, res)
       }
@@ -40,7 +52,13 @@ const requestApi = (api, _this) => {
 }
 export const getRest = async(formId, dataModel, _this) => {
   const apis = await restApi.list({ formId: formId }) || []
+  const datasourceMap = {}
   for (const api of apis) {
-    dataModel[api.name] = requestApi(api, _this)
+    let datasource = datasourceMap[api.datasourceId]
+    if (!datasource) {
+      datasource = await datasourceApi.get({ id: api.datasourceId })
+      datasourceMap[api.datasourceId] = datasource
+    }
+    dataModel[api.name] = requestApi(api, datasource, _this)
   }
 }
